@@ -185,7 +185,7 @@
         
         <li><div class="divider"></div></li>
         <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+            <a href="https://github.com/trojan20161207" class="waves-effect waves-light" target="_blank">
                 <i class="fa fa-github-square fa-fw"></i>Fork Me
             </a>
         </li>
@@ -241,7 +241,7 @@
     }
 </style>
 
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+<a href="https://github.com/trojan20161207" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
    data-tooltip="Fork Me" data-position="left" data-delay="50">
     <svg viewBox="0 0 250 250" aria-hidden="true">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -391,12 +391,21 @@
                 </div>
 
                 
-				
-				
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        125
                     </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        1 分
+                    </div>
+                    
+                
+				
 				
             </div>
         </div>
@@ -534,7 +543,7 @@
     <div id="rewardModal" class="modal">
         <div class="modal-content">
             <a class="close modal-close"><i class="fa fa-close"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <h4 class="reward-title">爱点赞赏的人运气都超好的~</h4>
             <div class="reward-content">
                 <div class="reward-tabs">
                     <ul class="tabs row">
@@ -616,6 +625,28 @@
     </div>
 
     
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '579e332cbc733f103180',
+        clientSecret: '6c3814efc44e89144f57da9d7e03fd4aff54ce4b',
+        repo: 'trojan20161207.github.io',
+        owner: 'trojan20161207',
+        admin: "trojan20161207",
+        id: '2019-08-26T16-06-44',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
 
     
 
@@ -651,7 +682,7 @@
         
         
           var ap = new APlayer({
-            element: document.getElementById("aplayer-C
+            element: document.getElementById("aplayer-H
                         
                     </div>
                     <div class="publish-info">
@@ -712,6 +743,43 @@
 </article>
 </div>
 
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('10')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 小冲的幸福生活<br />'
+            + '作者: Hao Dexuan<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
 
 
     </div>
@@ -819,6 +887,9 @@
 			</br>
             <span id="sitetime"></span>
             
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">239</span>
+            
 
             
 			
@@ -835,16 +906,20 @@
 			
         </div>
         <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/trojan20161207" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
 
 
 
-    <a href="mailto:xxx@xx.xx" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+
+    <a href="mailto:1530860548@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=123123123" class="tooltipped" data-tooltip="QQ联系我: 123123123" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1530860548" class="tooltipped" data-tooltip="QQ联系我: 1530860548" data-position="top" data-delay="50">
         <i class="fa fa-qq"></i>
     </a>
 
@@ -953,8 +1028,6 @@ $(function () {
 
     <script src="/libs/others/clicklove.js"></script>
 
-
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
 
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/Epsilon2.1.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
