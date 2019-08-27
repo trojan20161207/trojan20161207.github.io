@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>小冲的幸福生活</title>
   
-  
+  <subtitle>个人博客</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://trojan20161207.github.io/"/>
-  <updated>2019-08-26T09:04:51.398Z</updated>
+  <updated>2019-08-27T07:31:04.254Z</updated>
   <id>https://trojan20161207.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://trojan20161207.github.io/2019/08/26/article-title/"/>
     <id>https://trojan20161207.github.io/2019/08/26/article-title/</id>
     <published>2019-08-26T08:21:51.000Z</published>
-    <updated>2019-08-26T09:04:51.398Z</updated>
+    <updated>2019-08-27T07:31:04.254Z</updated>
     
     <summary type="html">
     
@@ -29,11 +29,7 @@
       
         
         
-          &lt;script&gt;
-        document.querySelectorAll(&#39;.github-emoji&#39;)
-          .forEach(el =&gt; {
-            if (!el.dataset.src) { return; }
-       
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
         
       
     
