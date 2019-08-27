@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>小冲的幸福生活</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://trojan20161207.github.io/"/>
+  <updated>2019-08-26T09:04:51.398Z</updated>
+  <id>https://trojan20161207.github.io/</id>
+  
+  <author>
+    <name>Hao Dexuan</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>article title</title>
+    <link href="https://trojan20161207.github.io/2019/08/26/article-title/"/>
+    <id>https://trojan20161207.github.io/2019/08/26/article-title/</id>
+    <published>2019-08-26T08:21:51.000Z</published>
+    <updated>2019-08-26T09:04:51.398Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script&gt;
+        document.querySelectorAll(&#39;.github-emoji&#39;)
+          .forEach(el =&gt; {
+            if (!el.dataset.src) { return; }
+       
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://trojan20161207.github.io/2019/08/26/hello-world/"/>
+    <id>https://trojan20161207.github.io/2019/08/26/hello-world/</id>
+    <published>2019-08-26T08:06:44.672Z</published>
+    <updated>2019-08-26T08:06:44.672Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
