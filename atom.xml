@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://trojan20161207.github.io/"/>
-  <updated>2019-08-27T07:31:04.254Z</updated>
+  <updated>2019-09-06T03:30:11.000Z</updated>
   <id>https://trojan20161207.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>11 个 Nginx 参数性能优化工作</title>
+    <link href="https://trojan20161207.github.io/2019/09/06//articles/2019/09/06/1567740611395.html/"/>
+    <id>https://trojan20161207.github.io/2019/09/06//articles/2019/09/06/1567740611395.html/</id>
+    <published>2019-09-06T03:30:11.000Z</published>
+    <updated>2019-09-06T03:30:11.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="nginx" scheme="https://trojan20161207.github.io/tags/nginx/"/>
+    
+  </entry>
   
   <entry>
     <title>article title</title>
