@@ -4,10 +4,15 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="事件驱动的微服务架构的最佳实践, blog">
-    <meta name="description" content="事件驱动的微服务架构的最佳实践你做到了吗？
-她正在做她的“最佳实践”。
-如果您是企业架构师，您可能已经听说过并使用过微服务架构。虽然您过去可能已将REST用作服务通信层，但越来越多的项目正在转向事件驱动的体系结构。让我们深入探讨这种流行架构">
+    <meta name="keywords" content="快速shell安装docker-ce, blog">
+    <meta name="description" content="我们以18.09.8为例，以下为详细shell：
+#!/bin/sh
+set -e
+
+CHANNEL=&#34;stable&#34;
+
+docker_version=18.09.8
+apt_url=&#34;https://apt.dockerproject.o">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +20,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>事件驱动的微服务架构的最佳实践 | 小冲的幸福生活</title>
+    <title>快速shell安装docker-ce | 小冲的幸福生活</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -261,13 +266,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        事件驱动的微服务架构的最佳实践
+                        快速shell安装docker-ce
                     </div>
                 </div>
             </div>
@@ -378,8 +383,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/微服务架构-微服务-微服务最佳实践-事件驱动架构/" target="_blank">
-                                <span class="chip bg-color">微服务架构, 微服务, 微服务最佳实践, 事件驱动架构</span>
+                            <a href="/tags/docker-shell/" target="_blank">
+                                <span class="chip bg-color">docker, shell</span>
                             </a>
                         
                     </div>
@@ -393,21 +398,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-09-14
+                    2019-09-19
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        3.2k
+                        2.2k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        10 分
+                        13 分
                     </div>
                     
                 
@@ -418,80 +423,533 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="事件驱动的微服务架构的最佳实践"><a href="#事件驱动的微服务架构的最佳实践" class="headerlink" title="事件驱动的微服务架构的最佳实践"></a>事件驱动的微服务架构的最佳实践</h1><h3 id="你做到了吗？"><a href="#你做到了吗？" class="headerlink" title="你做到了吗？"></a>你做到了吗？</h3><p><img src="https://dzone.com/storage/temp/12455990-she-is-doing-her-22best-practice22.jpeg" alt="她正在做她的“最佳实践”。"></p>
-<p><em>她正在做她的“最佳实践”。</em></p>
-<p>如果您是企业架构师，您可能已经听说过并使用过微服务架构。虽然您过去可能已将REST用作服务通信层，但越来越多的项目正在转向事件驱动的体系结构。让我们深入探讨这种流行架构的优缺点，它所包含的一些关键设计选择以及常见的反模式。</p>
-<h2 id="什么是事件驱动的微服务架构？"><a href="#什么是事件驱动的微服务架构？" class="headerlink" title="什么是事件驱动的微服务架构？"></a>什么是事件驱动的微服务架构？</h2><p>在事件驱动的体系结构中，当服务执行其他服务可能感兴趣的某项工作时，该服务会生成事件 - 执行操作的记录。其他服务使用这些事件，以便他们可以执行事件所需的任何自己的任务。与REST不同，创建请求的服务不需要知道使用请求的服务的详细信息。</p>
-<p>这是一个简单的例子：当一个订单放在电子商务网站上时，会产生一个“下订单”事件，然后由几个微服务消费：</p>
-<ol>
-<li>有序服务，可以将订单记录写入数据库。</li>
-<li>客户服务，可以创建客户记录。 </li>
-<li>付款服务，可以处理付款。</li>
-</ol>
-<p>事件可以以各种方式发布。例如，可以将它们发布到保证将事件传递给适当的消费者的队列，或者可以将它们发布到发布事件并允许访问所有感兴趣的各方的“发布/订阅”模型流。在任何一种情况下，生产者都会发布事件，消费者会收到该事件，并做出相应的反应。请注意，在某些情况下，这两个actor也可以称为发布者（生产者）和订阅者（​​消费者）。</p>
-<h2 id="为什么使用事件驱动的体系结构"><a href="#为什么使用事件驱动的体系结构" class="headerlink" title="为什么使用事件驱动的体系结构"></a>为什么使用事件驱动的体系结构</h2><p>事件驱动的体系结构提供了多种优于REST的优势，其中包括：</p>
-<ul>
-<li><strong>异步</strong>  - 基于事件的体系结构是异步的，没有阻塞。这允许资源在他们的工作单元完成后自由移动到下一个任务，而不用担心之前发生的事情或接下来发生的事情。它们还允许事件排队或缓冲，从而防止消费者对生产者施加压力或阻止它们。</li>
-<li><strong>松散耦合</strong>  - 服务不需要（也不应该）了解或依赖其他服务。使用事件时，服务独立运行，不了解其他服务，包括其实现细节和传输协议。事件模型下的服务可以独立且更容易地更新，测试和部署。</li>
-<li><strong>轻松扩展</strong>  - 由于服务在事件驱动的体系结构下解耦，并且服务通常只执行一项任务，因此追踪到特定服务的瓶颈，并且扩展该服务（并且只有该服务）变得容易。</li>
-<li><strong>恢复支持</strong>  - 具有队列的事件驱动架构可以通过“重放”过去的事件来恢复丢失的工作。当消费者需要恢复时，这对于防止数据丢失是有价值的。</li>
-</ul>
-<p>当然，事件驱动的体系结构也有缺点。通过分离紧密耦合时可能更简单的问题，它们很容易过度设计; 他们可能需要大量的前期投资; 并且通常会导致基础架构，服务合同或模式，多语言构建系统和依赖关系图的额外复杂性。</p>
-<p>也许最重要的缺点和挑战是数据和事务管理。由于它们的异步性质，事件驱动模型必须小心处理服务之间的不一致数据，不兼容的版本，监视重复事件，并且通常不支持ACID事务，而不是支持更难以跟踪或调试的<a href="https://en.wikipedia.org/wiki/Eventual_consistency" target="_blank" rel="noopener">最终一致性</a>。</p>
-<p>即使存在这些缺点，事件驱动的体系结构通常也是企业级微服务系统的更好选择。专业可扩展，松散耦合，开发友好的设计 - 超过缺点。</p>
-<h2 id="何时使用REST"><a href="#何时使用REST" class="headerlink" title="何时使用REST"></a>何时使用REST</h2><p>但是，有时候REST / Web界面可能更适合：</p>
-<ul>
-<li>您需要一个异步请求/回复接口。</li>
-<li>您需要支持强大的交易。</li>
-<li>您的API可供公众使用。</li>
-<li>您的项目很小（REST设置和部署起来要简单得多）。</li>
-</ul>
-<h2 id="您最重要的设计选择-消息传递框架"><a href="#您最重要的设计选择-消息传递框架" class="headerlink" title="您最重要的设计选择 - 消息传递框架"></a>您最重要的设计选择 - 消息传递框架</h2><p>一旦确定了事件驱动的体系结构，就应该选择事件框架了。生成和使用事件的方式是系统中的关键因素。存在数十种经过验证的框架和选择，选择正确的框架和选择需要时间和研究。</p>
-<p>您的基本选择归结为消息处理或流处理。</p>
-<h2 id="消息处理"><a href="#消息处理" class="headerlink" title="消息处理"></a>消息处理</h2><p>在传统的消息处理中，组件创建消息，然后将其发送到特定（通常是单个）目的地。已经闲置并等待的接收组件接收该消息并相应地动作。通常，当消息到达时，接收组件执行单个过程。然后，该邮件将被删除。</p>
-<p>消息处理体系结构的典型示例是消息队列。虽然大多数较新的项目使用流处理（如下所述），但使用消息（或事件）队列的体系结构仍然很受欢迎。消息队列通常使用“存储和转发”系统的代理，其中事件从代理传递到代理，直到它们到达适当的消费者。<a href="https://activemq.apache.org/" target="_blank" rel="noopener">ActiveMQ</a>和<a href="https://www.rabbitmq.com/" target="_blank" rel="noopener">RabbitMQ</a>是消息队列框架的两个流行示例。这两个项目都有多年的经过验证的使用和已建立的社区。</p>
-<h3 id="流处理"><a href="#流处理" class="headerlink" title="流处理"></a>流处理</h3><p>另一方面，在流处理中，组件在达到某个状态时发出事件。其他感兴趣的组件在事件流上侦听这些事件并做出相应的反应。事件不是针对某个收件人，而是针对所有感兴趣的组件。</p>
-<p>在流处理中，组件可以同时对多个事件做出反应，并对多个流和事件应用复杂的操作。一些流包括持久性，其中事件在必要时保留在流上。</p>
-<p>通过流处理，系统可以重现事件历史，在事件发生后上线并仍然对其作出反应，甚至执行滑动窗口计算。例如，它可以从每秒事件流计算每分钟的平均CPU使用率。</p>
-<p><a href="https://kafka.apache.org/" target="_blank" rel="noopener">Apache Kafka</a>是最受欢迎的流处理框架之一  。Kafka是许多项目使用的成熟稳定的解决方案。它可以被认为是一种首选的工业级流处理解决方案。Kafka拥有庞大的用户群，有用的社区和不断发展的工具集。</p>
-<h2 id="其他选择"><a href="#其他选择" class="headerlink" title="其他选择"></a>其他选择</h2><p>还有其他框架可以提供流和消息处理的组合或它们自己独特的解决方案。例如，  <a href="https://pulsar.apache.org/" target="_blank" rel="noopener">Pulsar</a>是Apache的新产品，是一个开源的pub / sub消息系统，支持流和事件队列，所有这些都具有极高的性能。Pulsar功能丰富 - 它提供多租户和地理复制 - 因此很复杂。据说Kafka的目标是高吞吐量，而Pulsar的目标是低延迟。</p>
-<p><a href="https://nats.io/" target="_blank" rel="noopener">NATS</a>是具有“合成”排队的备选发布/订阅消息系统。NATS旨在发送小而频繁的消息。它提供高性能和低延迟; 但是，NATS认为某些级别的数据丢失是可以接受的，优先考虑性能而不是交付保证。</p>
-<h2 id="其他设计考虑因素"><a href="#其他设计考虑因素" class="headerlink" title="其他设计考虑因素"></a>其他设计考虑因素</h2><p>选择事件框架后，还需要考虑以下几个其他挑战：</p>
-<ul>
-<li>活动采购</li>
-</ul>
-<p>很难实现松散耦合服务，不同数据存储和原子事务的组合。可能<a href="https://dzone.com/articles/introduction-to-event-sourcing" target="_blank" rel="noopener">有用的</a>一种模式是  <a href="https://dzone.com/articles/introduction-to-event-sourcing" target="_blank" rel="noopener">Event Sourcing</a>。在事件源中，永远不会直接对数据执行更新和删除操作; 相反，实体的状态更改将保存为一系列事件。</p>
-<ul>
-<li>CQRS</li>
-</ul>
-<p>上述事件采购引入了另一个问题：由于状态需要从一系列事件构建，因此查询可能既缓慢又复杂。命令查询责任分离（<a href="https://dzone.com/articles/microservices-with-cqrs-and-event-sourcing" target="_blank" rel="noopener">CQRS</a>）是一种设计解决方案，它要求插入操作和读取操作的单独模型。</p>
-<ul>
-<li>发现活动信息</li>
-</ul>
-<p>事件驱动架构中最大的挑战之一是编目服务和事件。您在哪里可以找到活动描述和详细信息？活动的原因是什么？什么团队创建了这个活动？他们是否积极致力于此？</p>
-<ul>
-<li>处理变革</li>
-</ul>
-<p>事件架构会改变吗？如何在不破坏其他服务的情况下更改事件架构？随着您的服务和事件数量的增长，您如何回答这些问题变得至关重要。</p>
-<p>作为一个好的事件消费者意味着编码改变的模式。作为一个好的事件生产者意味着要认识到你的模式变化如何影响其他服务，并创建明确记录的精心设计的事件。</p>
-<ul>
-<li>内部部署与托管部署</li>
-</ul>
-<p>无论您的事件框架如何，您还需要自己决定在内部部署框架（消息代理不是很容易操作，尤其是高可用性），或者<a href="https://www.heroku.com/kafka" target="_blank" rel="noopener">在Heroku上</a>使用<a href="https://www.heroku.com/kafka" target="_blank" rel="noopener">Apache Kafka等</a>托管服务。</p>
-<h2 id="反模式"><a href="#反模式" class="headerlink" title="反模式"></a>反模式</h2><p>与大多数体系结构一样，事件驱动的体系结构具有自己的一组反模式。以下是一些需要注意的事项：</p>
-<h3 id="好太多了"><a href="#好太多了" class="headerlink" title="好太多了"></a>好太多了</h3><p>小心你不要对创建事件感到太兴奋。创建太多事件将在服务之间产生不必要的复杂性，增加开发人员的认知负担，使部署和测试更加困难，并导致事件消费者拥塞。并非每种方法都需要成为一种事件。</p>
-<h3 id="通用事件"><a href="#通用事件" class="headerlink" title="通用事件"></a>通用事件</h3><p>不要在名称或故意使用通用事件。您希望其他团队了解您的事件存在的原因，应该使用的内容以及何时应该使用它。事件应具有特定目的并相应地命名。具有通用名称的事件或具有混淆标志的通用事件会导致问题。</p>
-<h3 id="复杂的依赖关系图"><a href="#复杂的依赖关系图" class="headerlink" title="复杂的依赖关系图"></a>复杂的依赖关系图</h3><p>注意彼此依赖的服务并创建复杂的依赖关系图或反馈循环。每个网络跃点都会为原始请求增加额外的延迟，尤其是离开数据中心的北/南网络流量。</p>
-<h3 id="取决于保证订单，交货或副作用"><a href="#取决于保证订单，交货或副作用" class="headerlink" title="取决于保证订单，交货或副作用"></a>取决于保证订单，交货或副作用</h3><p>事件是异步的; 因此，包括对顺序或重复的假设不仅会增加复杂性，还会抵消基于事件的体系结构的许多关键优势。如果您的消费者有副作用，例如在数据库中添加值，那么您可能无法通过重播事件来恢复。</p>
-<h3 id="过早优化"><a href="#过早优化" class="headerlink" title="过早优化"></a>过早优化</h3><p>大多数产品从小开始，随着时间的推移而增长 虽然您可能梦想未来需要扩展到大型复杂组织，但如果您的团队规模较小，那么事件驱动架构的复杂性可能会让您失望。相反，考虑使用简单的架构设计您的系统，但包括必要的关注点分离，以便您可以随着需求的增长进行交换。</p>
-<h3 id="期待事件驱动来解决所有问题"><a href="#期待事件驱动来解决所有问题" class="headerlink" title="期待事件驱动来解决所有问题"></a>期待事件驱动来解决所有问题</h3><p>在技​​术水平较低的情况下，不要指望事件驱动的架构能够解决您的所有问题。虽然这种架构肯定可以改善技术功能障碍的许多方面，但它无法解决核心问题，例如缺乏自动化测试，团队沟通不畅或者过时的开发实践。</p>
-<h2 id="学到更多"><a href="#学到更多" class="headerlink" title="学到更多"></a>学到更多</h2><p>了解事件驱动架构的优缺点，以及一些最常见的设计决策和挑战是创建最佳设计的重要部分。</p>
-<p>如果您想了解更多信息，请查看这个<a href="https://devcenter.heroku.com/articles/event-driven-microservices-with-apache-kafka" target="_blank" rel="noopener">事件驱动的参考架构</a>，它允许您通过单击在Heroku上部署工作项目。该参考架构创建了一个销售虚构咖啡产品的网上商店。</p>
-<p><img src="https://lh4.googleusercontent.com/OOp9l49cyvKMzp6ESmHAlu5oP4oDNQDiM-T0b5aKDJHiA9ecNb8HNLxAzwYJAWyhQewIiy3yPW6g3YkAkN6vaJt1kcES6xflzajp6lEpMaQwJRi5bszEsBrPZTVVat6aP9pR07e9" alt="null"></p>
-<p>产品点击次数作为事件进行跟踪并存储在Kafka中。然后，它们被报告仪表板使用。</p>
-<p><img src="https://lh4.googleusercontent.com/4ILhHjd5e6fAzp5VVm5eqhNtk71GdqSOY4HKd-8exLhMkqT-G2xboGZxDPAdH-KvJpFgXRbg1kfO_7u4i4mEhkLB4rndZ4O4XFzI3ehyd-qZC-FrkZ_9ZotjJQmaD9jMMMoFX7pG" alt="null"></p>
-<p>代码是开源的，因此您可以根据需要对其进行修改并运行您自己的实验。</p>
-<script>
+                <p>我们以18.09.8为例，以下为详细shell：</p>
+<pre><code>#!/bin/sh
+set -e
+
+CHANNEL="stable"
+
+docker_version=18.09.8
+apt_url="https://apt.dockerproject.org"
+yum_url="https://yum.dockerproject.org"
+gpg_fingerprint="9DC858229FC7DD38854AE2D88D81803C0EBFCD88"
+
+key_servers="
+ha.pool.sks-keyservers.net
+pgp.mit.edu
+keyserver.ubuntu.com
+"
+
+rhel_repos="
+rhel-7-server-extras-rpms
+rhui-REGION-rhel-server-extras
+rhui-rhel-7-server-rhui-extras-rpms
+rhui-rhel-7-for-arm-64-extras-rhui-rpms
+"
+
+mirror=''
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --mirror)
+            mirror="$2"
+            shift
+            ;;
+        *)
+            echo "Illegal option $1"
+            ;;
+    esac
+    shift $(( $# &gt; 0 ? 1 : 0 ))
+done
+
+case "$mirror" in
+    AzureChinaCloud)
+        apt_url="https://mirror.azure.cn/docker-engine/apt"
+        yum_url="https://mirror.azure.cn/docker-engine/yum"
+        ;;
+    Aliyun)
+        apt_url="https://mirrors.aliyun.com/docker-engine/apt"
+        yum_url="https://mirrors.aliyun.com/docker-engine/yum"
+        ;;
+esac
+
+command_exists() {
+    command -v "$@" &gt; /dev/null 2&gt;&amp;1
+}
+
+echo_docker_as_nonroot() {
+    if command_exists docker &amp;&amp; [ -e /var/run/docker.sock ]; then
+        (
+            set -x
+            $sh_c 'docker version'
+        ) || true
+    fi
+    your_user=your-user
+    [ "$user" != 'root' ] &amp;&amp; your_user="$user"
+    # intentionally mixed spaces and tabs here -- tabs are stripped by "&lt;&lt;-EOF", spaces are kept in the output
+    cat &lt;&lt;-EOF
+
+    If you would like to use Docker as a non-root user, you should now consider
+    adding your user to the "docker" group with something like:
+
+      sudo usermod -aG docker $your_user
+
+    Remember that you will have to log out and back in for this to take effect!
+
+    WARNING: Adding a user to the "docker" group will grant the ability to run
+             containers which can be used to obtain root privileges on the
+             docker host.
+             Refer to https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface
+             for more information.
+
+    EOF
+}
+
+# Check if this is a forked Linux distro
+check_forked() {
+
+    # Check for lsb_release command existence, it usually exists in forked distros
+    if command_exists lsb_release; then
+        # Check if the `-u` option is supported
+        set +e
+        lsb_release -a -u &gt; /dev/null 2&gt;&amp;1
+        lsb_release_exit_code=$?
+        set -e
+
+        # Check if the command has exited successfully, it means we're in a forked distro
+        if [ "$lsb_release_exit_code" = "0" ]; then
+            # Print info about current distro
+            cat &lt;&lt;-EOF
+            You're using '$lsb_dist' version '$dist_version'.
+            EOF
+
+            # Get the upstream release info
+            lsb_dist=$(lsb_release -a -u 2&gt;&amp;1 | tr '[:upper:]' '[:lower:]' | grep -E 'id' | cut -d ':' -f 2 | tr -d '[[:space:]]')
+            dist_version=$(lsb_release -a -u 2&gt;&amp;1 | tr '[:upper:]' '[:lower:]' | grep -E 'codename' | cut -d ':' -f 2 | tr -d '[[:space:]]')
+
+            # Print info about upstream distro
+            cat &lt;&lt;-EOF
+            Upstream release is '$lsb_dist' version '$dist_version'.
+            EOF
+        else
+            if [ -r /etc/debian_version ] &amp;&amp; [ "$lsb_dist" != "ubuntu" ] &amp;&amp; [ "$lsb_dist" != "raspbian" ]; then
+                # We're Debian and don't even know it!
+                lsb_dist=debian
+                dist_version="$(cat /etc/debian_version | sed 's/\/.*//' | sed 's/\..*//')"
+                case "$dist_version" in
+                    10)
+                        dist_version="buster"
+                    ;;
+                    9)
+                        dist_version="stretch"
+                    ;;
+                    8|'Kali Linux 2')
+                        dist_version="jessie"
+                    ;;
+                    7)
+                        dist_version="wheezy"
+                    ;;
+                esac
+            fi
+        fi
+    fi
+}
+
+semverParse() {
+    major="${1%%.*}"
+    minor="${1#$major.}"
+    minor="${minor%%.*}"
+    patch="${1#$major.$minor.}"
+    patch="${patch%%[-.]*}"
+}
+
+deprecation_notice() {
+    echo
+    echo
+    echo "  WARNING: $1 is no longer updated @ $url"
+    echo "           Installing the legacy docker-engine package..."
+    echo
+    echo
+    sleep 10;
+}
+
+do_install() {
+
+    architecture=$(uname -m)
+    case $architecture in
+        # officially supported
+        amd64|aarch64|arm64|x86_64)
+            ;;
+        # unofficially supported with available repositories
+        armv6l|armv7l)
+            ;;
+        # unofficially supported without available repositories
+        ppc64le|s390x)
+            cat 1&gt;&amp;2 &lt;&lt;-EOF
+            Error: This install script does not support $architecture, because no
+            $architecture package exists in Docker's repositories.
+
+            Other install options include checking your distribution's package repository
+            for a version of Docker, or building Docker from source.
+            EOF
+            exit 1
+            ;;
+        # not supported
+        *)
+            cat &gt;&amp;2 &lt;&lt;-EOF
+            Error: $architecture is not a recognized platform.
+            EOF
+            exit 1
+            ;;
+    esac
+
+    if command_exists docker; then
+        version="$(docker -v | cut -d ' ' -f3 | cut -d ',' -f1)"
+        MAJOR_W=1
+        MINOR_W=10
+
+        semverParse $version
+
+        shouldWarn=0
+        if [ $major -lt $MAJOR_W ]; then
+            shouldWarn=1
+        fi
+
+        if [ $major -le $MAJOR_W ] &amp;&amp; [ $minor -lt $MINOR_W ]; then
+            shouldWarn=1
+        fi
+
+        cat &gt;&amp;2 &lt;&lt;-'EOF'
+            Warning: the "docker" command appears to already exist on this system.
+
+            If you already have Docker installed, this script can cause trouble, which is
+            why we're displaying this warning and provide the opportunity to cancel the
+            installation.
+
+            If you installed the current Docker package using this script and are using it
+        EOF
+
+        if [ $shouldWarn -eq 1 ]; then
+            cat &gt;&amp;2 &lt;&lt;-'EOF'
+            again to update Docker, we urge you to migrate your image store before upgrading
+            to v1.10+.
+
+            You can find instructions for this here:
+            https://github.com/docker/docker/wiki/Engine-v1.10.0-content-addressability-migration
+            EOF
+        else
+            cat &gt;&amp;2 &lt;&lt;-'EOF'
+            again to update Docker, you can safely ignore this message.
+            EOF
+        fi
+
+        cat &gt;&amp;2 &lt;&lt;-'EOF'
+
+            You may press Ctrl+C now to abort this script.
+        EOF
+        ( set -x; sleep 20 )
+    fi
+
+    user="$(id -un 2&gt;/dev/null || true)"
+
+    sh_c='sh -c'
+    if [ "$user" != 'root' ]; then
+        if command_exists sudo; then
+            sh_c='sudo -E sh -c'
+        elif command_exists su; then
+            sh_c='su -c'
+        else
+            cat &gt;&amp;2 &lt;&lt;-'EOF'
+            Error: this installer needs the ability to run commands as root.
+            We are unable to find either "sudo" or "su" available to make this happen.
+            EOF
+            exit 1
+        fi
+    fi
+
+    curl=''
+    if command_exists curl; then
+        curl='curl -sSL'
+    elif command_exists wget; then
+        curl='wget -qO-'
+    elif command_exists busybox &amp;&amp; busybox --list-modules | grep -q wget; then
+        curl='busybox wget -qO-'
+    fi
+
+    # check to see which repo they are trying to install from
+    if [ -z "$repo" ]; then
+        repo='main'
+        if [ "https://test.docker.com/" = "$url" ]; then
+            repo='testing'
+        elif [ "https://experimental.docker.com/" = "$url" ]; then
+            repo='experimental'
+        fi
+    fi
+
+    # perform some very rudimentary platform detection
+    lsb_dist=''
+    dist_version=''
+    if command_exists lsb_release; then
+        lsb_dist="$(lsb_release -si)"
+    fi
+    if [ -z "$lsb_dist" ] &amp;&amp; [ -r /etc/lsb-release ]; then
+        lsb_dist="$(. /etc/lsb-release &amp;&amp; echo "$DISTRIB_ID")"
+    fi
+    if [ -z "$lsb_dist" ] &amp;&amp; [ -r /etc/debian_version ]; then
+        lsb_dist='debian'
+    fi
+    if [ -z "$lsb_dist" ] &amp;&amp; [ -r /etc/fedora-release ]; then
+        lsb_dist='fedora'
+    fi
+    if [ -z "$lsb_dist" ] &amp;&amp; [ -r /etc/oracle-release ]; then
+        lsb_dist='oracleserver'
+    fi
+    if [ -z "$lsb_dist" ] &amp;&amp; [ -r /etc/centos-release ]; then
+        lsb_dist='centos'
+    fi
+    if [ -z "$lsb_dist" ] &amp;&amp; [ -r /etc/redhat-release ]; then
+        lsb_dist='redhat'
+    fi
+    if [ -z "$lsb_dist" ] &amp;&amp; [ -r /etc/os-release ]; then
+        lsb_dist="$(. /etc/os-release &amp;&amp; echo "$ID")"
+    fi
+
+    lsb_dist="$(echo "$lsb_dist" | tr '[:upper:]' '[:lower:]')"
+
+    # Special case redhatenterpriseserver
+    if [ "${lsb_dist}" = "redhatenterpriseserver" ]; then
+        # Set it to redhat, it will be changed to centos below anyways
+        lsb_dist='redhat'
+    fi
+
+    case "$lsb_dist" in
+
+        ubuntu)
+            if command_exists lsb_release; then
+                dist_version="$(lsb_release --codename | cut -f2)"
+            fi
+            if [ -z "$dist_version" ] &amp;&amp; [ -r /etc/lsb-release ]; then
+                dist_version="$(. /etc/lsb-release &amp;&amp; echo "$DISTRIB_CODENAME")"
+            fi
+        ;;
+
+        debian|raspbian)
+            dist_version="$(cat /etc/debian_version | sed 's/\/.*//' | sed 's/\..*//')"
+            case "$dist_version" in
+                9)
+                    dist_version="stretch"
+                ;;
+                8)
+                    dist_version="jessie"
+                ;;
+                7)
+                    dist_version="wheezy"
+                ;;
+            esac
+        ;;
+
+        oracleserver)
+            # need to switch lsb_dist to match yum repo URL
+            lsb_dist="oraclelinux"
+            dist_version="$(rpm -q --whatprovides redhat-release --queryformat "%{VERSION}\n" | sed 's/\/.*//' | sed 's/\..*//' | sed 's/Server*//')"
+        ;;
+
+        fedora|centos|redhat)
+            dist_version="$(rpm -q --whatprovides ${lsb_dist}-release --queryformat "%{VERSION}\n" | sed 's/\/.*//' | sed 's/\..*//' | sed 's/Server*//' | sort | tail -1)"
+        ;;
+
+        *)
+            if command_exists lsb_release; then
+                dist_version="$(lsb_release --codename | cut -f2)"
+            fi
+            if [ -z "$dist_version" ] &amp;&amp; [ -r /etc/os-release ]; then
+                dist_version="$(. /etc/os-release &amp;&amp; echo "$VERSION_ID")"
+            fi
+        ;;
+
+
+    esac
+
+    # Check if this is a forked Linux distro
+    check_forked
+
+    # Run setup for each distro accordingly
+    case "$lsb_dist" in
+        ubuntu|debian)
+            pre_reqs="apt-transport-https ca-certificates curl"
+            if [ "$lsb_dist" = "debian" ] &amp;&amp; [ "$dist_version" = "wheezy" ]; then
+                pre_reqs="$pre_reqs python-software-properties"
+                backports="deb http://ftp.debian.org/debian wheezy-backports main"
+                if ! grep -Fxq "$backports" /etc/apt/sources.list; then
+                    (set -x; $sh_c "echo \"$backports\" &gt;&gt; /etc/apt/sources.list")
+                fi
+            else
+                pre_reqs="$pre_reqs software-properties-common"
+            fi
+            if ! command -v gpg &gt; /dev/null; then
+                pre_reqs="$pre_reqs gnupg"
+            fi
+            apt_repo="deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/$lsb_dist $dist_version $CHANNEL"
+            (
+                set -x
+                $sh_c 'apt-get update'
+                $sh_c "apt-get install -y -q $pre_reqs"
+                curl -fsSl "https://download.docker.com/linux/$lsb_dist/gpg" | $sh_c 'apt-key add -'
+                $sh_c "add-apt-repository \"$apt_repo\""
+                if [ "$lsb_dist" = "debian" ] &amp;&amp; [ "$dist_version" = "wheezy" ]; then
+                    $sh_c 'sed -i "/deb-src.*download\.docker/d" /etc/apt/sources.list'
+                fi
+                $sh_c 'apt-get update'
+                $sh_c "apt-get install -y -q docker-ce=$(apt-cache madison docker-ce | grep ${docker_version} | head -n 1 | cut -d ' ' -f 4)"
+            )
+            echo_docker_as_nonroot
+            exit 0
+            ;;
+        centos|fedora|redhat|oraclelinux)
+            yum_repo="https://download.docker.com/linux/centos/docker-ce.repo"
+            if [ "$lsb_dist" = "fedora" ]; then
+                if [ "$dist_version" -lt "24" ]; then
+                    echo "Error: Only Fedora &gt;=24 are supported by $url"
+                    exit 1
+                fi
+                pkg_manager="dnf"
+                config_manager="dnf config-manager"
+                enable_channel_flag="--set-enabled"
+                pre_reqs="dnf-plugins-core"
+            else
+                pkg_manager="yum"
+                config_manager="yum-config-manager"
+                enable_channel_flag="--enable"
+                pre_reqs="yum-utils"
+            fi
+            (
+                set -x
+                    if [ "$lsb_dist" = "redhat" ]; then
+                                        for rhel_repo in $rhel_repos ; do
+                                                $sh_c "$config_manager $enable_channel_flag $rhel_repo"
+                                        done
+                                fi
+                $sh_c "$pkg_manager install -y -q $pre_reqs"
+                $sh_c "$config_manager --add-repo $yum_repo"
+                if [ "$CHANNEL" != "stable" ]; then
+                    echo "Info: Enabling channel '$CHANNEL' for docker-ce repo"
+                    $sh_c "$config_manager $enable_channel_flag docker-ce-$CHANNEL"
+                fi
+                $sh_c "$pkg_manager makecache fast"
+                $sh_c "$pkg_manager install -y -q docker-ce-${docker_version}"
+                if [ -d '/run/systemd/system' ]; then
+                    $sh_c 'service docker start'
+                else
+                    $sh_c 'systemctl start docker'
+                fi
+            )
+            echo_docker_as_nonroot
+            exit 0
+            ;;
+        raspbian)
+            deprecation_notice "$lsb_dist"
+            export DEBIAN_FRONTEND=noninteractive
+
+            did_apt_get_update=
+            apt_get_update() {
+                if [ -z "$did_apt_get_update" ]; then
+                    ( set -x; $sh_c 'sleep 3; apt-get update' )
+                    did_apt_get_update=1
+                fi
+            }
+
+            if [ "$lsb_dist" != "raspbian" ]; then
+                # aufs is preferred over devicemapper; try to ensure the driver is available.
+                if ! grep -q aufs /proc/filesystems &amp;&amp; ! $sh_c 'modprobe aufs'; then
+                    if uname -r | grep -q -- '-generic' &amp;&amp; dpkg -l 'linux-image-*-generic' | grep -qE '^ii|^hi' 2&gt;/dev/null; then
+                        kern_extras="linux-image-extra-$(uname -r) linux-image-extra-virtual"
+
+                        apt_get_update
+                        ( set -x; $sh_c 'sleep 3; apt-get install -y -q '"$kern_extras" ) || true
+
+                        if ! grep -q aufs /proc/filesystems &amp;&amp; ! $sh_c 'modprobe aufs'; then
+                            echo &gt;&amp;2 'Warning: tried to install '"$kern_extras"' (for AUFS)'
+                            echo &gt;&amp;2 ' but we still have no AUFS.  Docker may not work. Proceeding anyways!'
+                            ( set -x; sleep 10 )
+                        fi
+                    else
+                        echo &gt;&amp;2 'Warning: current kernel is not supported by the linux-image-extra-virtual'
+                        echo &gt;&amp;2 ' package.  We have no AUFS support.  Consider installing the packages'
+                        echo &gt;&amp;2 ' "linux-image-virtual" and "linux-image-extra-virtual" for AUFS support.'
+                        ( set -x; sleep 10 )
+                    fi
+                fi
+            fi
+
+            # install apparmor utils if they're missing and apparmor is enabled in the kernel
+            # otherwise Docker will fail to start
+            if [ "$(cat /sys/module/apparmor/parameters/enabled 2&gt;/dev/null)" = 'Y' ]; then
+                if command -v apparmor_parser &gt;/dev/null 2&gt;&amp;1; then
+                    echo 'apparmor is enabled in the kernel and apparmor utils were already installed'
+                else
+                    echo 'apparmor is enabled in the kernel, but apparmor_parser is missing. Trying to install it..'
+                    apt_get_update
+                    ( set -x; $sh_c 'sleep 3; apt-get install -y -q apparmor' )
+                fi
+            fi
+
+            if [ ! -e /usr/lib/apt/methods/https ]; then
+                apt_get_update
+                ( set -x; $sh_c 'sleep 3; apt-get install -y -q apt-transport-https ca-certificates' )
+            fi
+            if [ -z "$curl" ]; then
+                apt_get_update
+                ( set -x; $sh_c 'sleep 3; apt-get install -y -q curl ca-certificates' )
+                curl='curl -sSL'
+            fi
+            if ! command -v gpg &gt; /dev/null; then
+                apt_get_update
+                ( set -x; $sh_c 'sleep 3; apt-get install -y -q gnupg2 || apt-get install -y -q gnupg' )
+            fi
+
+            # dirmngr is a separate package in ubuntu yakkety; see https://bugs.launchpad.net/ubuntu/+source/apt/+bug/1634464
+            if ! command -v dirmngr &gt; /dev/null; then
+                apt_get_update
+                ( set -x; $sh_c 'sleep 3; apt-get install -y -q dirmngr' )
+            fi
+
+            (
+            set -x
+                        for key_server in $key_servers ; do
+                                $sh_c "apt-key adv --keyserver hkp://${key_server}:80 --recv-keys ${gpg_fingerprint}" &amp;&amp; break
+                        done
+                        $sh_c "apt-key adv -k ${gpg_fingerprint} &gt;/dev/null"
+            $sh_c "mkdir -p /etc/apt/sources.list.d"
+            $sh_c "echo deb \[arch=$(dpkg --print-architecture)\] ${apt_url}/repo ${lsb_dist}-${dist_version} ${repo} &gt; /etc/apt/sources.list.d/docker.list"
+            $sh_c 'sleep 3; apt-get update; apt-get install -y -q docker-engine'
+            )
+            echo_docker_as_nonroot
+            exit 0
+            ;;
+        rancheros)
+            (
+            set -x
+            $sh_c "sleep 3; ros engine switch -f $(sudo ros engine list | grep ${docker_version} | head -n 1 | cut -d ' ' -f 2)"
+            )
+            exit 0
+            ;;
+    esac
+
+    # intentionally mixed spaces and tabs here -- tabs are stripped by "&lt;&lt;-'EOF'", spaces are kept in the output
+    cat &gt;&amp;2 &lt;&lt;-'EOF'
+
+    Either your platform is not easily detectable or is not supported by this
+    installer script.
+    Please visit the following URL for more detailed installation instructions:
+
+    https://docs.docker.com/engine/installation/
+
+    EOF
+    exit 1
+}
+
+# wrapped up in a function so that we have some protection against only getting
+# half the file during "curl | sh"
+do_install</code></pre><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -667,9 +1125,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《事件驱动的微服务架构的最佳实践》
+                    《快速shell安装docker-ce》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/14/shi-jian-qu-dong-de-wei-fu-wu-jia-gou-de-zui-jia-shi-jian/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/19/kuai-su-shell-an-zhuang-dockerce/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Hao Dexuan
             </a> 采用
@@ -710,7 +1168,7 @@
         repo: 'trojan20161207.github.io',
         owner: 'trojan20161207',
         admin: "trojan20161207",
-        id: '2019-09-14T19-38-59',
+        id: '2019-09-19T15-12-46',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -735,22 +1193,22 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/09/19/gao-bing-fa-da-liu-liang-wang-zhan-10-ge-diao-you-ce-lue/">
+                <a href="/2019/09/19/docker-ming-ling-shi-yong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="高并发大流量网站10个调优策略">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="docker命令使用">
                         
-                        <span class="card-title">高并发大流量网站10个调优策略</span>
+                        <span class="card-title">docker命令使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            1. 硬件升级
-普通的P4服务器一般最多能支持每天10万独立IP，如果访问量比这个还要大，那么必须首先配置一台更高性能的专用服务器才能解决问题，否则怎么优化都不可能彻底解决性能问题。
-2. 负载均衡
-它是根据某种负载均衡策略把请求分发到集群
+                            docker01
+List Docker CLI commandsdocker container --helpDisplay Docker version and infodocker --version
+docker version
+d
                         
                     </div>
                     <div class="publish-info">
@@ -768,8 +1226,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/高并发-网站调优/" target="_blank">
-                        <span class="chip bg-color">高并发, 网站调优</span>
+                    <a href="/tags/docker/" target="_blank">
+                        <span class="chip bg-color">docker</span>
                     </a>
                     
                 </div>
@@ -783,24 +1241,25 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/09/06/ji-yu-a-li-yun-jing-xiang-zhan-an-zhuang-kubernetes1.15/">
+                <a href="/2019/09/19/docker-an-zhuang-yu-jian-dan-shi-yong/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="基于阿里云镜像站安装Kubernetes 1.15">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="docker安装与简单使用">
                         
-                        <span class="card-title">基于阿里云镜像站安装Kubernetes 1.15</span>
+                        <span class="card-title">docker安装与简单使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            kubernetes官网的文档比较详细，但是所有的安装步骤都有个前提(你有足够自由的互联络)，之前在香港和亚马逊的服务器都是直接照着手册执行脚本一路顺畅。无奈天朝的网络只能够借助于阿里云镜像站了，先前只是在使用该站点的各种linux发行版安
+                            docker安装与简单使用(来自docker官方)系统要求：Docker CE 支持 64 位版本 CentOS 7，并且要求内核版本不低于 3.10,安装最新版CE，推荐使用CentOS 7.6
+卸载旧版本：sudo yum remove
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-06
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-19
                             </span>
                         <span class="publish-author">
                             
@@ -813,8 +1272,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/kubernetes-docker/" target="_blank">
-                        <span class="chip bg-color">kubernetes, docker</span>
+                    <a href="/tags/docker/" target="_blank">
+                        <span class="chip bg-color">docker</span>
                     </a>
                     
                 </div>

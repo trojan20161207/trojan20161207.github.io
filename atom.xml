@@ -36,9 +36,7 @@
     </summary>
     
     
-      <category term="shell" scheme="https://xiaochong2018.gitee.io/tags/shell/"/>
-    
-      <category term="巡检" scheme="https://xiaochong2018.gitee.io/tags/%E5%B7%A1%E6%A3%80/"/>
+      <category term="shell, 巡检" scheme="https://xiaochong2018.gitee.io/tags/shell-%E5%B7%A1%E6%A3%80/"/>
     
   </entry>
   
@@ -92,8 +90,8 @@
   
   <entry>
     <title>快速shell安装docker-ce</title>
-    <link href="https://xiaochong2018.gitee.io/2019/09/19//articles/2019/09/19/1568877166153.html/"/>
-    <id>https://xiaochong2018.gitee.io/2019/09/19//articles/2019/09/19/1568877166153.html/</id>
+    <link href="https://xiaochong2018.gitee.io/2019/09/19/kuai-su-shell-an-zhuang-dockerce/"/>
+    <id>https://xiaochong2018.gitee.io/2019/09/19/kuai-su-shell-an-zhuang-dockerce/</id>
     <published>2019-09-19T07:12:46.000Z</published>
     <updated>2019-09-19T07:15:12.000Z</updated>
     
@@ -110,9 +108,7 @@
     </summary>
     
     
-      <category term="docker" scheme="https://xiaochong2018.gitee.io/tags/docker/"/>
-    
-      <category term="shell" scheme="https://xiaochong2018.gitee.io/tags/shell/"/>
+      <category term="docker, shell" scheme="https://xiaochong2018.gitee.io/tags/docker-shell/"/>
     
   </entry>
   
@@ -160,9 +156,7 @@
     </summary>
     
     
-      <category term="进阶" scheme="https://xiaochong2018.gitee.io/tags/%E8%BF%9B%E9%98%B6/"/>
-    
-      <category term="Linux运维" scheme="https://xiaochong2018.gitee.io/tags/Linux%E8%BF%90%E7%BB%B4/"/>
+      <category term="Linux运维, 进阶" scheme="https://xiaochong2018.gitee.io/tags/Linux%E8%BF%90%E7%BB%B4-%E8%BF%9B%E9%98%B6/"/>
     
   </entry>
   
@@ -186,9 +180,7 @@
     </summary>
     
     
-      <category term="高并发" scheme="https://xiaochong2018.gitee.io/tags/%E9%AB%98%E5%B9%B6%E5%8F%91/"/>
-    
-      <category term="网站调优" scheme="https://xiaochong2018.gitee.io/tags/%E7%BD%91%E7%AB%99%E8%B0%83%E4%BC%98/"/>
+      <category term="高并发, 网站调优" scheme="https://xiaochong2018.gitee.io/tags/%E9%AB%98%E5%B9%B6%E5%8F%91-%E7%BD%91%E7%AB%99%E8%B0%83%E4%BC%98/"/>
     
   </entry>
   
@@ -212,13 +204,7 @@
     </summary>
     
     
-      <category term="微服务架构" scheme="https://xiaochong2018.gitee.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
-    
-      <category term="微服务" scheme="https://xiaochong2018.gitee.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
-    
-      <category term="微服务最佳实践" scheme="https://xiaochong2018.gitee.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
-    
-      <category term="事件驱动架构" scheme="https://xiaochong2018.gitee.io/tags/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84/"/>
+      <category term="微服务架构, 微服务, 微服务最佳实践, 事件驱动架构" scheme="https://xiaochong2018.gitee.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84-%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84/"/>
     
   </entry>
   
@@ -242,9 +228,7 @@
     </summary>
     
     
-      <category term="docker" scheme="https://xiaochong2018.gitee.io/tags/docker/"/>
-    
-      <category term="kubernetes" scheme="https://xiaochong2018.gitee.io/tags/kubernetes/"/>
+      <category term="kubernetes, docker" scheme="https://xiaochong2018.gitee.io/tags/kubernetes-docker/"/>
     
   </entry>
   

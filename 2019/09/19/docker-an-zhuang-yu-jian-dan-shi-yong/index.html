@@ -5,9 +5,8 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="docker安装与简单使用, blog">
-    <meta name="description" content="
-docker安装与简单使用(来自docker官方)系统要求：Docker CE 支持 64 位版本 CentOS 7，并且要求内核版本不低于 3.10,安装最新版CE，推荐使用CentOS 7.6
-卸载旧版本：sudo yum remov">
+    <meta name="description" content="docker安装与简单使用(来自docker官方)系统要求：Docker CE 支持 64 位版本 CentOS 7，并且要求内核版本不低于 3.10,安装最新版CE，推荐使用CentOS 7.6
+卸载旧版本：sudo yum remove">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -418,8 +417,7 @@ docker安装与简单使用(来自docker官方)系统要求：Docker CE 支持 6
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><img src="https://img.hacpai.com/bing/20190609.jpg?imageView2/1/w/960/h/540/interlace/1/q/100" alt=""></p>
-<h2 id="docker安装与简单使用-来自docker官方"><a href="#docker安装与简单使用-来自docker官方" class="headerlink" title="docker安装与简单使用(来自docker官方)"></a>docker安装与简单使用(来自docker官方)</h2><h4 id="系统要求："><a href="#系统要求：" class="headerlink" title="系统要求："></a>系统要求：</h4><p>Docker CE 支持 64 位版本 CentOS 7，并且要求<strong>内核版本</strong>不低于 3.10,安装最新版CE，推荐使用CentOS 7.6</p>
+                <h2 id="docker安装与简单使用-来自docker官方"><a href="#docker安装与简单使用-来自docker官方" class="headerlink" title="docker安装与简单使用(来自docker官方)"></a>docker安装与简单使用(来自docker官方)</h2><h4 id="系统要求："><a href="#系统要求：" class="headerlink" title="系统要求："></a>系统要求：</h4><p>Docker CE 支持 64 位版本 CentOS 7，并且要求<strong>内核版本</strong>不低于 3.10,安装最新版CE，推荐使用CentOS 7.6</p>
 <h4 id="卸载旧版本："><a href="#卸载旧版本：" class="headerlink" title="卸载旧版本："></a>卸载旧版本：</h4><pre><code>sudo yum remove docker \
                   docker-client \
                   docker-client-latest \
@@ -708,7 +706,7 @@ docker image rm node@sha256:b4f0e0bdeb578043c1ea6862f0d40cc4afe32a4a582f3be235a3
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/09/19/articles/2019/09/19/1568877166153.html/">
+                <a href="/2019/09/19/kuai-su-shell-an-zhuang-dockerce/">
                     <div class="card-image">
                         
                         
@@ -720,15 +718,14 @@ docker image rm node@sha256:b4f0e0bdeb578043c1ea6862f0d40cc4afe32a4a582f3be235a3
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             
-我们以18.09.8为例，以下为详细shell：
+                            我们以18.09.8为例，以下为详细shell：
 #!/bin/sh
 set -e
 
 CHANNEL="stable"
 
 docker_version=18.09.8
-apt_url="https://apt.dockerproject
+apt_url="https://apt.dockerproject.o
                         
                     </div>
                     <div class="publish-info">
@@ -746,12 +743,8 @@ apt_url="https://apt.dockerproject
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/docker/" target="_blank">
-                        <span class="chip bg-color">docker</span>
-                    </a>
-                    
-                    <a href="/tags/shell/" target="_blank">
-                        <span class="chip bg-color">shell</span>
+                    <a href="/tags/docker-shell/" target="_blank">
+                        <span class="chip bg-color">docker, shell</span>
                     </a>
                     
                 </div>
@@ -777,9 +770,8 @@ apt_url="https://apt.dockerproject
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                             
-一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。本文简单介绍了其中一种linux运维的个人进阶路线，有需要的朋友可以参考下。
-第一阶段：企业级Linux运维工程师1、Linux运维最佳学习方法”5W1H”六何分析法全
+                            一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。本文简单介绍了其中一种linux运维的个人进阶路线，有需要的朋友可以参考下。
+第一阶段：企业级Linux运维工程师1、Linux运维最佳学习方法”5W1H”六何分析法全面介
                         
                     </div>
                     <div class="publish-info">
@@ -797,12 +789,8 @@ apt_url="https://apt.dockerproject
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/进阶/" target="_blank">
-                        <span class="chip bg-color">进阶</span>
-                    </a>
-                    
-                    <a href="/tags/Linux运维/" target="_blank">
-                        <span class="chip bg-color">Linux运维</span>
+                    <a href="/tags/Linux运维-进阶/" target="_blank">
+                        <span class="chip bg-color">Linux运维, 进阶</span>
                     </a>
                     
                 </div>
