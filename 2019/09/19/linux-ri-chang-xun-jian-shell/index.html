@@ -1,0 +1,1787 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Linux日常巡检shell, blog">
+    <meta name="description" content="
+#!/bin/bash
+###################################################################
+# Functions: this script from polling s">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Linux日常巡检shell | 小冲的幸福生活</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小冲的幸福生活</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小冲的幸福生活</div>
+        <div class="logo-desc">
+            
+            一棵大树经过一场雨之后倒了下来，原来是根基短浅。我们做任何事都要打好基础，才能坚固不倒。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/trojan20161207" class="waves-effect waves-light" target="_blank">
+                <i class="fa fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/trojan20161207" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        Linux日常巡检shell
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/shell/" target="_blank">
+                                <span class="chip bg-color">shell</span>
+                            </a>
+                        
+                            <a href="/tags/巡检/" target="_blank">
+                                <span class="chip bg-color">巡检</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-09-19
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.1k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        17 分
+                    </div>
+                    
+                
+				
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p><img src="https://img.hacpai.com/bing/20190618.jpg?imageView2/1/w/960/h/540/interlace/1/q/100" alt=""></p>
+<pre><code>#!/bin/bash
+###################################################################
+# Functions: this script from polling system status
+# Info: be suitable for CentOS/RHEL 6/7 
+# Changelog:
+#      2019-01-30    haodexuan     initial commit
+###################################################################
+#set path env,if not set will some command not found in crontab
+
+export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
+source /etc/profile
+
+
+# run this script use root
+[ $(id -u) -gt 0 ] &amp;&amp; echo "please use root run the script! " &amp;&amp; exit 1
+
+# check system  version
+OS_Version=$(awk '{print $(NF-1)}' /etc/redhat-release)
+
+# declare script version date
+Script_Version="2019.01.30"
+
+
+# define polling log path
+LOGPATH=/home/logs/polling
+[ -d $LOGPATH ] || mkdir -p $LOGPATH
+RESULTFILE="$LOGPATH/HostDailyCheck-`hostname`-`date +%Y%m%d`.txt"
+
+
+# define globle variable
+report_DateTime=""    #日期 ok
+report_Hostname=""    #主机名 ok
+report_OSRelease=""    #发行版本 ok
+report_Kernel=""    #内核 ok
+report_Language=""    #语言/编码 ok
+report_LastReboot=""    #最近启动时间 ok
+report_Uptime=""    #运行时间（天） ok
+report_CPUs=""    #CPU数量 ok
+report_CPUType=""    #CPU类型 ok
+report_Arch=""    #CPU架构 ok
+report_MemTotal=""    #内存总容量(MB) ok
+report_MemFree=""    #内存剩余(MB) ok
+report_MemUsedPercent=""    #内存使用率% ok
+report_DiskTotal=""    #硬盘总容量(GB) ok
+report_DiskFree=""    #硬盘剩余(GB) ok
+report_DiskUsedPercent=""    #硬盘使用率% ok
+report_InodeTotal=""    #Inode总量 ok
+report_InodeFree=""    #Inode剩余 ok
+report_InodeUsedPercent=""    #Inode使用率 ok
+report_IP=""    #IP地址 ok
+report_MAC=""    #MAC地址 ok
+report_Gateway=""    #默认网关 ok
+report_DNS=""    #DNS ok
+report_Listen=""    #监听 ok
+report_Selinux=""    #Selinux ok
+report_Firewall=""    #防火墙 ok
+report_USERs=""    #用户 ok
+report_USEREmptyPassword=""   #空密码用户 ok
+report_USERTheSameUID=""      #相同ID的用户 ok 
+report_PasswordExpiry=""    #密码过期（天） ok
+report_RootUser=""    #root用户 ok
+report_Sudoers=""    #sudo授权  ok
+report_SSHAuthorized=""    #SSH信任主机 ok
+report_SSHDProtocolVersion=""    #SSH协议版本 ok
+report_SSHDPermitRootLogin=""    #允许root远程登录 ok
+report_DefunctProsess=""    #僵尸进程数量 ok
+report_SelfInitiatedService=""    #自启动服务数量 ok
+report_SelfInitiatedProgram=""    #自启动程序数量 ok
+report_RuningService=""           #运行中服务数  ok
+report_Crontab=""    #计划任务数 ok
+report_Syslog=""    #日志服务 ok
+report_SNMP=""    #SNMP  OK
+report_NTP=""    #NTP ok
+report_JDK=""    #JDK版本 ok
+
+
+function version(){
+    echo ""
+    echo "System Polling：Version $Script_Version "
+    echo ""
+}
+
+
+function getCpuStatus(){
+    echo ""
+    echo "############################ Check CPU Status#############################"
+    Physical_CPUs=$(grep "physical id" /proc/cpuinfo| sort | uniq | wc -l)
+    Virt_CPUs=$(grep "processor" /proc/cpuinfo | wc -l)
+    CPU_Kernels=$(grep "cores" /proc/cpuinfo|uniq| awk -F ': ' '{print $2}')
+    CPU_Type=$(grep "model name" /proc/cpuinfo | awk -F ': ' '{print $2}' | sort | uniq)
+    CPU_Arch=$(uname -m)
+    echo "物理CPU个数:$Physical_CPUs"
+    echo "逻辑CPU个数:$Virt_CPUs"
+    echo "每CPU核心数:$CPU_Kernels"
+    echo "    CPU型号:$CPU_Type"
+    echo "    CPU架构:$CPU_Arch"
+    # report information
+    report_CPUs=$Virt_CPUs    #CPU数量
+    report_CPUType=$CPU_Type  #CPU类型
+    report_Arch=$CPU_Arch     #CPU架构
+}
+
+
+function getMemStatus(){
+    echo ""
+    echo "############################ Check Memmory Usage ###########################"
+    if [[ $OS_Version &lt; 7 ]];then
+        free -mo
+    else
+        free -h
+    fi
+    # report information
+    MemTotal=$(grep MemTotal /proc/meminfo| awk '{print $2}')  #KB
+    MemFree=$(grep MemFree /proc/meminfo| awk '{print $2}')    #KB
+    let MemUsed=MemTotal-MemFree
+    MemPercent=$(awk "BEGIN {if($MemTotal==0){printf 100}else{printf \"%.2f\",$MemUsed*100/$MemTotal}}")
+    report_MemTotal="$((MemTotal/1024))""MB"        #内存总容量(MB)
+    report_MemFree="$((MemFree/1024))""MB"          #内存剩余(MB)
+    report_MemUsedPercent="$(awk "BEGIN {if($MemTotal==0){printf 100}else{printf \"%.2f\",$MemUsed*100/$MemTotal}}")""%"   #内存使用率%
+}
+
+
+function getDiskStatus(){
+    echo ""
+    echo "############################ Check Disk Status ############################"
+    df -hiP | sed 's/Mounted on/Mounted/' &gt; /tmp/inode
+    df -hTP | sed 's/Mounted on/Mounted/' &gt; /tmp/disk 
+    join /tmp/disk /tmp/inode | awk '{print $1,$2,"|",$3,$4,$5,$6,"|",$8,$9,$10,$11,"|",$12}'| column -t
+    # report information
+    diskdata=$(df -TP | sed '1d' | awk '$2!="tmpfs"{print}') #KB
+    disktotal=$(echo "$diskdata" | awk '{total+=$3}END{print total}') #KB
+    diskused=$(echo "$diskdata" | awk '{total+=$4}END{print total}')  #KB
+    diskfree=$((disktotal-diskused)) #KB
+    diskusedpercent=$(echo $disktotal $diskused | awk '{if($1==0){printf 100}else{printf "%.2f",$2*100/$1}}') 
+    inodedata=$(df -iTP | sed '1d' | awk '$2!="tmpfs"{print}')
+    inodetotal=$(echo "$inodedata" | awk '{total+=$3}END{print total}')
+    inodeused=$(echo "$inodedata" | awk '{total+=$4}END{print total}')
+    inodefree=$((inodetotal-inodeused))
+    inodeusedpercent=$(echo $inodetotal $inodeused | awk '{if($1==0){printf 100}else{printf "%.2f",$2*100/$1}}')
+    report_DiskTotal=$((disktotal/1024/1024))"GB"   #硬盘总容量(GB)
+    report_DiskFree=$((diskfree/1024/1024))"GB"     #硬盘剩余(GB)
+    report_DiskUsedPercent="$diskusedpercent""%"    #硬盘使用率%
+    report_InodeTotal=$((inodetotal/1000))"K"       #Inode总量
+    report_InodeFree=$((inodefree/1000))"K"         #Inode剩余
+    report_InodeUsedPercent="$inodeusedpercent""%"  #Inode使用率%
+    echo ""
+}
+
+
+function getSystemStatus(){
+    echo ""
+    echo "############################ Check System Status ############################"
+    if [ -e /etc/sysconfig/i18n ];then
+        default_LANG="$(grep "LANG=" /etc/sysconfig/i18n | grep -v "^#" | awk -F '"' '{print $2}')"
+    else
+        default_LANG=$LANG
+    fi
+    export LANG="en_US.UTF-8"
+    Release=$(cat /etc/redhat-release 2&gt;/dev/null)
+    Kernel=$(uname -r)
+    OS=$(uname -o)
+    Hostname=$(uname -n)
+    SELinux=$(/usr/sbin/sestatus | grep "SELinux status: " | awk '{print $3}')
+    LastReboot=$(who -b | awk '{print $3,$4}')
+    uptime=$(uptime | sed 's/.*up [,]∗, .*/\1/')
+    echo "     系统：$OS"
+    echo " 发行版本：$Release"
+    echo "     内核：$Kernel"
+    echo "   主机名：$Hostname"
+    echo "  SELinux：$SELinux"
+    echo "语言/编码：$default_LANG"
+    echo " 当前时间：$(date +'%F %T')"
+    echo " 最后启动：$LastReboot"
+    echo " 运行时间：$uptime"
+    # report information
+    report_DateTime=$(date +"%F %T")  #日期
+    report_Hostname="$Hostname"       #主机名
+    report_OSRelease="$Release"       #发行版本
+    report_Kernel="$Kernel"           #内核
+    report_Language="$default_LANG"   #语言/编码
+    report_LastReboot="$LastReboot"   #最近启动时间
+    report_Uptime="$uptime"           #运行时间（天）
+    report_Selinux="$SELinux"
+    export LANG="$default_LANG"
+    echo ""
+}
+
+function getServiceStatus(){
+    echo ""
+    echo "############################ Check Service Status ############################"
+    if [[ $OS_Version &gt; 7 ]];then
+        conf=$(systemctl list-unit-files --type=service --state=enabled --no-pager | grep "enabled")
+        process=$(systemctl list-units --type=service --state=running --no-pager | grep ".service")
+        # report information
+        report_SelfInitiatedService="$(echo "$conf" | wc -l)"       #自启动服务数量
+        report_RuningService="$(echo "$process" | wc -l)"           #运行中服务数量
+    else
+        conf=$(/sbin/chkconfig | grep -E ":on|:启用")
+        process=$(/sbin/service --status-all 2&gt;/dev/null | grep -E "is running|正在运行")
+        # report information
+        report_SelfInitiatedService="$(echo "$conf" | wc -l)"       #自启动服务数量
+        report_RuningService="$(echo "$process" | wc -l)"           #运行中服务数量
+    fi
+    echo "Service Configure"
+    echo "--------------------------------"
+    echo "$conf" | column -t
+    echo ""
+    echo "The Running Services"
+    echo "--------------------------------"
+    echo "$process"
+}
+
+function getAutoStartStatus(){
+    echo ""
+    echo "############################ Check Self-starting Services ##########################"
+    conf=$(grep -v "^#" /etc/rc.d/rc.local| sed '/^$/d')
+    echo "$conf"
+    # report information
+    report_SelfInitiatedProgram="$(echo $conf | wc -l)"    #自启动程序数量
+}
+
+
+function getLoginStatus(){
+    echo ""
+    echo "############################ Check Login In ############################"
+    last | head
+}
+
+function getNetworkStatus(){
+    echo ""
+    echo "############################ Check Network ############################"
+    if [[ $OS_Version &lt; 7 ]];then
+        /sbin/ifconfig -a | grep -v packets | grep -v collisions | grep -v inet6
+    else
+        #ip address
+        for i in $(ip link | grep BROADCAST | awk -F: '{print $2}');do ip add show $i | grep -E "BROADCAST|global"| awk '{print $2}' | tr '\n' ' ' ;echo "" ;done
+    fi
+    GATEWAY=$(ip route | grep default | awk '{print $3}')
+    DNS=$(grep nameserver /etc/resolv.conf| grep -v "#" | awk '{print $2}' | tr '\n' ',' | sed 's/,$//')
+    echo ""
+    echo "Gateway: $GATEWAY "
+    echo " DNS: $DNS"
+    # report information
+    IP=$(ip -f inet addr | grep -v 127.0.0.1 |  grep inet | awk '{print $NF,$2}' | tr '\n' ',' | sed 's/,$//')
+    MAC=$(ip link | grep -v "LOOPBACK\|loopback" | awk '{print $2}' | sed 'N;s/\n//' | tr '\n' ',' | sed 's/,$//')
+    report_IP="$IP"            #IP地址
+    report_MAC=$MAC            #MAC地址
+    report_Gateway="$GATEWAY"  #默认网关
+    report_DNS="$DNS"          #DNS
+}
+
+
+function getListenStatus(){
+    echo ""
+    echo "############################ Check Connect Status ############################"
+#    TCPListen=$(ss -ntul | column -t)
+    TCPListen=$(netstat -ntulp | column -t)
+    AllConnect=$(ss -an | awk 'NR&gt;1 {++s[$1]} END {for(k in s) print k,s[k]}' | column -t)
+    echo "$TCPListen"
+    echo "$AllConnect"
+    # report information
+    report_Listen="$(echo "$TCPListen"| sed '1d' | awk '/tcp/ {print $5}' | awk -F: '{print $NF}' | sort | uniq | wc -l)"
+}
+
+function getCronStatus(){
+    echo ""
+    echo "############################ Check Crontab ########################"
+    Crontab=0
+    for shell in $(grep -v "/sbin/nologin" /etc/shells);do
+        for user in $(grep "$shell" /etc/passwd | awk -F: '{print $1}');do
+            crontab -l -u $user &gt;/dev/null 2&gt;&amp;1
+            status=$?
+            if [ $status -eq 0 ];then
+                echo "$user"
+                echo "-------------"
+                crontab -l -u $user
+                let Crontab=Crontab+$(crontab -l -u $user | wc -l)
+                echo ""
+            fi
+        done
+    done
+    # scheduled task
+    find /etc/cron* -type f | xargs -i ls -l {} | column  -t
+    let Crontab=Crontab+$(find /etc/cron* -type f | wc -l)
+    # report information
+    report_Crontab="$Crontab"    #计划任务数
+}
+
+function getHowLongAgo(){
+    # 计算一个时间戳离现在有多久了
+    datetime="$*"
+    [ -z "$datetime" ] &amp;&amp; echo "错误的参数：getHowLongAgo() $*"
+    Timestamp=$(date +%s -d "$datetime")    #转化为时间戳
+    Now_Timestamp=$(date +%s)
+    Difference_Timestamp=$(($Now_Timestamp-$Timestamp))
+    days=0;hours=0;minutes=0;
+    sec_in_day=$((60*60*24));
+    sec_in_hour=$((60*60));
+    sec_in_minute=60
+    while (( $(($Difference_Timestamp-$sec_in_day)) &gt; 1 ))
+    do
+        let Difference_Timestamp=Difference_Timestamp-sec_in_day
+        let days++
+    done
+    while (( $(($Difference_Timestamp-$sec_in_hour)) &gt; 1 ))
+    do
+        let Difference_Timestamp=Difference_Timestamp-sec_in_hour
+        let hours++
+    done
+    echo "$days 天 $hours 小时前"
+}
+
+
+function getUserLastLogin(){
+    # 获取用户最近一次登录的时间，含年份
+    # 很遗憾last命令不支持显示年份，只有"last -t YYYYMMDDHHMMSS"表示某个时间之间的登录，我
+    # 们只能用最笨的方法了，对比今天之前和今年元旦之前（或者去年之前和前年之前……）某个用户
+    # 登录次数，如果登录统计次数有变化，则说明最近一次登录是今年。
+    username=$1
+    : ${username:="`whoami`"}
+    thisYear=$(date +%Y)
+    oldesYear=$(last | tail -n1 | awk '{print $NF}')
+    while(( $thisYear &gt;= $oldesYear));do
+        loginBeforeToday=$(last $username | grep $username | wc -l)
+        loginBeforeNewYearsDayOfThisYear=$(last $username -t $thisYear"0101000000" | grep $username | wc -l)
+        if [ $loginBeforeToday -eq 0 ];then
+            echo "Never Login"
+            break
+        elif [ $loginBeforeToday -gt $loginBeforeNewYearsDayOfThisYear ];then
+            lastDateTime=$(last -i $username | head -n1 | awk '{for(i=4;i&lt;(NF-2);i++)printf"%s ",$i}')" $thisYear" #格式如: Sat Nov 2 20:33 2015
+            lastDateTime=$(date "+%Y-%m-%d %H:%M:%S" -d "$lastDateTime")
+            echo "$lastDateTime"
+            break
+        else
+            thisYear=$((thisYear-1))
+        fi
+    done
+}
+
+function getUserStatus(){
+    echo ""
+    echo "############################ Check User ############################"
+    # /etc/passwd the last modification time
+    pwdfile="$(cat /etc/passwd)"
+    Modify=$(stat /etc/passwd | grep Modify | tr '.' ' ' | awk '{print $2,$3}')
+    echo "/etc/passwd The last modification time：$Modify ($(getHowLongAgo $Modify))"
+    echo ""
+    echo "A privileged user"
+    echo "-----------------"
+    RootUser=""
+    for user in $(echo "$pwdfile" | awk -F: '{print $1}');do
+        if [ $(id -u $user) -eq 0 ];then
+            echo "$user"
+            RootUser="$RootUser,$user"
+        fi
+    done
+    echo ""
+    echo "User List"
+    echo "--------"
+    USERs=0
+    echo "$(
+    echo "UserName UID GID HOME SHELL LasttimeLogin"
+    for shell in $(grep -v "/sbin/nologin" /etc/shells);do
+        for username in $(grep "$shell" /etc/passwd| awk -F: '{print $1}');do
+            userLastLogin="$(getUserLastLogin $username)"
+            echo "$pwdfile" | grep -w "$username" |grep -w "$shell"| awk -F: -v lastlogin="$(echo "$userLastLogin" | tr ' ' '_')" '{print $1,$3,$4,$6,$7,lastlogin}'
+        done
+        let USERs=USERs+$(echo "$pwdfile" | grep "$shell"| wc -l)
+    done
+    )" | column -t
+    echo ""
+    echo "Null Password User"
+    echo "------------------"
+    USEREmptyPassword=""
+    for shell in $(grep -v "/sbin/nologin" /etc/shells);do
+            for user in $(echo "$pwdfile" | grep "$shell" | cut -d: -f1);do
+            r=$(awk -F: '$2=="!!"{print $1}' /etc/shadow | grep -w $user)
+            if [ ! -z $r ];then
+                echo $r
+                USEREmptyPassword="$USEREmptyPassword,"$r
+            fi
+        done    
+    done
+    echo ""
+    echo "The Same UID User"
+    echo "----------------"
+    USERTheSameUID=""
+    UIDs=$(cut -d: -f3 /etc/passwd | sort | uniq -c | awk '$1&gt;1{print $2}')
+    for uid in $UIDs;do
+        echo -n "$uid";
+        USERTheSameUID="$uid"
+        r=$(awk -F: 'ORS="";$3=='"$uid"'{print ":",$1}' /etc/passwd)
+        echo "$r"
+        echo ""
+        USERTheSameUID="$USERTheSameUID $r,"
+    done
+    # report information
+    report_USERs="$USERs"    #用户
+    report_USEREmptyPassword=$(echo $USEREmptyPassword | sed 's/^,//') 
+    report_USERTheSameUID=$(echo $USERTheSameUID | sed 's/,$//') 
+    report_RootUser=$(echo $RootUser | sed 's/^,//')    #特权用户
+}
+
+
+function getPasswordStatus {
+    echo ""
+    echo "############################ Check Password Status ############################"
+    pwdfile="$(cat /etc/passwd)"
+    echo ""
+    echo "Password Expiration Check"
+    echo "-------------------------"
+    result=""
+    for shell in $(grep -v "/sbin/nologin" /etc/shells);do
+        for user in $(echo "$pwdfile" | grep "$shell" | cut -d: -f1);do
+            get_expiry_date=$(/usr/bin/chage -l $user | grep 'Password expires' | cut -d: -f2)
+            if [[ $get_expiry_date = ' never' || $get_expiry_date = 'never' ]];then
+                printf "%-15s never expiration\n" $user
+                result="$result,$user:never"
+            else
+                password_expiry_date=$(date -d "$get_expiry_date" "+%s")
+                current_date=$(date "+%s")
+                diff=$(($password_expiry_date-$current_date))
+                let DAYS=$(($diff/(60*60*24)))
+                printf "%-15s %s expiration after days\n" $user $DAYS
+                result="$result,$user:$DAYS days"
+            fi
+        done
+    done
+    report_PasswordExpiry=$(echo $result | sed 's/^,//')
+    echo ""
+    echo "Check The Password Policy"
+    echo "------------"
+    grep -v "#" /etc/login.defs | grep -E "PASS_MAX_DAYS|PASS_MIN_DAYS|PASS_MIN_LEN|PASS_WARN_AGE"
+    echo ""
+}
+
+function getSudoersStatus(){
+    echo ""
+    echo "############################ Sudoers Check #########################"
+    conf=$(grep -v "^#" /etc/sudoers| grep -v "^Defaults" | sed '/^$/d')
+    echo "$conf"
+    echo ""
+    # report information
+    report_Sudoers="$(echo $conf | wc -l)"
+}
+
+
+function getInstalledStatus(){
+    echo ""
+    echo "############################ Software Check ############################"
+    rpm -qa --last | head | column -t 
+}
+
+function getProcessStatus(){
+    echo ""
+    echo "############################ Process Check ############################"
+    if [ $(ps -ef | grep defunct | grep -v grep | wc -l) -ge 1 ];then
+        echo ""
+        echo "zombie process";
+        echo "--------"
+        ps -ef | head -n1
+        ps -ef | grep defunct | grep -v grep
+    fi
+    echo ""
+    echo "Merory Usage TOP10"
+    echo "-------------"
+    echo -e "PID %MEM RSS COMMAND
+    $(ps aux | awk '{print $2, $4, $6, $11}' | sort -k3rn | head -n 10 )"| column -t 
+    echo ""
+    echo "CPU Usage TOP10"
+    echo "------------"
+    top b -n1 | head -17 | tail -11
+    # report information
+    report_DefunctProsess="$(ps -ef | grep defunct | grep -v grep|wc -l)"
+}
+
+
+function getJDKStatus(){
+    echo ""
+    echo "############################ JDK Check #############################"
+    java -version 2&gt;/dev/null
+    if [ $? -eq 0 ];then
+        java -version 2&gt;&amp;1
+    fi
+    echo "JAVA_HOME=\"$JAVA_HOME\""
+    # report information
+    report_JDK="$(java -version 2&gt;&amp;1 | grep version | awk '{print $1,$3}' | tr -d '"')"
+}
+
+function getSyslogStatus(){
+    echo ""
+    echo "############################ Syslog Check ##########################"
+    echo "Service Status：$(getState rsyslog)"
+    echo ""
+    echo "/etc/rsyslog.conf"
+    echo "-----------------"
+    cat /etc/rsyslog.conf 2&gt;/dev/null | grep -v "^#" | grep -v "^\\$" | sed '/^$/d'  | column -t
+    #report information
+    report_Syslog="$(getState rsyslog)"
+}
+
+
+function getFirewallStatus(){
+    echo ""
+    echo "############################ Firewall Check ##########################"
+    # Firewall Status/Poilcy
+    if [[ $OS_Version &lt; 7 ]];then
+        /etc/init.d/iptables status &gt;/dev/null  2&gt;&amp;1
+        status=$?
+        if [ $status -eq 0 ];then
+                s="active"
+        elif [ $status -eq 3 ];then
+                s="inactive"
+        elif [ $status -eq 4 ];then
+                s="permission denied"
+        else
+                s="unknown"
+        fi
+    else
+        s="$(getState iptables)"
+    fi
+    echo "iptables: $s"
+    echo ""
+    echo "/etc/sysconfig/iptables"
+    echo "-----------------------"
+    cat /etc/sysconfig/iptables 2&gt;/dev/null
+    # report information
+    report_Firewall="$s"
+}
+
+
+function getSNMPStatus(){
+    #SNMP Service Status,Configure
+    echo ""
+    echo "############################ SNMP Check ############################"
+    status="$(getState snmpd)"
+    echo "Service Status：$status"
+    echo ""
+    if [ -e /etc/snmp/snmpd.conf ];then
+        echo "/etc/snmp/snmpd.conf"
+        echo "--------------------"
+        cat /etc/snmp/snmpd.conf 2&gt;/dev/null | grep -v "^#" | sed '/^$/d'
+    fi
+    # report information
+    report_SNMP="$(getState snmpd)"
+}
+
+function getState(){
+    if [[ $OS_Version &lt; 7 ]];then
+        if [ -e "/etc/init.d/$1" ];then
+            if [ `/etc/init.d/$1 status 2&gt;/dev/null | grep -E "is running|正在运行" | wc -l` -ge 1 ];then
+                r="active"
+            else
+                r="inactive"
+            fi
+        else
+            r="unknown"
+        fi
+    else
+        #CentOS 7+
+        r="$(systemctl is-active $1 2&gt;&amp;1)"
+    fi
+    echo "$r"
+}
+
+function getSSHStatus(){
+    #SSHD Service Status,Configure
+    echo ""
+    echo "############################ SSH Check #############################"
+    # Check the trusted host
+    pwdfile="$(cat /etc/passwd)"
+    echo "Service Status：$(getState sshd)"
+    Protocol_Version=$(cat /etc/ssh/sshd_config | grep Protocol | awk '{print $2}')
+    echo "SSH Protocol Version：$Protocol_Version"
+    echo ""
+    echo "Trusted Host"
+    echo "------------"
+    authorized=0
+    for user in $(echo "$pwdfile" | grep /bin/bash | awk -F: '{print $1}');do
+        authorize_file=$(echo "$pwdfile" | grep -w $user | awk -F: '{printf $6"/.ssh/authorized_keys"}')
+        authorized_host=$(cat $authorize_file 2&gt;/dev/null | awk '{print $3}' | tr '\n' ',' | sed 's/,$//')
+        if [ ! -z $authorized_host ];then
+            echo "$user authorization \"$authorized_host\" Password-less access"
+        fi
+        let authorized=authorized+$(cat $authorize_file 2&gt;/dev/null | awk '{print $3}'|wc -l)
+    done
+
+
+    echo ""
+    echo "Whether to allow ROOT remote login"
+    echo "----------------------------------"
+    config=$(cat /etc/ssh/sshd_config | grep PermitRootLogin)
+    firstChar=${config:0:1}
+    if [ $firstChar == "#" ];then
+        PermitRootLogin="yes"  #The default is to allow ROOT remote login
+    else
+        PermitRootLogin=$(echo $config | awk '{print $2}')
+    fi
+    echo "PermitRootLogin $PermitRootLogin"
+
+
+    echo ""
+    echo "/etc/ssh/sshd_config"
+    echo "--------------------"
+    cat /etc/ssh/sshd_config | grep -v "^#" | sed '/^$/d'
+    # report information
+    report_SSHAuthorized="$authorized"    #SSH信任主机
+    report_SSHDProtocolVersion="$Protocol_Version"    #SSH协议版本
+    report_SSHDPermitRootLogin="$PermitRootLogin"    #允许root远程登录
+}
+
+function getNTPStatus(){
+    # The NTP service status, the current time, configuration, etc
+    echo ""
+    echo "############################ NTP Check #############################"
+    if [ -e /etc/ntp.conf ];then
+        echo "Service Status：$(getState ntpd)"
+        echo ""
+        echo "/etc/ntp.conf"
+        echo "-------------"
+        cat /etc/ntp.conf 2&gt;/dev/null | grep -v "^#" | sed '/^$/d'
+    fi
+    # report information
+    report_NTP="$(getState ntpd)"
+}
+
+
+
+function getZabbixStatus(){
+    # Check Zabbix Serivce Status
+    echo ""
+    echo "######################### Zabbix Check ##############################"
+    netstat -nltp | grep -v grep | grep zabbix &gt; /dev/null 2&gt;&amp;1
+    if [ $? -eq 0 ];then
+       echo "Service Status": Zabbix is running!
+    else
+       echo "Service Status": Zabbix not running!
+    fi
+    # report information
+}
+
+function uploadHostDailyCheckReport(){
+    json="{
+        \"DateTime\":\"$report_DateTime\",
+        \"Hostname\":\"$report_Hostname\",
+        \"OSRelease\":\"$report_OSRelease\",
+        \"Kernel\":\"$report_Kernel\",
+        \"Language\":\"$report_Language\",
+        \"LastReboot\":\"$report_LastReboot\",
+        \"Uptime\":\"$report_Uptime\",
+        \"CPUs\":\"$report_CPUs\",
+        \"CPUType\":\"$report_CPUType\",
+        \"Arch\":\"$report_Arch\",
+        \"MemTotal\":\"$report_MemTotal\",
+        \"MemFree\":\"$report_MemFree\",
+        \"MemUsedPercent\":\"$report_MemUsedPercent\",
+        \"DiskTotal\":\"$report_DiskTotal\",
+        \"DiskFree\":\"$report_DiskFree\",
+        \"DiskUsedPercent\":\"$report_DiskUsedPercent\",
+        \"InodeTotal\":\"$report_InodeTotal\",
+        \"InodeFree\":\"$report_InodeFree\",
+        \"InodeUsedPercent\":\"$report_InodeUsedPercent\",
+        \"IP\":\"$report_IP\",
+        \"MAC\":\"$report_MAC\",
+        \"Gateway\":\"$report_Gateway\",
+        \"DNS\":\"$report_DNS\",
+        \"Listen\":\"$report_Listen\",
+        \"Selinux\":\"$report_Selinux\",
+        \"Firewall\":\"$report_Firewall\",
+        \"USERs\":\"$report_USERs\",
+        \"USEREmptyPassword\":\"$report_USEREmptyPassword\",
+        \"USERTheSameUID\":\"$report_USERTheSameUID\",
+        \"PasswordExpiry\":\"$report_PasswordExpiry\",
+        \"RootUser\":\"$report_RootUser\",
+        \"Sudoers\":\"$report_Sudoers\",
+        \"SSHAuthorized\":\"$report_SSHAuthorized\",
+        \"SSHDProtocolVersion\":\"$report_SSHDProtocolVersion\",
+        \"SSHDPermitRootLogin\":\"$report_SSHDPermitRootLogin\",
+        \"DefunctProsess\":\"$report_DefunctProsess\",
+        \"SelfInitiatedService\":\"$report_SelfInitiatedService\",
+        \"SelfInitiatedProgram\":\"$report_SelfInitiatedProgram\",
+        \"RuningService\":\"$report_RuningService\",
+        \"Crontab\":\"$report_Crontab\",
+        \"Syslog\":\"$report_Syslog\",
+        \"SNMP\":\"$report_SNMP\",
+        \"NTP\":\"$report_NTP\",
+        \"JDK\":\"$report_JDK\"
+    }"
+    #echo "$json" 
+    curl -l -H "Content-type: application/json" -X POST -d "$json" "$uploadHostDailyCheckReportApi" 2&gt;/dev/null
+}
+
+function check(){
+    version
+    getSystemStatus
+    getCpuStatus
+    getMemStatus
+    getDiskStatus
+    getNetworkStatus
+    getListenStatus
+    getProcessStatus
+    getServiceStatus
+    getAutoStartStatus
+    getLoginStatus
+    getCronStatus
+    getUserStatus
+    getPasswordStatus
+    getSudoersStatus
+    getJDKStatus
+    getFirewallStatus
+    getSSHStatus
+    getSyslogStatus
+    getSNMPStatus
+    getNTPStatus
+    getZabbixStatus
+    getInstalledStatus
+}
+
+# Perform inspections and save the inspection results  #执行检查并保存检查结果
+check &gt; $RESULTFILE
+echo "Check the result：$RESULTFILE"
+
+# Upload the result file  #上传检查结果的文件
+#curl -F "filename=@$RESULTFILE" "$uploadHostDailyCheckApi" 2&gt;/dev/null
+
+#Upload inspection result report  #上传检查结果的报表
+#uploadHostDailyCheckReport 1&gt;/dev/null</code></pre><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+            <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fa fa-close"></i></a>
+            <h4 class="reward-title">爱点赞赏的人运气都超好的~</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《Linux日常巡检shell》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/19/linux-ri-chang-xun-jian-shell/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                Hao Dexuan
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '579e332cbc733f103180',
+        clientSecret: '6c3814efc44e89144f57da9d7e03fd4aff54ce4b',
+        repo: 'trojan20161207.github.io',
+        owner: 'trojan20161207',
+        admin: "trojan20161207",
+        id: '2019-09-19T15-34-40',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2019/09/19/linux-ri-chang-xun-jian-shell/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Linux日常巡检shell">
+                        
+                        <span class="card-title">Linux日常巡检shell</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+#!/bin/bash
+###################################################################
+# Functions: this script from polling s
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            Hao Dexuan
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/shell/" target="_blank">
+                        <span class="chip bg-color">shell</span>
+                    </a>
+                    
+                    <a href="/tags/巡检/" target="_blank">
+                        <span class="chip bg-color">巡检</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/19/articles/2019/09/19/1568877659661.html/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="运维架构层级">
+                        
+                        <span class="card-title">运维架构层级</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                             
+来源：https://www.unixhot.com/page/ops
+
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+   
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            Hao Dexuan
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux运维/" target="_blank">
+                        <span class="chip bg-color">Linux运维</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('10')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 小冲的幸福生活<br />'
+            + '作者: Hao Dexuan<br />'
+            + '链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            &copy;<a href="https://trojan20161207.github.io/" target="_blank">2019 Hao Dexuan. All Rights Reserved. </a>
+			</br>
+            <span id="sitetime"></span>
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">16.3k</span>
+            
+
+            
+			
+				<span id="busuanzi_container_site_pv" style='display:none'>
+				</br>
+					<i class="fa fa-heart-o"></i>
+					本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+				</span>
+			
+			
+				<span id="busuanzi_container_site_uv" style='display:none'>
+				人次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+				</span>
+			
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/trojan20161207" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+
+    <a href="mailto:1530860548@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1530860548" class="tooltipped" data-tooltip="QQ联系我: 1530860548" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+<script language=javascript>
+    function siteTime() {
+        window.setTimeout("siteTime()", 1000);
+        var seconds = 1000;
+        var minutes = seconds * 60;
+        var hours = minutes * 60;
+        var days = hours * 24;
+        var years = days * 365;
+        var today = new Date();
+        var todayYear = today.getFullYear();
+        var todayMonth = today.getMonth() + 1;
+        var todayDate = today.getDate();
+        var todayHour = today.getHours();
+        var todayMinute = today.getMinutes();
+        var todaySecond = today.getSeconds();
+        /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+        year - 作为date对象的年份，为4位年份值
+        month - 0-11之间的整数，做为date对象的月份
+        day - 1-31之间的整数，做为date对象的天数
+        hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+        minutes - 0-59之间的整数，做为date对象的分钟数
+        seconds - 0-59之间的整数，做为date对象的秒数
+        microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+        var t1 = Date.UTC(2017, 09, 11, 00, 00, 00); //北京时间2018-2-13 00:00:00
+        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+        var diff = t2 - t1;
+        var diffYears = Math.floor(diff / years);
+        var diffDays = Math.floor((diff / days) - diffYears * 365);
+        var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+        var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
+        var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
+        document.getElementById("sitetime").innerHTML = "本站已运行 " +diffYears+" 年 "+diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+    }/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+    siteTime();
+</script>
+<script>
+    $(document).ready(function () {
+
+        var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+        var pvcountOffset = 80000;  // 初始化首次数据
+        var uvcountOffset = 20000;
+
+        function fixCount() {
+            if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
+                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + pvcountOffset);
+                clearInterval(int);
+            }
+            if ($("#busuanzi_container_site_pv").css("display") != "none") {
+                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + uvcountOffset); // 加上初始数据 
+                clearInterval(int); // 停止检测
+            }
+        }
+    });
+</script>
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/Epsilon2.1.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+</html>
