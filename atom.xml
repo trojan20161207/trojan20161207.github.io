@@ -41,11 +41,11 @@
   </entry>
   
   <entry>
-    <title>article title</title>
-    <link href="https://xiaochong2018.gitee.io/2019/08/26/article-title/"/>
-    <id>https://xiaochong2018.gitee.io/2019/08/26/article-title/</id>
+    <title>音乐欣赏</title>
+    <link href="https://xiaochong2018.gitee.io/2019/08/26/yin-le/"/>
+    <id>https://xiaochong2018.gitee.io/2019/08/26/yin-le/</id>
     <published>2019-08-26T08:21:51.000Z</published>
-    <updated>2019-08-27T07:31:04.254Z</updated>
+    <updated>2019-09-19T03:10:32.749Z</updated>
     
     <summary type="html">
     
@@ -60,14 +60,16 @@
     </summary>
     
     
+      <category term="music" scheme="https://xiaochong2018.gitee.io/tags/music/"/>
+    
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="https://xiaochong2018.gitee.io/2019/08/26/hello-world/"/>
-    <id>https://xiaochong2018.gitee.io/2019/08/26/hello-world/</id>
+    <title>新世界的大门</title>
+    <link href="https://xiaochong2018.gitee.io/2019/08/26/xin-shi-jie/"/>
+    <id>https://xiaochong2018.gitee.io/2019/08/26/xin-shi-jie/</id>
     <published>2019-08-26T08:06:44.672Z</published>
-    <updated>2019-08-26T08:06:44.672Z</updated>
+    <updated>2019-09-19T03:13:04.612Z</updated>
     
     <summary type="html">
     

@@ -4,10 +4,15 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="11 个 Nginx 参数性能优化工作, blog">
-    <meta name="description" content="工作上，需要配置 Nginx，要投入生产使用，做了一点优化工作，加上以前也经常折腾 Nginx，故记下一些优化工作。
-优化 Nginx 进程数量配置参数如下：
-worker_processes  1; # 指定 Nginx 要开启的进程数，">
+    <meta name="keywords" content="音乐欣赏, blog">
+    <meta name="description" content="最近最喜欢听的一首歌，分享给大家。
+
+        
+            
+        
+        
+          var ap = new APlayer({
+            element: documen">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +20,7 @@ worker_processes  1; # 指定 Nginx 要开启的进程数，">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>11 个 Nginx 参数性能优化工作 | 小冲的幸福生活</title>
+    <title>音乐欣赏 | 小冲的幸福生活</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -30,7 +35,9 @@ worker_processes  1; # 指定 Nginx 要开启的进程数，">
     </style>
 
     <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
+<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
+</head>
 
 
 <body>
@@ -261,13 +268,13 @@ worker_processes  1; # 指定 Nginx 要开启的进程数，">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        11 个 Nginx 参数性能优化工作
+                        音乐欣赏
                     </div>
                 </div>
             </div>
@@ -378,8 +385,8 @@ worker_processes  1; # 指定 Nginx 要开启的进程数，">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/nginx/" target="_blank">
-                                <span class="chip bg-color">nginx</span>
+                            <a href="/tags/music/" target="_blank">
+                                <span class="chip bg-color">music</span>
                             </a>
                         
                     </div>
@@ -393,21 +400,21 @@ worker_processes  1; # 指定 Nginx 要开启的进程数，">
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-09-06
+                    2019-08-26
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2.2k
+                        129
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        8 分
+                        1 分
                     </div>
                     
                 
@@ -418,96 +425,28 @@ worker_processes  1; # 指定 Nginx 要开启的进程数，">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>工作上，需要配置 Nginx，要投入生产使用，做了一点优化工作，加上以前也经常折腾 Nginx，故记下一些优化工作。</p>
-<h4 id="优化-Nginx-进程数量"><a href="#优化-Nginx-进程数量" class="headerlink" title="优化 Nginx 进程数量"></a>优化 Nginx 进程数量</h4><p>配置参数如下：</p>
-<pre><code>worker_processes  1; # 指定 Nginx 要开启的进程数，结尾的数字就是进程的个数，可以为 auto</code></pre><p>这个参数调整的是 Nginx 服务的 worker 进程数，Nginx 有 Master 进程和 worker 进程之分，Master 为管理进程、真正接待“顾客”的是 worker 进程。</p>
-<p>进程个数的策略：worker 进程数可以设置为等于 CPU 的核数。高流量高并发场合也可以考虑将进程数提高至 CPU 核数 x 2。这个参数除了要和 CPU 核数匹配之外，也与硬盘存储的数据及系统的负载有关，设置为 CPU 核数是个好的起始配置，也是官方建议的。</p>
-<p>当然，如果想省麻烦也可以配置为<code>worker_processes auto;</code>，将由 Nginx 自行决定 worker 数量。当访问量快速增加时，Nginx 就会临时 fork 新进程来缩短系统的瞬时开销和降低服务的时间。</p>
-<h4 id="将不同的进程绑定到不同的CPU"><a href="#将不同的进程绑定到不同的CPU" class="headerlink" title="将不同的进程绑定到不同的CPU"></a>将不同的进程绑定到不同的CPU</h4><p>默认情况下，Nginx 的多个进程有可能运行在同一个 CPU 核上，导致 Nginx 进程使用硬件的资源不均，这就需要制定进程分配到指定的 CPU 核上处理，达到充分有效利用硬件的目的。配置参数如下：</p>
-<pre><code>worker_processes  4; worker_cpu_affinity  0001  0010  0100  1000;</code></pre><p>其中 <code>worker_cpu_affinity</code> 就是配置 Nginx 进程与 CPU 亲和力的参数，即把不同的进程分给不同的 CPU 核处理。这里的<code>0001 0010 0100 1000</code>是掩码，分别代表第1、2、3、4核CPU。上述配置会为每个进程分配一核CPU处理。</p>
-<p>当然，如果想省麻烦也可以配置<code>worker_cpu_affinity auto;</code>，将由 Nginx 按需自动分配。</p>
-<h4 id="Nginx-事件处理模型优化"><a href="#Nginx-事件处理模型优化" class="headerlink" title="Nginx 事件处理模型优化"></a>Nginx 事件处理模型优化</h4><p>Nginx 的连接处理机制在不同的操作系统中会采用不同的 I/O 模型，在 linux 下，Nginx 使用 epoll 的 I/O 多路复用模型，在 Freebsd 中使用 kqueue 的 I/O 多路复用模型，在 Solaris 中使用 /dev/poll 方式的 I/O 多路复用模型，在 Windows 中使用 icop，等等。</p>
-<p>配置如下：</p>
-<pre><code>events { use  epoll; }</code></pre><p><code>events</code> 指令是设定 Nginx 的工作模式及连接数上限。<code>use</code>指令用来指定 Nginx 的工作模式。Nginx 支持的工作模式有 select、 poll、 kqueue、 epoll 、 rtsig 和/ dev/poll。当然，也可以不指定事件处理模型，Nginx 会自动选择最佳的事件处理模型。</p>
-<h4 id="单个进程允许的客户端最大连接数"><a href="#单个进程允许的客户端最大连接数" class="headerlink" title="单个进程允许的客户端最大连接数"></a>单个进程允许的客户端最大连接数</h4><p>通过调整控制连接数的参数来调整 Nginx 单个进程允许的客户端最大连接数。</p>
-<pre><code>events { worker_connections  20480; }</code></pre><p><code>worker_connections</code> 也是个事件模块指令，用于定义 Nginx 每个进程的最大连接数，默认是 1024。</p>
-<p>最大连接数的计算公式如下：</p>
-<p><code>max_clients = worker_processes * worker_connections;</code></p>
-<p>如果作为反向代理，因为浏览器默认会开启 2 个连接到 server，而且 Nginx 还会使用fds（file descriptor）从同一个连接池建立连接到 upstream 后端。则最大连接数的计算公式如下：</p>
-<p><code>max_clients = worker_processes * worker_connections / 4;</code></p>
-<p>另外，<strong>进程的最大连接数受 Linux 系统进程的最大打开文件数限制</strong>，在执行操作系统命令 <code>ulimit -HSn 65535</code>或配置相应文件后， <code>worker_connections</code> 的设置才能生效。</p>
-<h4 id="配置获取更多连接数"><a href="#配置获取更多连接数" class="headerlink" title="配置获取更多连接数"></a>配置获取更多连接数</h4><p>默认情况下，Nginx 进程只会在一个时刻接收一个新的连接，我们可以配置<code>multi_accept</code> 为 <code>on</code>，实现在一个时刻内可以接收多个新的连接，提高处理效率。该参数默认是 <code>off</code>，建议开启。</p>
-<pre><code>events {
-  multi_accept on;
-}</code></pre><h4 id="配置-worker-进程的最大打开文件数"><a href="#配置-worker-进程的最大打开文件数" class="headerlink" title="配置 worker 进程的最大打开文件数"></a>配置 worker 进程的最大打开文件数</h4><p>调整配置 Nginx worker 进程的最大打开文件数，这个控制连接数的参数为<code>worker_rlimit_nofile</code>。该参数的实际配置如下:</p>
-<pre><code>worker_rlimit_nofile 65535;</code></pre><p>可设置为系统优化后的 <code>ulimit -HSn</code> 的结果</p>
-<h4 id="优化域名的散列表大小"><a href="#优化域名的散列表大小" class="headerlink" title="优化域名的散列表大小"></a>优化域名的散列表大小</h4><pre><code>http {
-  server_names_hash_bucket_size 128;
-}</code></pre><p>参数作用:设置存放域名( server names)的最大散列表的存储桶( bucket)的大小。 默认值依赖 CPU 的缓存行。</p>
-<p><code>server_names_hash_bucket_size</code> 的值是不能带单位 的。配置主机时必须设置该值，否则无法运行 Nginx，或者无法通过测试 。 该设置与 <code>server_ names_hash_max_size</code> 共同控制保存服务器名的 hash 表， hash bucket size 总是等于 hash 表的大小， 并且是一路处理器缓存大小的倍数。若 hash bucket size 等于一路处理器缓存的大小，那么在查找键时， 最坏的情况下在内存中查找的次数为 2。第一次是确定存储单元的地址，第二次是在存储单元中查找键值 。 若报 出 hash max size 或 hash bucket size 的提示，则需要增加 <code>server_names_hash_max size</code> 的值。</p>
-<h4 id="TCP-优化"><a href="#TCP-优化" class="headerlink" title="TCP 优化"></a>TCP 优化</h4><pre><code>http {
-  sendfile on;
-  tcp_nopush on;
+                <p>最近最喜欢听的一首歌，分享给大家。</p>
 
-  keepalive_timeout 120;
-  tcp_nodelay on;
-}</code></pre><p>第一行的 <code>sendfile</code> 配置可以提高 Nginx 静态资源托管效率。sendfile 是一个系统调用，直接在内核空间完成文件发送，不需要先 read 再 write，没有上下文切换开销。</p>
-<p>TCP_NOPUSH 是 FreeBSD 的一个 socket 选项，对应 Linux 的 TCP_CORK，Nginx 里统一用 <code>tcp_nopush</code> 来控制它，并且只有在启用了 <code>sendfile</code> 之后才生效。启用它之后，数据包会累计到一定大小之后才会发送，减小了额外开销，提高网络效率。</p>
-<p>TCP_NODELAY 也是一个 socket 选项，启用后会禁用 Nagle 算法，尽快发送数据，某些情况下可以节约 200ms（Nagle 算法原理是：在发出去的数据还未被确认之前，新生成的小数据先存起来，凑满一个 MSS 或者等到收到确认后再发送）。Nginx 只会针对处于 keep-alive 状态的 TCP 连接才会启用 <code>tcp_nodelay</code>。</p>
-<h4 id="优化连接参数"><a href="#优化连接参数" class="headerlink" title="优化连接参数"></a>优化连接参数</h4><pre><code>http {
-  client_header_buffer_size 32k;
-  large_client_header_buffers 4 32k;
-  client_max_body_size 1024m;
-  client_body_buffer_size 10m;
-}</code></pre><p>这部分更多是更具业务场景来决定的。例如<code>client_max_body_size</code>用来决定请求体的大小，用来限制上传文件的大小。上面列出的参数可以作为起始参数。</p>
-<h4 id="配置压缩优化"><a href="#配置压缩优化" class="headerlink" title="配置压缩优化"></a>配置压缩优化</h4><p><strong>1、Gzip 压缩</strong></p>
-<p>我们在上线前，代码（JS、CSS 和 HTML）会做压缩，图片也会做压缩（PNGOUT、Pngcrush、JpegOptim、Gifsicle 等）。对于文本文件，在服务端发送响应之前进行 GZip 压缩也很重要，通常压缩后的文本大小会减小到原来的 1/4 - 1/3。</p>
-<pre><code>http {
-  gzip on;
-  gzip_buffers 16 8k;
-  gzip_comp_level 6;
-  gzip_http_version 1.0;
-  gzip_min_length 1000;
-  gzip_proxied any;
-  gzip_vary on;
-  gzip_types
-    text/xml application/xml application/atom+xml application/rss+xml application/xhtml+xml image/svg+xml
-    text/javascript application/javascript application/x-javascript
-    text/x-json application/json application/x-web-app-manifest+json
-    text/css text/plain text/x-component
-    font/opentype application/x-font-ttf application/vnd.ms-fontobject
-    image/x-icon;
-  gzip_disable "MSIE [1-6]\.(?!.*SV1)";
-}</code></pre><p>这部分内容比较简单，只有两个地方需要解释下：</p>
-<p><code>gzip_vary</code> 用来输出 Vary 响应头，用来解决某些缓存服务的一个问题，详情请看我之前的博客：HTTP 协议中 Vary 的一些研究。</p>
-<p><code>gzip_disable</code> 指令接受一个正则表达式，当请求头中的 UserAgent 字段满足这个正则时，响应不会启用 GZip，这是为了解决在某些浏览器启用 GZip 带来的问题。</p>
-<p>默认 Nginx 只会针对 HTTP/1.1 及以上的请求才会启用 GZip，因为部分早期的 HTTP/1.0 客户端在处理 GZip 时有 Bug。现在基本上可以忽略这种情况，于是可以指定 gzip_http_version 1.0 来针对 HTTP/1.0 及以上的请求开启 GZip。</p>
-<p><strong>2、Brotli 压缩</strong></p>
-<p>Brotli 是基于LZ77算法的一个现代变体、霍夫曼编码和二阶上下文建模。Google软件工程师在2015年9月发布了包含通用无损数据压缩的Brotli增强版本，特别侧重于HTTP压缩。其中的编码器被部分改写以提高压缩比，编码器和解码器都提高了速度，流式API已被改进，增加更多压缩质量级别。</p>
-<p>需要安装<code>libbrotli</code>、<code>ngx_brotli</code>，重新编译 Nginx 时，带上<code>--add-module=/path/to/ngx_brotli</code>即可，然后配置如下</p>
-<pre><code>http {
-  brotli on;
-  brotli_comp_level 6;
-  brotli_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript image/svg+xml;
-}</code></pre><p>Brotli 可与 Gzip 共存在一个配置文件中</p>
-<h4 id="静态资源优化"><a href="#静态资源优化" class="headerlink" title="静态资源优化"></a>静态资源优化</h4><p>静态资源优化，可以减少连接请求数，同时也不需要对这些资源请求打印日志。但副作用是资源更新可能无法及时。</p>
-<pre><code>server {
-    # 图片、视频
-    location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|flv|mp4|ico)$ {
-      expires 30d;
-      access_log off;
-    }
-    # 字体
-    location ~ .*\.(eot|ttf|otf|woff|svg)$ {
-      expires 30d;
-      access_log off;
-    }
-    # js、css
-    location ~ .*\.(js|css)?$ {
-      expires 7d;
-      access_log off;
-    }
-}</code></pre><hr>
+        <div id="aplayer-OKoPvabJ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-OKoPvabJ"),
+            narrow: false,
+            autoplay: false,
+            showlrc: false,
+            music: {
+              title: "来自天堂的魔鬼",
+              author: "邓紫棋",
+              url: "http://fs.open.kugou.com/118792e7757ad99fe25a5ce4503712b7/5d82eef6/G108/M00/0D/0D/DIcBAFvgHyOAUoSLADv7TtiRGW8736.mp3",
+              pic: "http://p1.music.126.net/kVwk6b8Qdya8oDyGDcyAVA==/1364493930777368.jpg?param=300x300",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -684,9 +623,9 @@ worker_processes  1; # 指定 Nginx 要开启的进程数，">
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《11 个 Nginx 参数性能优化工作》
+                    《音乐欣赏》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/06/articles/2019/09/06/1567740611395.html/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/08/26/yin-le/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Hao Dexuan
             </a> 采用
@@ -727,7 +666,7 @@ worker_processes  1; # 指定 Nginx 要开启的进程数，">
         repo: 'trojan20161207.github.io',
         owner: 'trojan20161207',
         admin: "trojan20161207",
-        id: '2019-09-06T11-30-11',
+        id: '2019-08-26T16-21-51',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -748,10 +687,9 @@ worker_processes  1; # 指定 Nginx 要开启的进程数，">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="/2019/09/06/articles/2019/09/06/1567740611395.html/">
                     <div class="card-image">
@@ -771,9 +709,9 @@ worker_processes  1; # 指定 Nginx 要开启的进程数，
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-06
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-06
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -782,7 +720,6 @@ worker_processes  1; # 指定 Nginx 要开启的进程数，
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -801,26 +738,19 @@ worker_processes  1; # 指定 Nginx 要开启的进程数，
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/08/26/yin-le/">
+                <a href="/2019/08/26/xin-shi-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="音乐欣赏">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="新世界的大门">
                         
-                        <span class="card-title">音乐欣赏</span>
+                        <span class="card-title">新世界的大门</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            最近最喜欢听的一首歌，分享给大家。
-
-        
-            
-        
-        
-          var ap = new APlayer({
-            element: documen
+                            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
                         
                     </div>
                     <div class="publish-info">
@@ -834,14 +764,6 @@ worker_processes  1; # 指定 Nginx 要开启的进程数，
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/music/" target="_blank">
-                        <span class="chip bg-color">music</span>
-                    </a>
-                    
                 </div>
                 
             </div>
