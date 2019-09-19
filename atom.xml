@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiaochong2018.gitee.io/"/>
-  <updated>2019-09-06T03:30:11.000Z</updated>
+  <updated>2019-09-19T03:21:11.591Z</updated>
   <id>https://xiaochong2018.gitee.io/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>11 个 Nginx 参数性能优化工作</title>
-    <link href="https://xiaochong2018.gitee.io/2019/09/06//articles/2019/09/06/1567740611395.html/"/>
-    <id>https://xiaochong2018.gitee.io/2019/09/06//articles/2019/09/06/1567740611395.html/</id>
-    <published>2019-09-06T03:30:11.000Z</published>
-    <updated>2019-09-06T03:30:11.000Z</updated>
+    <link href="https://xiaochong2018.gitee.io/2019/09/01/11-ge-nginx-can-shu-xing-neng-you-hua-gong-zuo/"/>
+    <id>https://xiaochong2018.gitee.io/2019/09/01/11-ge-nginx-can-shu-xing-neng-you-hua-gong-zuo/</id>
+    <published>2019-09-01T03:30:11.000Z</published>
+    <updated>2019-09-19T03:21:11.591Z</updated>
     
     <summary type="html">
     
@@ -42,10 +42,10 @@
   
   <entry>
     <title>音乐欣赏</title>
-    <link href="https://xiaochong2018.gitee.io/2019/08/26/yin-le/"/>
-    <id>https://xiaochong2018.gitee.io/2019/08/26/yin-le/</id>
-    <published>2019-08-26T08:21:51.000Z</published>
-    <updated>2019-09-19T03:10:32.749Z</updated>
+    <link href="https://xiaochong2018.gitee.io/2019/08/27/yin-le/"/>
+    <id>https://xiaochong2018.gitee.io/2019/08/27/yin-le/</id>
+    <published>2019-08-27T01:30:00.000Z</published>
+    <updated>2019-09-19T03:25:26.406Z</updated>
     
     <summary type="html">
     
@@ -68,8 +68,8 @@
     <title>新世界的大门</title>
     <link href="https://xiaochong2018.gitee.io/2019/08/26/xin-shi-jie/"/>
     <id>https://xiaochong2018.gitee.io/2019/08/26/xin-shi-jie/</id>
-    <published>2019-08-26T08:06:44.672Z</published>
-    <updated>2019-09-19T03:13:04.612Z</updated>
+    <published>2019-08-26T01:30:51.000Z</published>
+    <updated>2019-09-19T03:24:43.478Z</updated>
     
     <summary type="html">
     
@@ -83,6 +83,8 @@
     
     </summary>
     
+    
+      <category term="new world" scheme="https://xiaochong2018.gitee.io/tags/new-world/"/>
     
   </entry>
   
