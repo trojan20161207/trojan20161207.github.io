@@ -297,41 +297,33 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
 			
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2019/08/27/yin-le/">
+                    <a href="/2019/09/23/nginxmain-pei-zhi-zhi-ling/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="音乐欣赏">
+                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="nginx  main配置指令">
                             
-                            <span class="card-title">音乐欣赏</span>
+                            <span class="card-title">nginx  main配置指令</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                最近最喜欢听的一首歌，分享给大家。
-
-        
-            
-        
-        
-          var ap = new APlayer({
-            element: documen
+                                
+　　定义Nginx运行的用户和用户组用user指令。
+user www-data;　　定义nginx进程数，用_workerprocesses指令，建议设置为等于CPU总核心数。
+worker_processes 8;　　全局错误日志定义
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-27
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-23
                             </span>
                             <span class="publish-author">
                                 
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/music/" class="post-category" target="_blank">
-                                    music
-                                </a>
-                                
+                                <i class="fa fa-user fa-fw"></i>
+                                Hao Dexuan
                                 
                             </span>
                         </div>
@@ -340,8 +332,8 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/music/" target="_blank">
-                            <span class="chip bg-color">music</span>
+                        <a href="/tags/nginx/" target="_blank">
+                            <span class="chip bg-color">nginx</span>
                         </a>
                         
                     </div>
@@ -352,34 +344,30 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
 			
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2019/08/26/xin-shi-jie/">
+                    <a href="/2019/09/23/nginx.conf-pei-zhi-wen-jian-jie-gou/">
                         <div class="card-image">
                             
                             
-                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="新世界的大门">
+                            <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="nginx.conf配置文件结构">
                             
-                            <span class="card-title">新世界的大门</span>
+                            <span class="card-title">nginx.conf配置文件结构</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+                                　Nginx的核心模块为Main和Events，此外还包括标准HTTP模块、可选HTTP模块和邮件模块，其还可以支持诸多第三方模块。Main用于配置错误日志、进程及权限等相关的参数，Events用于配置IO模型，如epoll、kqueue、
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-08-26
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-23
                             </span>
                             <span class="publish-author">
                                 
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/new-world/" class="post-category" target="_blank">
-                                    new world
-                                </a>
-                                
+                                <i class="fa fa-user fa-fw"></i>
+                                Hao Dexuan
                                 
                             </span>
                         </div>
@@ -388,8 +376,380 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/new-world/" target="_blank">
-                            <span class="chip bg-color">new world</span>
+                        <a href="/tags/nginx/" target="_blank">
+                            <span class="chip bg-color">nginx</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+			
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/09/23/nginx-pei-zhi-xi-tong/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="nginx配置系统">
+                            
+                            <span class="card-title">nginx配置系统</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                　　nginx的配置系统由一个主配置文件和其他一些辅助的配置文件构成。这些配置文件均是纯文本文件，全部位于nginx安装目录下的conf目录下。
+　　配置文件中以#开始的行，或者是前面有若干空格或者TAB，然后再跟#的行，都被认为是注释，也
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-23
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-user fa-fw"></i>
+                                Hao Dexuan
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/nginx/" target="_blank">
+                            <span class="chip bg-color">nginx</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+			
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/09/23/nginx-chu-ti-yan/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="nginx初体验">
+                            
+                            <span class="card-title">nginx初体验</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                当我们安装完nginx后，我们首先进入nginx的安装目录，启动nginx的服务，然后在地址中输入 http://127.0.0.1/ ， 然后我们就会看到”welcome to nginx“。　　下面的代码为nginx.conf配置文件中
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-23
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-user fa-fw"></i>
+                                Hao Dexuan
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/nginx/" target="_blank">
+                            <span class="chip bg-color">nginx</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+			
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/09/23/nginx-chang-yong-ming-ling/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="nginx常用命令">
+                            
+                            <span class="card-title">nginx常用命令</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.nginx启动
+nginx   -c /etc/nginx/nginx.conf其中参数-c指定nginx启动时加载的配置文件，当然也可以不指定配置文件，省略-c，也可以启动，表示使用默认的配置文件。
+nginx2.nginx停止(三种
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-23
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-user fa-fw"></i>
+                                Hao Dexuan
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/nginx/" target="_blank">
+                            <span class="chip bg-color">nginx</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+			
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/09/23/nginx-gai-shu/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="nginx概述">
+                            
+                            <span class="card-title">nginx概述</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Nginx ("engine x") 是一个高性能的 HTTP 和 *反向代理* 服务器，也是一个 IMAP/POP3/SMTP *代理服务器*。 Nginx 是由 Igor Sysoev 为*俄罗斯*访问量第二的 Rambler.ru 站
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-23
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-user fa-fw"></i>
+                                Hao Dexuan
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/nginx/" target="_blank">
+                            <span class="chip bg-color">nginx</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+			
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/09/19/linux-ri-chang-xun-jian-shell/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Linux日常巡检shell">
+                            
+                            <span class="card-title">Linux日常巡检shell</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                #!/bin/bash
+###################################################################
+# Functions: this script from polling sy
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-user fa-fw"></i>
+                                Hao Dexuan
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/shell-巡检/" target="_blank">
+                            <span class="chip bg-color">shell, 巡检</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+			
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/09/19/articles/2019/09/19/1568877659661.html/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="运维架构层级">
+                            
+                            <span class="card-title">运维架构层级</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                 
+来源：https://www.unixhot.com/page/ops
+
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+   
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-user fa-fw"></i>
+                                Hao Dexuan
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Linux运维/" target="_blank">
+                            <span class="chip bg-color">Linux运维</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+			
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/09/19/docker-ming-ling-shi-yong/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="docker命令使用">
+                            
+                            <span class="card-title">docker命令使用</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                docker01
+List Docker CLI commandsdocker container --helpDisplay Docker version and infodocker --version
+docker version
+d
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-user fa-fw"></i>
+                                Hao Dexuan
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/docker/" target="_blank">
+                            <span class="chip bg-color">docker</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+			
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/09/19/kuai-su-shell-an-zhuang-dockerce/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="快速shell安装docker-ce">
+                            
+                            <span class="card-title">快速shell安装docker-ce</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                我们以18.09.8为例，以下为详细shell：
+#!/bin/sh
+set -e
+
+CHANNEL="stable"
+
+docker_version=18.09.8
+apt_url="https://apt.dockerproject.o
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fa fa-user fa-fw"></i>
+                                Hao Dexuan
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/docker-shell/" target="_blank">
+                            <span class="chip bg-color">docker, shell</span>
                         </a>
                         
                     </div>
@@ -413,11 +773,12 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
         </div>
         <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">2 / 2</div>
+            <div class="center-align b-text-gray">2 / 3</div>
         </div>
         <div class="col s6 m4 l4">
             
-            <a class="right btn-floating btn-large disabled">
+            <a href="/page/3/"
+               class="right btn-floating btn-large waves-effect waves-light bg-color">
                 <i class="fa fa-angle-right"></i>
             </a>
             
@@ -435,7 +796,7 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             <span id="sitetime"></span>
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">16.3k</span>
+                <span class="white-color">20.5k</span>
             
 
             
