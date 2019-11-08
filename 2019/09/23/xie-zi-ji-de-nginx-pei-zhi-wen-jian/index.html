@@ -4,10 +4,13 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="nginx 反向代理示例, blog">
-    <meta name="description" content="
-　　反向代理（Reverse Proxy）是指代理服务器来接收来自Internet上的连接请求，并将请求转发给内部网络上的服务器，并从服务器上得到的结果返回给Internet上请求连接的客户端。
-　　比如要配置后端跑 apache 服务的">
+    <meta name="keywords" content="写自己的nginx配置文件, blog">
+    <meta name="description" content="前面几节中我们已经学过了nginx配置文件中的各个段的配置指令，下面我们就来写一个自己配置文件。如下代码：
+worker_processes  1;
+events {
+    worker_connections  1024;
+}
+http">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +18,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>nginx 反向代理示例 | xiaochong&#39;s Life</title>
+    <title>写自己的nginx配置文件 | xiaochong&#39;s Life</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -261,13 +264,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        nginx 反向代理示例
+                        写自己的nginx配置文件
                     </div>
                 </div>
             </div>
@@ -387,15 +390,6 @@
                 </div>
                 <div class="col s5 right-align">
                     
-                    <div class="post-cate">
-                        <i class="fa fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/nginx/" class="post-category" target="_blank">
-                                nginx
-                            </a>
-                        
-                    </div>
-                    
                 </div>
             </div>
 
@@ -409,7 +403,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        226
+                        330
                     </div>
                     
 
@@ -427,28 +421,28 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <hr>
-<p>　　<em>反向代理（Reverse Proxy）</em>是指代理服务器来接收来自Internet上的连接请求，并将请求转发给内部网络上的服务器，并从服务器上得到的结果返回给Internet上请求连接的客户端。</p>
-<p>　　比如要配置后端跑 apache 服务的 ip 和端口，也就是说，我们的目标是实现通过 <a href="http://ip:port/" target="_blank" rel="noopener">http://ip:port</a> 能访问到你的网站。配置文件可以修改以下内容，reload nginx就可以了。</p>
-<pre><code>## Basic reverse proxy server ##
-    upstream apachephp  {
-        server ip:8080; #Apache
-    }
-    ## Start www.nowamagic.net ##
-    server {
-        listen 80;
-        server_name  www.nowamagic.net;
-        access_log  logs/quancha.access.log  main;
-        error_log  logs/quancha.error.log;
-        root   html;
-        index  index.html index.htm index.php;
-
-        ## send request back to apache ##
-        location / {
-            proxy_pass  http://apachephp;
-                #……………………
+                <p>前面几节中我们已经学过了nginx配置文件中的各个段的配置指令，下面我们就来写一个自己配置文件。如下代码：</p>
+<pre><code>worker_processes  1;
+events {
+    worker_connections  1024;
 }
-}</code></pre><script>
+http {
+       server {
+            location / {
+                      #root   html;      #定义服务器的默认网站根目录位置
+                      #index index.php index.html index.htm;   #定义首页索引文件的名称
+                      proxy_pass http://www.baidu.com;
+             }
+            error_page   500 502 503 504  /50x.html;
+            location = /50x.html {
+                root   html;
+           }
+         }
+}</code></pre><p>　　这样我们自己的配置文件就完成了，先将nginx的服务停止，然后我们用<em>nginx -c <em>.conf</em>命令来重新启动nginx，</em>.conf 为我们自己的配置文件所在的路径，nginx启动以后，然后点击【访问测试】，看看会出现什么情况，是不是已经转到我们所配置的站点了。</p>
+<p>　　在右面的编辑页面中编辑一个配置文件，我自己的配置文件名为Mynginx.conf,其中的内容就是以上面代码的内容，保存在/etc/nginx目录下，完成以后我们做如下操作：</p>
+<pre><code>nginx -s stop   
+nginx -c /etc/nginx/Mynginx.conf</code></pre><p>然后点击【访问测试】</p>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -624,9 +618,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《nginx 反向代理示例》
+                    《写自己的nginx配置文件》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/23/nginx-fan-xiang-dai-li-shi-li/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/23/xie-zi-ji-de-nginx-pei-zhi-wen-jian/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Hao Dexuan
             </a> 采用
@@ -667,7 +661,7 @@
         repo: 'trojan20161207.github.io',
         owner: 'trojan20161207',
         admin: "trojan20161207",
-        id: '2019-09-23T15-16-04',
+        id: '2019-09-23T15-11-40',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -692,22 +686,21 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/09/23/nginx-xu-ni-zhu-ji-shi-li/">
+                <a href="/2019/09/23/nginx-fan-xiang-dai-li-shi-li/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="nginx 虚拟主机示例">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="nginx 反向代理示例">
                         
-                        <span class="card-title">nginx 虚拟主机示例</span>
+                        <span class="card-title">nginx 反向代理示例</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
-　　Nginx做虚拟主机，尤其是仅仅支持纯静态-html，这是最简单的应用了，可以理解为一个仅支持静态页面的最简单的Web服务器。
-　　例子，同时支持两个虚拟主机（纯静态-html支持）的配置，我们只需要理改server段，如下：
-ser
+　　反向代理（Reverse Proxy）是指代理服务器来接收来自Internet上的连接请求，并将请求转发给内部网络上的服务器，并从服务器上得到的结果返回给Internet上请求连接的客户端。
+　　比如要配置后端跑 apache 服务的
                         
                     </div>
                     <div class="publish-info">
@@ -744,24 +737,21 @@ ser
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/09/23/xie-zi-ji-de-nginx-pei-zhi-wen-jian/">
+                <a href="/2019/09/23/nginxrewrite-gui-ze/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="写自己的nginx配置文件">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="nginx rewrite规则">
                         
-                        <span class="card-title">写自己的nginx配置文件</span>
+                        <span class="card-title">nginx rewrite规则</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            前面几节中我们已经学过了nginx配置文件中的各个段的配置指令，下面我们就来写一个自己配置文件。如下代码：
-worker_processes  1;
-events {
-    worker_connections  1024;
-}
-http
+                            
+　　Nginx Rewrite 规则相关指令有if,rewrite,set,return,break等，其中最关键的就是rewrite。一个简单的Nginx Rewrite规则语法如下：
+rewrite ^/b/(.\*)\.html /
                         
                     </div>
                     <div class="publish-info">
@@ -770,8 +760,12 @@ http
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            Hao Dexuan
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/nginx/" class="post-category" target="_blank">
+                                    nginx
+                                </a>
+                            
                             
                         </span>
                     </div>

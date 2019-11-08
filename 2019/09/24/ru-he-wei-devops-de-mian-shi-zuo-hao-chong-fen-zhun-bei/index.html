@@ -4,10 +4,10 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="nginx 反向代理示例, blog">
-    <meta name="description" content="
-　　反向代理（Reverse Proxy）是指代理服务器来接收来自Internet上的连接请求，并将请求转发给内部网络上的服务器，并从服务器上得到的结果返回给Internet上请求连接的客户端。
-　　比如要配置后端跑 apache 服务的">
+    <meta name="keywords" content="如何为DevOps的面试做好充分准备, blog">
+    <meta name="description" content="这是您为DevOps热点准备的面试准备。
+那么，为什么他们要雇用您呢？
+在过去的十年中，DevOps成为一种新的技术文化和职业，将软件开发所需的快速迭代与基础架构运营团队的坚如磐石的稳定性相结合。对于系统管理员，运营工程师以及其他拥有强大系">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>nginx 反向代理示例 | xiaochong&#39;s Life</title>
+    <title>如何为DevOps的面试做好充分准备 | xiaochong&#39;s Life</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -261,13 +261,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        nginx 反向代理示例
+                        如何为DevOps的面试做好充分准备
                     </div>
                 </div>
             </div>
@@ -378,8 +378,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/nginx/" target="_blank">
-                                <span class="chip bg-color">nginx</span>
+                            <a href="/tags/DevOps/" target="_blank">
+                                <span class="chip bg-color">DevOps</span>
+                            </a>
+                        
+                            <a href="/tags/linux/" target="_blank">
+                                <span class="chip bg-color">linux</span>
                             </a>
                         
                     </div>
@@ -387,36 +391,27 @@
                 </div>
                 <div class="col s5 right-align">
                     
-                    <div class="post-cate">
-                        <i class="fa fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/nginx/" class="post-category" target="_blank">
-                                nginx
-                            </a>
-                        
-                    </div>
-                    
                 </div>
             </div>
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-09-23
+                    2019-09-24
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        226
+                        3.4k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        11 分
                     </div>
                     
                 
@@ -427,28 +422,123 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <hr>
-<p>　　<em>反向代理（Reverse Proxy）</em>是指代理服务器来接收来自Internet上的连接请求，并将请求转发给内部网络上的服务器，并从服务器上得到的结果返回给Internet上请求连接的客户端。</p>
-<p>　　比如要配置后端跑 apache 服务的 ip 和端口，也就是说，我们的目标是实现通过 <a href="http://ip:port/" target="_blank" rel="noopener">http://ip:port</a> 能访问到你的网站。配置文件可以修改以下内容，reload nginx就可以了。</p>
-<pre><code>## Basic reverse proxy server ##
-    upstream apachephp  {
-        server ip:8080; #Apache
-    }
-    ## Start www.nowamagic.net ##
-    server {
-        listen 80;
-        server_name  www.nowamagic.net;
-        access_log  logs/quancha.access.log  main;
-        error_log  logs/quancha.error.log;
-        root   html;
-        index  index.html index.htm index.php;
-
-        ## send request back to apache ##
-        location / {
-            proxy_pass  http://apachephp;
-                #……………………
-}
-}</code></pre><script>
+                <h3 id="这是您为DevOps热点准备的面试准备。"><a href="#这是您为DevOps热点准备的面试准备。" class="headerlink" title="这是您为DevOps热点准备的面试准备。"></a>这是您为DevOps热点准备的面试准备。</h3><p><img src="https://dzone.com/storage/temp/12433224-interiew-chairs-and-table.jpg" alt="面试桌椅"></p>
+<p><em>那么，为什么他们要雇用您呢？</em></p>
+<p>在过去的十年中，DevOps成为一种新的技术文化和职业，将软件开发所需的快速迭代与基础架构运营团队的坚如磐石的稳定性相结合。对于系统管理员，运营工程师以及其他拥有强大系统和软件背景的人员来说，过渡到DevOps的时间可能比现在更好。截至2019年8月，仅在美国，目前就有超过50,000个 LinkedIn DevOps工作岗位。</p>
+<p>假设您已经了解了基础知识，并准备开始寻找工作。您如何评价DevOps面试？DevOps工程师必须既是优秀的软件开发人员，又是基础架构专家，因此，他们应该知道Linux基础架构，网络，算法和DevOps工具（例如Terraform，Docker和Kubernetes）。范围从标准软件工程师编码问题到有关系统设计，再到Linux调试和DevOps工具的问题等等。</p>
+<p>这是一个令人生畏的清单，但请不要害怕！在Insight上，DevOps奖学金将许多具有可转让技能的个人的职业推向了人们所期望的行业DevOps职位。这是我们为他们准备面试的方式。</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>动机是一个好的开始，但是您需要纪律才能有效地做好准备。我编写了这本指南，以帮助您制定有规律的面试准备程序。面试真的很烂-这是随机的，可能会让您对自己感到难过。在此过程中，<strong>不可</strong>控制的事情太多了，但是您<strong>可以</strong>控制自己的准备方式。</p>
+<p>在这里有很多值得一试的东西，所以不要指望能够一次学习所有东西。也许有一天您会选择一个主题来关注。也许您将连续一个星期专注于另一个主题。不过，通常来说，您应该每天习惯性地进行两到三项活动，轮流讨论不同的主题，以使您的思想保持新鲜和投入。这些类别按重要性顺序列出：</p>
+<ol>
+<li>Linux基础</li>
+<li>数据结构与算法</li>
+<li>系统设计</li>
+<li>解析</li>
+<li>DevOps工具</li>
+</ol>
+<p>首先，要建立广泛而浅薄的知识基础，这样一来，以循环方式首先在各个主题之间实现负载平衡是一件好事。这将扩大您的DevOps空间的概念框架，以便您可以更轻松地将新信息放入上下文中。每个类别中的活动也按重要性顺序或多或少地排名。某些活动适合日常实践，例如CodeSignal问题或OverTheWire挑战。其他人则适合深入学习。</p>
+<p>如果您想快点走，那就一个人走。但是，如果您想走得更远，那就一起走吧。与您的同龄人一起创建一个学习小组。互相追究责任。每周或每天签到和信息共享会话。在这段时间里，您会感到无动力，请记住，做某事总比什么都不做好。在您动力十足的那段时间里，请记住，睡眠和运动对您的成功至为重要。这些活动是人生下一阶段的垫脚石，但请记住让自己着迷于每块石头的形状。</p>
+<h2 id="Linux基础"><a href="#Linux基础" class="headerlink" title="Linux基础"></a>Linux基础</h2><p>作为一名DevOps工程师，你应该对Linux了如指掌。从内核到网络再到命令行命令，有关Linux的任何问题都是公平的游戏。</p>
+<h3 id="示例问题"><a href="#示例问题" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
+<li>Linux计算机加电时发生的步骤顺序是什么？</li>
+<li>当您在浏览器中键入google.com并导致网页返回给您时，会发生什么情况？如果没有出现网页怎么办？如何调试问题？</li>
+<li>您如何检查文件系统是否空间不足？如何打印最大文件列表？如何删除所有大于1 GB的.mov文件？</li>
+</ul>
+<h3 id="活动"><a href="#活动" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>通读<a href="http://solutionsproj.net/software/The_Linux_Command_Linex.pdf" target="_blank" rel="noopener"><em>Linux命令</em></a>行书</li>
+<li>通过<a href="https://overthewire.org/wargames/" target="_blank" rel="noopener">OverTheWire</a>战争游戏进行工作。这些是通过精心设计的Linux系统进行的有趣的寻宝游戏，旨在教您一些基本概念。至少通过强盗等级。如果遇到困难，请不要担心Google解决方案。我强烈建议您随时随地在GitHub中记录进度。</li>
+<li>只需使用vimtutor命令来学习vim。它是有史以来最好的编辑器，请勿让任何人说服您。</li>
+<li>考虑购买课程以获取Linux基础知识认证（Linux +，RedHat等）。的确，一磅的认证比一盎司的经验没有价值，但是，如果您经验不足，那么认证可以帮助填补您的知识空白，并证明您具有基本的了解。</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li>最好参考手册Linux命令是<a href="https://tldr.sh/" target="_blank" rel="noopener">tldr.sh</a>。我强烈建议您下载tl; dr移动应用程序以快速参考。这在电话采访中帮助了我，我当时根本不知道该怎么做。</li>
+<li><a href="https://devhints.io/" target="_blank" rel="noopener">devhints.io</a>是各种备忘单的重要来源。</li>
+<li>它看上去并不浮华，但是<a href="https://www.tldp.org/LDP/abs/html/" target="_blank" rel="noopener">Advanced Bash脚本指南</a>是个巨大的财产库。</li>
+</ul>
+<h2 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h2><p>请记住，DevOps是<strong>开发</strong> +运营，因此您应该知道如何编码。选择一种您选择的语言（不是Bash-如果您不太喜欢，我建议使用Python）并练习，练习，练习。这不仅仅是寻找最佳解决方案-您必须与面试官清楚地交流问题的参数，传达您的思考过程，并计算不同算法的时间和空间复杂度。</p>
+<h3 id="示例问题-1"><a href="#示例问题-1" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
+<li>从列表中删除所有重复项。</li>
+<li>在包含除一个以外的所有可能IP的文件中找到丢失的IP。</li>
+<li>对二叉树的所有节点进行排序。</li>
+</ul>
+<h3 id="活动-1"><a href="#活动-1" class="headerlink" title="活动"></a>活动</h3><ul>
+<li><a href="https://www.khanacademy.org/computing/computer-science/algorithms" target="_blank" rel="noopener">可汗学院</a>有一个非常好的数据结构和算法入门。它使用Javascript，但不要反对它。该课程是与汤姆·科门（Tom Cormen）合作完成的，汤姆·科门（Tom Cormen）是<a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms" target="_blank" rel="noopener">一本有关数据结构和算法</a>的权威<a href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms" target="_blank" rel="noopener">著作</a>，绝对值得拥有。</li>
+<li><a href="https://leetcode.com/" target="_blank" rel="noopener">LeetCode</a>拥有大量的问题库，这些问题库与真实的面试问题非常接近。实际上，许多公司都会直接问您LeetCode问题！每种算法至少要回答10个简单和中等问题。当您解决了100个问题后，您就可以开始感到准备好了，并且实际上可以解决这些问题而无需查找任何内容。</li>
+<li>每天在<a href="https://codesignal.com/developers/interview-practice/" target="_blank" rel="noopener">CodeSignal</a>上<a href="https://codesignal.com/developers/interview-practice/" target="_blank" rel="noopener">完成</a>面试准备材料。我建议使用Python，但您可以使用任何语言。将代码复制并粘贴到文件中，并使用Gi​​tHub对其进行版本控制。每天，仔细阅读您昨天做的代码，并详细记录下来。编写代码比阅读旧代码并记住发生的事情要容易。一两天后重新访问旧代码将迫使您综合所学的概念。</li>
+<li>通过CodeSignal的Python Arcade进行工作。这是对所有重要的标准Python库的很好的浏览。有些练习确实没有达到目标，但总体而言，这是一个不错的播放列表。</li>
+<li>研究动态规划，有向无环图，拓扑排序。</li>
+<li>每个人都需要一点SQL。无需花费大量时间，但是您应该在<a href="https://mode.com/" target="_blank" rel="noopener">Mode Analytics</a>上注册一个免费帐户，并利用其使用真实公共数据库的出色互动SQL教程。</li>
+<li>随着您对编码技能的适应程度提高，请使用<a href="https://www.pramp.com/" target="_blank" rel="noopener">Pramp</a>进行现场技术面试。这是重要的组成部分。像练习技术电话屏幕一样，您没有比技术电话屏幕更充分的准备。</li>
+<li>请记住，唯一有价值的知识是您可以在白板或实时编码上在面试官面前展示的内容。如果您倾向于在高压情况下停滞不前，那么您就远非唯一的人了-请确保与同伴一起做很多练习。</li>
+</ul>
+<h3 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://learnxinyminutes.com/docs/python3/" target="_blank" rel="noopener">LearnXinYminutes</a>是一个很棒的示例驱动的Python备忘单</li>
+<li><a href="https://gto76.github.io/python-cheatsheet/#main" target="_blank" rel="noopener">Python</a>备忘<a href="https://gto76.github.io/python-cheatsheet/#main" target="_blank" rel="noopener">单</a>：最好的Python备忘单，尽管它很简洁</li>
+<li><a href="https://docs.python-guide.org/" target="_blank" rel="noopener">Hitchhiker的Python指南</a>：最佳的Python文档。</li>
+<li>我的<a href="https://github.com/chuckinator0/Projects/tree/master/scripts" target="_blank" rel="noopener">脚本GitHub存储库中</a>有很多示例文件，这些文件经过了详细记录，尽管实际上是无组织的！</li>
+</ul>
+<h2 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h2><p>系统设计面试可测试您的整体思维，架构复杂基础架构的能力以及沟通技巧。确保采用自上而下的设计方法，并具有清晰的基础结构图和DevOps注意事项。</p>
+<h3 id="示例问题-2"><a href="#示例问题-2" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
+<li>设计一个基于微博消息的社交网络，如Twitter。您将如何确保不同地区的高可用性？</li>
+</ul>
+<h3 id="活动-2"><a href="#活动-2" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>消除<a href="https://github.com/donnemartin/system-design-primer/blob/master/README.md" target="_blank" rel="noopener">系统设计入门知识</a>。一个有趣的事情是选择一个主题，然后请朋友选择另一个主题，然后花2个小时研究您的主题，然后再花一两个小时进行分享。轮流扮演面试官和受访者的角色。</li>
+<li>阅读<a href="https://landing.google.com/sre/sre-book/toc/index.html" target="_blank" rel="noopener">Google SRE图书</a>。这是现代DevOps必读的书。</li>
+</ul>
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>系统管理员经常分析系统输出和日志，以获得系统见解和调试问题。使用grep，awk和sed之类的工具进行命令行解析是DevOps工具库的一项重要技能。</p>
+<h3 id="示例问题-3"><a href="#示例问题-3" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
+<li>给定一个Apache Web服务器日志，每天有多少个请求？哪些IP是最常访问的访客？最需要哪些页面和图像？</li>
+</ul>
+<h3 id="活动-3"><a href="#活动-3" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>通过Insight的<a href="https://github.com/InsightDataScience/Parsing-Workshop" target="_blank" rel="noopener">解析研讨会资料</a>中的<strong>练习进行练习</strong>。专注于awk。本章材料不错，是练习是最重要的部分。<a href="https://github.com/InsightDataScience/Parsing-Workshop" target="_blank" rel="noopener"></a></li>
+</ul>
+<h3 id="参考-2"><a href="#参考-2" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://learnxinyminutes.com/docs/awk/" target="_blank" rel="noopener">LearnXinYminutes</a>：另一个出色的示例驱动参考-这次是awk。</li>
+<li><a href="https://regexr.com/" target="_blank" rel="noopener">Regexr</a>：最佳正则表达式参考。</li>
+</ul>
+<h2 id="DevOps工具"><a href="#DevOps工具" class="headerlink" title="DevOps工具"></a>DevOps工具</h2><p>Docker，Terraform和Kubernetes是必不可少的DevOps工具，并且彻底学习它们不会出错。您还应该知道至少一种CI/CD工具，例如Jenkins。强烈建议您至少在三大云之一上学习这些工具：AWS，GCP或Azure。</p>
+<h3 id="示例问题："><a href="#示例问题：" class="headerlink" title="示例问题："></a>示例问题：</h3><ul>
+<li>使用Terraform将Docker应用程序部署到新的AWS EC2实例上。</li>
+</ul>
+<h3 id="活动-4"><a href="#活动-4" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>您需要学习Kubernetes。为了学习Kubernetes，您需要了解容器化和Docker。</li>
+<li>通过<a href="https://github.com/docker/labs/blob/master/beginner/readme.md" target="_blank" rel="noopener">Docker初学者</a>实验</li>
+<li>通过<a href="https://training.play-with-docker.com/" target="_blank" rel="noopener">Docker课堂</a>进行<a href="https://training.play-with-docker.com/" target="_blank" rel="noopener">游戏</a></li>
+<li>Kubernetes（概念：容器编排）</li>
+<li>阅读<a href="https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/" target="_blank" rel="noopener">Kubernetes概念</a></li>
+<li>通过<a href="https://kubernetes.io/docs/tutorials/kubernetes-basics/" target="_blank" rel="noopener">Kubernetes基础</a>教程学习</li>
+<li>若要进行更深入的潜水，请完成<a href="https://www.katacoda.com/courses/kubernetes" target="_blank" rel="noopener">Katacoda课程</a></li>
+<li>通过一两个入门性的<a href="https://jenkins.io/doc/tutorials/build-a-python-app-with-pyinstaller/" target="_blank" rel="noopener">Jenkins教程</a>来学习有关CI / CD的更多信息（概念：部署管道作为代码）。老实说，我对Jenkins知之甚少，所以我不了解更好的资源。</li>
+<li>使用<a href="https://www.vagrantup.com/intro/getting-started/index.html" target="_blank" rel="noopener">Vagrant</a>声明性地定义VM，然后使用<a href="https://www.virtualbox.org/" target="_blank" rel="noopener">VirtualBox</a>或<a href="https://www.packer.io/intro/getting-started/install.html" target="_blank" rel="noopener">Packer</a>将该VM导出为OVA文件（概念：不可变的基础结构，配置为代码）。</li>
+<li>Terraform（概念：基础架构作为代码）</li>
+<li>阅读Terragrunt的<a href="https://blog.gruntwork.io/a-comprehensive-guide-to-terraform-b3d32832baca" target="_blank" rel="noopener">Terraform综合指南</a></li>
+<li>通过<a href="https://learn.hashicorp.com/terraform/" target="_blank" rel="noopener">Terraform教程进行工作</a></li>
+<li>Ansible（概念：配置为代码）</li>
+<li>观看<a href="https://www.ansible.com/resources/videos/quick-start-video" target="_blank" rel="noopener">介绍视频</a></li>
+<li>对于一些动手实验，我认为Linux Academy可能是最好的选择（不是免费的）</li>
+<li>进行<a href="https://docs.honeycomb.io/learning-about-observability/quick-start/" target="_blank" rel="noopener">Honeycomb Quickstart，</a>以提供一种监视/跟踪工具（概念：全栈跟踪）</li>
+<li>完成<a href="https://learn.hashicorp.com/consul/" target="_blank" rel="noopener">Consul教程</a>（概念：服务发现）。</li>
+<li>完成<a href="https://learn.hashicorp.com/vault/" target="_blank" rel="noopener">Vault教程</a>（概念：企业级机密管理）</li>
+<li>玩<a href="https://linkerd.io/2/getting-started/" target="_blank" rel="noopener">Linkerd</a>（概念：服务网格）</li>
+<li>Apache Kafka（概念：容错，高吞吐量事件流）</li>
+<li>适用于Apache Kafka的无耻插件—  在该网站上免费找到<a href="https://cloud.contentraven.com/confluent/self-userpackage" target="_blank" rel="noopener">Confluent培训</a>课程，以获取有关Kafka基础知识的不错的视频集</li>
+<li>查看<a href="https://github.com/confluentinc/training-operations-src" target="_blank" rel="noopener">操作培训仓库，</a>以建立自己的本地docker-组成Kafka集群，并开始使用Kafka</li>
+</ul>
+<h3 id="参考-3"><a href="#参考-3" class="headerlink" title="参考"></a>参考</h3><ul>
+<li>Ansible：<a href="https://docs.ansible.com/ansible/latest/user_guide/index.html" target="_blank" rel="noopener">用户指南</a>。</li>
+<li>想在Kubernetes中做一些特定的事情吗？检查文档的“ <a href="https://kubernetes.io/docs/tasks/" target="_blank" rel="noopener">任务”</a>部分。有许多特定于任务的指南。</li>
+<li>Docker的“demo”(<a href="https://docs.docker.com/samples/)页面提供了完整应用程序的良好示例以及一些实用的教程。我喜欢[Django" target="_blank" rel="noopener">https://docs.docker.com/samples/)页面提供了完整应用程序的良好示例以及一些实用的教程。我喜欢[Django</a> + Postgres](<a href="https://docs.docker.com/compose/django/)示例。" target="_blank" rel="noopener">https://docs.docker.com/compose/django/)示例。</a></li>
+</ul>
+<h2 id="其他具有高价值物品"><a href="#其他具有高价值物品" class="headerlink" title="其他具有高价值物品"></a>其他具有高价值物品</h2><h3 id="活动-5"><a href="#活动-5" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>定期收听《软件工程日报》(<a href="https://softwareengineeringdaily.com/)播客。到目前为止，这是保持DevOps世界脉搏的最佳方法。建议您安装该应用程序，以便您可以轻松搜索旧剧集，以深入了解正在研究的技术和概念。在“" target="_blank" rel="noopener">https://softwareengineeringdaily.com/)播客。到目前为止，这是保持DevOps世界脉搏的最佳方法。建议您安装该应用程序，以便您可以轻松搜索旧剧集，以深入了解正在研究的技术和概念。在“</a> DevOps工具”部分中，我为每个工具背后的概念提供了关键字。您可以使用这些关键字在SEdaily中搜索相关的播客。</li>
+<li>阅读有关看板(<a href="https://www.atlassian.com/agile/kanban/boards)的知识，并使用它们来增强您的注意力和生产力。GitHub有一个简单的看板，您可以使用它来保持生产力。我个人也喜欢[子弹式日记](https://www.youtube.com/watch?v=fm15cmYU0IM)和[Pomodoro方法](https://en.wikipedia.org/wiki/Pomodoro_Technique)。" target="_blank" rel="noopener">https://www.atlassian.com/agile/kanban/boards)的知识，并使用它们来增强您的注意力和生产力。GitHub有一个简单的看板，您可以使用它来保持生产力。我个人也喜欢[子弹式日记](https://www.youtube.com/watch?v=fm15cmYU0IM)和[Pomodoro方法](https://en.wikipedia.org/wiki/Pomodoro_Technique)。</a></li>
+<li>深入了解一些您喜欢的工具的技术细节。从文档开始。配对并分享技术深层次的收获。</li>
+<li>考虑为Linux Academy或acloudguru课程付费以获得AWS，GCP或Azure认证。</li>
+</ul>
+<h3 id="参考-4"><a href="#参考-4" class="headerlink" title="参考"></a>参考</h3><ul>
+<li>Digital Ocean有很棒的教程。当我使用Google时，我倾向于首先尝试“ <research topic=""> site：digitalocean.com”。当您第一次学习手动安装某些东西时，这特别有用。</research></li>
+</ul>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -624,9 +714,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《nginx 反向代理示例》
+                    《如何为DevOps的面试做好充分准备》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/23/nginx-fan-xiang-dai-li-shi-li/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/24/ru-he-wei-devops-de-mian-shi-zuo-hao-chong-fen-zhun-bei/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Hao Dexuan
             </a> 采用
@@ -667,7 +757,7 @@
         repo: 'trojan20161207.github.io',
         owner: 'trojan20161207',
         admin: "trojan20161207",
-        id: '2019-09-23T15-16-04',
+        id: '2019-09-24T12-43-37',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -692,36 +782,30 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/09/23/nginx-xu-ni-zhu-ji-shi-li/">
+                <a href="/2019/10/08/jiang-python-jiao-ben-bian-cheng-piao-liang-de-ml-gong-ju/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="nginx 虚拟主机示例">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="将Python脚本变成漂亮的ML工具">
                         
-                        <span class="card-title">nginx 虚拟主机示例</span>
+                        <span class="card-title">将Python脚本变成漂亮的ML工具</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-　　Nginx做虚拟主机，尤其是仅仅支持纯静态-html，这是最简单的应用了，可以理解为一个仅支持静态页面的最简单的Web服务器。
-　　例子，同时支持两个虚拟主机（纯静态-html支持）的配置，我们只需要理改server段，如下：
-ser
+                            将Python脚本变成漂亮的ML工具Streamlit，这是专为ML工程师打造的应用程序框架Adrien Treuille在300行Python中使用实时神经网络推理对语义搜索引擎进行编码。
+以我的经验，每个不平凡的机器学习项目最终都将使用
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-23
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-08
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/nginx/" class="post-category" target="_blank">
-                                    nginx
-                                </a>
-                            
+                            <i class="fa fa-user fa-fw"></i>
+                            Hao Dexuan
                             
                         </span>
                     </div>
@@ -729,8 +813,8 @@ ser
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/nginx/" target="_blank">
-                        <span class="chip bg-color">nginx</span>
+                    <a href="/tags/机器学习/" target="_blank">
+                        <span class="chip bg-color">机器学习</span>
                     </a>
                     
                 </div>
@@ -744,24 +828,27 @@ ser
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/09/23/xie-zi-ji-de-nginx-pei-zhi-wen-jian/">
+                <a href="/2019/09/23/nginxrewrite-jian-dan-shi-li/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="写自己的nginx配置文件">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="nginx Rewrite简单示例">
                         
-                        <span class="card-title">写自己的nginx配置文件</span>
+                        <span class="card-title">nginx Rewrite简单示例</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            前面几节中我们已经学过了nginx配置文件中的各个段的配置指令，下面我们就来写一个自己配置文件。如下代码：
+                            
 worker_processes  1;
 events {
     worker_connections  1024;
 }
-http
+http {
+       server {
+            location /google {
+   
                         
                     </div>
                     <div class="publish-info">
@@ -770,8 +857,12 @@ http
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-user fa-fw"></i>
-                            Hao Dexuan
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/nginx/" class="post-category" target="_blank">
+                                    nginx
+                                </a>
+                            
                             
                         </span>
                     </div>

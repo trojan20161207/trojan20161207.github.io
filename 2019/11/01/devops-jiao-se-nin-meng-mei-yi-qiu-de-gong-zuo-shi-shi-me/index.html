@@ -4,10 +4,10 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="nginx 反向代理示例, blog">
-    <meta name="description" content="
-　　反向代理（Reverse Proxy）是指代理服务器来接收来自Internet上的连接请求，并将请求转发给内部网络上的服务器，并从服务器上得到的结果返回给Internet上请求连接的客户端。
-　　比如要配置后端跑 apache 服务的">
+    <meta name="keywords" content="DevOps角色：您梦寐以求的工作是什么？, blog">
+    <meta name="description" content="在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。
+有这么多DevOps角色可供选择，您将是哪个构建基块？
+当IT专业人员迫切希望成为DevOps的专家时，对于各种DevOps角色还有很多困惑。因此，本文致力于使实施Dev">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>nginx 反向代理示例 | xiaochong&#39;s Life</title>
+    <title>DevOps角色：您梦寐以求的工作是什么？ | xiaochong&#39;s Life</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -261,13 +261,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        nginx 反向代理示例
+                        DevOps角色：您梦寐以求的工作是什么？
                     </div>
                 </div>
             </div>
@@ -378,8 +378,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/nginx/" target="_blank">
-                                <span class="chip bg-color">nginx</span>
+                            <a href="/tags/devops/" target="_blank">
+                                <span class="chip bg-color">devops</span>
                             </a>
                         
                     </div>
@@ -387,36 +387,27 @@
                 </div>
                 <div class="col s5 right-align">
                     
-                    <div class="post-cate">
-                        <i class="fa fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/nginx/" class="post-category" target="_blank">
-                                nginx
-                            </a>
-                        
-                    </div>
-                    
                 </div>
             </div>
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-09-23
+                    2019-11-01
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        226
+                        1.5k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        5 分
                     </div>
                     
                 
@@ -427,28 +418,40 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <hr>
-<p>　　<em>反向代理（Reverse Proxy）</em>是指代理服务器来接收来自Internet上的连接请求，并将请求转发给内部网络上的服务器，并从服务器上得到的结果返回给Internet上请求连接的客户端。</p>
-<p>　　比如要配置后端跑 apache 服务的 ip 和端口，也就是说，我们的目标是实现通过 <a href="http://ip:port/" target="_blank" rel="noopener">http://ip:port</a> 能访问到你的网站。配置文件可以修改以下内容，reload nginx就可以了。</p>
-<pre><code>## Basic reverse proxy server ##
-    upstream apachephp  {
-        server ip:8080; #Apache
-    }
-    ## Start www.nowamagic.net ##
-    server {
-        listen 80;
-        server_name  www.nowamagic.net;
-        access_log  logs/quancha.access.log  main;
-        error_log  logs/quancha.error.log;
-        root   html;
-        index  index.html index.htm index.php;
-
-        ## send request back to apache ##
-        location / {
-            proxy_pass  http://apachephp;
-                #……………………
-}
-}</code></pre><script>
+                <h3 id="在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。"><a href="#在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。" class="headerlink" title="在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。"></a>在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。</h3><p><img src="https://dzone.com/storage/temp/12646937-blocks.jpg" alt="建筑模块"></p>
+<p><em>有这么多DevOps角色可供选择，您将是哪个构建基块？</em></p>
+<p>当IT专业人员迫切希望成为DevOps的专家时，对于各种DevOps角色还有很多困惑。因此，本文致力于使实施DevOps的公司的团队结构更加清晰。</p>
+<p>您可能一直听说，在DevOps中，每个参与人员都扮演着共同的角色：DevOps，这是两种实践的结合：<em>Development</em>和<em>Operations</em>。但这远非事实。</p>
+<h2 id="DevOps实践"><a href="#DevOps实践" class="headerlink" title="DevOps实践"></a><strong>DevOps实践</strong></h2><p>实际上，DevOps实践强调，开发人员应该能够执行由Ops家伙执行的任务，而Ops则应该能够执行由Dev家伙执行的任务。</p>
+<p>既然您知道DevOps专业人员是具有多种技能的人员，那么您可能还想知道DevOps专业人员在其组织中负责的各种任务。如果是这样，请继续阅读。</p>
+<p>要真正理解这个概念，您需要从另一个角度看待它。如果您置身于实施DevOps的公司中，那么它就更容易理解，因为您必须根据要求分配各种DevOps角色。</p>
+<h2 id="DevOps角色"><a href="#DevOps角色" class="headerlink" title="DevOps角色"></a><strong>DevOps角色</strong></h2><p>首先让我列出各种角色及其描述。</p>
+<ol>
+<li><strong>DevOps传播者</strong> –负责实施DevOps的首席官（领导）</li>
+<li><strong>发布管理器</strong> –发布新功能并确保发布后产品稳定性的工具</li>
+<li><strong>自动化专家</strong> –负责实现工具自动化和编排的人</li>
+<li><strong>软件开发人员/测试人员</strong> –实际开发代码并对其进行测试的人</li>
+<li><strong>质量保证</strong> –确保产品质量符合其要求的人</li>
+<li><strong>安全工程师</strong> –始终监视产品安全性和健康状况的<strong>工程师</strong></li>
+</ol>
+<p>这里要注意的重要一点是，其中许多角色将涉及一个团队或一组专业人员，例如软件开发人员/测试人员，安全工程师和质量保证。因此，您应该以层次结构的形式考虑这些角色及其关系。</p>
+<p><img src="https://www.edureka.co/blog/wp-content/uploads/2018/02/DevOps-Roles.png" alt="DevOps角色"></p>
+<p>根据公司的要求，甚至自动化专家也可以由多个人担任该角色。因此，让我更多地谈谈这些DevOps角色。</p>
+<h3 id="DevOps传播者"><a href="#DevOps传播者" class="headerlink" title="DevOps传播者"></a><strong>DevOps传播者</strong></h3><p>就像我之前提到的那样，这是DevOps中的关键角色。由领导者或负责确保在产品的端到端开发中实施DevOps策略并带来环境积极影响的人员来担任此角色。</p>
+<p>DevOps传播者还考虑到可用的各种自动化工具以及Dev和Ops团队具有的技能，还找到了改进产品现有体系结构的方法。他的主要目标是管理其他DevOps角色并从团队中获得全面的效率。</p>
+<h3 id="发布经理"><a href="#发布经理" class="headerlink" title="发布经理"></a><strong>发布经理</strong></h3><p>该角色是产品可交付成果的关键角色，因为他需要将新功能/更新功能与现有框架集成在一起。该角色可以是担任发布工程师的角色的同一个人，也可以是领导发布工程师团队的发布经理。</p>
+<p>该角色的主要重点领域是从开发到部署，以协调和管理产品。由于此角色是以重要方式参与的，因此应由了解该技术的工作原理和各种结构的技术人员（经理）来担任。</p>
+<p>根据需求，将有多位经理领导各自的团队来处理多个功能（项目）。</p>
+<h3 id="自动化专家"><a href="#自动化专家" class="headerlink" title="自动化专家"></a><strong>自动化专家</strong></h3><p>无需再次强调该角色的重要性，因为DevOps完全是关于自动化的。作为自动化专家，此角色应该能够理解什么可以自动化以及如何将一个产品堆栈与另一个产品堆栈集成。</p>
+<p>此人也称为集成专家，负责分析，设计和实施持续部署的策略，同时确保生产和预生产系统的高可用性。</p>
+<h3 id="软件开发人员-测试人员"><a href="#软件开发人员-测试人员" class="headerlink" title="软件开发人员/测试人员"></a><strong>软件开发人员/测试人员</strong></h3><p>该角色负责软件的实际根级开发。传统的编码人员和程序员属于这一类。除开发外，专业人员还负责测试代码。</p>
+<p>名称可能保持不变，但是软件开发人员/测试人员的新角色大大增加了职责范围，因为他们不仅负责将新需求转化为代码，还负责单元测试，部署和持续监控。</p>
+<h3 id="质量保证"><a href="#质量保证" class="headerlink" title="质量保证"></a><strong>质量保证</strong></h3><p>这是DevOps中引入的新角色，实际上可以保证产品的质量。通常也称为“体验保证”，此角色是传统测试和质量检查之外的一步。</p>
+<p>在此，对产品的功能进行了极限测试，以发现每个缺陷并改善每个独立功能的性能欠佳，因为客户的经验至关重要。这个角色一直在寻找机会，以改善所有功能以提高客户满意度。</p>
+<h3 id="安全工程师"><a href="#安全工程师" class="headerlink" title="安全工程师"></a><strong>安全工程师</strong></h3><p>安全工程师与任何其他角色一样重要，因为他们是负责监视产品交付能力的人员。他们与开发人员并肩工作，在过程中更早地嵌入了他们的建议（安全补丁）。</p>
+<p>除了外部安全性之外，他们还监视系统以检查其性能，报告系统面临的任何停机时间并深入分析以找出造成该问题的原因。防止再次发生停机或安全风险是安全工程师的一项重要任务。</p>
+<p>我希望到目前为止，您对组织中可能存在的各种DevOps角色有了很好的了解。</p>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -624,9 +627,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《nginx 反向代理示例》
+                    《DevOps角色：您梦寐以求的工作是什么？》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/23/nginx-fan-xiang-dai-li-shi-li/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/11/01/devops-jiao-se-nin-meng-mei-yi-qiu-de-gong-zuo-shi-shi-me/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Hao Dexuan
             </a> 采用
@@ -667,7 +670,7 @@
         repo: 'trojan20161207.github.io',
         owner: 'trojan20161207',
         admin: "trojan20161207",
-        id: '2019-09-23T15-16-04',
+        id: '2019-11-01T17-09-06',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -692,36 +695,31 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/09/23/nginx-xu-ni-zhu-ji-shi-li/">
+                <a href="/2019/11/01/gai-jin-ci-guan-dao-zhong-zi-dong-hua-xing-neng-ce-shi-de-10-tiao-ji-qiao-di-1-bu-fen/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="nginx 虚拟主机示例">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="改进CI管道中自动化性能测试的10条技巧（第1部分）">
                         
-                        <span class="card-title">nginx 虚拟主机示例</span>
+                        <span class="card-title">改进CI管道中自动化性能测试的10条技巧（第1部分）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-　　Nginx做虚拟主机，尤其是仅仅支持纯静态-html，这是最简单的应用了，可以理解为一个仅支持静态页面的最简单的Web服务器。
-　　例子，同时支持两个虚拟主机（纯静态-html支持）的配置，我们只需要理改server段，如下：
-ser
+                            看一看如何通过连续测试和SLA改善CI管道的性能。
+这是创建更好的CI管道的方法的1和2。
+在持续集成管道中正确进行测试是Web规模软件开发的关键部分。对于许多公司而言，这是一个挑战，尤其是在自动化性能测试方面。这不是因为缺乏努力。许多公司
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-23
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-01
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/nginx/" class="post-category" target="_blank">
-                                    nginx
-                                </a>
-                            
+                            <i class="fa fa-user fa-fw"></i>
+                            Hao Dexuan
                             
                         </span>
                     </div>
@@ -729,8 +727,8 @@ ser
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/nginx/" target="_blank">
-                        <span class="chip bg-color">nginx</span>
+                    <a href="/tags/自动化测试/" target="_blank">
+                        <span class="chip bg-color">自动化测试</span>
                     </a>
                     
                 </div>
@@ -744,29 +742,26 @@ ser
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/09/23/xie-zi-ji-de-nginx-pei-zhi-wen-jian/">
+                <a href="/2019/10/15/rong-qi-he-pei-zhi-3-ge-devops-gong-ju-yi-ji-dui-ying-de-su-cha-biao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="写自己的nginx配置文件">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt=" 容器和配置：3个DevOps工具以及对应的速查表">
                         
-                        <span class="card-title">写自己的nginx配置文件</span>
+                        <span class="card-title"> 容器和配置：3个DevOps工具以及对应的速查表</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            前面几节中我们已经学过了nginx配置文件中的各个段的配置指令，下面我们就来写一个自己配置文件。如下代码：
-worker_processes  1;
-events {
-    worker_connections  1024;
-}
-http
+                            Puppet，Docker和Ansible速查表有助于简化DevOps的实现。
+这些DevOps工具使每个DevOps实施都更加容易。
+PuppetPuppet是使用最广泛的DevOps工具之一。它通过支持版本控制，自动测试和连续交付的功能
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-23
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-15
                             </span>
                         <span class="publish-author">
                             
@@ -779,8 +774,8 @@ http
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/nginx/" target="_blank">
-                        <span class="chip bg-color">nginx</span>
+                    <a href="/tags/devops/" target="_blank">
+                        <span class="chip bg-color">devops</span>
                     </a>
                     
                 </div>

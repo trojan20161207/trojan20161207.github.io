@@ -4,10 +4,10 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="nginx 反向代理示例, blog">
-    <meta name="description" content="
-　　反向代理（Reverse Proxy）是指代理服务器来接收来自Internet上的连接请求，并将请求转发给内部网络上的服务器，并从服务器上得到的结果返回给Internet上请求连接的客户端。
-　　比如要配置后端跑 apache 服务的">
+    <meta name="keywords" content=" 容器和配置：3个DevOps工具以及对应的速查表, blog">
+    <meta name="description" content="Puppet，Docker和Ansible速查表有助于简化DevOps的实现。
+这些DevOps工具使每个DevOps实施都更加容易。
+PuppetPuppet是使用最广泛的DevOps工具之一。它通过支持版本控制，自动测试和连续交付的功能">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>nginx 反向代理示例 | xiaochong&#39;s Life</title>
+    <title> 容器和配置：3个DevOps工具以及对应的速查表 | xiaochong&#39;s Life</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -261,13 +261,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        nginx 反向代理示例
+                         容器和配置：3个DevOps工具以及对应的速查表
                     </div>
                 </div>
             </div>
@@ -378,8 +378,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/nginx/" target="_blank">
-                                <span class="chip bg-color">nginx</span>
+                            <a href="/tags/devops/" target="_blank">
+                                <span class="chip bg-color">devops</span>
                             </a>
                         
                     </div>
@@ -387,36 +387,27 @@
                 </div>
                 <div class="col s5 right-align">
                     
-                    <div class="post-cate">
-                        <i class="fa fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/nginx/" class="post-category" target="_blank">
-                                nginx
-                            </a>
-                        
-                    </div>
-                    
                 </div>
             </div>
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-09-23
+                    2019-10-15
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        226
+                        1.2k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        4 分
                     </div>
                     
                 
@@ -427,28 +418,47 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <hr>
-<p>　　<em>反向代理（Reverse Proxy）</em>是指代理服务器来接收来自Internet上的连接请求，并将请求转发给内部网络上的服务器，并从服务器上得到的结果返回给Internet上请求连接的客户端。</p>
-<p>　　比如要配置后端跑 apache 服务的 ip 和端口，也就是说，我们的目标是实现通过 <a href="http://ip:port/" target="_blank" rel="noopener">http://ip:port</a> 能访问到你的网站。配置文件可以修改以下内容，reload nginx就可以了。</p>
-<pre><code>## Basic reverse proxy server ##
-    upstream apachephp  {
-        server ip:8080; #Apache
-    }
-    ## Start www.nowamagic.net ##
-    server {
-        listen 80;
-        server_name  www.nowamagic.net;
-        access_log  logs/quancha.access.log  main;
-        error_log  logs/quancha.error.log;
-        root   html;
-        index  index.html index.htm index.php;
-
-        ## send request back to apache ##
-        location / {
-            proxy_pass  http://apachephp;
-                #……………………
-}
-}</code></pre><script>
+                <h3 id="Puppet，Docker和Ansible速查表有助于简化DevOps的实现。"><a href="#Puppet，Docker和Ansible速查表有助于简化DevOps的实现。" class="headerlink" title="Puppet，Docker和Ansible速查表有助于简化DevOps的实现。"></a>Puppet，Docker和Ansible速查表有助于简化DevOps的实现。</h3><p><img src="https://dzone.com/storage/temp/12567617-tools.jpg" alt="工具"></p>
+<p><em>这些DevOps工具使每个DevOps实施都更加容易。</em></p>
+<h2 id="Puppet"><a href="#Puppet" class="headerlink" title="Puppet"></a><strong>Puppet</strong></h2><p>Puppet是使用最广泛的DevOps工具之一。它通过支持版本控制，自动测试和连续交付的功能，使交付和发布技术更改的速度更快，更频繁。它可以管理多台服务器并执行系统配置。出于多种原因，Puppet是当今IT行业中最流行的配置管理工具之一。</p>
+<p>Puppet提供了更多的平台支持。例如，以下是您可以使用Puppet管理的平台：</p>
+<ul>
+<li>Debian / Ubuntu</li>
+<li>Microsoft Windows</li>
+<li>Redhat，Centos，Fedora</li>
+<li>Mac OS X Server</li>
+</ul>
+<p>与其他配置管理工具不同，Puppet在任何系统上部署配置后，都会在一定间隔后继续验证那些配置。您也可以修改这些间隔。</p>
+<h3 id="了解Puppet架构和Puppet组件"><a href="#了解Puppet架构和Puppet组件" class="headerlink" title="了解Puppet架构和Puppet组件"></a><strong>了解Puppet架构和Puppet组件</strong></h3><p><img src="https://dzone.com/storage/temp/12568247-how-does-puppet-work-1.png" alt="Puppet"></p>
+<p><strong>Puppet Master：</strong> Puppet Master是处理所有与配置有关的信息的工具。Puppet Master在指定的服务器上运行，并管理部署和配置。</p>
+<p><strong>Puppet Agent：</strong> Puppet代理在客户端上运行。Puppet代理是由Puppet Master维护和管理的实际工作机器。</p>
+<p><strong>Config Repository：</strong> Config Repository是存储与服务器相关的配置和节点的位置。可以在需要时随时将其拉出。</p>
+<p><strong>Facts</strong>：它们是全局变量，包含与机器有关的详细信息，例如操作系统和网络接口。它们用于分析任何节点的当前状态。</p>
+<p><strong>Catalog</strong>：将用Puppet编写的所有配置都转换为编译后的格式，称为目录，然后将这些目录应用于目标系统。</p>
+<p><strong>Manifests</strong>：清单是声明所有需要检查和更改的所有资源（即服务，程序包或文件）的文件。清单的扩展名为“ .pp”。</p>
+<p><strong>Module</strong>：模块是清单文件的集合，这些清单文件的组织方式便于共享文件。</p>
+<p><strong>Class</strong>：与其他编程语言一样，Puppet也具有用于更好地组织代码的类，从而使阅读和理解代码以及重用部分代码更加容易。</p>
+<p><strong>Resources</strong>：在Puppet代码中，是通过声明资源定义的编码块，其中资源可以表示包，文件，用户，命令。</p>
+<p><strong>Nodes</strong>：要在其上安装P代理的所有要管理的服务器或客户端都称为节点。</p>
+<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a><strong>Docker</strong></h2><p>Docker是高端DevOps工具，它允许在多个系统上构建，交付和运行分布式应用程序。它有助于快速组装应用程序，通常适用于容器管理。</p>
+<p>使用Docker容器时的一些重要术语包括：</p>
+<ul>
+<li><strong>Layer</strong>：只读文件以配置系统</li>
+<li><strong>Image</strong>：只读层，它是镜像的基础</li>
+<li><strong>Container</strong>：镜像的可运行实例</li>
+<li><strong>Registry/hub</strong>: 镜像存放的中央位置</li>
+<li><strong>Docker machine</strong>：运行Docker容器的虚拟机</li>
+<li><strong>Docker-compose</strong>：一个虚拟机，可将多个容器作为系统运行</li>
+</ul>
+<p><img src="https://dzone.com/storage/temp/12568254-docker-cheat-sheet.jpg" alt="Docker速查表"></p>
+<h2 id="Ansible"><a href="#Ansible" class="headerlink" title="Ansible"></a><strong>Ansible</strong></h2><p>Ansible是一种开源IT配置工具，可帮助自动执行服务器和云配置，配置管理和应用程序部署。它可以管理复杂的部署并提高生产率，并有助于自动化应用程序的整个生命周期。 </p>
+<p>让我们考虑一种情况，其中系统管理员负责处理公司的基础结构。有九台服务器，其中五台服务器充当Web服务器，五台服务器充当数据库服务器。此外，您想在Web服务器上安装Tomcat，在数据库服务器上安装MySQL。在传统方法中，系统管理员将必须手动管理服务器，安装所需的软件并更改配置，以及分别管理每个服务器上的服务。Ansile通过自动执行此过程的大部分步骤来帮助解决这一问题。<br><img src="https://dzone.com/storage/temp/12568248-ansible-cheat-sheet-3.jpg" alt="Ansible速查表"></p>
+<h3 id="Ansible中的重要术语"><a href="#Ansible中的重要术语" class="headerlink" title="Ansible中的重要术语"></a><strong>Ansible中的重要术语</strong></h3><p><strong>Controller Machine</strong>：这是Ansible的安装位置。控制器机器有助于在您管理的服务器上启用配置。</p>
+<p><strong>Inventory</strong>：基本上，这是一个初始化文件，其中包含有关您所管理的服务器的信息。</p>
+<p><strong>Playbook</strong>：脚本化的有组织的单位，用于定义服务器配置管理的自动化作业。</p>
+<p><strong>Task</strong>：任务块定义了要在服务器上执行的单个过程，例如安装软件包。</p>
+<p><strong>Nagios</strong>：此工具有助于监视IT基础结构。它能够确定错误并在标准网络，服务器和日志监视系统的帮助下进行纠正。</p>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -624,9 +634,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《nginx 反向代理示例》
+                    《 容器和配置：3个DevOps工具以及对应的速查表》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/23/nginx-fan-xiang-dai-li-shi-li/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/10/15/rong-qi-he-pei-zhi-3-ge-devops-gong-ju-yi-ji-dui-ying-de-su-cha-biao/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Hao Dexuan
             </a> 采用
@@ -667,7 +677,7 @@
         repo: 'trojan20161207.github.io',
         owner: 'trojan20161207',
         admin: "trojan20161207",
-        id: '2019-09-23T15-16-04',
+        id: '2019-10-15T11-10-23',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -692,36 +702,31 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/09/23/nginx-xu-ni-zhu-ji-shi-li/">
+                <a href="/2019/11/01/devops-jiao-se-nin-meng-mei-yi-qiu-de-gong-zuo-shi-shi-me/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="nginx 虚拟主机示例">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="DevOps角色：您梦寐以求的工作是什么？">
                         
-                        <span class="card-title">nginx 虚拟主机示例</span>
+                        <span class="card-title">DevOps角色：您梦寐以求的工作是什么？</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-　　Nginx做虚拟主机，尤其是仅仅支持纯静态-html，这是最简单的应用了，可以理解为一个仅支持静态页面的最简单的Web服务器。
-　　例子，同时支持两个虚拟主机（纯静态-html支持）的配置，我们只需要理改server段，如下：
-ser
+                            在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。
+有这么多DevOps角色可供选择，您将是哪个构建基块？
+当IT专业人员迫切希望成为DevOps的专家时，对于各种DevOps角色还有很多困惑。因此，本文致力于使实施Dev
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-23
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-01
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/nginx/" class="post-category" target="_blank">
-                                    nginx
-                                </a>
-                            
+                            <i class="fa fa-user fa-fw"></i>
+                            Hao Dexuan
                             
                         </span>
                     </div>
@@ -729,8 +734,8 @@ ser
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/nginx/" target="_blank">
-                        <span class="chip bg-color">nginx</span>
+                    <a href="/tags/devops/" target="_blank">
+                        <span class="chip bg-color">devops</span>
                     </a>
                     
                 </div>
@@ -744,29 +749,25 @@ ser
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/09/23/xie-zi-ji-de-nginx-pei-zhi-wen-jian/">
+                <a href="/2019/10/08/jiang-python-jiao-ben-bian-cheng-piao-liang-de-ml-gong-ju/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="写自己的nginx配置文件">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="将Python脚本变成漂亮的ML工具">
                         
-                        <span class="card-title">写自己的nginx配置文件</span>
+                        <span class="card-title">将Python脚本变成漂亮的ML工具</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            前面几节中我们已经学过了nginx配置文件中的各个段的配置指令，下面我们就来写一个自己配置文件。如下代码：
-worker_processes  1;
-events {
-    worker_connections  1024;
-}
-http
+                            将Python脚本变成漂亮的ML工具Streamlit，这是专为ML工程师打造的应用程序框架Adrien Treuille在300行Python中使用实时神经网络推理对语义搜索引擎进行编码。
+以我的经验，每个不平凡的机器学习项目最终都将使用
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-23
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-08
                             </span>
                         <span class="publish-author">
                             
@@ -779,8 +780,8 @@ http
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/nginx/" target="_blank">
-                        <span class="chip bg-color">nginx</span>
+                    <a href="/tags/机器学习/" target="_blank">
+                        <span class="chip bg-color">机器学习</span>
                     </a>
                     
                 </div>

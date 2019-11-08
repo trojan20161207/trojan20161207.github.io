@@ -4,10 +4,10 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="nginx 反向代理示例, blog">
-    <meta name="description" content="
-　　反向代理（Reverse Proxy）是指代理服务器来接收来自Internet上的连接请求，并将请求转发给内部网络上的服务器，并从服务器上得到的结果返回给Internet上请求连接的客户端。
-　　比如要配置后端跑 apache 服务的">
+    <meta name="keywords" content="改进CI管道中自动化性能测试的10条技巧（第1部分）, blog">
+    <meta name="description" content="看一看如何通过连续测试和SLA改善CI管道的性能。
+这是创建更好的CI管道的方法的1和2。
+在持续集成管道中正确进行测试是Web规模软件开发的关键部分。对于许多公司而言，这是一个挑战，尤其是在自动化性能测试方面。这不是因为缺乏努力。许多公司">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>nginx 反向代理示例 | xiaochong&#39;s Life</title>
+    <title>改进CI管道中自动化性能测试的10条技巧（第1部分） | xiaochong&#39;s Life</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -261,13 +261,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        nginx 反向代理示例
+                        改进CI管道中自动化性能测试的10条技巧（第1部分）
                     </div>
                 </div>
             </div>
@@ -378,8 +378,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/nginx/" target="_blank">
-                                <span class="chip bg-color">nginx</span>
+                            <a href="/tags/自动化测试/" target="_blank">
+                                <span class="chip bg-color">自动化测试</span>
                             </a>
                         
                     </div>
@@ -387,36 +387,27 @@
                 </div>
                 <div class="col s5 right-align">
                     
-                    <div class="post-cate">
-                        <i class="fa fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/nginx/" class="post-category" target="_blank">
-                                nginx
-                            </a>
-                        
-                    </div>
-                    
                 </div>
             </div>
 
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-09-23
+                    2019-11-01
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        226
+                        1.8k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        1 分
+                        6 分
                     </div>
                     
                 
@@ -427,28 +418,37 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <hr>
-<p>　　<em>反向代理（Reverse Proxy）</em>是指代理服务器来接收来自Internet上的连接请求，并将请求转发给内部网络上的服务器，并从服务器上得到的结果返回给Internet上请求连接的客户端。</p>
-<p>　　比如要配置后端跑 apache 服务的 ip 和端口，也就是说，我们的目标是实现通过 <a href="http://ip:port/" target="_blank" rel="noopener">http://ip:port</a> 能访问到你的网站。配置文件可以修改以下内容，reload nginx就可以了。</p>
-<pre><code>## Basic reverse proxy server ##
-    upstream apachephp  {
-        server ip:8080; #Apache
-    }
-    ## Start www.nowamagic.net ##
-    server {
-        listen 80;
-        server_name  www.nowamagic.net;
-        access_log  logs/quancha.access.log  main;
-        error_log  logs/quancha.error.log;
-        root   html;
-        index  index.html index.htm index.php;
-
-        ## send request back to apache ##
-        location / {
-            proxy_pass  http://apachephp;
-                #……………………
-}
-}</code></pre><script>
+                <h3 id="看一看如何通过连续测试和SLA改善CI管道的性能。"><a href="#看一看如何通过连续测试和SLA改善CI管道的性能。" class="headerlink" title="看一看如何通过连续测试和SLA改善CI管道的性能。"></a>看一看如何通过连续测试和SLA改善CI管道的性能。</h3><p><img src="https://dzone.com/storage/temp/12642760-10.jpg" alt="图片标题"></p>
+<p><em>这是创建更好的CI管道的方法的1和2。</em></p>
+<p>在持续集成管道中正确进行测试是Web规模软件开发的关键部分。对于许多公司而言，这是一个挑战，尤其是在自动化性能测试方面。这不是因为缺乏努力。许多公司似乎无法实现其努力的全部价值。原因很多。一些测试工作只是在重新发明轮子。其他人则只是出于执行目的而无明显意图地随机进行。确保测试既适当又旨在满足业务需求是事后才想到的。</p>
+<p>不必一定是以这种方式。</p>
+<p>任何公司都可以在自动化CI管道中进行有用，高效的性能测试。所需要的只是那些有知识的人的一些有用的知识。为了扩大“了解者”的圈子，我们创建了十个技巧列表，以改善CI Pipelines中的性能测试。</p>
+<p>1.根据产品的长期目标进行连续测试</p>
+<p>2.区分SLA，SLO和SLI</p>
+<p>3.保持测试规模小且目标明确</p>
+<p>4.在整体之前测试段</p>
+<p>5.自动化不易碎的东西</p>
+<p>6.节省时间，使用烟雾测试</p>
+<p>7.利用您的源代码管理管理系统</p>
+<p>8.没有反馈循环的期望不是</p>
+<p>9.已知的基础架构是可测试的基础架构</p>
+<p>10.使用您的CI / CD管道，而不是反对</p>
+<p>今天的帖子将重点介绍前两个技巧，而其余建议将在单独的文章中介绍。</p>
+<h2 id="1-根据产品的长期目标进行连续测试"><a href="#1-根据产品的长期目标进行连续测试" class="headerlink" title="1.根据产品的长期目标进行连续测试"></a><strong>1.根据产品的长期目标进行连续测试</strong></h2><p>如果你想快速识别什么可怕的事情是否在进行与贵公司的测试流程，请考虑以下情形。现在该发布产品了。开发团队中的每个人都以焦虑不安的状态坐在会议室的桌子旁，等待端到端测试完成，以便可以将代码推送发布。无论哪种方式，您都无法自拔。为什么？毕竟，如果测试顺利，代码将继续进行。没关系吧？错误。</p>
+<p>发布的生存能力取决于单个引发焦虑的端到端测试的状态这一事实揭示了整个测试过程的重大缺陷。此类测试所承受的压力不应超过常规血液测试的压力。如果患者有定期体检，健康饮食和定期运动的病史，则血液检查应验证历史上的积极行为。但是，如果患者已经十年没有去看医生，只能依靠薯片和生啤酒的饮食生活，而且只能走到邮箱，那么简单的验血会改变您的生活。谁知道它可能揭示什么？</p>
+<p>类比适用于IT流程。如果公司的总体开发实践是健康的，并且在软件开发生命周期的各个级别进行连续测试，则端到端测试应该只是另一个验证复选框。如果发现问题所在，则无需费力即可解决它。</p>
+<p>当开发实践杂乱无章，而测试被拖到最后时，最后的端到端测试又怎会是一种焦虑的经历呢？谁知道代码中隐藏了多少技术债务，开发人员不再在公司工作留下了多少谜团。测试中有多少只不过是循环使用20％的代码库，而其余部分则保持不变？诸如此类的问题在开发环境中令人惊讶地普遍存在，在该环境中，长期产品目标尚不清楚，而测试事件则是偶然的。</p>
+<p>当创造了所有人都可以充分理解长期产品目标的条件时，开发过程和所产生的代码质量也会提高（前提是在整个生命周期阶段都进行了连续测试）。基于产品的长期目标进行连续测试是明智且实用的，并有助于改善自动化性能测试。</p>
+<h2 id="2-区分SLA，SLO和SLI"><a href="#2-区分SLA，SLO和SLI" class="headerlink" title="2.区分SLA，SLO和SLI"></a><strong>2.区分SLA，SLO和SLI</strong></h2><p>当大多数公司考虑定义软件/软件服务的工作方式时，他们相信服务水平协议。定义明确的SLA是必不可少的。否则，就没有可靠的方法让公司作为服务提供商或消费者运营。从提供商的角度来看，缺少SLA意味着客户可以随时（并期望）要求任何东西。从消费者的角度来看，没有SLA会使技术人员处于等待数小时的危险之中，因为他们的公司的数字基础架构崩溃时，他们一直处于等待与关键任务支持人员联系的状态。</p>
+<p>SLA是必需的，但它们只能捕获部分图片。还需要更多。服务水平目标（SLO）和服务水平指标（SLI）的添加提供了必要的附加信息，以确保提供者和消费者之间的伙伴关系满足所有人的需求。</p>
+<p>SLA描述了提供者和消费者之间的承诺；其复杂性将根据各方的需求而变化。SLA将定义每个服务的职责和服务的可用性。该协议仅取决于其背后目标的定义以及确定服务级别的度量标准。这就是SLO和SLI变得重要的地方。</p>
+<p>如果提前定义了SLO，则建立SLA会容易得多。理解消费者希望从代码/服务中获得什么，将提供必要的见解，以确认所提供的服务符合期望。定义明确的SLO将有助于制定对所有人都有意义的SLA。</p>
+<p>为了使SLA有效地满足SLO中规定的目标，必须定义一套标准的，易于理解的度量标准。否则，公司冒着将苹果与橙子进行比较的风险。因此，SLI的价值。服务水平指示器提供有关如何根据SLA衡量运营绩效的详细信息。SLI越精确，就越好。</p>
+<p>SLO / SLI允许您根据SLA构造进行假设。确定了操作的需求和条件以及测量方法。“我需要喝点东西”和“我渴了，需要8盎司水来满足我的渴求”之间的区别。</p>
+<p>然后，基于定义明确的SLO的SLA，然后根据详细SLI的一组度量标准进行测量，这将有益于常规操作以及测试过程。根据SLI中明确定义的参数，满足SLA要求的测试与即席测试相比，提供了更高的准确性和更可靠的分析。</p>
+<p>在SLA，SLO和SLI之间进行区分将大大有助于在软件所涉及的各方（开发人员，测试人员和用户之间）之间建立有意义，可靠的关系。</p>
+<p><em>下周，在由十个技巧组成的三部分博客系列中的第二篇中，我们将深入探讨技巧3-6。</em></p>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -624,9 +624,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《nginx 反向代理示例》
+                    《改进CI管道中自动化性能测试的10条技巧（第1部分）》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/09/23/nginx-fan-xiang-dai-li-shi-li/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/11/01/gai-jin-ci-guan-dao-zhong-zi-dong-hua-xing-neng-ce-shi-de-10-tiao-ji-qiao-di-1-bu-fen/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Hao Dexuan
             </a> 采用
@@ -667,7 +667,7 @@
         repo: 'trojan20161207.github.io',
         owner: 'trojan20161207',
         admin: "trojan20161207",
-        id: '2019-09-23T15-16-04',
+        id: '2019-11-01T17-17-05',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -688,49 +688,46 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/09/23/nginx-xu-ni-zhu-ji-shi-li/">
+                <a href="/2019/11/01/gai-jin-ci-guan-dao-zhong-zi-dong-hua-xing-neng-ce-shi-de-10-tiao-ji-qiao-di-1-bu-fen/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="nginx 虚拟主机示例">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="改进CI管道中自动化性能测试的10条技巧（第1部分）">
                         
-                        <span class="card-title">nginx 虚拟主机示例</span>
+                        <span class="card-title">改进CI管道中自动化性能测试的10条技巧（第1部分）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-　　Nginx做虚拟主机，尤其是仅仅支持纯静态-html，这是最简单的应用了，可以理解为一个仅支持静态页面的最简单的Web服务器。
-　　例子，同时支持两个虚拟主机（纯静态-html支持）的配置，我们只需要理改server段，如下：
-ser
+                            看一看如何通过连续测试和SLA改善CI管道的性能。
+这是创建更好的CI管道的方法的1和2。
+在持续集成管道中正确进行测试是Web规模软件开发的关键部分。对于许多公司而言，这是一个挑战，尤其是在自动化性能测试方面。这不是因为缺乏努力。许多公司
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-23
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-01
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/nginx/" class="post-category" target="_blank">
-                                    nginx
-                                </a>
-                            
+                            <i class="fa fa-user fa-fw"></i>
+                            Hao Dexuan
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/nginx/" target="_blank">
-                        <span class="chip bg-color">nginx</span>
+                    <a href="/tags/自动化测试/" target="_blank">
+                        <span class="chip bg-color">自动化测试</span>
                     </a>
                     
                 </div>
@@ -744,29 +741,26 @@ ser
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/09/23/xie-zi-ji-de-nginx-pei-zhi-wen-jian/">
+                <a href="/2019/11/01/devops-jiao-se-nin-meng-mei-yi-qiu-de-gong-zuo-shi-shi-me/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="写自己的nginx配置文件">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="DevOps角色：您梦寐以求的工作是什么？">
                         
-                        <span class="card-title">写自己的nginx配置文件</span>
+                        <span class="card-title">DevOps角色：您梦寐以求的工作是什么？</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            前面几节中我们已经学过了nginx配置文件中的各个段的配置指令，下面我们就来写一个自己配置文件。如下代码：
-worker_processes  1;
-events {
-    worker_connections  1024;
-}
-http
+                            在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。
+有这么多DevOps角色可供选择，您将是哪个构建基块？
+当IT专业人员迫切希望成为DevOps的专家时，对于各种DevOps角色还有很多困惑。因此，本文致力于使实施Dev
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-09-23
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-11-01
                             </span>
                         <span class="publish-author">
                             
@@ -779,8 +773,8 @@ http
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/nginx/" target="_blank">
-                        <span class="chip bg-color">nginx</span>
+                    <a href="/tags/devops/" target="_blank">
+                        <span class="chip bg-color">devops</span>
                     </a>
                     
                 </div>
