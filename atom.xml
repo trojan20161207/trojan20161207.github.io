@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>小冲的幸福生活</title>
+  <title>xiaochong&#39;s Life</title>
   
   <subtitle>个人博客</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xiaochong2018.gitee.io/"/>
-  <updated>2019-09-23T07:25:46.000Z</updated>
+  <updated>2019-11-01T09:17:12.000Z</updated>
   <id>https://xiaochong2018.gitee.io/</id>
   
   <author>
@@ -15,6 +15,128 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>改进CI管道中自动化性能测试的10条技巧（第1部分）</title>
+    <link href="https://xiaochong2018.gitee.io/2019/11/01//articles/2019/11/01/1572599824896.html/"/>
+    <id>https://xiaochong2018.gitee.io/2019/11/01//articles/2019/11/01/1572599824896.html/</id>
+    <published>2019-11-01T09:17:05.000Z</published>
+    <updated>2019-11-01T09:17:12.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="自动化测试" scheme="https://xiaochong2018.gitee.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DevOps角色：您梦寐以求的工作是什么？</title>
+    <link href="https://xiaochong2018.gitee.io/2019/11/01//articles/2019/11/01/1572599346013.html/"/>
+    <id>https://xiaochong2018.gitee.io/2019/11/01//articles/2019/11/01/1572599346013.html/</id>
+    <published>2019-11-01T09:09:06.000Z</published>
+    <updated>2019-11-01T09:17:33.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="devops" scheme="https://xiaochong2018.gitee.io/tags/devops/"/>
+    
+  </entry>
+  
+  <entry>
+    <title> 容器和配置：3个DevOps工具以及对应的速查表</title>
+    <link href="https://xiaochong2018.gitee.io/2019/10/15//articles/2019/10/15/1571109023019.html/"/>
+    <id>https://xiaochong2018.gitee.io/2019/10/15//articles/2019/10/15/1571109023019.html/</id>
+    <published>2019-10-15T03:10:23.000Z</published>
+    <updated>2019-10-15T03:24:17.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="devops" scheme="https://xiaochong2018.gitee.io/tags/devops/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>将Python脚本变成漂亮的ML工具</title>
+    <link href="https://xiaochong2018.gitee.io/2019/10/08//articles/2019/10/08/1570525430799.html/"/>
+    <id>https://xiaochong2018.gitee.io/2019/10/08//articles/2019/10/08/1570525430799.html/</id>
+    <published>2019-10-08T09:03:50.000Z</published>
+    <updated>2019-10-08T09:03:50.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="https://xiaochong2018.gitee.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何为DevOps的面试做好充分准备</title>
+    <link href="https://xiaochong2018.gitee.io/2019/09/24//articles/2019/09/24/1569300217485.html/"/>
+    <id>https://xiaochong2018.gitee.io/2019/09/24//articles/2019/09/24/1569300217485.html/</id>
+    <published>2019-09-24T04:43:37.000Z</published>
+    <updated>2019-09-24T04:43:37.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="DevOps" scheme="https://xiaochong2018.gitee.io/tags/DevOps/"/>
+    
+      <category term="linux" scheme="https://xiaochong2018.gitee.io/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>nginx Rewrite简单示例</title>
@@ -140,6 +262,30 @@
     </summary>
     
       <category term="nginx" scheme="https://xiaochong2018.gitee.io/categories/nginx/"/>
+    
+    
+      <category term="nginx" scheme="https://xiaochong2018.gitee.io/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>写自己的nginx配置文件</title>
+    <link href="https://xiaochong2018.gitee.io/2019/09/23//articles/2019/09/23/1569222700137.html/"/>
+    <id>https://xiaochong2018.gitee.io/2019/09/23//articles/2019/09/23/1569222700137.html/</id>
+    <published>2019-09-23T07:11:40.000Z</published>
+    <updated>2019-09-23T07:11:40.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
     
     
       <category term="nginx" scheme="https://xiaochong2018.gitee.io/tags/nginx/"/>
@@ -377,162 +523,6 @@
     
     
       <category term="nginx" scheme="https://xiaochong2018.gitee.io/tags/nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>nginx常用命令</title>
-    <link href="https://xiaochong2018.gitee.io/2019/09/23/nginx-chang-yong-ming-ling/"/>
-    <id>https://xiaochong2018.gitee.io/2019/09/23/nginx-chang-yong-ming-ling/</id>
-    <published>2019-09-23T06:38:06.000Z</published>
-    <updated>2019-09-23T07:42:14.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="nginx" scheme="https://xiaochong2018.gitee.io/categories/nginx/"/>
-    
-    
-      <category term="nginx" scheme="https://xiaochong2018.gitee.io/tags/nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>nginx概述</title>
-    <link href="https://xiaochong2018.gitee.io/2019/09/23/nginx-gai-shu/"/>
-    <id>https://xiaochong2018.gitee.io/2019/09/23/nginx-gai-shu/</id>
-    <published>2019-09-23T06:37:22.000Z</published>
-    <updated>2019-09-23T06:37:22.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="nginx" scheme="https://xiaochong2018.gitee.io/categories/nginx/"/>
-    
-    
-      <category term="nginx" scheme="https://xiaochong2018.gitee.io/tags/nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux日常巡检shell</title>
-    <link href="https://xiaochong2018.gitee.io/2019/09/19/linux-ri-chang-xun-jian-shell/"/>
-    <id>https://xiaochong2018.gitee.io/2019/09/19/linux-ri-chang-xun-jian-shell/</id>
-    <published>2019-09-19T07:34:40.000Z</published>
-    <updated>2019-09-19T07:34:40.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="shell" scheme="https://xiaochong2018.gitee.io/categories/shell/"/>
-    
-    
-      <category term="shell, 巡检" scheme="https://xiaochong2018.gitee.io/tags/shell-%E5%B7%A1%E6%A3%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>运维架构层级</title>
-    <link href="https://xiaochong2018.gitee.io/2019/09/19/yun-wei-jia-gou-ceng-ji/"/>
-    <id>https://xiaochong2018.gitee.io/2019/09/19/yun-wei-jia-gou-ceng-ji/</id>
-    <published>2019-09-19T07:20:59.000Z</published>
-    <updated>2019-09-19T07:29:54.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="架构" scheme="https://xiaochong2018.gitee.io/categories/%E6%9E%B6%E6%9E%84/"/>
-    
-    
-      <category term="Linux运维" scheme="https://xiaochong2018.gitee.io/tags/Linux%E8%BF%90%E7%BB%B4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker命令使用</title>
-    <link href="https://xiaochong2018.gitee.io/2019/09/19/docker-ming-ling-shi-yong/"/>
-    <id>https://xiaochong2018.gitee.io/2019/09/19/docker-ming-ling-shi-yong/</id>
-    <published>2019-09-19T07:18:43.000Z</published>
-    <updated>2019-09-19T07:18:43.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="docker" scheme="https://xiaochong2018.gitee.io/categories/docker/"/>
-    
-    
-      <category term="docker" scheme="https://xiaochong2018.gitee.io/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>快速shell安装docker-ce</title>
-    <link href="https://xiaochong2018.gitee.io/2019/09/19/kuai-su-shell-an-zhuang-dockerce/"/>
-    <id>https://xiaochong2018.gitee.io/2019/09/19/kuai-su-shell-an-zhuang-dockerce/</id>
-    <published>2019-09-19T07:12:46.000Z</published>
-    <updated>2019-09-19T07:15:12.000Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
-        
-      
-    
-    </summary>
-    
-      <category term="docker, shell" scheme="https://xiaochong2018.gitee.io/categories/docker-shell/"/>
-    
-    
-      <category term="docker, shell" scheme="https://xiaochong2018.gitee.io/tags/docker-shell/"/>
     
   </entry>
   
