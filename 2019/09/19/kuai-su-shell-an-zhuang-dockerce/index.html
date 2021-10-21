@@ -1,0 +1,1231 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="快速shell安装docker-ce, 小冲的生活">
+    <meta name="description" content="小冲的个人博客">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>快速shell安装docker-ce | 小冲的生活</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="小冲的生活" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小冲的生活</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小冲的生活</div>
+        <div class="logo-desc">
+            
+            小冲的个人博客
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">快速shell安装docker-ce</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/docker-shell/">
+                                <span class="chip bg-color">docker, shell</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/docker-shell/" class="post-category">
+                                docker, shell
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-09-19
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>我们以18.09.8为例，以下为详细shell：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">set -e</span><br><span class="line"></span><br><span class="line">CHANNEL="stable"</span><br><span class="line"></span><br><span class="line">docker_version=18.09.8</span><br><span class="line">apt_url="https://apt.dockerproject.org"</span><br><span class="line">yum_url="https://yum.dockerproject.org"</span><br><span class="line">gpg_fingerprint="9DC858229FC7DD38854AE2D88D81803C0EBFCD88"</span><br><span class="line"></span><br><span class="line">key_servers="</span><br><span class="line">ha.pool.sks-keyservers.net</span><br><span class="line">pgp.mit.edu</span><br><span class="line">keyserver.ubuntu.com</span><br><span class="line">"</span><br><span class="line"></span><br><span class="line">rhel_repos="</span><br><span class="line">rhel-7-server-extras-rpms</span><br><span class="line">rhui-REGION-rhel-server-extras</span><br><span class="line">rhui-rhel-7-server-rhui-extras-rpms</span><br><span class="line">rhui-rhel-7-for-arm-64-extras-rhui-rpms</span><br><span class="line">"</span><br><span class="line"></span><br><span class="line">mirror=''</span><br><span class="line">while [ $# -gt 0 ]; do</span><br><span class="line">	case "$1" in</span><br><span class="line">		--mirror)</span><br><span class="line">			mirror="$2"</span><br><span class="line">			shift</span><br><span class="line">			;;</span><br><span class="line">		*)</span><br><span class="line">			echo "Illegal option $1"</span><br><span class="line">			;;</span><br><span class="line">	esac</span><br><span class="line">	shift $(( $# &gt; 0 ? 1 : 0 ))</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">case "$mirror" in</span><br><span class="line">	AzureChinaCloud)</span><br><span class="line">		apt_url="https://mirror.azure.cn/docker-engine/apt"</span><br><span class="line">		yum_url="https://mirror.azure.cn/docker-engine/yum"</span><br><span class="line">		;;</span><br><span class="line">	Aliyun)</span><br><span class="line">		apt_url="https://mirrors.aliyun.com/docker-engine/apt"</span><br><span class="line">		yum_url="https://mirrors.aliyun.com/docker-engine/yum"</span><br><span class="line">		;;</span><br><span class="line">esac</span><br><span class="line"></span><br><span class="line">command_exists() {</span><br><span class="line">	command -v "$@" &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">echo_docker_as_nonroot() {</span><br><span class="line">	if command_exists docker &amp;&amp; [ -e /var/run/docker.sock ]; then</span><br><span class="line">		(</span><br><span class="line">			set -x</span><br><span class="line">			$sh_c 'docker version'</span><br><span class="line">		) || true</span><br><span class="line">	fi</span><br><span class="line">	your_user=your-user</span><br><span class="line">	[ "$user" != 'root' ] &amp;&amp; your_user="$user"</span><br><span class="line">	# intentionally mixed spaces and tabs here -- tabs are stripped by "&lt;&lt;-EOF", spaces are kept in the output</span><br><span class="line">	cat &lt;&lt;-EOF</span><br><span class="line"></span><br><span class="line">	If you would like to use Docker as a non-root user, you should now consider</span><br><span class="line">	adding your user to the "docker" group with something like:</span><br><span class="line"></span><br><span class="line">	  sudo usermod -aG docker $your_user</span><br><span class="line"></span><br><span class="line">	Remember that you will have to log out and back in for this to take effect!</span><br><span class="line"></span><br><span class="line">	WARNING: Adding a user to the "docker" group will grant the ability to run</span><br><span class="line">	         containers which can be used to obtain root privileges on the</span><br><span class="line">	         docker host.</span><br><span class="line">	         Refer to https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface</span><br><span class="line">	         for more information.</span><br><span class="line"></span><br><span class="line">	EOF</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"># Check if this is a forked Linux distro</span><br><span class="line">check_forked() {</span><br><span class="line"></span><br><span class="line">	# Check for lsb_release command existence, it usually exists in forked distros</span><br><span class="line">	if command_exists lsb_release; then</span><br><span class="line">		# Check if the `-u` option is supported</span><br><span class="line">		set +e</span><br><span class="line">		lsb_release -a -u &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">		lsb_release_exit_code=$?</span><br><span class="line">		set -e</span><br><span class="line"></span><br><span class="line">		# Check if the command has exited successfully, it means we're in a forked distro</span><br><span class="line">		if [ "$lsb_release_exit_code" = "0" ]; then</span><br><span class="line">			# Print info about current distro</span><br><span class="line">			cat &lt;&lt;-EOF</span><br><span class="line">			You're using '$lsb_dist' version '$dist_version'.</span><br><span class="line">			EOF</span><br><span class="line"></span><br><span class="line">			# Get the upstream release info</span><br><span class="line">			lsb_dist=$(lsb_release -a -u 2&gt;&amp;1 | tr '[:upper:]' '[:lower:]' | grep -E 'id' | cut -d ':' -f 2 | tr -d '[[:space:]]')</span><br><span class="line">			dist_version=$(lsb_release -a -u 2&gt;&amp;1 | tr '[:upper:]' '[:lower:]' | grep -E 'codename' | cut -d ':' -f 2 | tr -d '[[:space:]]')</span><br><span class="line"></span><br><span class="line">			# Print info about upstream distro</span><br><span class="line">			cat &lt;&lt;-EOF</span><br><span class="line">			Upstream release is '$lsb_dist' version '$dist_version'.</span><br><span class="line">			EOF</span><br><span class="line">		else</span><br><span class="line">			if [ -r /etc/debian_version ] &amp;&amp; [ "$lsb_dist" != "ubuntu" ] &amp;&amp; [ "$lsb_dist" != "raspbian" ]; then</span><br><span class="line">				# We're Debian and don't even know it!</span><br><span class="line">				lsb_dist=debian</span><br><span class="line">				dist_version="$(cat /etc/debian_version | sed 's/\/.*//' | sed 's/\..*//')"</span><br><span class="line">				case "$dist_version" in</span><br><span class="line">					10)</span><br><span class="line">						dist_version="buster"</span><br><span class="line">					;;</span><br><span class="line">					9)</span><br><span class="line">						dist_version="stretch"</span><br><span class="line">					;;</span><br><span class="line">					8|'Kali Linux 2')</span><br><span class="line">						dist_version="jessie"</span><br><span class="line">					;;</span><br><span class="line">					7)</span><br><span class="line">						dist_version="wheezy"</span><br><span class="line">					;;</span><br><span class="line">				esac</span><br><span class="line">			fi</span><br><span class="line">		fi</span><br><span class="line">	fi</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">semverParse() {</span><br><span class="line">	major="${1%%.*}"</span><br><span class="line">	minor="${1#$major.}"</span><br><span class="line">	minor="${minor%%.*}"</span><br><span class="line">	patch="${1#$major.$minor.}"</span><br><span class="line">	patch="${patch%%[-.]*}"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">deprecation_notice() {</span><br><span class="line">	echo</span><br><span class="line">	echo</span><br><span class="line">	echo "  WARNING: $1 is no longer updated @ $url"</span><br><span class="line">	echo "           Installing the legacy docker-engine package..."</span><br><span class="line">	echo</span><br><span class="line">	echo</span><br><span class="line">	sleep 10;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">do_install() {</span><br><span class="line"></span><br><span class="line">	architecture=$(uname -m)</span><br><span class="line">	case $architecture in</span><br><span class="line">		# officially supported</span><br><span class="line">		amd64|aarch64|arm64|x86_64)</span><br><span class="line">			;;</span><br><span class="line">		# unofficially supported with available repositories</span><br><span class="line">		armv6l|armv7l)</span><br><span class="line">			;;</span><br><span class="line">		# unofficially supported without available repositories</span><br><span class="line">		ppc64le|s390x)</span><br><span class="line">			cat 1&gt;&amp;2 &lt;&lt;-EOF</span><br><span class="line">			Error: This install script does not support $architecture, because no</span><br><span class="line">			$architecture package exists in Docker's repositories.</span><br><span class="line"></span><br><span class="line">			Other install options include checking your distribution's package repository</span><br><span class="line">			for a version of Docker, or building Docker from source.</span><br><span class="line">			EOF</span><br><span class="line">			exit 1</span><br><span class="line">			;;</span><br><span class="line">		# not supported</span><br><span class="line">		*)</span><br><span class="line">			cat &gt;&amp;2 &lt;&lt;-EOF</span><br><span class="line">			Error: $architecture is not a recognized platform.</span><br><span class="line">			EOF</span><br><span class="line">			exit 1</span><br><span class="line">			;;</span><br><span class="line">	esac</span><br><span class="line"></span><br><span class="line">	if command_exists docker; then</span><br><span class="line">		version="$(docker -v | cut -d ' ' -f3 | cut -d ',' -f1)"</span><br><span class="line">		MAJOR_W=1</span><br><span class="line">		MINOR_W=10</span><br><span class="line"></span><br><span class="line">		semverParse $version</span><br><span class="line"></span><br><span class="line">		shouldWarn=0</span><br><span class="line">		if [ $major -lt $MAJOR_W ]; then</span><br><span class="line">			shouldWarn=1</span><br><span class="line">		fi</span><br><span class="line"></span><br><span class="line">		if [ $major -le $MAJOR_W ] &amp;&amp; [ $minor -lt $MINOR_W ]; then</span><br><span class="line">			shouldWarn=1</span><br><span class="line">		fi</span><br><span class="line"></span><br><span class="line">		cat &gt;&amp;2 &lt;&lt;-'EOF'</span><br><span class="line">			Warning: the "docker" command appears to already exist on this system.</span><br><span class="line"></span><br><span class="line">			If you already have Docker installed, this script can cause trouble, which is</span><br><span class="line">			why we're displaying this warning and provide the opportunity to cancel the</span><br><span class="line">			installation.</span><br><span class="line"></span><br><span class="line">			If you installed the current Docker package using this script and are using it</span><br><span class="line">		EOF</span><br><span class="line"></span><br><span class="line">		if [ $shouldWarn -eq 1 ]; then</span><br><span class="line">			cat &gt;&amp;2 &lt;&lt;-'EOF'</span><br><span class="line">			again to update Docker, we urge you to migrate your image store before upgrading</span><br><span class="line">			to v1.10+.</span><br><span class="line"></span><br><span class="line">			You can find instructions for this here:</span><br><span class="line">			https://github.com/docker/docker/wiki/Engine-v1.10.0-content-addressability-migration</span><br><span class="line">			EOF</span><br><span class="line">		else</span><br><span class="line">			cat &gt;&amp;2 &lt;&lt;-'EOF'</span><br><span class="line">			again to update Docker, you can safely ignore this message.</span><br><span class="line">			EOF</span><br><span class="line">		fi</span><br><span class="line"></span><br><span class="line">		cat &gt;&amp;2 &lt;&lt;-'EOF'</span><br><span class="line"></span><br><span class="line">			You may press Ctrl+C now to abort this script.</span><br><span class="line">		EOF</span><br><span class="line">		( set -x; sleep 20 )</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	user="$(id -un 2&gt;/dev/null || true)"</span><br><span class="line"></span><br><span class="line">	sh_c='sh -c'</span><br><span class="line">	if [ "$user" != 'root' ]; then</span><br><span class="line">		if command_exists sudo; then</span><br><span class="line">			sh_c='sudo -E sh -c'</span><br><span class="line">		elif command_exists su; then</span><br><span class="line">			sh_c='su -c'</span><br><span class="line">		else</span><br><span class="line">			cat &gt;&amp;2 &lt;&lt;-'EOF'</span><br><span class="line">			Error: this installer needs the ability to run commands as root.</span><br><span class="line">			We are unable to find either "sudo" or "su" available to make this happen.</span><br><span class="line">			EOF</span><br><span class="line">			exit 1</span><br><span class="line">		fi</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	curl=''</span><br><span class="line">	if command_exists curl; then</span><br><span class="line">		curl='curl -sSL'</span><br><span class="line">	elif command_exists wget; then</span><br><span class="line">		curl='wget -qO-'</span><br><span class="line">	elif command_exists busybox &amp;&amp; busybox --list-modules | grep -q wget; then</span><br><span class="line">		curl='busybox wget -qO-'</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	# check to see which repo they are trying to install from</span><br><span class="line">	if [ -z "$repo" ]; then</span><br><span class="line">		repo='main'</span><br><span class="line">		if [ "https://test.docker.com/" = "$url" ]; then</span><br><span class="line">			repo='testing'</span><br><span class="line">		elif [ "https://experimental.docker.com/" = "$url" ]; then</span><br><span class="line">			repo='experimental'</span><br><span class="line">		fi</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	# perform some very rudimentary platform detection</span><br><span class="line">	lsb_dist=''</span><br><span class="line">	dist_version=''</span><br><span class="line">	if command_exists lsb_release; then</span><br><span class="line">		lsb_dist="$(lsb_release -si)"</span><br><span class="line">	fi</span><br><span class="line">	if [ -z "$lsb_dist" ] &amp;&amp; [ -r /etc/lsb-release ]; then</span><br><span class="line">		lsb_dist="$(. /etc/lsb-release &amp;&amp; echo "$DISTRIB_ID")"</span><br><span class="line">	fi</span><br><span class="line">	if [ -z "$lsb_dist" ] &amp;&amp; [ -r /etc/debian_version ]; then</span><br><span class="line">		lsb_dist='debian'</span><br><span class="line">	fi</span><br><span class="line">	if [ -z "$lsb_dist" ] &amp;&amp; [ -r /etc/fedora-release ]; then</span><br><span class="line">		lsb_dist='fedora'</span><br><span class="line">	fi</span><br><span class="line">	if [ -z "$lsb_dist" ] &amp;&amp; [ -r /etc/oracle-release ]; then</span><br><span class="line">		lsb_dist='oracleserver'</span><br><span class="line">	fi</span><br><span class="line">	if [ -z "$lsb_dist" ] &amp;&amp; [ -r /etc/centos-release ]; then</span><br><span class="line">		lsb_dist='centos'</span><br><span class="line">	fi</span><br><span class="line">	if [ -z "$lsb_dist" ] &amp;&amp; [ -r /etc/redhat-release ]; then</span><br><span class="line">		lsb_dist='redhat'</span><br><span class="line">	fi</span><br><span class="line">	if [ -z "$lsb_dist" ] &amp;&amp; [ -r /etc/os-release ]; then</span><br><span class="line">		lsb_dist="$(. /etc/os-release &amp;&amp; echo "$ID")"</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	lsb_dist="$(echo "$lsb_dist" | tr '[:upper:]' '[:lower:]')"</span><br><span class="line"></span><br><span class="line">	# Special case redhatenterpriseserver</span><br><span class="line">	if [ "${lsb_dist}" = "redhatenterpriseserver" ]; then</span><br><span class="line">		# Set it to redhat, it will be changed to centos below anyways</span><br><span class="line">		lsb_dist='redhat'</span><br><span class="line">	fi</span><br><span class="line"></span><br><span class="line">	case "$lsb_dist" in</span><br><span class="line"></span><br><span class="line">		ubuntu)</span><br><span class="line">			if command_exists lsb_release; then</span><br><span class="line">				dist_version="$(lsb_release --codename | cut -f2)"</span><br><span class="line">			fi</span><br><span class="line">			if [ -z "$dist_version" ] &amp;&amp; [ -r /etc/lsb-release ]; then</span><br><span class="line">				dist_version="$(. /etc/lsb-release &amp;&amp; echo "$DISTRIB_CODENAME")"</span><br><span class="line">			fi</span><br><span class="line">		;;</span><br><span class="line"></span><br><span class="line">		debian|raspbian)</span><br><span class="line">			dist_version="$(cat /etc/debian_version | sed 's/\/.*//' | sed 's/\..*//')"</span><br><span class="line">			case "$dist_version" in</span><br><span class="line">				9)</span><br><span class="line">					dist_version="stretch"</span><br><span class="line">				;;</span><br><span class="line">				8)</span><br><span class="line">					dist_version="jessie"</span><br><span class="line">				;;</span><br><span class="line">				7)</span><br><span class="line">					dist_version="wheezy"</span><br><span class="line">				;;</span><br><span class="line">			esac</span><br><span class="line">		;;</span><br><span class="line"></span><br><span class="line">		oracleserver)</span><br><span class="line">			# need to switch lsb_dist to match yum repo URL</span><br><span class="line">			lsb_dist="oraclelinux"</span><br><span class="line">			dist_version="$(rpm -q --whatprovides redhat-release --queryformat "%{VERSION}\n" | sed 's/\/.*//' | sed 's/\..*//' | sed 's/Server*//')"</span><br><span class="line">		;;</span><br><span class="line"></span><br><span class="line">		fedora|centos|redhat)</span><br><span class="line">			dist_version="$(rpm -q --whatprovides ${lsb_dist}-release --queryformat "%{VERSION}\n" | sed 's/\/.*//' | sed 's/\..*//' | sed 's/Server*//' | sort | tail -1)"</span><br><span class="line">		;;</span><br><span class="line"></span><br><span class="line">		*)</span><br><span class="line">			if command_exists lsb_release; then</span><br><span class="line">				dist_version="$(lsb_release --codename | cut -f2)"</span><br><span class="line">			fi</span><br><span class="line">			if [ -z "$dist_version" ] &amp;&amp; [ -r /etc/os-release ]; then</span><br><span class="line">				dist_version="$(. /etc/os-release &amp;&amp; echo "$VERSION_ID")"</span><br><span class="line">			fi</span><br><span class="line">		;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	esac</span><br><span class="line"></span><br><span class="line">	# Check if this is a forked Linux distro</span><br><span class="line">	check_forked</span><br><span class="line"></span><br><span class="line">	# Run setup for each distro accordingly</span><br><span class="line">	case "$lsb_dist" in</span><br><span class="line">		ubuntu|debian)</span><br><span class="line">			pre_reqs="apt-transport-https ca-certificates curl"</span><br><span class="line">			if [ "$lsb_dist" = "debian" ] &amp;&amp; [ "$dist_version" = "wheezy" ]; then</span><br><span class="line">				pre_reqs="$pre_reqs python-software-properties"</span><br><span class="line">				backports="deb http://ftp.debian.org/debian wheezy-backports main"</span><br><span class="line">				if ! grep -Fxq "$backports" /etc/apt/sources.list; then</span><br><span class="line">					(set -x; $sh_c "echo \"$backports\" &gt;&gt; /etc/apt/sources.list")</span><br><span class="line">				fi</span><br><span class="line">			else</span><br><span class="line">				pre_reqs="$pre_reqs software-properties-common"</span><br><span class="line">			fi</span><br><span class="line">			if ! command -v gpg &gt; /dev/null; then</span><br><span class="line">				pre_reqs="$pre_reqs gnupg"</span><br><span class="line">			fi</span><br><span class="line">			apt_repo="deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/$lsb_dist $dist_version $CHANNEL"</span><br><span class="line">			(</span><br><span class="line">				set -x</span><br><span class="line">				$sh_c 'apt-get update'</span><br><span class="line">				$sh_c "apt-get install -y -q $pre_reqs"</span><br><span class="line">				curl -fsSl "https://download.docker.com/linux/$lsb_dist/gpg" | $sh_c 'apt-key add -'</span><br><span class="line">				$sh_c "add-apt-repository \"$apt_repo\""</span><br><span class="line">				if [ "$lsb_dist" = "debian" ] &amp;&amp; [ "$dist_version" = "wheezy" ]; then</span><br><span class="line">					$sh_c 'sed -i "/deb-src.*download\.docker/d" /etc/apt/sources.list'</span><br><span class="line">				fi</span><br><span class="line">				$sh_c 'apt-get update'</span><br><span class="line">				$sh_c "apt-get install -y -q docker-ce=$(apt-cache madison docker-ce | grep ${docker_version} | head -n 1 | cut -d ' ' -f 4)"</span><br><span class="line">			)</span><br><span class="line">			echo_docker_as_nonroot</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		centos|fedora|redhat|oraclelinux)</span><br><span class="line">			yum_repo="https://download.docker.com/linux/centos/docker-ce.repo"</span><br><span class="line">			if [ "$lsb_dist" = "fedora" ]; then</span><br><span class="line">				if [ "$dist_version" -lt "24" ]; then</span><br><span class="line">					echo "Error: Only Fedora &gt;=24 are supported by $url"</span><br><span class="line">					exit 1</span><br><span class="line">				fi</span><br><span class="line">				pkg_manager="dnf"</span><br><span class="line">				config_manager="dnf config-manager"</span><br><span class="line">				enable_channel_flag="--set-enabled"</span><br><span class="line">				pre_reqs="dnf-plugins-core"</span><br><span class="line">			else</span><br><span class="line">				pkg_manager="yum"</span><br><span class="line">				config_manager="yum-config-manager"</span><br><span class="line">				enable_channel_flag="--enable"</span><br><span class="line">				pre_reqs="yum-utils"</span><br><span class="line">			fi</span><br><span class="line">			(</span><br><span class="line">				set -x</span><br><span class="line">			        if [ "$lsb_dist" = "redhat" ]; then</span><br><span class="line">                                        for rhel_repo in $rhel_repos ; do</span><br><span class="line">                                                $sh_c "$config_manager $enable_channel_flag $rhel_repo"</span><br><span class="line">                                        done</span><br><span class="line">                                fi</span><br><span class="line">				$sh_c "$pkg_manager install -y -q $pre_reqs"</span><br><span class="line">				$sh_c "$config_manager --add-repo $yum_repo"</span><br><span class="line">				if [ "$CHANNEL" != "stable" ]; then</span><br><span class="line">					echo "Info: Enabling channel '$CHANNEL' for docker-ce repo"</span><br><span class="line">					$sh_c "$config_manager $enable_channel_flag docker-ce-$CHANNEL"</span><br><span class="line">				fi</span><br><span class="line">				$sh_c "$pkg_manager makecache fast"</span><br><span class="line">				$sh_c "$pkg_manager install -y -q docker-ce-${docker_version}"</span><br><span class="line">				if [ -d '/run/systemd/system' ]; then</span><br><span class="line">					$sh_c 'service docker start'</span><br><span class="line">				else</span><br><span class="line">					$sh_c 'systemctl start docker'</span><br><span class="line">				fi</span><br><span class="line">			)</span><br><span class="line">			echo_docker_as_nonroot</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		raspbian)</span><br><span class="line">			deprecation_notice "$lsb_dist"</span><br><span class="line">			export DEBIAN_FRONTEND=noninteractive</span><br><span class="line"></span><br><span class="line">			did_apt_get_update=</span><br><span class="line">			apt_get_update() {</span><br><span class="line">				if [ -z "$did_apt_get_update" ]; then</span><br><span class="line">					( set -x; $sh_c 'sleep 3; apt-get update' )</span><br><span class="line">					did_apt_get_update=1</span><br><span class="line">				fi</span><br><span class="line">			}</span><br><span class="line"></span><br><span class="line">			if [ "$lsb_dist" != "raspbian" ]; then</span><br><span class="line">				# aufs is preferred over devicemapper; try to ensure the driver is available.</span><br><span class="line">				if ! grep -q aufs /proc/filesystems &amp;&amp; ! $sh_c 'modprobe aufs'; then</span><br><span class="line">					if uname -r | grep -q -- '-generic' &amp;&amp; dpkg -l 'linux-image-*-generic' | grep -qE '^ii|^hi' 2&gt;/dev/null; then</span><br><span class="line">						kern_extras="linux-image-extra-$(uname -r) linux-image-extra-virtual"</span><br><span class="line"></span><br><span class="line">						apt_get_update</span><br><span class="line">						( set -x; $sh_c 'sleep 3; apt-get install -y -q '"$kern_extras" ) || true</span><br><span class="line"></span><br><span class="line">						if ! grep -q aufs /proc/filesystems &amp;&amp; ! $sh_c 'modprobe aufs'; then</span><br><span class="line">							echo &gt;&amp;2 'Warning: tried to install '"$kern_extras"' (for AUFS)'</span><br><span class="line">							echo &gt;&amp;2 ' but we still have no AUFS.  Docker may not work. Proceeding anyways!'</span><br><span class="line">							( set -x; sleep 10 )</span><br><span class="line">						fi</span><br><span class="line">					else</span><br><span class="line">						echo &gt;&amp;2 'Warning: current kernel is not supported by the linux-image-extra-virtual'</span><br><span class="line">						echo &gt;&amp;2 ' package.  We have no AUFS support.  Consider installing the packages'</span><br><span class="line">						echo &gt;&amp;2 ' "linux-image-virtual" and "linux-image-extra-virtual" for AUFS support.'</span><br><span class="line">						( set -x; sleep 10 )</span><br><span class="line">					fi</span><br><span class="line">				fi</span><br><span class="line">			fi</span><br><span class="line"></span><br><span class="line">			# install apparmor utils if they're missing and apparmor is enabled in the kernel</span><br><span class="line">			# otherwise Docker will fail to start</span><br><span class="line">			if [ "$(cat /sys/module/apparmor/parameters/enabled 2&gt;/dev/null)" = 'Y' ]; then</span><br><span class="line">				if command -v apparmor_parser &gt;/dev/null 2&gt;&amp;1; then</span><br><span class="line">					echo 'apparmor is enabled in the kernel and apparmor utils were already installed'</span><br><span class="line">				else</span><br><span class="line">					echo 'apparmor is enabled in the kernel, but apparmor_parser is missing. Trying to install it..'</span><br><span class="line">					apt_get_update</span><br><span class="line">					( set -x; $sh_c 'sleep 3; apt-get install -y -q apparmor' )</span><br><span class="line">				fi</span><br><span class="line">			fi</span><br><span class="line"></span><br><span class="line">			if [ ! -e /usr/lib/apt/methods/https ]; then</span><br><span class="line">				apt_get_update</span><br><span class="line">				( set -x; $sh_c 'sleep 3; apt-get install -y -q apt-transport-https ca-certificates' )</span><br><span class="line">			fi</span><br><span class="line">			if [ -z "$curl" ]; then</span><br><span class="line">				apt_get_update</span><br><span class="line">				( set -x; $sh_c 'sleep 3; apt-get install -y -q curl ca-certificates' )</span><br><span class="line">				curl='curl -sSL'</span><br><span class="line">			fi</span><br><span class="line">			if ! command -v gpg &gt; /dev/null; then</span><br><span class="line">				apt_get_update</span><br><span class="line">				( set -x; $sh_c 'sleep 3; apt-get install -y -q gnupg2 || apt-get install -y -q gnupg' )</span><br><span class="line">			fi</span><br><span class="line"></span><br><span class="line">			# dirmngr is a separate package in ubuntu yakkety; see https://bugs.launchpad.net/ubuntu/+source/apt/+bug/1634464</span><br><span class="line">			if ! command -v dirmngr &gt; /dev/null; then</span><br><span class="line">				apt_get_update</span><br><span class="line">				( set -x; $sh_c 'sleep 3; apt-get install -y -q dirmngr' )</span><br><span class="line">			fi</span><br><span class="line"></span><br><span class="line">			(</span><br><span class="line">			set -x</span><br><span class="line">                        for key_server in $key_servers ; do</span><br><span class="line">                                $sh_c "apt-key adv --keyserver hkp://${key_server}:80 --recv-keys ${gpg_fingerprint}" &amp;&amp; break</span><br><span class="line">                        done</span><br><span class="line">                        $sh_c "apt-key adv -k ${gpg_fingerprint} &gt;/dev/null"</span><br><span class="line">			$sh_c "mkdir -p /etc/apt/sources.list.d"</span><br><span class="line">			$sh_c "echo deb \[arch=$(dpkg --print-architecture)\] ${apt_url}/repo ${lsb_dist}-${dist_version} ${repo} &gt; /etc/apt/sources.list.d/docker.list"</span><br><span class="line">			$sh_c 'sleep 3; apt-get update; apt-get install -y -q docker-engine'</span><br><span class="line">			)</span><br><span class="line">			echo_docker_as_nonroot</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">		rancheros)</span><br><span class="line">			(</span><br><span class="line">			set -x</span><br><span class="line">			$sh_c "sleep 3; ros engine switch -f $(sudo ros engine list | grep ${docker_version} | head -n 1 | cut -d ' ' -f 2)"</span><br><span class="line">			)</span><br><span class="line">			exit 0</span><br><span class="line">			;;</span><br><span class="line">	esac</span><br><span class="line"></span><br><span class="line">	# intentionally mixed spaces and tabs here -- tabs are stripped by "&lt;&lt;-'EOF'", spaces are kept in the output</span><br><span class="line">	cat &gt;&amp;2 &lt;&lt;-'EOF'</span><br><span class="line"></span><br><span class="line">	Either your platform is not easily detectable or is not supported by this</span><br><span class="line">	installer script.</span><br><span class="line">	Please visit the following URL for more detailed installation instructions:</span><br><span class="line"></span><br><span class="line">	https://docs.docker.com/engine/installation/</span><br><span class="line"></span><br><span class="line">	EOF</span><br><span class="line">	exit 1</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"># wrapped up in a function so that we have some protection against only getting</span><br><span class="line"># half the file during "curl | sh"</span><br><span class="line">do_install</span><br></pre></td></tr></tbody></table></figure>
+
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Xiaochong</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://blog.xiaochong2021.top/2019/09/19/kuai-su-shell-an-zhuang-dockerce/">https://blog.xiaochong2021.top/2019/09/19/kuai-su-shell-an-zhuang-dockerce/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Xiaochong</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/docker-shell/">
+                                    <span class="chip bg-color">docker, shell</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="google,qq,qzone,wechat,weibo" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/09/19/docker-ming-ling-shi-yong/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="docker命令使用">
+                        
+                        <span class="card-title">docker命令使用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-09-19
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/docker/" class="post-category">
+                                    docker
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/docker/">
+                        <span class="chip bg-color">docker</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/19/docker-an-zhuang-yu-jian-dan-shi-yong/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="docker安装与简单使用">
+                        
+                        <span class="card-title">docker安装与简单使用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/docker/" class="post-category">
+                                    docker
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/docker/">
+                        <span class="chip bg-color">docker</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='true'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='false'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2018-2021</span>
+            
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Xiaochong</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/trojan20161207" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1530860548@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1530860548" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1530860548" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

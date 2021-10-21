@@ -1,0 +1,1339 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="如何为DevOps的面试做好充分准备, 小冲的生活">
+    <meta name="description" content="小冲的个人博客">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>如何为DevOps的面试做好充分准备 | 小冲的生活</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="小冲的生活" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">小冲的生活</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">小冲的生活</div>
+        <div class="logo-desc">
+            
+            小冲的个人博客
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">如何为DevOps的面试做好充分准备</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/DevOps/">
+                                <span class="chip bg-color">DevOps</span>
+                            </a>
+                        
+                            <a href="/tags/linux/">
+                                <span class="chip bg-color">linux</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-09-24
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="这是您为DevOps热点准备的面试准备。"><a href="#这是您为DevOps热点准备的面试准备。" class="headerlink" title="这是您为DevOps热点准备的面试准备。"></a>这是您为DevOps热点准备的面试准备。</h3><p><img src="https://dzone.com/storage/temp/12433224-interiew-chairs-and-table.jpg" alt="面试桌椅"></p>
+<p><em>那么，为什么他们要雇用您呢？</em></p>
+<p>在过去的十年中，DevOps成为一种新的技术文化和职业，将软件开发所需的快速迭代与基础架构运营团队的坚如磐石的稳定性相结合。对于系统管理员，运营工程师以及其他拥有强大系统和软件背景的人员来说，过渡到DevOps的时间可能比现在更好。截至2019年8月，仅在美国，目前就有超过50,000个 LinkedIn DevOps工作岗位。</p>
+<p>假设您已经了解了基础知识，并准备开始寻找工作。您如何评价DevOps面试？DevOps工程师必须既是优秀的软件开发人员，又是基础架构专家，因此，他们应该知道Linux基础架构，网络，算法和DevOps工具（例如Terraform，Docker和Kubernetes）。范围从标准软件工程师编码问题到有关系统设计，再到Linux调试和DevOps工具的问题等等。</p>
+<p>这是一个令人生畏的清单，但请不要害怕！在Insight上，DevOps奖学金将许多具有可转让技能的个人的职业推向了人们所期望的行业DevOps职位。这是我们为他们准备面试的方式。</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>动机是一个好的开始，但是您需要纪律才能有效地做好准备。我编写了这本指南，以帮助您制定有规律的面试准备程序。面试真的很烂-这是随机的，可能会让您对自己感到难过。在此过程中，<strong>不可</strong>控制的事情太多了，但是您<strong>可以</strong>控制自己的准备方式。</p>
+<p>在这里有很多值得一试的东西，所以不要指望能够一次学习所有东西。也许有一天您会选择一个主题来关注。也许您将连续一个星期专注于另一个主题。不过，通常来说，您应该每天习惯性地进行两到三项活动，轮流讨论不同的主题，以使您的思想保持新鲜和投入。这些类别按重要性顺序列出：</p>
+<ol>
+<li>Linux基础</li>
+<li>数据结构与算法</li>
+<li>系统设计</li>
+<li>解析</li>
+<li>DevOps工具</li>
+</ol>
+<p>首先，要建立广泛而浅薄的知识基础，这样一来，以循环方式首先在各个主题之间实现负载平衡是一件好事。这将扩大您的DevOps空间的概念框架，以便您可以更轻松地将新信息放入上下文中。每个类别中的活动也按重要性顺序或多或少地排名。某些活动适合日常实践，例如CodeSignal问题或OverTheWire挑战。其他人则适合深入学习。</p>
+<p>如果您想快点走，那就一个人走。但是，如果您想走得更远，那就一起走吧。与您的同龄人一起创建一个学习小组。互相追究责任。每周或每天签到和信息共享会话。在这段时间里，您会感到无动力，请记住，做某事总比什么都不做好。在您动力十足的那段时间里，请记住，睡眠和运动对您的成功至为重要。这些活动是人生下一阶段的垫脚石，但请记住让自己着迷于每块石头的形状。</p>
+<h2 id="Linux基础"><a href="#Linux基础" class="headerlink" title="Linux基础"></a>Linux基础</h2><p>作为一名DevOps工程师，你应该对Linux了如指掌。从内核到网络再到命令行命令，有关Linux的任何问题都是公平的游戏。</p>
+<h3 id="示例问题"><a href="#示例问题" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
+<li>Linux计算机加电时发生的步骤顺序是什么？</li>
+<li>当您在浏览器中键入google.com并导致网页返回给您时，会发生什么情况？如果没有出现网页怎么办？如何调试问题？</li>
+<li>您如何检查文件系统是否空间不足？如何打印最大文件列表？如何删除所有大于1 GB的.mov文件？</li>
+</ul>
+<h3 id="活动"><a href="#活动" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>通读<a target="_blank" rel="noopener" href="http://solutionsproj.net/software/The_Linux_Command_Linex.pdf"><em>Linux命令</em></a>行书</li>
+<li>通过<a target="_blank" rel="noopener" href="https://overthewire.org/wargames/">OverTheWire</a>战争游戏进行工作。这些是通过精心设计的Linux系统进行的有趣的寻宝游戏，旨在教您一些基本概念。至少通过强盗等级。如果遇到困难，请不要担心Google解决方案。我强烈建议您随时随地在GitHub中记录进度。</li>
+<li>只需使用vimtutor命令来学习vim。它是有史以来最好的编辑器，请勿让任何人说服您。</li>
+<li>考虑购买课程以获取Linux基础知识认证（Linux +，RedHat等）。的确，一磅的认证比一盎司的经验没有价值，但是，如果您经验不足，那么认证可以帮助填补您的知识空白，并证明您具有基本的了解。</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li>最好参考手册Linux命令是<a target="_blank" rel="noopener" href="https://tldr.sh/">tldr.sh</a>。我强烈建议您下载tl; dr移动应用程序以快速参考。这在电话采访中帮助了我，我当时根本不知道该怎么做。</li>
+<li><a target="_blank" rel="noopener" href="https://devhints.io/">devhints.io</a>是各种备忘单的重要来源。</li>
+<li>它看上去并不浮华，但是<a target="_blank" rel="noopener" href="https://www.tldp.org/LDP/abs/html/">Advanced Bash脚本指南</a>是个巨大的财产库。</li>
+</ul>
+<h2 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h2><p>请记住，DevOps是<strong>开发</strong> +运营，因此您应该知道如何编码。选择一种您选择的语言（不是Bash-如果您不太喜欢，我建议使用Python）并练习，练习，练习。这不仅仅是寻找最佳解决方案-您必须与面试官清楚地交流问题的参数，传达您的思考过程，并计算不同算法的时间和空间复杂度。</p>
+<h3 id="示例问题-1"><a href="#示例问题-1" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
+<li>从列表中删除所有重复项。</li>
+<li>在包含除一个以外的所有可能IP的文件中找到丢失的IP。</li>
+<li>对二叉树的所有节点进行排序。</li>
+</ul>
+<h3 id="活动-1"><a href="#活动-1" class="headerlink" title="活动"></a>活动</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.khanacademy.org/computing/computer-science/algorithms">可汗学院</a>有一个非常好的数据结构和算法入门。它使用Javascript，但不要反对它。该课程是与汤姆·科门（Tom Cormen）合作完成的，汤姆·科门（Tom Cormen）是<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">一本有关数据结构和算法</a>的权威<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms">著作</a>，绝对值得拥有。</li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.com/">LeetCode</a>拥有大量的问题库，这些问题库与真实的面试问题非常接近。实际上，许多公司都会直接问您LeetCode问题！每种算法至少要回答10个简单和中等问题。当您解决了100个问题后，您就可以开始感到准备好了，并且实际上可以解决这些问题而无需查找任何内容。</li>
+<li>每天在<a target="_blank" rel="noopener" href="https://codesignal.com/developers/interview-practice/">CodeSignal</a>上<a target="_blank" rel="noopener" href="https://codesignal.com/developers/interview-practice/">完成</a>面试准备材料。我建议使用Python，但您可以使用任何语言。将代码复制并粘贴到文件中，并使用Gi​​tHub对其进行版本控制。每天，仔细阅读您昨天做的代码，并详细记录下来。编写代码比阅读旧代码并记住发生的事情要容易。一两天后重新访问旧代码将迫使您综合所学的概念。</li>
+<li>通过CodeSignal的Python Arcade进行工作。这是对所有重要的标准Python库的很好的浏览。有些练习确实没有达到目标，但总体而言，这是一个不错的播放列表。</li>
+<li>研究动态规划，有向无环图，拓扑排序。</li>
+<li>每个人都需要一点SQL。无需花费大量时间，但是您应该在<a target="_blank" rel="noopener" href="https://mode.com/">Mode Analytics</a>上注册一个免费帐户，并利用其使用真实公共数据库的出色互动SQL教程。</li>
+<li>随着您对编码技能的适应程度提高，请使用<a target="_blank" rel="noopener" href="https://www.pramp.com/">Pramp</a>进行现场技术面试。这是重要的组成部分。像练习技术电话屏幕一样，您没有比技术电话屏幕更充分的准备。</li>
+<li>请记住，唯一有价值的知识是您可以在白板或实时编码上在面试官面前展示的内容。如果您倾向于在高压情况下停滞不前，那么您就远非唯一的人了-请确保与同伴一起做很多练习。</li>
+</ul>
+<h3 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://learnxinyminutes.com/docs/python3/">LearnXinYminutes</a>是一个很棒的示例驱动的Python备忘单</li>
+<li><a target="_blank" rel="noopener" href="https://gto76.github.io/python-cheatsheet/#main">Python</a>备忘<a target="_blank" rel="noopener" href="https://gto76.github.io/python-cheatsheet/#main">单</a>：最好的Python备忘单，尽管它很简洁</li>
+<li><a target="_blank" rel="noopener" href="https://docs.python-guide.org/">Hitchhiker的Python指南</a>：最佳的Python文档。</li>
+<li>我的<a target="_blank" rel="noopener" href="https://github.com/chuckinator0/Projects/tree/master/scripts">脚本GitHub存储库中</a>有很多示例文件，这些文件经过了详细记录，尽管实际上是无组织的！</li>
+</ul>
+<h2 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h2><p>系统设计面试可测试您的整体思维，架构复杂基础架构的能力以及沟通技巧。确保采用自上而下的设计方法，并具有清晰的基础结构图和DevOps注意事项。</p>
+<h3 id="示例问题-2"><a href="#示例问题-2" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
+<li>设计一个基于微博消息的社交网络，如Twitter。您将如何确保不同地区的高可用性？</li>
+</ul>
+<h3 id="活动-2"><a href="#活动-2" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>消除<a target="_blank" rel="noopener" href="https://github.com/donnemartin/system-design-primer/blob/master/README.md">系统设计入门知识</a>。一个有趣的事情是选择一个主题，然后请朋友选择另一个主题，然后花2个小时研究您的主题，然后再花一两个小时进行分享。轮流扮演面试官和受访者的角色。</li>
+<li>阅读<a target="_blank" rel="noopener" href="https://landing.google.com/sre/sre-book/toc/index.html">Google SRE图书</a>。这是现代DevOps必读的书。</li>
+</ul>
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>系统管理员经常分析系统输出和日志，以获得系统见解和调试问题。使用grep，awk和sed之类的工具进行命令行解析是DevOps工具库的一项重要技能。</p>
+<h3 id="示例问题-3"><a href="#示例问题-3" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
+<li>给定一个Apache Web服务器日志，每天有多少个请求？哪些IP是最常访问的访客？最需要哪些页面和图像？</li>
+</ul>
+<h3 id="活动-3"><a href="#活动-3" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>通过Insight的<a target="_blank" rel="noopener" href="https://github.com/InsightDataScience/Parsing-Workshop">解析研讨会资料</a>中的<strong>练习进行练习</strong>。专注于awk。本章材料不错，是练习是最重要的部分。<a target="_blank" rel="noopener" href="https://github.com/InsightDataScience/Parsing-Workshop"></a></li>
+</ul>
+<h3 id="参考-2"><a href="#参考-2" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://learnxinyminutes.com/docs/awk/">LearnXinYminutes</a>：另一个出色的示例驱动参考-这次是awk。</li>
+<li><a target="_blank" rel="noopener" href="https://regexr.com/">Regexr</a>：最佳正则表达式参考。</li>
+</ul>
+<h2 id="DevOps工具"><a href="#DevOps工具" class="headerlink" title="DevOps工具"></a>DevOps工具</h2><p>Docker，Terraform和Kubernetes是必不可少的DevOps工具，并且彻底学习它们不会出错。您还应该知道至少一种CI/CD工具，例如Jenkins。强烈建议您至少在三大云之一上学习这些工具：AWS，GCP或Azure。</p>
+<h3 id="示例问题："><a href="#示例问题：" class="headerlink" title="示例问题："></a>示例问题：</h3><ul>
+<li>使用Terraform将Docker应用程序部署到新的AWS EC2实例上。</li>
+</ul>
+<h3 id="活动-4"><a href="#活动-4" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>您需要学习Kubernetes。为了学习Kubernetes，您需要了解容器化和Docker。</li>
+<li>通过<a target="_blank" rel="noopener" href="https://github.com/docker/labs/blob/master/beginner/readme.md">Docker初学者</a>实验</li>
+<li>通过<a target="_blank" rel="noopener" href="https://training.play-with-docker.com/">Docker课堂</a>进行<a target="_blank" rel="noopener" href="https://training.play-with-docker.com/">游戏</a></li>
+<li>Kubernetes（概念：容器编排）</li>
+<li>阅读<a target="_blank" rel="noopener" href="https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/">Kubernetes概念</a></li>
+<li>通过<a target="_blank" rel="noopener" href="https://kubernetes.io/docs/tutorials/kubernetes-basics/">Kubernetes基础</a>教程学习</li>
+<li>若要进行更深入的潜水，请完成<a target="_blank" rel="noopener" href="https://www.katacoda.com/courses/kubernetes">Katacoda课程</a></li>
+<li>通过一两个入门性的<a target="_blank" rel="noopener" href="https://jenkins.io/doc/tutorials/build-a-python-app-with-pyinstaller/">Jenkins教程</a>来学习有关CI / CD的更多信息（概念：部署管道作为代码）。老实说，我对Jenkins知之甚少，所以我不了解更好的资源。</li>
+<li>使用<a target="_blank" rel="noopener" href="https://www.vagrantup.com/intro/getting-started/index.html">Vagrant</a>声明性地定义VM，然后使用<a target="_blank" rel="noopener" href="https://www.virtualbox.org/">VirtualBox</a>或<a target="_blank" rel="noopener" href="https://www.packer.io/intro/getting-started/install.html">Packer</a>将该VM导出为OVA文件（概念：不可变的基础结构，配置为代码）。</li>
+<li>Terraform（概念：基础架构作为代码）</li>
+<li>阅读Terragrunt的<a target="_blank" rel="noopener" href="https://blog.gruntwork.io/a-comprehensive-guide-to-terraform-b3d32832baca">Terraform综合指南</a></li>
+<li>通过<a target="_blank" rel="noopener" href="https://learn.hashicorp.com/terraform/">Terraform教程进行工作</a></li>
+<li>Ansible（概念：配置为代码）</li>
+<li>观看<a target="_blank" rel="noopener" href="https://www.ansible.com/resources/videos/quick-start-video">介绍视频</a></li>
+<li>对于一些动手实验，我认为Linux Academy可能是最好的选择（不是免费的）</li>
+<li>进行<a target="_blank" rel="noopener" href="https://docs.honeycomb.io/learning-about-observability/quick-start/">Honeycomb Quickstart，</a>以提供一种监视/跟踪工具（概念：全栈跟踪）</li>
+<li>完成<a target="_blank" rel="noopener" href="https://learn.hashicorp.com/consul/">Consul教程</a>（概念：服务发现）。</li>
+<li>完成<a target="_blank" rel="noopener" href="https://learn.hashicorp.com/vault/">Vault教程</a>（概念：企业级机密管理）</li>
+<li>玩<a target="_blank" rel="noopener" href="https://linkerd.io/2/getting-started/">Linkerd</a>（概念：服务网格）</li>
+<li>Apache Kafka（概念：容错，高吞吐量事件流）</li>
+<li>适用于Apache Kafka的无耻插件—  在该网站上免费找到<a target="_blank" rel="noopener" href="https://cloud.contentraven.com/confluent/self-userpackage">Confluent培训</a>课程，以获取有关Kafka基础知识的不错的视频集</li>
+<li>查看<a target="_blank" rel="noopener" href="https://github.com/confluentinc/training-operations-src">操作培训仓库，</a>以建立自己的本地docker-组成Kafka集群，并开始使用Kafka</li>
+</ul>
+<h3 id="参考-3"><a href="#参考-3" class="headerlink" title="参考"></a>参考</h3><ul>
+<li>Ansible：<a target="_blank" rel="noopener" href="https://docs.ansible.com/ansible/latest/user_guide/index.html">用户指南</a>。</li>
+<li>想在Kubernetes中做一些特定的事情吗？检查文档的“ <a target="_blank" rel="noopener" href="https://kubernetes.io/docs/tasks/">任务”</a>部分。有许多特定于任务的指南。</li>
+<li>Docker的“demo”(<a target="_blank" rel="noopener" href="https://docs.docker.com/samples/)%E9%A1%B5%E9%9D%A2%E6%8F%90%E4%BE%9B%E4%BA%86%E5%AE%8C%E6%95%B4%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%89%AF%E5%A5%BD%E7%A4%BA%E4%BE%8B%E4%BB%A5%E5%8F%8A%E4%B8%80%E4%BA%9B%E5%AE%9E%E7%94%A8%E7%9A%84%E6%95%99%E7%A8%8B%E3%80%82%E6%88%91%E5%96%9C%E6%AC%A2[Django">https://docs.docker.com/samples/)页面提供了完整应用程序的良好示例以及一些实用的教程。我喜欢[Django</a> + Postgres](<a target="_blank" rel="noopener" href="https://docs.docker.com/compose/django/)%E7%A4%BA%E4%BE%8B%E3%80%82">https://docs.docker.com/compose/django/)示例。</a></li>
+</ul>
+<h2 id="其他具有高价值物品"><a href="#其他具有高价值物品" class="headerlink" title="其他具有高价值物品"></a>其他具有高价值物品</h2><h3 id="活动-5"><a href="#活动-5" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>定期收听《软件工程日报》(<a target="_blank" rel="noopener" href="https://softwareengineeringdaily.com/)%E6%92%AD%E5%AE%A2%E3%80%82%E5%88%B0%E7%9B%AE%E5%89%8D%E4%B8%BA%E6%AD%A2%EF%BC%8C%E8%BF%99%E6%98%AF%E4%BF%9D%E6%8C%81DevOps%E4%B8%96%E7%95%8C%E8%84%89%E6%90%8F%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%B3%95%E3%80%82%E5%BB%BA%E8%AE%AE%E6%82%A8%E5%AE%89%E8%A3%85%E8%AF%A5%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%EF%BC%8C%E4%BB%A5%E4%BE%BF%E6%82%A8%E5%8F%AF%E4%BB%A5%E8%BD%BB%E6%9D%BE%E6%90%9C%E7%B4%A2%E6%97%A7%E5%89%A7%E9%9B%86%EF%BC%8C%E4%BB%A5%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3%E6%AD%A3%E5%9C%A8%E7%A0%94%E7%A9%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%92%8C%E6%A6%82%E5%BF%B5%E3%80%82%E5%9C%A8%E2%80%9C">https://softwareengineeringdaily.com/)播客。到目前为止，这是保持DevOps世界脉搏的最佳方法。建议您安装该应用程序，以便您可以轻松搜索旧剧集，以深入了解正在研究的技术和概念。在“</a> DevOps工具”部分中，我为每个工具背后的概念提供了关键字。您可以使用这些关键字在SEdaily中搜索相关的播客。</li>
+<li>阅读有关看板(<a target="_blank" rel="noopener" href="https://www.atlassian.com/agile/kanban/boards)%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%8C%E5%B9%B6%E4%BD%BF%E7%94%A8%E5%AE%83%E4%BB%AC%E6%9D%A5%E5%A2%9E%E5%BC%BA%E6%82%A8%E7%9A%84%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%92%8C%E7%94%9F%E4%BA%A7%E5%8A%9B%E3%80%82GitHub%E6%9C%89%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E7%9C%8B%E6%9D%BF%EF%BC%8C%E6%82%A8%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E5%AE%83%E6%9D%A5%E4%BF%9D%E6%8C%81%E7%94%9F%E4%BA%A7%E5%8A%9B%E3%80%82%E6%88%91%E4%B8%AA%E4%BA%BA%E4%B9%9F%E5%96%9C%E6%AC%A2[%E5%AD%90%E5%BC%B9%E5%BC%8F%E6%97%A5%E8%AE%B0](https://www.youtube.com/watch?v=fm15cmYU0IM)%E5%92%8C%5BPomodoro%E6%96%B9%E6%B3%95%5D(https://en.wikipedia.org/wiki/Pomodoro_Technique)%E3%80%82">https://www.atlassian.com/agile/kanban/boards)的知识，并使用它们来增强您的注意力和生产力。GitHub有一个简单的看板，您可以使用它来保持生产力。我个人也喜欢[子弹式日记](https://www.youtube.com/watch?v=fm15cmYU0IM)和[Pomodoro方法](https://en.wikipedia.org/wiki/Pomodoro_Technique)。</a></li>
+<li>深入了解一些您喜欢的工具的技术细节。从文档开始。配对并分享技术深层次的收获。</li>
+<li>考虑为Linux Academy或acloudguru课程付费以获得AWS，GCP或Azure认证。</li>
+</ul>
+<h3 id="参考-4"><a href="#参考-4" class="headerlink" title="参考"></a>参考</h3><ul>
+<li>Digital Ocean有很棒的教程。当我使用Google时，我倾向于首先尝试“ <research topic=""> site：digitalocean.com”。当您第一次学习手动安装某些东西时，这特别有用。</research></li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Xiaochong</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://blog.xiaochong2021.top/2019/09/24/ru-he-wei-devops-de-mian-shi-zuo-hao-chong-fen-zhun-bei/">https://blog.xiaochong2021.top/2019/09/24/ru-he-wei-devops-de-mian-shi-zuo-hao-chong-fen-zhun-bei/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Xiaochong</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/DevOps/">
+                                    <span class="chip bg-color">DevOps</span>
+                                </a>
+                            
+                                <a href="/tags/linux/">
+                                    <span class="chip bg-color">linux</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="google,qq,qzone,wechat,weibo" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/10/08/jiang-python-jiao-ben-bian-cheng-piao-liang-de-ml-gong-ju/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="将Python脚本变成漂亮的ML工具">
+                        
+                        <span class="card-title">将Python脚本变成漂亮的ML工具</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2019-10-08
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Xiaochong
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">机器学习</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/09/23/nginxrewrite-jian-dan-shi-li/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="nginx Rewrite简单示例">
+                        
+                        <span class="card-title">nginx Rewrite简单示例</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/nginx/" class="post-category">
+                                    nginx
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/nginx/">
+                        <span class="chip bg-color">nginx</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='true'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='false'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2018-2021</span>
+            
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">Xiaochong</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/trojan20161207" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1530860548@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1530860548" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1530860548" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
