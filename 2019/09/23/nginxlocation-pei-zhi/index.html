@@ -29,10 +29,11 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="小冲的生活" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<meta name="generator" content="Hexo 5.4.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="alternate" href="/atom.xml" title="小冲的生活" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -485,6 +486,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
         <!-- 代码块折行 -->
@@ -499,7 +503,18 @@
 <p>语法规则： <em>location [=|<del>|</del></em>|^~] /uri/ { … }*</p>
 <p>| — | — |<br>| 通配符 |  说明 |<br>| =   |开头表示精确匹配 |<br>| ^~ |  开头表示uri以某个常规字符串开头，理解为匹配 url路径即可 |<br>| ~ |  开头表示区分大小写的正则匹配 |<br>| !~ |  区分大小写不匹配 |<br>| !~* |  不区分大小写不匹配 |<br>| ~* |  开头表示不区分大小写的正则匹配 |<br>| / |  通用匹配，任何请求都会匹配到 |</p>
 <p>　　首先匹配 =，其次匹配^~, 其次是按文件中顺序的正则匹配，最后是交给 / 通用匹配。当有匹配成功时候，停止匹配，按当前匹配规则处理请求。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">location = / {</span><br><span class="line">   #规则A</span><br><span class="line">}</span><br><span class="line">location = /login {</span><br><span class="line">   #规则B</span><br><span class="line">}</span><br><span class="line">location ^~ /static/ {</span><br><span class="line">   #规则C</span><br><span class="line">}</span><br><span class="line">location ~ \.(gif|jpg|png|js|css)$ {</span><br><span class="line">   #规则D</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">location = / {
+   #规则A
+}
+location = /login {
+   #规则B
+}
+location ^~ /static/ {
+   #规则C
+}
+location ~ \.(gif|jpg|png|js|css)$ {
+   #规则D
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>　　那么产生的效果如下：</p>
 <p>访问根目录/， 比如<a target="_blank" rel="noopener" href="http://localhost/">http://localhost/</a> 将匹配规则A；<br>访问 <a target="_blank" rel="noopener" href="http://localhost/login">http://localhost/login</a> 将匹配规则B；<br>访问 <a target="_blank" rel="noopener" href="http://localhost/static/a.html">http://localhost/static/a.html</a> 将匹配规则C；<br>访问 <a target="_blank" rel="noopener" href="http://localhost/a.gif">http://localhost/a.gif</a>, <a target="_blank" rel="noopener" href="http://localhost/b.jpg">http://localhost/b.jpg</a> 将匹配规则D。</p>

@@ -29,10 +29,11 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="小冲的生活" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<meta name="generator" content="Hexo 5.4.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="alternate" href="/atom.xml" title="小冲的生活" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -485,6 +486,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
         <!-- 代码块折行 -->
@@ -498,7 +502,25 @@
                 <hr>
 <p>　　<em>反向代理（Reverse Proxy）</em>是指代理服务器来接收来自Internet上的连接请求，并将请求转发给内部网络上的服务器，并从服务器上得到的结果返回给Internet上请求连接的客户端。</p>
 <p>　　比如要配置后端跑 apache 服务的 ip 和端口，也就是说，我们的目标是实现通过 <a href="http://ip:port/">http://ip:port</a> 能访问到你的网站。配置文件可以修改以下内容，reload nginx就可以了。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">## Basic reverse proxy server ##</span><br><span class="line">    upstream apachephp  {</span><br><span class="line">        server ip:8080; #Apache</span><br><span class="line">    }</span><br><span class="line">    ## Start www.nowamagic.net ##</span><br><span class="line">    server {</span><br><span class="line">        listen 80;</span><br><span class="line">        server_name  www.nowamagic.net;</span><br><span class="line">        access_log  logs/quancha.access.log  main;</span><br><span class="line">        error_log  logs/quancha.error.log;</span><br><span class="line">        root   html;</span><br><span class="line">        index  index.html index.htm index.php;</span><br><span class="line"></span><br><span class="line">        ## send request back to apache ##</span><br><span class="line">        location / {</span><br><span class="line">            proxy_pass  http://apachephp;</span><br><span class="line">                #……………………</span><br><span class="line">}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">## Basic reverse proxy server ##
+    upstream apachephp  {
+        server ip:8080; #Apache
+    }
+    ## Start www.nowamagic.net ##
+    server {
+        listen 80;
+        server_name  www.nowamagic.net;
+        access_log  logs/quancha.access.log  main;
+        error_log  logs/quancha.error.log;
+        root   html;
+        index  index.html index.htm index.php;
+
+        ## send request back to apache ##
+        location / {
+            proxy_pass  http://apachephp;
+                #……………………
+}
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>

@@ -29,10 +29,11 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="小冲的生活" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<meta name="generator" content="Hexo 5.4.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="alternate" href="/atom.xml" title="小冲的生活" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -492,12 +493,12 @@
                                 
                                     
 　　定义Nginx运行的用户和用户组用user指令。
-1user www-data;
+user www-data;
 
 　　定义nginx进程数，用_workerprocesses指令，建议设置为等于CPU总核心数。
-1worker_processes 8;
+worker_processes 8;
 
-　　全局
+　　全局错误
                                 
                             </div>
                             <div class="publish-info">
@@ -735,12 +736,12 @@
                             <div class="summary block-with-text">
                                 
                                     1.nginx启动
-1nginx   -c /etc/nginx/nginx.conf
+nginx   -c /etc/nginx/nginx.conf
 
 其中参数-c指定nginx启动时加载的配置文件，当然也可以不指定配置文件，省略-c，也可以启动，表示使用默认的配置文件。
-1nginx
+nginx
 
-2.ngin
+2.nginx停
                                 
                             </div>
                             <div class="publish-info">

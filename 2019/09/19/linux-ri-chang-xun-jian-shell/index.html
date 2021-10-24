@@ -29,10 +29,11 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="小冲的生活" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<meta name="generator" content="Hexo 5.4.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
+<link rel="alternate" href="/atom.xml" title="小冲的生活" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 
@@ -485,6 +486,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
         <!-- 代码块折行 -->
@@ -495,7 +499,733 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br><span class="line">551</span><br><span class="line">552</span><br><span class="line">553</span><br><span class="line">554</span><br><span class="line">555</span><br><span class="line">556</span><br><span class="line">557</span><br><span class="line">558</span><br><span class="line">559</span><br><span class="line">560</span><br><span class="line">561</span><br><span class="line">562</span><br><span class="line">563</span><br><span class="line">564</span><br><span class="line">565</span><br><span class="line">566</span><br><span class="line">567</span><br><span class="line">568</span><br><span class="line">569</span><br><span class="line">570</span><br><span class="line">571</span><br><span class="line">572</span><br><span class="line">573</span><br><span class="line">574</span><br><span class="line">575</span><br><span class="line">576</span><br><span class="line">577</span><br><span class="line">578</span><br><span class="line">579</span><br><span class="line">580</span><br><span class="line">581</span><br><span class="line">582</span><br><span class="line">583</span><br><span class="line">584</span><br><span class="line">585</span><br><span class="line">586</span><br><span class="line">587</span><br><span class="line">588</span><br><span class="line">589</span><br><span class="line">590</span><br><span class="line">591</span><br><span class="line">592</span><br><span class="line">593</span><br><span class="line">594</span><br><span class="line">595</span><br><span class="line">596</span><br><span class="line">597</span><br><span class="line">598</span><br><span class="line">599</span><br><span class="line">600</span><br><span class="line">601</span><br><span class="line">602</span><br><span class="line">603</span><br><span class="line">604</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br><span class="line">609</span><br><span class="line">610</span><br><span class="line">611</span><br><span class="line">612</span><br><span class="line">613</span><br><span class="line">614</span><br><span class="line">615</span><br><span class="line">616</span><br><span class="line">617</span><br><span class="line">618</span><br><span class="line">619</span><br><span class="line">620</span><br><span class="line">621</span><br><span class="line">622</span><br><span class="line">623</span><br><span class="line">624</span><br><span class="line">625</span><br><span class="line">626</span><br><span class="line">627</span><br><span class="line">628</span><br><span class="line">629</span><br><span class="line">630</span><br><span class="line">631</span><br><span class="line">632</span><br><span class="line">633</span><br><span class="line">634</span><br><span class="line">635</span><br><span class="line">636</span><br><span class="line">637</span><br><span class="line">638</span><br><span class="line">639</span><br><span class="line">640</span><br><span class="line">641</span><br><span class="line">642</span><br><span class="line">643</span><br><span class="line">644</span><br><span class="line">645</span><br><span class="line">646</span><br><span class="line">647</span><br><span class="line">648</span><br><span class="line">649</span><br><span class="line">650</span><br><span class="line">651</span><br><span class="line">652</span><br><span class="line">653</span><br><span class="line">654</span><br><span class="line">655</span><br><span class="line">656</span><br><span class="line">657</span><br><span class="line">658</span><br><span class="line">659</span><br><span class="line">660</span><br><span class="line">661</span><br><span class="line">662</span><br><span class="line">663</span><br><span class="line">664</span><br><span class="line">665</span><br><span class="line">666</span><br><span class="line">667</span><br><span class="line">668</span><br><span class="line">669</span><br><span class="line">670</span><br><span class="line">671</span><br><span class="line">672</span><br><span class="line">673</span><br><span class="line">674</span><br><span class="line">675</span><br><span class="line">676</span><br><span class="line">677</span><br><span class="line">678</span><br><span class="line">679</span><br><span class="line">680</span><br><span class="line">681</span><br><span class="line">682</span><br><span class="line">683</span><br><span class="line">684</span><br><span class="line">685</span><br><span class="line">686</span><br><span class="line">687</span><br><span class="line">688</span><br><span class="line">689</span><br><span class="line">690</span><br><span class="line">691</span><br><span class="line">692</span><br><span class="line">693</span><br><span class="line">694</span><br><span class="line">695</span><br><span class="line">696</span><br><span class="line">697</span><br><span class="line">698</span><br><span class="line">699</span><br><span class="line">700</span><br><span class="line">701</span><br><span class="line">702</span><br><span class="line">703</span><br><span class="line">704</span><br><span class="line">705</span><br><span class="line">706</span><br><span class="line">707</span><br><span class="line">708</span><br><span class="line">709</span><br><span class="line">710</span><br><span class="line">711</span><br><span class="line">712</span><br><span class="line">713</span><br><span class="line">714</span><br><span class="line">715</span><br><span class="line">716</span><br><span class="line">717</span><br><span class="line">718</span><br><span class="line">719</span><br><span class="line">720</span><br><span class="line">721</span><br><span class="line">722</span><br><span class="line">723</span><br><span class="line">724</span><br><span class="line">725</span><br><span class="line">726</span><br><span class="line">727</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">###################################################################</span><br><span class="line"># Functions: this script from polling system status</span><br><span class="line"># Info: be suitable for CentOS/RHEL 6/7 </span><br><span class="line"># Changelog:</span><br><span class="line">#      2019-01-30    haodexuan     initial commit</span><br><span class="line">###################################################################</span><br><span class="line">#set path env,if not set will some command not found in crontab</span><br><span class="line"></span><br><span class="line">export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin</span><br><span class="line">source /etc/profile</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># run this script use root</span><br><span class="line">[ $(id -u) -gt 0 ] &amp;&amp; echo "please use root run the script! " &amp;&amp; exit 1</span><br><span class="line"></span><br><span class="line"># check system  version</span><br><span class="line">OS_Version=$(awk '{print $(NF-1)}' /etc/redhat-release)</span><br><span class="line"></span><br><span class="line"># declare script version date</span><br><span class="line">Script_Version="2019.01.30"</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># define polling log path</span><br><span class="line">LOGPATH=/home/logs/polling</span><br><span class="line">[ -d $LOGPATH ] || mkdir -p $LOGPATH</span><br><span class="line">RESULTFILE="$LOGPATH/HostDailyCheck-`hostname`-`date +%Y%m%d`.txt"</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># define globle variable</span><br><span class="line">report_DateTime=""    #日期 ok</span><br><span class="line">report_Hostname=""    #主机名 ok</span><br><span class="line">report_OSRelease=""    #发行版本 ok</span><br><span class="line">report_Kernel=""    #内核 ok</span><br><span class="line">report_Language=""    #语言/编码 ok</span><br><span class="line">report_LastReboot=""    #最近启动时间 ok</span><br><span class="line">report_Uptime=""    #运行时间（天） ok</span><br><span class="line">report_CPUs=""    #CPU数量 ok</span><br><span class="line">report_CPUType=""    #CPU类型 ok</span><br><span class="line">report_Arch=""    #CPU架构 ok</span><br><span class="line">report_MemTotal=""    #内存总容量(MB) ok</span><br><span class="line">report_MemFree=""    #内存剩余(MB) ok</span><br><span class="line">report_MemUsedPercent=""    #内存使用率% ok</span><br><span class="line">report_DiskTotal=""    #硬盘总容量(GB) ok</span><br><span class="line">report_DiskFree=""    #硬盘剩余(GB) ok</span><br><span class="line">report_DiskUsedPercent=""    #硬盘使用率% ok</span><br><span class="line">report_InodeTotal=""    #Inode总量 ok</span><br><span class="line">report_InodeFree=""    #Inode剩余 ok</span><br><span class="line">report_InodeUsedPercent=""    #Inode使用率 ok</span><br><span class="line">report_IP=""    #IP地址 ok</span><br><span class="line">report_MAC=""    #MAC地址 ok</span><br><span class="line">report_Gateway=""    #默认网关 ok</span><br><span class="line">report_DNS=""    #DNS ok</span><br><span class="line">report_Listen=""    #监听 ok</span><br><span class="line">report_Selinux=""    #Selinux ok</span><br><span class="line">report_Firewall=""    #防火墙 ok</span><br><span class="line">report_USERs=""    #用户 ok</span><br><span class="line">report_USEREmptyPassword=""   #空密码用户 ok</span><br><span class="line">report_USERTheSameUID=""      #相同ID的用户 ok </span><br><span class="line">report_PasswordExpiry=""    #密码过期（天） ok</span><br><span class="line">report_RootUser=""    #root用户 ok</span><br><span class="line">report_Sudoers=""    #sudo授权  ok</span><br><span class="line">report_SSHAuthorized=""    #SSH信任主机 ok</span><br><span class="line">report_SSHDProtocolVersion=""    #SSH协议版本 ok</span><br><span class="line">report_SSHDPermitRootLogin=""    #允许root远程登录 ok</span><br><span class="line">report_DefunctProsess=""    #僵尸进程数量 ok</span><br><span class="line">report_SelfInitiatedService=""    #自启动服务数量 ok</span><br><span class="line">report_SelfInitiatedProgram=""    #自启动程序数量 ok</span><br><span class="line">report_RuningService=""           #运行中服务数  ok</span><br><span class="line">report_Crontab=""    #计划任务数 ok</span><br><span class="line">report_Syslog=""    #日志服务 ok</span><br><span class="line">report_SNMP=""    #SNMP  OK</span><br><span class="line">report_NTP=""    #NTP ok</span><br><span class="line">report_JDK=""    #JDK版本 ok</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function version(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "System Polling：Version $Script_Version "</span><br><span class="line">    echo ""</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function getCpuStatus(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ Check CPU Status#############################"</span><br><span class="line">    Physical_CPUs=$(grep "physical id" /proc/cpuinfo| sort | uniq | wc -l)</span><br><span class="line">    Virt_CPUs=$(grep "processor" /proc/cpuinfo | wc -l)</span><br><span class="line">    CPU_Kernels=$(grep "cores" /proc/cpuinfo|uniq| awk -F ': ' '{print $2}')</span><br><span class="line">    CPU_Type=$(grep "model name" /proc/cpuinfo | awk -F ': ' '{print $2}' | sort | uniq)</span><br><span class="line">    CPU_Arch=$(uname -m)</span><br><span class="line">    echo "物理CPU个数:$Physical_CPUs"</span><br><span class="line">    echo "逻辑CPU个数:$Virt_CPUs"</span><br><span class="line">    echo "每CPU核心数:$CPU_Kernels"</span><br><span class="line">    echo "    CPU型号:$CPU_Type"</span><br><span class="line">    echo "    CPU架构:$CPU_Arch"</span><br><span class="line">    # report information</span><br><span class="line">    report_CPUs=$Virt_CPUs    #CPU数量</span><br><span class="line">    report_CPUType=$CPU_Type  #CPU类型</span><br><span class="line">    report_Arch=$CPU_Arch     #CPU架构</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function getMemStatus(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ Check Memmory Usage ###########################"</span><br><span class="line">    if [[ $OS_Version &lt; 7 ]];then</span><br><span class="line">        free -mo</span><br><span class="line">    else</span><br><span class="line">        free -h</span><br><span class="line">    fi</span><br><span class="line">    # report information</span><br><span class="line">    MemTotal=$(grep MemTotal /proc/meminfo| awk '{print $2}')  #KB</span><br><span class="line">    MemFree=$(grep MemFree /proc/meminfo| awk '{print $2}')    #KB</span><br><span class="line">    let MemUsed=MemTotal-MemFree</span><br><span class="line">    MemPercent=$(awk "BEGIN {if($MemTotal==0){printf 100}else{printf \"%.2f\",$MemUsed*100/$MemTotal}}")</span><br><span class="line">    report_MemTotal="$((MemTotal/1024))""MB"        #内存总容量(MB)</span><br><span class="line">    report_MemFree="$((MemFree/1024))""MB"          #内存剩余(MB)</span><br><span class="line">    report_MemUsedPercent="$(awk "BEGIN {if($MemTotal==0){printf 100}else{printf \"%.2f\",$MemUsed*100/$MemTotal}}")""%"   #内存使用率%</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function getDiskStatus(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ Check Disk Status ############################"</span><br><span class="line">    df -hiP | sed 's/Mounted on/Mounted/' &gt; /tmp/inode</span><br><span class="line">    df -hTP | sed 's/Mounted on/Mounted/' &gt; /tmp/disk </span><br><span class="line">    join /tmp/disk /tmp/inode | awk '{print $1,$2,"|",$3,$4,$5,$6,"|",$8,$9,$10,$11,"|",$12}'| column -t</span><br><span class="line">    # report information</span><br><span class="line">    diskdata=$(df -TP | sed '1d' | awk '$2!="tmpfs"{print}') #KB</span><br><span class="line">    disktotal=$(echo "$diskdata" | awk '{total+=$3}END{print total}') #KB</span><br><span class="line">    diskused=$(echo "$diskdata" | awk '{total+=$4}END{print total}')  #KB</span><br><span class="line">    diskfree=$((disktotal-diskused)) #KB</span><br><span class="line">    diskusedpercent=$(echo $disktotal $diskused | awk '{if($1==0){printf 100}else{printf "%.2f",$2*100/$1}}') </span><br><span class="line">    inodedata=$(df -iTP | sed '1d' | awk '$2!="tmpfs"{print}')</span><br><span class="line">    inodetotal=$(echo "$inodedata" | awk '{total+=$3}END{print total}')</span><br><span class="line">    inodeused=$(echo "$inodedata" | awk '{total+=$4}END{print total}')</span><br><span class="line">    inodefree=$((inodetotal-inodeused))</span><br><span class="line">    inodeusedpercent=$(echo $inodetotal $inodeused | awk '{if($1==0){printf 100}else{printf "%.2f",$2*100/$1}}')</span><br><span class="line">    report_DiskTotal=$((disktotal/1024/1024))"GB"   #硬盘总容量(GB)</span><br><span class="line">    report_DiskFree=$((diskfree/1024/1024))"GB"     #硬盘剩余(GB)</span><br><span class="line">    report_DiskUsedPercent="$diskusedpercent""%"    #硬盘使用率%</span><br><span class="line">    report_InodeTotal=$((inodetotal/1000))"K"       #Inode总量</span><br><span class="line">    report_InodeFree=$((inodefree/1000))"K"         #Inode剩余</span><br><span class="line">    report_InodeUsedPercent="$inodeusedpercent""%"  #Inode使用率%</span><br><span class="line">    echo ""</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function getSystemStatus(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ Check System Status ############################"</span><br><span class="line">    if [ -e /etc/sysconfig/i18n ];then</span><br><span class="line">        default_LANG="$(grep "LANG=" /etc/sysconfig/i18n | grep -v "^#" | awk -F '"' '{print $2}')"</span><br><span class="line">    else</span><br><span class="line">        default_LANG=$LANG</span><br><span class="line">    fi</span><br><span class="line">    export LANG="en_US.UTF-8"</span><br><span class="line">    Release=$(cat /etc/redhat-release 2&gt;/dev/null)</span><br><span class="line">    Kernel=$(uname -r)</span><br><span class="line">    OS=$(uname -o)</span><br><span class="line">    Hostname=$(uname -n)</span><br><span class="line">    SELinux=$(/usr/sbin/sestatus | grep "SELinux status: " | awk '{print $3}')</span><br><span class="line">    LastReboot=$(who -b | awk '{print $3,$4}')</span><br><span class="line">    uptime=$(uptime | sed 's/.*up [,]∗, .*/\1/')</span><br><span class="line">    echo "     系统：$OS"</span><br><span class="line">    echo " 发行版本：$Release"</span><br><span class="line">    echo "     内核：$Kernel"</span><br><span class="line">    echo "   主机名：$Hostname"</span><br><span class="line">    echo "  SELinux：$SELinux"</span><br><span class="line">    echo "语言/编码：$default_LANG"</span><br><span class="line">    echo " 当前时间：$(date +'%F %T')"</span><br><span class="line">    echo " 最后启动：$LastReboot"</span><br><span class="line">    echo " 运行时间：$uptime"</span><br><span class="line">    # report information</span><br><span class="line">    report_DateTime=$(date +"%F %T")  #日期</span><br><span class="line">    report_Hostname="$Hostname"       #主机名</span><br><span class="line">    report_OSRelease="$Release"       #发行版本</span><br><span class="line">    report_Kernel="$Kernel"           #内核</span><br><span class="line">    report_Language="$default_LANG"   #语言/编码</span><br><span class="line">    report_LastReboot="$LastReboot"   #最近启动时间</span><br><span class="line">    report_Uptime="$uptime"           #运行时间（天）</span><br><span class="line">    report_Selinux="$SELinux"</span><br><span class="line">    export LANG="$default_LANG"</span><br><span class="line">    echo ""</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">function getServiceStatus(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ Check Service Status ############################"</span><br><span class="line">    if [[ $OS_Version &gt; 7 ]];then</span><br><span class="line">        conf=$(systemctl list-unit-files --type=service --state=enabled --no-pager | grep "enabled")</span><br><span class="line">        process=$(systemctl list-units --type=service --state=running --no-pager | grep ".service")</span><br><span class="line">        # report information</span><br><span class="line">        report_SelfInitiatedService="$(echo "$conf" | wc -l)"       #自启动服务数量</span><br><span class="line">        report_RuningService="$(echo "$process" | wc -l)"           #运行中服务数量</span><br><span class="line">    else</span><br><span class="line">        conf=$(/sbin/chkconfig | grep -E ":on|:启用")</span><br><span class="line">        process=$(/sbin/service --status-all 2&gt;/dev/null | grep -E "is running|正在运行")</span><br><span class="line">        # report information</span><br><span class="line">        report_SelfInitiatedService="$(echo "$conf" | wc -l)"       #自启动服务数量</span><br><span class="line">        report_RuningService="$(echo "$process" | wc -l)"           #运行中服务数量</span><br><span class="line">    fi</span><br><span class="line">    echo "Service Configure"</span><br><span class="line">    echo "--------------------------------"</span><br><span class="line">    echo "$conf" | column -t</span><br><span class="line">    echo ""</span><br><span class="line">    echo "The Running Services"</span><br><span class="line">    echo "--------------------------------"</span><br><span class="line">    echo "$process"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">function getAutoStartStatus(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ Check Self-starting Services ##########################"</span><br><span class="line">    conf=$(grep -v "^#" /etc/rc.d/rc.local| sed '/^$/d')</span><br><span class="line">    echo "$conf"</span><br><span class="line">    # report information</span><br><span class="line">    report_SelfInitiatedProgram="$(echo $conf | wc -l)"    #自启动程序数量</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function getLoginStatus(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ Check Login In ############################"</span><br><span class="line">    last | head</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">function getNetworkStatus(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ Check Network ############################"</span><br><span class="line">    if [[ $OS_Version &lt; 7 ]];then</span><br><span class="line">        /sbin/ifconfig -a | grep -v packets | grep -v collisions | grep -v inet6</span><br><span class="line">    else</span><br><span class="line">        #ip address</span><br><span class="line">        for i in $(ip link | grep BROADCAST | awk -F: '{print $2}');do ip add show $i | grep -E "BROADCAST|global"| awk '{print $2}' | tr '\n' ' ' ;echo "" ;done</span><br><span class="line">    fi</span><br><span class="line">    GATEWAY=$(ip route | grep default | awk '{print $3}')</span><br><span class="line">    DNS=$(grep nameserver /etc/resolv.conf| grep -v "#" | awk '{print $2}' | tr '\n' ',' | sed 's/,$//')</span><br><span class="line">    echo ""</span><br><span class="line">    echo "Gateway: $GATEWAY "</span><br><span class="line">    echo " DNS: $DNS"</span><br><span class="line">    # report information</span><br><span class="line">    IP=$(ip -f inet addr | grep -v 127.0.0.1 |  grep inet | awk '{print $NF,$2}' | tr '\n' ',' | sed 's/,$//')</span><br><span class="line">    MAC=$(ip link | grep -v "LOOPBACK\|loopback" | awk '{print $2}' | sed 'N;s/\n//' | tr '\n' ',' | sed 's/,$//')</span><br><span class="line">    report_IP="$IP"            #IP地址</span><br><span class="line">    report_MAC=$MAC            #MAC地址</span><br><span class="line">    report_Gateway="$GATEWAY"  #默认网关</span><br><span class="line">    report_DNS="$DNS"          #DNS</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function getListenStatus(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ Check Connect Status ############################"</span><br><span class="line">#    TCPListen=$(ss -ntul | column -t)</span><br><span class="line">    TCPListen=$(netstat -ntulp | column -t)</span><br><span class="line">    AllConnect=$(ss -an | awk 'NR&gt;1 {++s[$1]} END {for(k in s) print k,s[k]}' | column -t)</span><br><span class="line">    echo "$TCPListen"</span><br><span class="line">    echo "$AllConnect"</span><br><span class="line">    # report information</span><br><span class="line">    report_Listen="$(echo "$TCPListen"| sed '1d' | awk '/tcp/ {print $5}' | awk -F: '{print $NF}' | sort | uniq | wc -l)"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">function getCronStatus(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ Check Crontab ########################"</span><br><span class="line">    Crontab=0</span><br><span class="line">    for shell in $(grep -v "/sbin/nologin" /etc/shells);do</span><br><span class="line">        for user in $(grep "$shell" /etc/passwd | awk -F: '{print $1}');do</span><br><span class="line">            crontab -l -u $user &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">            status=$?</span><br><span class="line">            if [ $status -eq 0 ];then</span><br><span class="line">                echo "$user"</span><br><span class="line">                echo "-------------"</span><br><span class="line">                crontab -l -u $user</span><br><span class="line">                let Crontab=Crontab+$(crontab -l -u $user | wc -l)</span><br><span class="line">                echo ""</span><br><span class="line">            fi</span><br><span class="line">        done</span><br><span class="line">    done</span><br><span class="line">    # scheduled task</span><br><span class="line">    find /etc/cron* -type f | xargs -i ls -l {} | column  -t</span><br><span class="line">    let Crontab=Crontab+$(find /etc/cron* -type f | wc -l)</span><br><span class="line">    # report information</span><br><span class="line">    report_Crontab="$Crontab"    #计划任务数</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">function getHowLongAgo(){</span><br><span class="line">    # 计算一个时间戳离现在有多久了</span><br><span class="line">    datetime="$*"</span><br><span class="line">    [ -z "$datetime" ] &amp;&amp; echo "错误的参数：getHowLongAgo() $*"</span><br><span class="line">    Timestamp=$(date +%s -d "$datetime")    #转化为时间戳</span><br><span class="line">    Now_Timestamp=$(date +%s)</span><br><span class="line">    Difference_Timestamp=$(($Now_Timestamp-$Timestamp))</span><br><span class="line">    days=0;hours=0;minutes=0;</span><br><span class="line">    sec_in_day=$((60*60*24));</span><br><span class="line">    sec_in_hour=$((60*60));</span><br><span class="line">    sec_in_minute=60</span><br><span class="line">    while (( $(($Difference_Timestamp-$sec_in_day)) &gt; 1 ))</span><br><span class="line">    do</span><br><span class="line">        let Difference_Timestamp=Difference_Timestamp-sec_in_day</span><br><span class="line">        let days++</span><br><span class="line">    done</span><br><span class="line">    while (( $(($Difference_Timestamp-$sec_in_hour)) &gt; 1 ))</span><br><span class="line">    do</span><br><span class="line">        let Difference_Timestamp=Difference_Timestamp-sec_in_hour</span><br><span class="line">        let hours++</span><br><span class="line">    done</span><br><span class="line">    echo "$days 天 $hours 小时前"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function getUserLastLogin(){</span><br><span class="line">    # 获取用户最近一次登录的时间，含年份</span><br><span class="line">    # 很遗憾last命令不支持显示年份，只有"last -t YYYYMMDDHHMMSS"表示某个时间之间的登录，我</span><br><span class="line">    # 们只能用最笨的方法了，对比今天之前和今年元旦之前（或者去年之前和前年之前……）某个用户</span><br><span class="line">    # 登录次数，如果登录统计次数有变化，则说明最近一次登录是今年。</span><br><span class="line">    username=$1</span><br><span class="line">    : ${username:="`whoami`"}</span><br><span class="line">    thisYear=$(date +%Y)</span><br><span class="line">    oldesYear=$(last | tail -n1 | awk '{print $NF}')</span><br><span class="line">    while(( $thisYear &gt;= $oldesYear));do</span><br><span class="line">        loginBeforeToday=$(last $username | grep $username | wc -l)</span><br><span class="line">        loginBeforeNewYearsDayOfThisYear=$(last $username -t $thisYear"0101000000" | grep $username | wc -l)</span><br><span class="line">        if [ $loginBeforeToday -eq 0 ];then</span><br><span class="line">            echo "Never Login"</span><br><span class="line">            break</span><br><span class="line">        elif [ $loginBeforeToday -gt $loginBeforeNewYearsDayOfThisYear ];then</span><br><span class="line">            lastDateTime=$(last -i $username | head -n1 | awk '{for(i=4;i&lt;(NF-2);i++)printf"%s ",$i}')" $thisYear" #格式如: Sat Nov 2 20:33 2015</span><br><span class="line">            lastDateTime=$(date "+%Y-%m-%d %H:%M:%S" -d "$lastDateTime")</span><br><span class="line">            echo "$lastDateTime"</span><br><span class="line">            break</span><br><span class="line">        else</span><br><span class="line">            thisYear=$((thisYear-1))</span><br><span class="line">        fi</span><br><span class="line">    done</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">function getUserStatus(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ Check User ############################"</span><br><span class="line">    # /etc/passwd the last modification time</span><br><span class="line">    pwdfile="$(cat /etc/passwd)"</span><br><span class="line">    Modify=$(stat /etc/passwd | grep Modify | tr '.' ' ' | awk '{print $2,$3}')</span><br><span class="line">    echo "/etc/passwd The last modification time：$Modify ($(getHowLongAgo $Modify))"</span><br><span class="line">    echo ""</span><br><span class="line">    echo "A privileged user"</span><br><span class="line">    echo "-----------------"</span><br><span class="line">    RootUser=""</span><br><span class="line">    for user in $(echo "$pwdfile" | awk -F: '{print $1}');do</span><br><span class="line">        if [ $(id -u $user) -eq 0 ];then</span><br><span class="line">            echo "$user"</span><br><span class="line">            RootUser="$RootUser,$user"</span><br><span class="line">        fi</span><br><span class="line">    done</span><br><span class="line">    echo ""</span><br><span class="line">    echo "User List"</span><br><span class="line">    echo "--------"</span><br><span class="line">    USERs=0</span><br><span class="line">    echo "$(</span><br><span class="line">    echo "UserName UID GID HOME SHELL LasttimeLogin"</span><br><span class="line">    for shell in $(grep -v "/sbin/nologin" /etc/shells);do</span><br><span class="line">        for username in $(grep "$shell" /etc/passwd| awk -F: '{print $1}');do</span><br><span class="line">            userLastLogin="$(getUserLastLogin $username)"</span><br><span class="line">            echo "$pwdfile" | grep -w "$username" |grep -w "$shell"| awk -F: -v lastlogin="$(echo "$userLastLogin" | tr ' ' '_')" '{print $1,$3,$4,$6,$7,lastlogin}'</span><br><span class="line">        done</span><br><span class="line">        let USERs=USERs+$(echo "$pwdfile" | grep "$shell"| wc -l)</span><br><span class="line">    done</span><br><span class="line">    )" | column -t</span><br><span class="line">    echo ""</span><br><span class="line">    echo "Null Password User"</span><br><span class="line">    echo "------------------"</span><br><span class="line">    USEREmptyPassword=""</span><br><span class="line">    for shell in $(grep -v "/sbin/nologin" /etc/shells);do</span><br><span class="line">            for user in $(echo "$pwdfile" | grep "$shell" | cut -d: -f1);do</span><br><span class="line">            r=$(awk -F: '$2=="!!"{print $1}' /etc/shadow | grep -w $user)</span><br><span class="line">            if [ ! -z $r ];then</span><br><span class="line">                echo $r</span><br><span class="line">                USEREmptyPassword="$USEREmptyPassword,"$r</span><br><span class="line">            fi</span><br><span class="line">        done    </span><br><span class="line">    done</span><br><span class="line">    echo ""</span><br><span class="line">    echo "The Same UID User"</span><br><span class="line">    echo "----------------"</span><br><span class="line">    USERTheSameUID=""</span><br><span class="line">    UIDs=$(cut -d: -f3 /etc/passwd | sort | uniq -c | awk '$1&gt;1{print $2}')</span><br><span class="line">    for uid in $UIDs;do</span><br><span class="line">        echo -n "$uid";</span><br><span class="line">        USERTheSameUID="$uid"</span><br><span class="line">        r=$(awk -F: 'ORS="";$3=='"$uid"'{print ":",$1}' /etc/passwd)</span><br><span class="line">        echo "$r"</span><br><span class="line">        echo ""</span><br><span class="line">        USERTheSameUID="$USERTheSameUID $r,"</span><br><span class="line">    done</span><br><span class="line">    # report information</span><br><span class="line">    report_USERs="$USERs"    #用户</span><br><span class="line">    report_USEREmptyPassword=$(echo $USEREmptyPassword | sed 's/^,//') </span><br><span class="line">    report_USERTheSameUID=$(echo $USERTheSameUID | sed 's/,$//') </span><br><span class="line">    report_RootUser=$(echo $RootUser | sed 's/^,//')    #特权用户</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function getPasswordStatus {</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ Check Password Status ############################"</span><br><span class="line">    pwdfile="$(cat /etc/passwd)"</span><br><span class="line">    echo ""</span><br><span class="line">    echo "Password Expiration Check"</span><br><span class="line">    echo "-------------------------"</span><br><span class="line">    result=""</span><br><span class="line">    for shell in $(grep -v "/sbin/nologin" /etc/shells);do</span><br><span class="line">        for user in $(echo "$pwdfile" | grep "$shell" | cut -d: -f1);do</span><br><span class="line">            get_expiry_date=$(/usr/bin/chage -l $user | grep 'Password expires' | cut -d: -f2)</span><br><span class="line">            if [[ $get_expiry_date = ' never' || $get_expiry_date = 'never' ]];then</span><br><span class="line">                printf "%-15s never expiration\n" $user</span><br><span class="line">                result="$result,$user:never"</span><br><span class="line">            else</span><br><span class="line">                password_expiry_date=$(date -d "$get_expiry_date" "+%s")</span><br><span class="line">                current_date=$(date "+%s")</span><br><span class="line">                diff=$(($password_expiry_date-$current_date))</span><br><span class="line">                let DAYS=$(($diff/(60*60*24)))</span><br><span class="line">                printf "%-15s %s expiration after days\n" $user $DAYS</span><br><span class="line">                result="$result,$user:$DAYS days"</span><br><span class="line">            fi</span><br><span class="line">        done</span><br><span class="line">    done</span><br><span class="line">    report_PasswordExpiry=$(echo $result | sed 's/^,//')</span><br><span class="line">    echo ""</span><br><span class="line">    echo "Check The Password Policy"</span><br><span class="line">    echo "------------"</span><br><span class="line">    grep -v "#" /etc/login.defs | grep -E "PASS_MAX_DAYS|PASS_MIN_DAYS|PASS_MIN_LEN|PASS_WARN_AGE"</span><br><span class="line">    echo ""</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">function getSudoersStatus(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ Sudoers Check #########################"</span><br><span class="line">    conf=$(grep -v "^#" /etc/sudoers| grep -v "^Defaults" | sed '/^$/d')</span><br><span class="line">    echo "$conf"</span><br><span class="line">    echo ""</span><br><span class="line">    # report information</span><br><span class="line">    report_Sudoers="$(echo $conf | wc -l)"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function getInstalledStatus(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ Software Check ############################"</span><br><span class="line">    rpm -qa --last | head | column -t </span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">function getProcessStatus(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ Process Check ############################"</span><br><span class="line">    if [ $(ps -ef | grep defunct | grep -v grep | wc -l) -ge 1 ];then</span><br><span class="line">        echo ""</span><br><span class="line">        echo "zombie process";</span><br><span class="line">        echo "--------"</span><br><span class="line">        ps -ef | head -n1</span><br><span class="line">        ps -ef | grep defunct | grep -v grep</span><br><span class="line">    fi</span><br><span class="line">    echo ""</span><br><span class="line">    echo "Merory Usage TOP10"</span><br><span class="line">    echo "-------------"</span><br><span class="line">    echo -e "PID %MEM RSS COMMAND</span><br><span class="line">    $(ps aux | awk '{print $2, $4, $6, $11}' | sort -k3rn | head -n 10 )"| column -t </span><br><span class="line">    echo ""</span><br><span class="line">    echo "CPU Usage TOP10"</span><br><span class="line">    echo "------------"</span><br><span class="line">    top b -n1 | head -17 | tail -11</span><br><span class="line">    # report information</span><br><span class="line">    report_DefunctProsess="$(ps -ef | grep defunct | grep -v grep|wc -l)"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function getJDKStatus(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ JDK Check #############################"</span><br><span class="line">    java -version 2&gt;/dev/null</span><br><span class="line">    if [ $? -eq 0 ];then</span><br><span class="line">        java -version 2&gt;&amp;1</span><br><span class="line">    fi</span><br><span class="line">    echo "JAVA_HOME=\"$JAVA_HOME\""</span><br><span class="line">    # report information</span><br><span class="line">    report_JDK="$(java -version 2&gt;&amp;1 | grep version | awk '{print $1,$3}' | tr -d '"')"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">function getSyslogStatus(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ Syslog Check ##########################"</span><br><span class="line">    echo "Service Status：$(getState rsyslog)"</span><br><span class="line">    echo ""</span><br><span class="line">    echo "/etc/rsyslog.conf"</span><br><span class="line">    echo "-----------------"</span><br><span class="line">    cat /etc/rsyslog.conf 2&gt;/dev/null | grep -v "^#" | grep -v "^\\$" | sed '/^$/d'  | column -t</span><br><span class="line">    #report information</span><br><span class="line">    report_Syslog="$(getState rsyslog)"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function getFirewallStatus(){</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ Firewall Check ##########################"</span><br><span class="line">    # Firewall Status/Poilcy</span><br><span class="line">    if [[ $OS_Version &lt; 7 ]];then</span><br><span class="line">        /etc/init.d/iptables status &gt;/dev/null  2&gt;&amp;1</span><br><span class="line">        status=$?</span><br><span class="line">        if [ $status -eq 0 ];then</span><br><span class="line">                s="active"</span><br><span class="line">        elif [ $status -eq 3 ];then</span><br><span class="line">                s="inactive"</span><br><span class="line">        elif [ $status -eq 4 ];then</span><br><span class="line">                s="permission denied"</span><br><span class="line">        else</span><br><span class="line">                s="unknown"</span><br><span class="line">        fi</span><br><span class="line">    else</span><br><span class="line">        s="$(getState iptables)"</span><br><span class="line">    fi</span><br><span class="line">    echo "iptables: $s"</span><br><span class="line">    echo ""</span><br><span class="line">    echo "/etc/sysconfig/iptables"</span><br><span class="line">    echo "-----------------------"</span><br><span class="line">    cat /etc/sysconfig/iptables 2&gt;/dev/null</span><br><span class="line">    # report information</span><br><span class="line">    report_Firewall="$s"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function getSNMPStatus(){</span><br><span class="line">    #SNMP Service Status,Configure</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ SNMP Check ############################"</span><br><span class="line">    status="$(getState snmpd)"</span><br><span class="line">    echo "Service Status：$status"</span><br><span class="line">    echo ""</span><br><span class="line">    if [ -e /etc/snmp/snmpd.conf ];then</span><br><span class="line">        echo "/etc/snmp/snmpd.conf"</span><br><span class="line">        echo "--------------------"</span><br><span class="line">        cat /etc/snmp/snmpd.conf 2&gt;/dev/null | grep -v "^#" | sed '/^$/d'</span><br><span class="line">    fi</span><br><span class="line">    # report information</span><br><span class="line">    report_SNMP="$(getState snmpd)"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">function getState(){</span><br><span class="line">    if [[ $OS_Version &lt; 7 ]];then</span><br><span class="line">        if [ -e "/etc/init.d/$1" ];then</span><br><span class="line">            if [ `/etc/init.d/$1 status 2&gt;/dev/null | grep -E "is running|正在运行" | wc -l` -ge 1 ];then</span><br><span class="line">                r="active"</span><br><span class="line">            else</span><br><span class="line">                r="inactive"</span><br><span class="line">            fi</span><br><span class="line">        else</span><br><span class="line">            r="unknown"</span><br><span class="line">        fi</span><br><span class="line">    else</span><br><span class="line">        #CentOS 7+</span><br><span class="line">        r="$(systemctl is-active $1 2&gt;&amp;1)"</span><br><span class="line">    fi</span><br><span class="line">    echo "$r"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">function getSSHStatus(){</span><br><span class="line">    #SSHD Service Status,Configure</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ SSH Check #############################"</span><br><span class="line">    # Check the trusted host</span><br><span class="line">    pwdfile="$(cat /etc/passwd)"</span><br><span class="line">    echo "Service Status：$(getState sshd)"</span><br><span class="line">    Protocol_Version=$(cat /etc/ssh/sshd_config | grep Protocol | awk '{print $2}')</span><br><span class="line">    echo "SSH Protocol Version：$Protocol_Version"</span><br><span class="line">    echo ""</span><br><span class="line">    echo "Trusted Host"</span><br><span class="line">    echo "------------"</span><br><span class="line">    authorized=0</span><br><span class="line">    for user in $(echo "$pwdfile" | grep /bin/bash | awk -F: '{print $1}');do</span><br><span class="line">        authorize_file=$(echo "$pwdfile" | grep -w $user | awk -F: '{printf $6"/.ssh/authorized_keys"}')</span><br><span class="line">        authorized_host=$(cat $authorize_file 2&gt;/dev/null | awk '{print $3}' | tr '\n' ',' | sed 's/,$//')</span><br><span class="line">        if [ ! -z $authorized_host ];then</span><br><span class="line">            echo "$user authorization \"$authorized_host\" Password-less access"</span><br><span class="line">        fi</span><br><span class="line">        let authorized=authorized+$(cat $authorize_file 2&gt;/dev/null | awk '{print $3}'|wc -l)</span><br><span class="line">    done</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    echo ""</span><br><span class="line">    echo "Whether to allow ROOT remote login"</span><br><span class="line">    echo "----------------------------------"</span><br><span class="line">    config=$(cat /etc/ssh/sshd_config | grep PermitRootLogin)</span><br><span class="line">    firstChar=${config:0:1}</span><br><span class="line">    if [ $firstChar == "#" ];then</span><br><span class="line">        PermitRootLogin="yes"  #The default is to allow ROOT remote login</span><br><span class="line">    else</span><br><span class="line">        PermitRootLogin=$(echo $config | awk '{print $2}')</span><br><span class="line">    fi</span><br><span class="line">    echo "PermitRootLogin $PermitRootLogin"</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    echo ""</span><br><span class="line">    echo "/etc/ssh/sshd_config"</span><br><span class="line">    echo "--------------------"</span><br><span class="line">    cat /etc/ssh/sshd_config | grep -v "^#" | sed '/^$/d'</span><br><span class="line">    # report information</span><br><span class="line">    report_SSHAuthorized="$authorized"    #SSH信任主机</span><br><span class="line">    report_SSHDProtocolVersion="$Protocol_Version"    #SSH协议版本</span><br><span class="line">    report_SSHDPermitRootLogin="$PermitRootLogin"    #允许root远程登录</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">function getNTPStatus(){</span><br><span class="line">    # The NTP service status, the current time, configuration, etc</span><br><span class="line">    echo ""</span><br><span class="line">    echo "############################ NTP Check #############################"</span><br><span class="line">    if [ -e /etc/ntp.conf ];then</span><br><span class="line">        echo "Service Status：$(getState ntpd)"</span><br><span class="line">        echo ""</span><br><span class="line">        echo "/etc/ntp.conf"</span><br><span class="line">        echo "-------------"</span><br><span class="line">        cat /etc/ntp.conf 2&gt;/dev/null | grep -v "^#" | sed '/^$/d'</span><br><span class="line">    fi</span><br><span class="line">    # report information</span><br><span class="line">    report_NTP="$(getState ntpd)"</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function getZabbixStatus(){</span><br><span class="line">    # Check Zabbix Serivce Status</span><br><span class="line">    echo ""</span><br><span class="line">    echo "######################### Zabbix Check ##############################"</span><br><span class="line">    netstat -nltp | grep -v grep | grep zabbix &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">    if [ $? -eq 0 ];then</span><br><span class="line">       echo "Service Status": Zabbix is running!</span><br><span class="line">    else</span><br><span class="line">       echo "Service Status": Zabbix not running!</span><br><span class="line">    fi</span><br><span class="line">    # report information</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">function uploadHostDailyCheckReport(){</span><br><span class="line">    json="{</span><br><span class="line">        \"DateTime\":\"$report_DateTime\",</span><br><span class="line">        \"Hostname\":\"$report_Hostname\",</span><br><span class="line">        \"OSRelease\":\"$report_OSRelease\",</span><br><span class="line">        \"Kernel\":\"$report_Kernel\",</span><br><span class="line">        \"Language\":\"$report_Language\",</span><br><span class="line">        \"LastReboot\":\"$report_LastReboot\",</span><br><span class="line">        \"Uptime\":\"$report_Uptime\",</span><br><span class="line">        \"CPUs\":\"$report_CPUs\",</span><br><span class="line">        \"CPUType\":\"$report_CPUType\",</span><br><span class="line">        \"Arch\":\"$report_Arch\",</span><br><span class="line">        \"MemTotal\":\"$report_MemTotal\",</span><br><span class="line">        \"MemFree\":\"$report_MemFree\",</span><br><span class="line">        \"MemUsedPercent\":\"$report_MemUsedPercent\",</span><br><span class="line">        \"DiskTotal\":\"$report_DiskTotal\",</span><br><span class="line">        \"DiskFree\":\"$report_DiskFree\",</span><br><span class="line">        \"DiskUsedPercent\":\"$report_DiskUsedPercent\",</span><br><span class="line">        \"InodeTotal\":\"$report_InodeTotal\",</span><br><span class="line">        \"InodeFree\":\"$report_InodeFree\",</span><br><span class="line">        \"InodeUsedPercent\":\"$report_InodeUsedPercent\",</span><br><span class="line">        \"IP\":\"$report_IP\",</span><br><span class="line">        \"MAC\":\"$report_MAC\",</span><br><span class="line">        \"Gateway\":\"$report_Gateway\",</span><br><span class="line">        \"DNS\":\"$report_DNS\",</span><br><span class="line">        \"Listen\":\"$report_Listen\",</span><br><span class="line">        \"Selinux\":\"$report_Selinux\",</span><br><span class="line">        \"Firewall\":\"$report_Firewall\",</span><br><span class="line">        \"USERs\":\"$report_USERs\",</span><br><span class="line">        \"USEREmptyPassword\":\"$report_USEREmptyPassword\",</span><br><span class="line">        \"USERTheSameUID\":\"$report_USERTheSameUID\",</span><br><span class="line">        \"PasswordExpiry\":\"$report_PasswordExpiry\",</span><br><span class="line">        \"RootUser\":\"$report_RootUser\",</span><br><span class="line">        \"Sudoers\":\"$report_Sudoers\",</span><br><span class="line">        \"SSHAuthorized\":\"$report_SSHAuthorized\",</span><br><span class="line">        \"SSHDProtocolVersion\":\"$report_SSHDProtocolVersion\",</span><br><span class="line">        \"SSHDPermitRootLogin\":\"$report_SSHDPermitRootLogin\",</span><br><span class="line">        \"DefunctProsess\":\"$report_DefunctProsess\",</span><br><span class="line">        \"SelfInitiatedService\":\"$report_SelfInitiatedService\",</span><br><span class="line">        \"SelfInitiatedProgram\":\"$report_SelfInitiatedProgram\",</span><br><span class="line">        \"RuningService\":\"$report_RuningService\",</span><br><span class="line">        \"Crontab\":\"$report_Crontab\",</span><br><span class="line">        \"Syslog\":\"$report_Syslog\",</span><br><span class="line">        \"SNMP\":\"$report_SNMP\",</span><br><span class="line">        \"NTP\":\"$report_NTP\",</span><br><span class="line">        \"JDK\":\"$report_JDK\"</span><br><span class="line">    }"</span><br><span class="line">    #echo "$json" </span><br><span class="line">    curl -l -H "Content-type: application/json" -X POST -d "$json" "$uploadHostDailyCheckReportApi" 2&gt;/dev/null</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">function check(){</span><br><span class="line">    version</span><br><span class="line">    getSystemStatus</span><br><span class="line">    getCpuStatus</span><br><span class="line">    getMemStatus</span><br><span class="line">    getDiskStatus</span><br><span class="line">    getNetworkStatus</span><br><span class="line">    getListenStatus</span><br><span class="line">    getProcessStatus</span><br><span class="line">    getServiceStatus</span><br><span class="line">    getAutoStartStatus</span><br><span class="line">    getLoginStatus</span><br><span class="line">    getCronStatus</span><br><span class="line">    getUserStatus</span><br><span class="line">    getPasswordStatus</span><br><span class="line">    getSudoersStatus</span><br><span class="line">    getJDKStatus</span><br><span class="line">    getFirewallStatus</span><br><span class="line">    getSSHStatus</span><br><span class="line">    getSyslogStatus</span><br><span class="line">    getSNMPStatus</span><br><span class="line">    getNTPStatus</span><br><span class="line">    getZabbixStatus</span><br><span class="line">    getInstalledStatus</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"># Perform inspections and save the inspection results  #执行检查并保存检查结果</span><br><span class="line">check &gt; $RESULTFILE</span><br><span class="line">echo "Check the result：$RESULTFILE"</span><br><span class="line"></span><br><span class="line"># Upload the result file  #上传检查结果的文件</span><br><span class="line">#curl -F "filename=@$RESULTFILE" "$uploadHostDailyCheckApi" 2&gt;/dev/null</span><br><span class="line"></span><br><span class="line">#Upload inspection result report  #上传检查结果的报表</span><br><span class="line">#uploadHostDailyCheckReport 1&gt;/dev/null</span><br></pre></td></tr></tbody></table></figure>
+                <pre class="line-numbers language-none"><code class="language-none">#!/bin/bash
+###################################################################
+# Functions: this script from polling system status
+# Info: be suitable for CentOS/RHEL 6/7 
+# Changelog:
+#      2019-01-30    haodexuan     initial commit
+###################################################################
+#set path env,if not set will some command not found in crontab
+
+export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
+source /etc/profile
+
+
+# run this script use root
+[ $(id -u) -gt 0 ] &amp;&amp; echo "please use root run the script! " &amp;&amp; exit 1
+
+# check system  version
+OS_Version=$(awk '{print $(NF-1)}' /etc/redhat-release)
+
+# declare script version date
+Script_Version="2019.01.30"
+
+
+# define polling log path
+LOGPATH=/home/logs/polling
+[ -d $LOGPATH ] || mkdir -p $LOGPATH
+RESULTFILE="$LOGPATH/HostDailyCheck-`hostname`-`date +%Y%m%d`.txt"
+
+
+# define globle variable
+report_DateTime=""    #日期 ok
+report_Hostname=""    #主机名 ok
+report_OSRelease=""    #发行版本 ok
+report_Kernel=""    #内核 ok
+report_Language=""    #语言/编码 ok
+report_LastReboot=""    #最近启动时间 ok
+report_Uptime=""    #运行时间（天） ok
+report_CPUs=""    #CPU数量 ok
+report_CPUType=""    #CPU类型 ok
+report_Arch=""    #CPU架构 ok
+report_MemTotal=""    #内存总容量(MB) ok
+report_MemFree=""    #内存剩余(MB) ok
+report_MemUsedPercent=""    #内存使用率% ok
+report_DiskTotal=""    #硬盘总容量(GB) ok
+report_DiskFree=""    #硬盘剩余(GB) ok
+report_DiskUsedPercent=""    #硬盘使用率% ok
+report_InodeTotal=""    #Inode总量 ok
+report_InodeFree=""    #Inode剩余 ok
+report_InodeUsedPercent=""    #Inode使用率 ok
+report_IP=""    #IP地址 ok
+report_MAC=""    #MAC地址 ok
+report_Gateway=""    #默认网关 ok
+report_DNS=""    #DNS ok
+report_Listen=""    #监听 ok
+report_Selinux=""    #Selinux ok
+report_Firewall=""    #防火墙 ok
+report_USERs=""    #用户 ok
+report_USEREmptyPassword=""   #空密码用户 ok
+report_USERTheSameUID=""      #相同ID的用户 ok 
+report_PasswordExpiry=""    #密码过期（天） ok
+report_RootUser=""    #root用户 ok
+report_Sudoers=""    #sudo授权  ok
+report_SSHAuthorized=""    #SSH信任主机 ok
+report_SSHDProtocolVersion=""    #SSH协议版本 ok
+report_SSHDPermitRootLogin=""    #允许root远程登录 ok
+report_DefunctProsess=""    #僵尸进程数量 ok
+report_SelfInitiatedService=""    #自启动服务数量 ok
+report_SelfInitiatedProgram=""    #自启动程序数量 ok
+report_RuningService=""           #运行中服务数  ok
+report_Crontab=""    #计划任务数 ok
+report_Syslog=""    #日志服务 ok
+report_SNMP=""    #SNMP  OK
+report_NTP=""    #NTP ok
+report_JDK=""    #JDK版本 ok
+
+
+function version(){
+    echo ""
+    echo "System Polling：Version $Script_Version "
+    echo ""
+}
+
+
+function getCpuStatus(){
+    echo ""
+    echo "############################ Check CPU Status#############################"
+    Physical_CPUs=$(grep "physical id" /proc/cpuinfo| sort | uniq | wc -l)
+    Virt_CPUs=$(grep "processor" /proc/cpuinfo | wc -l)
+    CPU_Kernels=$(grep "cores" /proc/cpuinfo|uniq| awk -F ': ' '{print $2}')
+    CPU_Type=$(grep "model name" /proc/cpuinfo | awk -F ': ' '{print $2}' | sort | uniq)
+    CPU_Arch=$(uname -m)
+    echo "物理CPU个数:$Physical_CPUs"
+    echo "逻辑CPU个数:$Virt_CPUs"
+    echo "每CPU核心数:$CPU_Kernels"
+    echo "    CPU型号:$CPU_Type"
+    echo "    CPU架构:$CPU_Arch"
+    # report information
+    report_CPUs=$Virt_CPUs    #CPU数量
+    report_CPUType=$CPU_Type  #CPU类型
+    report_Arch=$CPU_Arch     #CPU架构
+}
+
+
+function getMemStatus(){
+    echo ""
+    echo "############################ Check Memmory Usage ###########################"
+    if [[ $OS_Version &lt; 7 ]];then
+        free -mo
+    else
+        free -h
+    fi
+    # report information
+    MemTotal=$(grep MemTotal /proc/meminfo| awk '{print $2}')  #KB
+    MemFree=$(grep MemFree /proc/meminfo| awk '{print $2}')    #KB
+    let MemUsed=MemTotal-MemFree
+    MemPercent=$(awk "BEGIN {if($MemTotal==0){printf 100}else{printf \"%.2f\",$MemUsed*100/$MemTotal}}")
+    report_MemTotal="$((MemTotal/1024))""MB"        #内存总容量(MB)
+    report_MemFree="$((MemFree/1024))""MB"          #内存剩余(MB)
+    report_MemUsedPercent="$(awk "BEGIN {if($MemTotal==0){printf 100}else{printf \"%.2f\",$MemUsed*100/$MemTotal}}")""%"   #内存使用率%
+}
+
+
+function getDiskStatus(){
+    echo ""
+    echo "############################ Check Disk Status ############################"
+    df -hiP | sed 's/Mounted on/Mounted/' &gt; /tmp/inode
+    df -hTP | sed 's/Mounted on/Mounted/' &gt; /tmp/disk 
+    join /tmp/disk /tmp/inode | awk '{print $1,$2,"|",$3,$4,$5,$6,"|",$8,$9,$10,$11,"|",$12}'| column -t
+    # report information
+    diskdata=$(df -TP | sed '1d' | awk '$2!="tmpfs"{print}') #KB
+    disktotal=$(echo "$diskdata" | awk '{total+=$3}END{print total}') #KB
+    diskused=$(echo "$diskdata" | awk '{total+=$4}END{print total}')  #KB
+    diskfree=$((disktotal-diskused)) #KB
+    diskusedpercent=$(echo $disktotal $diskused | awk '{if($1==0){printf 100}else{printf "%.2f",$2*100/$1}}') 
+    inodedata=$(df -iTP | sed '1d' | awk '$2!="tmpfs"{print}')
+    inodetotal=$(echo "$inodedata" | awk '{total+=$3}END{print total}')
+    inodeused=$(echo "$inodedata" | awk '{total+=$4}END{print total}')
+    inodefree=$((inodetotal-inodeused))
+    inodeusedpercent=$(echo $inodetotal $inodeused | awk '{if($1==0){printf 100}else{printf "%.2f",$2*100/$1}}')
+    report_DiskTotal=$((disktotal/1024/1024))"GB"   #硬盘总容量(GB)
+    report_DiskFree=$((diskfree/1024/1024))"GB"     #硬盘剩余(GB)
+    report_DiskUsedPercent="$diskusedpercent""%"    #硬盘使用率%
+    report_InodeTotal=$((inodetotal/1000))"K"       #Inode总量
+    report_InodeFree=$((inodefree/1000))"K"         #Inode剩余
+    report_InodeUsedPercent="$inodeusedpercent""%"  #Inode使用率%
+    echo ""
+}
+
+
+function getSystemStatus(){
+    echo ""
+    echo "############################ Check System Status ############################"
+    if [ -e /etc/sysconfig/i18n ];then
+        default_LANG="$(grep "LANG=" /etc/sysconfig/i18n | grep -v "^#" | awk -F '"' '{print $2}')"
+    else
+        default_LANG=$LANG
+    fi
+    export LANG="en_US.UTF-8"
+    Release=$(cat /etc/redhat-release 2&gt;/dev/null)
+    Kernel=$(uname -r)
+    OS=$(uname -o)
+    Hostname=$(uname -n)
+    SELinux=$(/usr/sbin/sestatus | grep "SELinux status: " | awk '{print $3}')
+    LastReboot=$(who -b | awk '{print $3,$4}')
+    uptime=$(uptime | sed 's/.*up [,]∗, .*/\1/')
+    echo "     系统：$OS"
+    echo " 发行版本：$Release"
+    echo "     内核：$Kernel"
+    echo "   主机名：$Hostname"
+    echo "  SELinux：$SELinux"
+    echo "语言/编码：$default_LANG"
+    echo " 当前时间：$(date +'%F %T')"
+    echo " 最后启动：$LastReboot"
+    echo " 运行时间：$uptime"
+    # report information
+    report_DateTime=$(date +"%F %T")  #日期
+    report_Hostname="$Hostname"       #主机名
+    report_OSRelease="$Release"       #发行版本
+    report_Kernel="$Kernel"           #内核
+    report_Language="$default_LANG"   #语言/编码
+    report_LastReboot="$LastReboot"   #最近启动时间
+    report_Uptime="$uptime"           #运行时间（天）
+    report_Selinux="$SELinux"
+    export LANG="$default_LANG"
+    echo ""
+}
+
+function getServiceStatus(){
+    echo ""
+    echo "############################ Check Service Status ############################"
+    if [[ $OS_Version &gt; 7 ]];then
+        conf=$(systemctl list-unit-files --type=service --state=enabled --no-pager | grep "enabled")
+        process=$(systemctl list-units --type=service --state=running --no-pager | grep ".service")
+        # report information
+        report_SelfInitiatedService="$(echo "$conf" | wc -l)"       #自启动服务数量
+        report_RuningService="$(echo "$process" | wc -l)"           #运行中服务数量
+    else
+        conf=$(/sbin/chkconfig | grep -E ":on|:启用")
+        process=$(/sbin/service --status-all 2&gt;/dev/null | grep -E "is running|正在运行")
+        # report information
+        report_SelfInitiatedService="$(echo "$conf" | wc -l)"       #自启动服务数量
+        report_RuningService="$(echo "$process" | wc -l)"           #运行中服务数量
+    fi
+    echo "Service Configure"
+    echo "--------------------------------"
+    echo "$conf" | column -t
+    echo ""
+    echo "The Running Services"
+    echo "--------------------------------"
+    echo "$process"
+}
+
+function getAutoStartStatus(){
+    echo ""
+    echo "############################ Check Self-starting Services ##########################"
+    conf=$(grep -v "^#" /etc/rc.d/rc.local| sed '/^$/d')
+    echo "$conf"
+    # report information
+    report_SelfInitiatedProgram="$(echo $conf | wc -l)"    #自启动程序数量
+}
+
+
+function getLoginStatus(){
+    echo ""
+    echo "############################ Check Login In ############################"
+    last | head
+}
+
+function getNetworkStatus(){
+    echo ""
+    echo "############################ Check Network ############################"
+    if [[ $OS_Version &lt; 7 ]];then
+        /sbin/ifconfig -a | grep -v packets | grep -v collisions | grep -v inet6
+    else
+        #ip address
+        for i in $(ip link | grep BROADCAST | awk -F: '{print $2}');do ip add show $i | grep -E "BROADCAST|global"| awk '{print $2}' | tr '\n' ' ' ;echo "" ;done
+    fi
+    GATEWAY=$(ip route | grep default | awk '{print $3}')
+    DNS=$(grep nameserver /etc/resolv.conf| grep -v "#" | awk '{print $2}' | tr '\n' ',' | sed 's/,$//')
+    echo ""
+    echo "Gateway: $GATEWAY "
+    echo " DNS: $DNS"
+    # report information
+    IP=$(ip -f inet addr | grep -v 127.0.0.1 |  grep inet | awk '{print $NF,$2}' | tr '\n' ',' | sed 's/,$//')
+    MAC=$(ip link | grep -v "LOOPBACK\|loopback" | awk '{print $2}' | sed 'N;s/\n//' | tr '\n' ',' | sed 's/,$//')
+    report_IP="$IP"            #IP地址
+    report_MAC=$MAC            #MAC地址
+    report_Gateway="$GATEWAY"  #默认网关
+    report_DNS="$DNS"          #DNS
+}
+
+
+function getListenStatus(){
+    echo ""
+    echo "############################ Check Connect Status ############################"
+#    TCPListen=$(ss -ntul | column -t)
+    TCPListen=$(netstat -ntulp | column -t)
+    AllConnect=$(ss -an | awk 'NR&gt;1 {++s[$1]} END {for(k in s) print k,s[k]}' | column -t)
+    echo "$TCPListen"
+    echo "$AllConnect"
+    # report information
+    report_Listen="$(echo "$TCPListen"| sed '1d' | awk '/tcp/ {print $5}' | awk -F: '{print $NF}' | sort | uniq | wc -l)"
+}
+
+function getCronStatus(){
+    echo ""
+    echo "############################ Check Crontab ########################"
+    Crontab=0
+    for shell in $(grep -v "/sbin/nologin" /etc/shells);do
+        for user in $(grep "$shell" /etc/passwd | awk -F: '{print $1}');do
+            crontab -l -u $user &gt;/dev/null 2&gt;&amp;1
+            status=$?
+            if [ $status -eq 0 ];then
+                echo "$user"
+                echo "-------------"
+                crontab -l -u $user
+                let Crontab=Crontab+$(crontab -l -u $user | wc -l)
+                echo ""
+            fi
+        done
+    done
+    # scheduled task
+    find /etc/cron* -type f | xargs -i ls -l {} | column  -t
+    let Crontab=Crontab+$(find /etc/cron* -type f | wc -l)
+    # report information
+    report_Crontab="$Crontab"    #计划任务数
+}
+
+function getHowLongAgo(){
+    # 计算一个时间戳离现在有多久了
+    datetime="$*"
+    [ -z "$datetime" ] &amp;&amp; echo "错误的参数：getHowLongAgo() $*"
+    Timestamp=$(date +%s -d "$datetime")    #转化为时间戳
+    Now_Timestamp=$(date +%s)
+    Difference_Timestamp=$(($Now_Timestamp-$Timestamp))
+    days=0;hours=0;minutes=0;
+    sec_in_day=$((60*60*24));
+    sec_in_hour=$((60*60));
+    sec_in_minute=60
+    while (( $(($Difference_Timestamp-$sec_in_day)) &gt; 1 ))
+    do
+        let Difference_Timestamp=Difference_Timestamp-sec_in_day
+        let days++
+    done
+    while (( $(($Difference_Timestamp-$sec_in_hour)) &gt; 1 ))
+    do
+        let Difference_Timestamp=Difference_Timestamp-sec_in_hour
+        let hours++
+    done
+    echo "$days 天 $hours 小时前"
+}
+
+
+function getUserLastLogin(){
+    # 获取用户最近一次登录的时间，含年份
+    # 很遗憾last命令不支持显示年份，只有"last -t YYYYMMDDHHMMSS"表示某个时间之间的登录，我
+    # 们只能用最笨的方法了，对比今天之前和今年元旦之前（或者去年之前和前年之前……）某个用户
+    # 登录次数，如果登录统计次数有变化，则说明最近一次登录是今年。
+    username=$1
+    : ${username:="`whoami`"}
+    thisYear=$(date +%Y)
+    oldesYear=$(last | tail -n1 | awk '{print $NF}')
+    while(( $thisYear &gt;= $oldesYear));do
+        loginBeforeToday=$(last $username | grep $username | wc -l)
+        loginBeforeNewYearsDayOfThisYear=$(last $username -t $thisYear"0101000000" | grep $username | wc -l)
+        if [ $loginBeforeToday -eq 0 ];then
+            echo "Never Login"
+            break
+        elif [ $loginBeforeToday -gt $loginBeforeNewYearsDayOfThisYear ];then
+            lastDateTime=$(last -i $username | head -n1 | awk '{for(i=4;i&lt;(NF-2);i++)printf"%s ",$i}')" $thisYear" #格式如: Sat Nov 2 20:33 2015
+            lastDateTime=$(date "+%Y-%m-%d %H:%M:%S" -d "$lastDateTime")
+            echo "$lastDateTime"
+            break
+        else
+            thisYear=$((thisYear-1))
+        fi
+    done
+}
+
+function getUserStatus(){
+    echo ""
+    echo "############################ Check User ############################"
+    # /etc/passwd the last modification time
+    pwdfile="$(cat /etc/passwd)"
+    Modify=$(stat /etc/passwd | grep Modify | tr '.' ' ' | awk '{print $2,$3}')
+    echo "/etc/passwd The last modification time：$Modify ($(getHowLongAgo $Modify))"
+    echo ""
+    echo "A privileged user"
+    echo "-----------------"
+    RootUser=""
+    for user in $(echo "$pwdfile" | awk -F: '{print $1}');do
+        if [ $(id -u $user) -eq 0 ];then
+            echo "$user"
+            RootUser="$RootUser,$user"
+        fi
+    done
+    echo ""
+    echo "User List"
+    echo "--------"
+    USERs=0
+    echo "$(
+    echo "UserName UID GID HOME SHELL LasttimeLogin"
+    for shell in $(grep -v "/sbin/nologin" /etc/shells);do
+        for username in $(grep "$shell" /etc/passwd| awk -F: '{print $1}');do
+            userLastLogin="$(getUserLastLogin $username)"
+            echo "$pwdfile" | grep -w "$username" |grep -w "$shell"| awk -F: -v lastlogin="$(echo "$userLastLogin" | tr ' ' '_')" '{print $1,$3,$4,$6,$7,lastlogin}'
+        done
+        let USERs=USERs+$(echo "$pwdfile" | grep "$shell"| wc -l)
+    done
+    )" | column -t
+    echo ""
+    echo "Null Password User"
+    echo "------------------"
+    USEREmptyPassword=""
+    for shell in $(grep -v "/sbin/nologin" /etc/shells);do
+            for user in $(echo "$pwdfile" | grep "$shell" | cut -d: -f1);do
+            r=$(awk -F: '$2=="!!"{print $1}' /etc/shadow | grep -w $user)
+            if [ ! -z $r ];then
+                echo $r
+                USEREmptyPassword="$USEREmptyPassword,"$r
+            fi
+        done    
+    done
+    echo ""
+    echo "The Same UID User"
+    echo "----------------"
+    USERTheSameUID=""
+    UIDs=$(cut -d: -f3 /etc/passwd | sort | uniq -c | awk '$1&gt;1{print $2}')
+    for uid in $UIDs;do
+        echo -n "$uid";
+        USERTheSameUID="$uid"
+        r=$(awk -F: 'ORS="";$3=='"$uid"'{print ":",$1}' /etc/passwd)
+        echo "$r"
+        echo ""
+        USERTheSameUID="$USERTheSameUID $r,"
+    done
+    # report information
+    report_USERs="$USERs"    #用户
+    report_USEREmptyPassword=$(echo $USEREmptyPassword | sed 's/^,//') 
+    report_USERTheSameUID=$(echo $USERTheSameUID | sed 's/,$//') 
+    report_RootUser=$(echo $RootUser | sed 's/^,//')    #特权用户
+}
+
+
+function getPasswordStatus {
+    echo ""
+    echo "############################ Check Password Status ############################"
+    pwdfile="$(cat /etc/passwd)"
+    echo ""
+    echo "Password Expiration Check"
+    echo "-------------------------"
+    result=""
+    for shell in $(grep -v "/sbin/nologin" /etc/shells);do
+        for user in $(echo "$pwdfile" | grep "$shell" | cut -d: -f1);do
+            get_expiry_date=$(/usr/bin/chage -l $user | grep 'Password expires' | cut -d: -f2)
+            if [[ $get_expiry_date = ' never' || $get_expiry_date = 'never' ]];then
+                printf "%-15s never expiration\n" $user
+                result="$result,$user:never"
+            else
+                password_expiry_date=$(date -d "$get_expiry_date" "+%s")
+                current_date=$(date "+%s")
+                diff=$(($password_expiry_date-$current_date))
+                let DAYS=$(($diff/(60*60*24)))
+                printf "%-15s %s expiration after days\n" $user $DAYS
+                result="$result,$user:$DAYS days"
+            fi
+        done
+    done
+    report_PasswordExpiry=$(echo $result | sed 's/^,//')
+    echo ""
+    echo "Check The Password Policy"
+    echo "------------"
+    grep -v "#" /etc/login.defs | grep -E "PASS_MAX_DAYS|PASS_MIN_DAYS|PASS_MIN_LEN|PASS_WARN_AGE"
+    echo ""
+}
+
+function getSudoersStatus(){
+    echo ""
+    echo "############################ Sudoers Check #########################"
+    conf=$(grep -v "^#" /etc/sudoers| grep -v "^Defaults" | sed '/^$/d')
+    echo "$conf"
+    echo ""
+    # report information
+    report_Sudoers="$(echo $conf | wc -l)"
+}
+
+
+function getInstalledStatus(){
+    echo ""
+    echo "############################ Software Check ############################"
+    rpm -qa --last | head | column -t 
+}
+
+function getProcessStatus(){
+    echo ""
+    echo "############################ Process Check ############################"
+    if [ $(ps -ef | grep defunct | grep -v grep | wc -l) -ge 1 ];then
+        echo ""
+        echo "zombie process";
+        echo "--------"
+        ps -ef | head -n1
+        ps -ef | grep defunct | grep -v grep
+    fi
+    echo ""
+    echo "Merory Usage TOP10"
+    echo "-------------"
+    echo -e "PID %MEM RSS COMMAND
+    $(ps aux | awk '{print $2, $4, $6, $11}' | sort -k3rn | head -n 10 )"| column -t 
+    echo ""
+    echo "CPU Usage TOP10"
+    echo "------------"
+    top b -n1 | head -17 | tail -11
+    # report information
+    report_DefunctProsess="$(ps -ef | grep defunct | grep -v grep|wc -l)"
+}
+
+
+function getJDKStatus(){
+    echo ""
+    echo "############################ JDK Check #############################"
+    java -version 2&gt;/dev/null
+    if [ $? -eq 0 ];then
+        java -version 2&gt;&amp;1
+    fi
+    echo "JAVA_HOME=\"$JAVA_HOME\""
+    # report information
+    report_JDK="$(java -version 2&gt;&amp;1 | grep version | awk '{print $1,$3}' | tr -d '"')"
+}
+
+function getSyslogStatus(){
+    echo ""
+    echo "############################ Syslog Check ##########################"
+    echo "Service Status：$(getState rsyslog)"
+    echo ""
+    echo "/etc/rsyslog.conf"
+    echo "-----------------"
+    cat /etc/rsyslog.conf 2&gt;/dev/null | grep -v "^#" | grep -v "^\\$" | sed '/^$/d'  | column -t
+    #report information
+    report_Syslog="$(getState rsyslog)"
+}
+
+
+function getFirewallStatus(){
+    echo ""
+    echo "############################ Firewall Check ##########################"
+    # Firewall Status/Poilcy
+    if [[ $OS_Version &lt; 7 ]];then
+        /etc/init.d/iptables status &gt;/dev/null  2&gt;&amp;1
+        status=$?
+        if [ $status -eq 0 ];then
+                s="active"
+        elif [ $status -eq 3 ];then
+                s="inactive"
+        elif [ $status -eq 4 ];then
+                s="permission denied"
+        else
+                s="unknown"
+        fi
+    else
+        s="$(getState iptables)"
+    fi
+    echo "iptables: $s"
+    echo ""
+    echo "/etc/sysconfig/iptables"
+    echo "-----------------------"
+    cat /etc/sysconfig/iptables 2&gt;/dev/null
+    # report information
+    report_Firewall="$s"
+}
+
+
+function getSNMPStatus(){
+    #SNMP Service Status,Configure
+    echo ""
+    echo "############################ SNMP Check ############################"
+    status="$(getState snmpd)"
+    echo "Service Status：$status"
+    echo ""
+    if [ -e /etc/snmp/snmpd.conf ];then
+        echo "/etc/snmp/snmpd.conf"
+        echo "--------------------"
+        cat /etc/snmp/snmpd.conf 2&gt;/dev/null | grep -v "^#" | sed '/^$/d'
+    fi
+    # report information
+    report_SNMP="$(getState snmpd)"
+}
+
+function getState(){
+    if [[ $OS_Version &lt; 7 ]];then
+        if [ -e "/etc/init.d/$1" ];then
+            if [ `/etc/init.d/$1 status 2&gt;/dev/null | grep -E "is running|正在运行" | wc -l` -ge 1 ];then
+                r="active"
+            else
+                r="inactive"
+            fi
+        else
+            r="unknown"
+        fi
+    else
+        #CentOS 7+
+        r="$(systemctl is-active $1 2&gt;&amp;1)"
+    fi
+    echo "$r"
+}
+
+function getSSHStatus(){
+    #SSHD Service Status,Configure
+    echo ""
+    echo "############################ SSH Check #############################"
+    # Check the trusted host
+    pwdfile="$(cat /etc/passwd)"
+    echo "Service Status：$(getState sshd)"
+    Protocol_Version=$(cat /etc/ssh/sshd_config | grep Protocol | awk '{print $2}')
+    echo "SSH Protocol Version：$Protocol_Version"
+    echo ""
+    echo "Trusted Host"
+    echo "------------"
+    authorized=0
+    for user in $(echo "$pwdfile" | grep /bin/bash | awk -F: '{print $1}');do
+        authorize_file=$(echo "$pwdfile" | grep -w $user | awk -F: '{printf $6"/.ssh/authorized_keys"}')
+        authorized_host=$(cat $authorize_file 2&gt;/dev/null | awk '{print $3}' | tr '\n' ',' | sed 's/,$//')
+        if [ ! -z $authorized_host ];then
+            echo "$user authorization \"$authorized_host\" Password-less access"
+        fi
+        let authorized=authorized+$(cat $authorize_file 2&gt;/dev/null | awk '{print $3}'|wc -l)
+    done
+
+
+    echo ""
+    echo "Whether to allow ROOT remote login"
+    echo "----------------------------------"
+    config=$(cat /etc/ssh/sshd_config | grep PermitRootLogin)
+    firstChar=${config:0:1}
+    if [ $firstChar == "#" ];then
+        PermitRootLogin="yes"  #The default is to allow ROOT remote login
+    else
+        PermitRootLogin=$(echo $config | awk '{print $2}')
+    fi
+    echo "PermitRootLogin $PermitRootLogin"
+
+
+    echo ""
+    echo "/etc/ssh/sshd_config"
+    echo "--------------------"
+    cat /etc/ssh/sshd_config | grep -v "^#" | sed '/^$/d'
+    # report information
+    report_SSHAuthorized="$authorized"    #SSH信任主机
+    report_SSHDProtocolVersion="$Protocol_Version"    #SSH协议版本
+    report_SSHDPermitRootLogin="$PermitRootLogin"    #允许root远程登录
+}
+
+function getNTPStatus(){
+    # The NTP service status, the current time, configuration, etc
+    echo ""
+    echo "############################ NTP Check #############################"
+    if [ -e /etc/ntp.conf ];then
+        echo "Service Status：$(getState ntpd)"
+        echo ""
+        echo "/etc/ntp.conf"
+        echo "-------------"
+        cat /etc/ntp.conf 2&gt;/dev/null | grep -v "^#" | sed '/^$/d'
+    fi
+    # report information
+    report_NTP="$(getState ntpd)"
+}
+
+
+
+function getZabbixStatus(){
+    # Check Zabbix Serivce Status
+    echo ""
+    echo "######################### Zabbix Check ##############################"
+    netstat -nltp | grep -v grep | grep zabbix &gt; /dev/null 2&gt;&amp;1
+    if [ $? -eq 0 ];then
+       echo "Service Status": Zabbix is running!
+    else
+       echo "Service Status": Zabbix not running!
+    fi
+    # report information
+}
+
+function uploadHostDailyCheckReport(){
+    json="{
+        \"DateTime\":\"$report_DateTime\",
+        \"Hostname\":\"$report_Hostname\",
+        \"OSRelease\":\"$report_OSRelease\",
+        \"Kernel\":\"$report_Kernel\",
+        \"Language\":\"$report_Language\",
+        \"LastReboot\":\"$report_LastReboot\",
+        \"Uptime\":\"$report_Uptime\",
+        \"CPUs\":\"$report_CPUs\",
+        \"CPUType\":\"$report_CPUType\",
+        \"Arch\":\"$report_Arch\",
+        \"MemTotal\":\"$report_MemTotal\",
+        \"MemFree\":\"$report_MemFree\",
+        \"MemUsedPercent\":\"$report_MemUsedPercent\",
+        \"DiskTotal\":\"$report_DiskTotal\",
+        \"DiskFree\":\"$report_DiskFree\",
+        \"DiskUsedPercent\":\"$report_DiskUsedPercent\",
+        \"InodeTotal\":\"$report_InodeTotal\",
+        \"InodeFree\":\"$report_InodeFree\",
+        \"InodeUsedPercent\":\"$report_InodeUsedPercent\",
+        \"IP\":\"$report_IP\",
+        \"MAC\":\"$report_MAC\",
+        \"Gateway\":\"$report_Gateway\",
+        \"DNS\":\"$report_DNS\",
+        \"Listen\":\"$report_Listen\",
+        \"Selinux\":\"$report_Selinux\",
+        \"Firewall\":\"$report_Firewall\",
+        \"USERs\":\"$report_USERs\",
+        \"USEREmptyPassword\":\"$report_USEREmptyPassword\",
+        \"USERTheSameUID\":\"$report_USERTheSameUID\",
+        \"PasswordExpiry\":\"$report_PasswordExpiry\",
+        \"RootUser\":\"$report_RootUser\",
+        \"Sudoers\":\"$report_Sudoers\",
+        \"SSHAuthorized\":\"$report_SSHAuthorized\",
+        \"SSHDProtocolVersion\":\"$report_SSHDProtocolVersion\",
+        \"SSHDPermitRootLogin\":\"$report_SSHDPermitRootLogin\",
+        \"DefunctProsess\":\"$report_DefunctProsess\",
+        \"SelfInitiatedService\":\"$report_SelfInitiatedService\",
+        \"SelfInitiatedProgram\":\"$report_SelfInitiatedProgram\",
+        \"RuningService\":\"$report_RuningService\",
+        \"Crontab\":\"$report_Crontab\",
+        \"Syslog\":\"$report_Syslog\",
+        \"SNMP\":\"$report_SNMP\",
+        \"NTP\":\"$report_NTP\",
+        \"JDK\":\"$report_JDK\"
+    }"
+    #echo "$json" 
+    curl -l -H "Content-type: application/json" -X POST -d "$json" "$uploadHostDailyCheckReportApi" 2&gt;/dev/null
+}
+
+function check(){
+    version
+    getSystemStatus
+    getCpuStatus
+    getMemStatus
+    getDiskStatus
+    getNetworkStatus
+    getListenStatus
+    getProcessStatus
+    getServiceStatus
+    getAutoStartStatus
+    getLoginStatus
+    getCronStatus
+    getUserStatus
+    getPasswordStatus
+    getSudoersStatus
+    getJDKStatus
+    getFirewallStatus
+    getSSHStatus
+    getSyslogStatus
+    getSNMPStatus
+    getNTPStatus
+    getZabbixStatus
+    getInstalledStatus
+}
+
+# Perform inspections and save the inspection results  #执行检查并保存检查结果
+check &gt; $RESULTFILE
+echo "Check the result：$RESULTFILE"
+
+# Upload the result file  #上传检查结果的文件
+#curl -F "filename=@$RESULTFILE" "$uploadHostDailyCheckApi" 2&gt;/dev/null
+
+#Upload inspection result report  #上传检查结果的报表
+#uploadHostDailyCheckReport 1&gt;/dev/null<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
