@@ -41,13 +41,13 @@
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://trojan20161207.github.io/2021/10/20/centos7-de-qi-dong-guo-cheng/"/>
-    <id>https://trojan20161207.github.io/2021/10/20/centos7-de-qi-dong-guo-cheng/</id>
-    <published>2021-10-20T11:59:49.051Z</published>
-    <updated>2021-03-25T09:24:56.000Z</updated>
+    <title>CentOS7.6进入单用户模式</title>
+    <link href="https://trojan20161207.github.io/2020/12/01/centos7.6-jin-ru-dan-yong-hu-mo-shi/"/>
+    <id>https://trojan20161207.github.io/2020/12/01/centos7.6-jin-ru-dan-yong-hu-mo-shi/</id>
+    <published>2020-12-01T09:09:06.000Z</published>
+    <updated>2020-12-01T09:17:33.000Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>参考：<a href="https://blog.51cto.com/m51cto/1958856">https://blog.51cto.com/m51cto/1958856</a></p><p>centos7的启动过程</p><p>一、终端态启动顺序：</p><p>开机启过程<br>POST–&gt;BOOT<br>SEQUENCE–&gt;BOOTLOADER–&gt;KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS–&gt;/sbin/init</p><p>POST:加电自检</p><p>检查内存，CPU等</p><p>Boot sequence：选择引导顺序</p><p>光盘启动，硬盘启动，网络启动，还是U盘启动(同windows)</p><p>Bootloader：引导加载器</p><p>MBR引导记录大小为512字节，其中前446个字节就是Bootloader,主要用来引导用户选择要启动的系统或不同的内核版本，把用户选定的内核装载到RAM中的特定空间中，解压，展开，而后把系统控制权移交给内核。</p><p>grub2分两部分：<br>1.在MBR引导记录中，大小为446字节，主要功能是引导启动介质的grub主体文件<br>2.partition,/boot/grub[2],此为grub的主体。</p><p>KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS：加载内核</p><p>内核初始化，生成一个ramdisk文件，用来模拟系统环境。退出ramdisk,下一步加载到真正的根文件系统。</p><p>ramdisk：内存上临时虚拟的系统<br>ramdisk(虚拟磁盘，双缓冲，双缓存）—-&gt; ramfs（虚拟文件系统）<br>centos5:initrd</p><p>工具程序：mkinitrd</p><p>centos6,7:initramfs</p><p>工具程序：dracut,mkinitrd</p><p>/sbin/init：运行用户空间的第一个应用程序</p><p>init:</p><p>Centos 5: SysV init    配置文件：/etc/inittab<br>Centos 6: Upstart      配置文件：/etc/inittab;/etc/init/*.conf(主要）<br>Centos 7: systemd      配置文件：/etc/systemd/system;/usr/lib/systemd/system</p><p>至此，内核空间就已经启动完毕，内核启动完成接着开始启动用户态启动过程。<br>systemd是个守护进程，pid号为1,<br>后面所有启动的服务或进程都是systemd的子进程及子进程的子进程。</p><p>二、用户态的启动顺序</p><p>设置默认允许级别—&gt;初始化脚本，<br>完成系统初始化—&gt;关闭及启动对应级别下的服务—–&gt;设置登录终端—–&gt;[启动图形终端]</p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>-</p><p>CentOS7.6进入单用户模式</p><p>1、在启动grub菜单，选择编辑启动选项<br>2、按键盘e键，来进入编辑界面<br>3、找到Linux 16那行，将ro改为rw init=/sysroot/bin/sh<br>如果用的是kvm做了console连接授权，还要把授权的console=ttyS0去掉<br>4、按下 Control+x ，使用单用户模式启动<br>5、使用下面的命令访问系统<br>chroot /sysroot<br>6、重置密码<br>passwd root<br>7、更新系统信息（如果打开了selinux需要做这一步）<br>touch /.autorelabel<br>8、退出chroot<br>exit<br>9、重启系统<br>reboot</p>]]></content>
     
     
       
@@ -57,37 +57,19 @@
     
     
     
+    
+    <category term="centos" scheme="https://trojan20161207.github.io/tags/centos/"/>
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://trojan20161207.github.io/2021/10/20/centos7.6-jin-ru-dan-yong-hu-mo-shi/"/>
-    <id>https://trojan20161207.github.io/2021/10/20/centos7.6-jin-ru-dan-yong-hu-mo-shi/</id>
-    <published>2021-10-20T11:59:49.050Z</published>
-    <updated>2021-03-25T09:24:56.000Z</updated>
+    <title>centos7的启动过程</title>
+    <link href="https://trojan20161207.github.io/2020/11/01/centos7-de-qi-dong-guo-cheng/"/>
+    <id>https://trojan20161207.github.io/2020/11/01/centos7-de-qi-dong-guo-cheng/</id>
+    <published>2020-11-01T09:09:06.000Z</published>
+    <updated>2020-11-01T09:17:33.000Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>CentOS7.6进入单用户模式</p><p>1、在启动grub菜单，选择编辑启动选项<br>2、按键盘e键，来进入编辑界面<br>3、找到Linux 16那行，将ro改为rw init=/sysroot/bin/sh<br>如果用的是kvm做了console连接授权，还要把授权的console=ttyS0去掉<br>4、按下 Control+x ，使用单用户模式启动<br>5、使用下面的命令访问系统<br>chroot /sysroot<br>6、重置密码<br>passwd root<br>7、更新系统信息（如果打开了selinux需要做这一步）<br>touch /.autorelabel<br>8、退出chroot<br>exit<br>9、重启系统<br>reboot</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="https://trojan20161207.github.io/2021/10/20/zai-kubernetes-zhong-bu-shu-elasticsearch/"/>
-    <id>https://trojan20161207.github.io/2021/10/20/zai-kubernetes-zhong-bu-shu-elasticsearch/</id>
-    <published>2021-10-20T11:59:49.046Z</published>
-    <updated>2020-05-23T13:46:06.570Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="在Kubernetes中部署Elasticsearch"><a href="#在Kubernetes中部署Elasticsearch" class="headerlink" title="在Kubernetes中部署Elasticsearch"></a>在Kubernetes中部署Elasticsearch</h2><p>原创 CALIN RUS <a href="javascript:void(0);">RancherLabs</a> <em>2018-12-25</em></p><p>modified by Devin hao 2020-05-23</p><p>介绍</p>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>centos7的启动过程</p><p>一、终端态启动顺序：</p><p>开机启过程<br>POST–&gt;BOOT<br>SEQUENCE–&gt;BOOTLOADER–&gt;KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS–&gt;/sbin/init</p><p>POST:加电自检</p><p>检查内存，CPU等</p><p>Boot sequence：选择引导顺序</p><p>光盘启动，硬盘启动，网络启动，还是U盘启动(同windows)</p><p>Bootloader：引导加载器</p><p>MBR引导记录大小为512字节，其中前446个字节就是Bootloader,主要用来引导用户选择要启动的系统或不同的内核版本，把用户选定的内核装载到RAM中的特定空间中，解压，展开，而后把系统控制权移交给内核。</p><p>grub2分两部分：<br>1.在MBR引导记录中，大小为446字节，主要功能是引导启动介质的grub主体文件<br>2.partition,/boot/grub[2],此为grub的主体。</p><p>KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS：加载内核</p><p>内核初始化，生成一个ramdisk文件，用来模拟系统环境。退出ramdisk,下一步加载到真正的根文件系统。</p><p>ramdisk：内存上临时虚拟的系统<br>ramdisk(虚拟磁盘，双缓冲，双缓存）—-&gt; ramfs（虚拟文件系统）<br>centos5:initrd</p><p>工具程序：mkinitrd</p><p>centos6,7:initramfs</p><p>工具程序：dracut,mkinitrd</p><p>/sbin/init：运行用户空间的第一个应用程序</p><p>init:</p><p>Centos 5: SysV init    配置文件：/etc/inittab<br>Centos 6: Upstart      配置文件：/etc/inittab;/etc/init/*.conf(主要）<br>Centos 7: systemd      配置文件：/etc/systemd/system;/usr/lib/systemd/system</p><p>至此，内核空间就已经启动完毕，内核启动完成接着开始启动用户态启动过程。<br>systemd是个守护进程，pid号为1,<br>后面所有启动的服务或进程都是systemd的子进程及子进程的子进程。</p><p>二、用户态的启动顺序</p><p>设置默认允许级别—&gt;初始化脚本，<br>完成系统初始化—&gt;关闭及启动对应级别下的服务—–&gt;设置登录终端—–&gt;[启动图形终端]</p><p>参考：<a href="https://blog.51cto.com/m51cto/1958856">https://blog.51cto.com/m51cto/1958856</a></p>]]></content>
     
     
       
@@ -98,85 +80,7 @@
     
     
     
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="https://trojan20161207.github.io/2021/10/20/yi-wei-nian-qing-de-dong-shi-chang-gei-da-xue-sheng-de-18-tiao-hao-jian-yi/"/>
-    <id>https://trojan20161207.github.io/2021/10/20/yi-wei-nian-qing-de-dong-shi-chang-gei-da-xue-sheng-de-18-tiao-hao-jian-yi/</id>
-    <published>2021-10-20T11:59:49.042Z</published>
-    <updated>2020-03-18T13:35:35.615Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>做每件事情之前一定要考虑好，从而才能做到胸有成竹啊！</p><h2 id="一位年轻的董事长给大学生的18条好建议"><a href="#一位年轻的董事长给大学生的18条好建议" class="headerlink" title="一位年轻的董事长给大学生的18条好建议"></a><a href="https://www.cnblogs.com/axinno1/articles/2111158.html">一位年轻的董事长给大学生的18条好建议</a></h2><p>1.一定要有独立的人格、独立的思想。一个经过独立思考而坚持错误观点的人比一个不假思索而接受正确观点的人更值得肯定。不要成为灌输教育的牺牲品。</p><p>　　2.仕途，商界，学术。大致说来，每个人都注定要走上三条道路中的某一条。&lt;&lt;在进行职业生涯规划的时候，不妨以此作为思考的出发点。根据不同的职业生涯规划来塑造各自的核心竞争力。只有知道自己以后要做什么，才能知道自己应该学什么。 </p><p>3.专业无冷热，学校无高低。没有哪个用人单位会认为你代表了你的学校或者你的专业。千万不要因为你是名牌<a href="http://daxue.learning.sohu.com/">大学</a>()或者热门专业而沾沾自喜，也大可不必因为你的学校不好或者专业冷门而自卑。</p><p>　　4.千招会，不如一招熟。十个百分之十并不是百分之百，而是零。如果你有十项工作，每项都会做百分之十，那么，在用人单位眼中，你什么都不会。所以，你必须要让自己具备核心竞争力，“通才”只有在“专才”的基础上才有意义。</p><p>　　5.不逃课的学生不是好学生。什么课都不逃，跟什么课都逃掉没什么两样。一定要掌握学习的主动性，不要像读中学一样被老师牵着鼻子走。逃课没有错，但是不要逃错课。同时，既要逃课，又要让老师给高分。</p><p>　　6.一定要学会理财。对于贫困生来说，首先要做的不是挣钱，而是省钱。很多大学生读书的时候一掷千金，可是，毕业以后一个月的工资还不够交半个月的房租。</p><p>　　7.大部分女生将电脑当成了影碟机，大部分男生将电脑当成了游戏机。大学生要掌握必要的计算机操作能力，但是，很多时候电脑会成为浪费时间的堂而皇之的借口。有电脑的大学生非常多，可是，这中间很多人可能大学毕业的时候还不会Excel，不会做一个像样的PPT。</p><p>　　8.做事不如做人，人脉决定成败。一个人有多少钱并不是指他拥有多少钱的所有权，而是指他拥有多少钱的使用权。一个人具备多少能力，不只是说他一个人的时候能做什么，还包括他能通过别人做什么。一个人赚的钱，12.5%是靠自身的知识，87.5%则来自人脉关系。三十岁以前靠专业赚钱，三十岁以后拿人脉赚钱。所以，请好好珍惜大学期间建立起来的人脉关系。这几年你认识的朋友可能会是你毕业以后最可宝贵的财富。</p><p>　　9.互联网固然威力无穷，但是，如果你沉迷于网络聊天，或者沉迷于网络游戏，浪费的金钱倒是可以弥补，荒废的青春就无可追寻了。轻舞飞扬已经红颜薄命了，而痞子蔡却继续跟别的女孩发生着一次又一次的亲密接触。对于很多大学生而言，网吧就是一个血淋淋的黑洞。</p><p>　　10.爱情是不期而至的，可以期待，但不可以制造。花开堪折方须折，莫让鲜花败残枝。一个有一万块钱的人为你花掉一百元，你只占了他的百分之一；而一个只有十块钱的人为你花掉十块，你就成了他的全部。</p><p>　　11.研究生扩招的速度是30%，也就意味着硕士学历贬值的速度是30%。千万不要以为考研究生就是积极进取的表现。对于很多人而言，考研不过是一种消极逃避的方式罢了。对于绝大多数人而言，读研究生纯粹是浪费时间浪费金钱，立志从事科研、学术的人及其他少数人除外。</p><p>　　12.不要一门心思想着出国，更加不要迷信外国的月亮比中国圆。削尖脑袋记GRE词汇很可能是一件非常愚蠢也非常可悲的事情。既然全世界的公司都想到中国的市场上来瓜分蛋糕，为什么中国人还要一门心思到国外去留学然后给外国人打工？</p><p>　　13.人才市场就是一个地雷阵。通过多种方式求职固然没有错，但是千万不要饥不择食。只要用人单位一说要你交钱，你掉头就走便是了。</p><p>　　14.求职简历必须突出自己的核心竞争力。求职的时候大可不必像严守一那样“有一说一”，必要的时候恰到好处地说一些谎言是非常有用的。一份求职简历只要用一张A4纸做个表格就足够了。很多女生的求职简历就像是写真集，不但浪费钱，而且对求职毫无用处。面试其实是有规律的，每次面试的时候只要背标准答案就行了……</p><p>　　15.垃圾是放错位置的人才。所以，在找工作的时候一定要把自己放到那个让你成为人才而不是垃圾的职位上。当然，前提是你要知道自己究竟想做什么、究竟适合做什么。世界上最大的悲剧莫过于有太多的年轻人从来没有发现自己真正想做什么。骑驴找马固然没错，可是，并非随便找一头驴就能找到千里马。所以，一定要重视第一份工作。</p><p>　　16.大公司是做人，小公司是做事。进入公司工作以后，必须尽快融入写字楼政治。职员能否得到提升，很大程度不在于是否努力，而在于老板对你的赏识程度。在写字楼的政治斗争中，一定要学会自我保护。</p><p>　　17.瘦死的骆驼比马大。撑死胆大的，饿死胆小的。一定要有创业的勇气和魄力。如果你一直满足于给别人打工，那么，不管你工资多高，永远都只能是一个可怜的穷光蛋。就算月薪两万，在深圳上海那种地方，一年的存款还买不来一个小小的洗手间。</p><p>　　18.大学期间一定要多去图书馆多去自习室。很多书你现在不读，一辈子就再也没有机会去读了。虽然不是每本书看了都一定有用，但是，因为你不知道究竟哪本书以后会有用，所以只好多看书，并且抛弃那些过于功利的想法。尽管每次网到鱼的不过是一个网眼，但要想捕到鱼，就必须要编织一张网。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="https://trojan20161207.github.io/2021/10/20/readme/"/>
-    <id>https://trojan20161207.github.io/2021/10/20/readme/</id>
-    <published>2021-10-20T11:59:49.022Z</published>
-    <updated>2021-03-25T09:24:56.000Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="md"><a href="#md" class="headerlink" title="md"></a>md</h1><p>blog-md</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="https://trojan20161207.github.io/2021/10/20/linux-mu-lu-jie-gou/"/>
-    <id>https://trojan20161207.github.io/2021/10/20/linux-mu-lu-jie-gou/</id>
-    <published>2021-10-20T11:59:48.987Z</published>
-    <updated>2021-03-25T09:24:56.000Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>bin<br>bin 是 Binaries (二进制文件) 的缩写, 这个目录存放着最经常使用的命令。</p><p>boot<br>这里存放的是启动 Linux 时使用的一些核心文件，包括一些连接文件以及镜像文件。</p><p>dev<br>dev 是 Device(设备) 的缩写, 该目录下存放的是 Linux 的外部设备，在 Linux 中访问设备的方式和访问文件的方式是相同的。</p><p>etc<br>etc 是 Etcetera(等等) 的缩写,这个目录用来存放所有的系统管理所需要的配置文件和子目录。</p><p>home<br>用户的主目录，在 Linux 中，每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的</p><p>lib<br>lib 是 Library(库) 的缩写这个目录里存放着系统最基本的动态连接共享库，其作用类似于 Windows 里的 DLL 文件。几乎所有的应用程序都需要用到这些共享库。</p><p>通过/bin和/sbin中的二进制文件。</p><p><a href="https://qastack.cn/unix/74646/difference-between-lib-lib32-lib64-libx32-and-libexec">https://qastack.cn/unix/74646/difference-between-lib-lib32-lib64-libx32-and-libexec</a></p><p>lib64<br>存放64位lib库</p><p>/lost+found：<br>这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。</p><p>media<br>linux 系统会自动识别一些设备，例如U盘、光驱等等，当识别后，Linux 会把识别的设备挂载到这个目录下。</p><p>mnt<br>系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将光驱挂载在 /mnt/ 上，然后进入该目录就可以查看光驱里的内容了。</p><p>opt<br>opt 是 optional(可选) 的缩写，这是给主机额外安装软件所摆放的目录。比如你安装一个ORACLE数据库则就可以放到这个目录下。默认是空的。</p><p>proc<br>proc 是 Processes(进程) 的缩写，/proc 是一种伪文件系统（也即虚拟文件系统），存储的是当前内核运行状态的一系列特殊文件，这个目录是一个虚拟的目录，它是系统内存的映射，我们可以通过直接访问这个目录来获取系统信息。</p><p>这个目录的内容不在硬盘上而是在内存里，我们也可以直接修改里面的某些文件，比如可以通过下面的命令来屏蔽主机的ping命令，使别人无法ping你的机器：<br>echo 1 &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all</p><p>root<br>该目录为系统管理员，也称作超级权限者的用户主目录。</p><p>run<br>是一个临时文件系统，存储系统启动以来的信息。当系统重启时，这个目录下的文件应该被删掉或清除。如果你的系统上有 /var/run 目录，应该让它指向 run。</p><p>sbin<br>s 就是 Super User 的意思，是 Superuser Binaries (超级用户的二进制文件)的缩写，这里存放的是系统管理员使用的系统管理程序。</p><p>/selinux：<br> 这个目录是 Redhat/CentOS 所特有的目录，Selinux 是一个安全机制，类似于 windows 的防火墙，但是这套机制比较复杂，这个目录就是存放selinux相关的文件的。</p><p>src</p><p>srv<br>该目录存放一些服务启动之后需要提取的数据。</p><p>sys<br>这是 Linux2.6 内核的一个很大的变化。该目录下安装了<br>2.6 内核中新出现的一个文件系统 sysfs 。</p><p>sysfs 文件系统集成了下面3种文件系统的信息：<br>针对进程信息的 proc 文件系统、<br>针对设备的 devfs 文件系统<br>以及针对伪终端的 devpts 文件系统。</p><p>该文件系统是内核设备树的一个直观反映。</p><p>当一个内核对象被创建的时候，对应的文件和目录也在内核对象子系统中被创建。</p><p>tmp<br>tmp 是 temporary(临时) 的缩写这个目录是用来存放一些临时文件的。</p><p>usr<br>usr 是 unix shared resources(共享资源) 的缩写，这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于 windows 下的 program files 目录。</p><p>var<br>var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放在这个目录下。包括各种日志文件。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://trojan20161207.github.io/2021/10/20/hello-world/"/>
-    <id>https://trojan20161207.github.io/2021/10/20/hello-world/</id>
-    <published>2021-10-20T11:58:46.197Z</published>
-    <updated>2021-10-20T11:58:46.197Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new "My New Post"<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
-      
-    
-    
-    
+    <category term="centos" scheme="https://trojan20161207.github.io/tags/centos/"/>
     
   </entry>
   
@@ -442,6 +346,126 @@
     <updated>2019-09-23T07:09:37.000Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><hr><p>　　Nginx Rewrite 规则相关指令有if,rewrite,set,return,break等，其中最关键的就是rewrite。一个简单的Nginx Rewrite规则语法如下：</p><p><code>rewrite ^/b/(.\*)\.html /play.php?video=$1 break;</code></p><p><strong>正则表达式匹配，</strong>其中：</p><ol><li>~ 为区分大小写匹配；  </li><li>~* 为不区分大小写匹配；  </li><li>!<del>和!</del>*分别为区分大小写不匹配及不区分大小写不匹配。</li></ol><p><strong>文件及目录匹配，</strong>其中：</p><ol><li>-f和!-f用来判断是否存在文件；  </li><li>-d和!-d用来判断是否存在目录；  </li><li>-e和!-e用来判断是否存在文件或目录；  </li><li>-x和!-x用来判断文件是否可执行。  </li></ol><p><strong>flag标记有：</strong></p><ol><li>last 相当于Apache里的[L]标记，表示完成rewrite；</li><li>break 终止匹配, 不再匹配后面的规则；</li><li>redirect 返回302临时重定向 地址栏会显示跳转后的地址；</li><li>permanent 返回301永久重定向 地址栏会显示跳转后的地址。</li></ol><p>当然除了这些以外，Rewrite规则中还会用到一些相应的全局变量，如$args，$url等等</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="nginx" scheme="https://trojan20161207.github.io/categories/nginx/"/>
+    
+    
+    <category term="nginx" scheme="https://trojan20161207.github.io/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>nginx location配置</title>
+    <link href="https://trojan20161207.github.io/2019/09/23/nginxlocation-pei-zhi/"/>
+    <id>https://trojan20161207.github.io/2019/09/23/nginxlocation-pei-zhi/</id>
+    <published>2019-09-23T07:08:05.000Z</published>
+    <updated>2019-09-23T07:08:05.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><hr><p>语法规则： <em>location [=|<del>|</del></em>|^~] /uri/ { … }*</p><p>| — | — |<br>| 通配符 |  说明 |<br>| =   |开头表示精确匹配 |<br>| ^~ |  开头表示uri以某个常规字符串开头，理解为匹配 url路径即可 |<br>| ~ |  开头表示区分大小写的正则匹配 |<br>| !~ |  区分大小写不匹配 |<br>| !~* |  不区分大小写不匹配 |<br>| ~* |  开头表示不区分大小写的正则匹配 |<br>| / |  通用匹配，任何请求都会匹配到 |</p><p>　　首先匹配 =，其次匹配^~, 其次是按文件中顺序的正则匹配，最后是交给 / 通用匹配。当有匹配成功时候，停止匹配，按当前匹配规则处理请求。</p><pre class="line-numbers language-none"><code class="language-none">location = / {   #规则A}location = /login {   #规则B}location ^~ /static/ {   #规则C}location ~ \.(gif|jpg|png|js|css)$ {   #规则D}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>　　那么产生的效果如下：</p><p>访问根目录/， 比如<a href="http://localhost/">http://localhost/</a> 将匹配规则A；<br>访问 <a href="http://localhost/login">http://localhost/login</a> 将匹配规则B；<br>访问 <a href="http://localhost/static/a.html">http://localhost/static/a.html</a> 将匹配规则C；<br>访问 <a href="http://localhost/a.gif">http://localhost/a.gif</a>, <a href="http://localhost/b.jpg">http://localhost/b.jpg</a> 将匹配规则D。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="nginx" scheme="https://trojan20161207.github.io/categories/nginx/"/>
+    
+    
+    <category term="nginx" scheme="https://trojan20161207.github.io/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>nginx 负载均衡</title>
+    <link href="https://trojan20161207.github.io/2019/09/23/nginx-fu-zai-jun-heng/"/>
+    <id>https://trojan20161207.github.io/2019/09/23/nginx-fu-zai-jun-heng/</id>
+    <published>2019-09-23T06:46:50.000Z</published>
+    <updated>2019-09-23T07:34:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>　　<em>负载均衡</em>（又称为负载分担），英文名称为Load Balance，其意思就是将负载（工作任务）进行平衡、分摊到多个操作单元上进行执行，例如Web服务器、FTP服务器、企业关键应用服务器和其它关键任务服务器等，从而共同完成工作任务。</p><p>　　nginx的<em>upstream</em>目前支持4种方式的分配</p><p>　　1)、<em>default</em>（默认） 每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。</p><p>　　2)、<em>weight</em> 指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。</p><p>　　3)、<em>ip_hash</em> 每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题。</p><p>　　4)、<em>fair</em>（第三方） 按后端服务器的响应时间来分配请求，响应时间短的优先分配。</p><pre class="line-numbers language-none"><code class="language-none">upstream ixdba.net{    ip_hash;    server 192.168.12.133:80;    server 192.168.12.134:80  down;    server 192.168.12.135:8009  max_fails=3  fail_timeout=20s;    server 192.168.12.136:8080;}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>　　<em>upstream</em>是Nginx的HTTP Upstream模块，这个模块通过一个简单的调度算法来实现客户端IP到后端服务器的负载均衡。在上面的设定中，通过upstream指令指定了一个负载均衡器的名称ixdba.net。这个名称可以任意指定，在后面需要的地方直接调用即可。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="nginx" scheme="https://trojan20161207.github.io/categories/nginx/"/>
+    
+    
+    <category term="nginx" scheme="https://trojan20161207.github.io/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一位年轻的董事长给大学生的18条好建议</title>
+    <link href="https://trojan20161207.github.io/2019/09/23/yi-wei-nian-qing-de-dong-shi-chang-gei-da-xue-sheng-de-18-tiao-hao-jian-yi/"/>
+    <id>https://trojan20161207.github.io/2019/09/23/yi-wei-nian-qing-de-dong-shi-chang-gei-da-xue-sheng-de-18-tiao-hao-jian-yi/</id>
+    <published>2019-09-23T06:46:50.000Z</published>
+    <updated>2019-09-23T07:34:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>做每件事情之前一定要考虑好，从而才能做到胸有成竹啊！</p><h2 id="一位年轻的董事长给大学生的18条好建议"><a href="#一位年轻的董事长给大学生的18条好建议" class="headerlink" title="一位年轻的董事长给大学生的18条好建议"></a>一位年轻的董事长给大学生的18条好建议</h2><p>　　1.一定要有独立的人格、独立的思想。一个经过独立思考而坚持错误观点的人比一个不假思索而接受正确观点的人更值得肯定。不要成为灌输教育的牺牲品。</p><p>　　2.仕途，商界，学术。大致说来，每个人都注定要走上三条道路中的某一条。在进行职业生涯规划的时候，不妨以此作为思考的出发点。根据不同的职业生涯规划来塑造各自的核心竞争力。只有知道自己以后要做什么，才能知道自己应该学什么。 </p><p>　　3.专业无冷热，学校无高低。没有哪个用人单位会认为你代表了你的学校或者你的专业。<br>千万不要因为你是名牌大学或者热门专业而沾沾自喜，也大可不必因为你的学校不好或者专业冷门而自卑。</p><p>　　4.千招会，不如一招熟。十个百分之十并不是百分之百，而是零。如果你有十项工作，每项都会做百分之十，那么，在用人单位眼中，你什么都不会。所以，你必须要让自己具备核心竞争力，“通才”只有在“专才”的基础上才有意义。</p><p>　　5.不逃课的学生不是好学生。什么课都不逃，跟什么课都逃掉没什么两样。一定要掌握学习的主动性，不要像读中学一样被老师牵着鼻子走。逃课没有错，但是不要逃错课。同时，既要逃课，又要让老师给高分。</p><p>　　6.一定要学会理财。对于贫困生来说，首先要做的不是挣钱，而是省钱。很多大学生读书的时候一掷千金，可是，毕业以后一个月的工资还不够交半个月的房租。</p><p>　　7.大部分女生将电脑当成了影碟机，大部分男生将电脑当成了游戏机。大学生要掌握必要的计算机操作能力，但是，很多时候电脑会成为浪费时间的堂而皇之的借口。有电脑的大学生非常多，可是，这中间很多人可能大学毕业的时候还不会Excel，不会做一个像样的PPT。</p><p>　　8.做事不如做人，人脉决定成败。一个人有多少钱并不是指他拥有多少钱的所有权，而是指他拥有多少钱的使用权。一个人具备多少能力，不只是说他一个人的时候能做什么，还包括他能通过别人做什么。一个人赚的钱，12.5%是靠自身的知识，87.5%则来自人脉关系。三十岁以前靠专业赚钱，三十岁以后拿人脉赚钱。所以，请好好珍惜大学期间建立起来的人脉关系。这几年你认识的朋友可能会是你毕业以后最可宝贵的财富。</p><p>　　9.互联网固然威力无穷，但是，如果你沉迷于网络聊天，或者沉迷于网络游戏，浪费的金钱倒是可以弥补，荒废的青春就无可追寻了。轻舞飞扬已经红颜薄命了，而痞子蔡却继续跟别的女孩发生着一次又一次的亲密接触。对于很多大学生而言，网吧就是一个血淋淋的黑洞。</p><p>　　10.爱情是不期而至的，可以期待，但不可以制造。花开堪折方须折，莫让鲜花败残枝。一个有一万块钱的人为你花掉一百元，你只占了他的百分之一；而一个只有十块钱的人为你花掉十块，你就成了他的全部。</p><p>　　11.研究生扩招的速度是30%，也就意味着硕士学历贬值的速度是30%。千万不要以为考研究生就是积极进取的表现。对于很多人而言，考研不过是一种消极逃避的方式罢了。对于绝大多数人而言，读研究生纯粹是浪费时间浪费金钱，立志从事科研、学术的人及其他少数人除外。</p><p>　　12.不要一门心思想着出国，更加不要迷信外国的月亮比中国圆。削尖脑袋记GRE词汇很可能是一件非常愚蠢也非常可悲的事情。既然全世界的公司都想到中国的市场上来瓜分蛋糕，为什么中国人还要一门心思到国外去留学然后给外国人打工？</p><p>　　13.人才市场就是一个地雷阵。通过多种方式求职固然没有错，但是千万不要饥不择食。只要用人单位一说要你交钱，你掉头就走便是了。</p><p>　　14.求职简历必须突出自己的核心竞争力。求职的时候大可不必像严守一那样“有一说一”，必要的时候恰到好处地说一些谎言是非常有用的。一份求职简历只要用一张A4纸做个表格就足够了。很多女生的求职简历就像是写真集，不但浪费钱，而且对求职毫无用处。面试其实是有规律的，每次面试的时候只要背标准答案就行了……</p><p>　　15.垃圾是放错位置的人才。所以，在找工作的时候一定要把自己放到那个让你成为人才而不是垃圾的职位上。当然，前提是你要知道自己究竟想做什么、究竟适合做什么。世界上最大的悲剧莫过于有太多的年轻人从来没有发现自己真正想做什么。骑驴找马固然没错，可是，并非随便找一头驴就能找到千里马。所以，一定要重视第一份工作。</p><p>　　16.大公司是做人，小公司是做事。进入公司工作以后，必须尽快融入写字楼政治。职员能否得到提升，很大程度不在于是否努力，而在于老板对你的赏识程度。在写字楼的政治斗争中，一定要学会自我保护。</p><p>　　17.瘦死的骆驼比马大。撑死胆大的，饿死胆小的。一定要有创业的勇气和魄力。如果你一直满足于给别人打工，那么，不管你工资多高，永远都只能是一个可怜的穷光蛋。就算月薪两万，在深圳上海那种地方，一年的存款还买不来一个小小的洗手间。</p><p>　　18.大学期间一定要多去图书馆多去自习室。很多书你现在不读，一辈子就再也没有机会去读了。虽然不是每本书看了都一定有用，但是，因为你不知道究竟哪本书以后会有用，所以只好多看书，并且抛弃那些过于功利的想法。尽管每次网到鱼的不过是一个网眼，但要想捕到鱼，就必须要编织一张网。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="感悟" scheme="https://trojan20161207.github.io/categories/%E6%84%9F%E6%82%9F/"/>
+    
+    
+    <category term="感悟" scheme="https://trojan20161207.github.io/tags/%E6%84%9F%E6%82%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>nginx http配置指令</title>
+    <link href="https://trojan20161207.github.io/2019/09/23/nginxhttp-pei-zhi-zhi-ling/"/>
+    <id>https://trojan20161207.github.io/2019/09/23/nginxhttp-pei-zhi-zhi-ling/</id>
+    <published>2019-09-23T06:45:41.000Z</published>
+    <updated>2019-09-23T07:36:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><hr><p>　　设定mime类型,类型由mime.type文件定义 用<em>include</em>指令.</p><pre class="line-numbers language-none"><code class="language-none">include       /etc/nginx/mime.types;default_type  application/octet-stream;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>　　开启gzip压缩指令</p><pre class="line-numbers language-none"><code class="language-none">gzip on;gzip_disable "MSIE [1-6]\.(?!.*SV1)";<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>　　设定负载均衡的服务器列表用指令<em>upstream</em>。</p><pre class="line-numbers language-none"><code class="language-none">upstream mysvr {    #weigth参数表示权值，权值越高被分配到的几率越大    #本机上的Squid开启3128端口    server 192.168.8.1:3128 weight=5;    server 192.168.8.2:80  weight=1;    server 192.168.8.3:80  weight=6;}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>　　设定虚拟主机用指令<em>server</em>，其中包括端口，主机名称，默认请求等设置。</p><pre class="line-numbers language-none"><code class="language-none">server {    #侦听80端口    listen       80;    #定义使用www.xx.com访问    server_name  www.xx.com;    #设定本虚拟主机的访问日志    access_log  logs/www.xx.com.access.log  main;    #默认请求    location / {          root   /root;      #定义服务器的默认网站根目录位置          index index.php index.html index.htm;   #定义首页索引文件的名称          fastcgi_pass  www.xx.com;          fastcgi_param SCRIPT_FILENAME $document_root/$fastcgi_script_name;          include /etc/nginx/fastcgi_params;     }    # 定义错误提示页面    error_page   500 502 503 504 /50x.html;     location = /50x.html {    root   /root;    }}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>请求转向指令_proxy<em>pass</em></p><pre class="line-numbers language-none"><code class="language-none">proxy_pass http://www.baidu.com;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="nginx" scheme="https://trojan20161207.github.io/categories/nginx/"/>
+    
+    
+    <category term="nginx" scheme="https://trojan20161207.github.io/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>nginx event配置指令</title>
+    <link href="https://trojan20161207.github.io/2019/09/23/nginxevent-pei-zhi-zhi-ling/"/>
+    <id>https://trojan20161207.github.io/2019/09/23/nginxevent-pei-zhi-zhi-ling/</id>
+    <published>2019-09-23T06:44:27.000Z</published>
+    <updated>2019-09-23T07:36:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><hr><p>　　参考事件模型指令：<em>use [ kqueue | rtsig | epoll | /dev/poll | select | poll ];</em></p><pre class="line-numbers language-none"><code class="language-none">use epoll;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>　　注：epoll模型是Linux 2.6以上版本内核中的高性能网络I/O模型，如果跑在FreeBSD上面，就用kqueue模型。</p><p>　　设置单个进程最大连接数用指令：_worker<em>connections</em>（最大连接数=连接数*进程数）</p><pre class="line-numbers language-none"><code class="language-none">worker_connections 65535;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>]]></content>
     
     
       

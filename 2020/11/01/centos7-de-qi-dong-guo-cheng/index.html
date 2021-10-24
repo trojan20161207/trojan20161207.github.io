@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="小冲的生活">
+    <meta name="keywords" content="centos7的启动过程, 小冲的生活">
     <meta name="description" content="小冲的个人博客">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>小冲的生活</title>
+    <title>centos7的启动过程 | 小冲的生活</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/libs/awesome/css/all.css">
@@ -324,12 +324,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title"></h1>
+                    <h1 class="description center-align post-title">centos7的启动过程</h1>
                 </div>
             </div>
         </div>
@@ -443,9 +443,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/centos/">
+                                <span class="chip bg-color">centos</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -457,7 +461,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-10-20
+                    2020-11-01
                 </div>
                 
 
@@ -486,34 +490,29 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>bin<br>bin 是 Binaries (二进制文件) 的缩写, 这个目录存放着最经常使用的命令。</p>
-<p>boot<br>这里存放的是启动 Linux 时使用的一些核心文件，包括一些连接文件以及镜像文件。</p>
-<p>dev<br>dev 是 Device(设备) 的缩写, 该目录下存放的是 Linux 的外部设备，在 Linux 中访问设备的方式和访问文件的方式是相同的。</p>
-<p>etc<br>etc 是 Etcetera(等等) 的缩写,这个目录用来存放所有的系统管理所需要的配置文件和子目录。</p>
-<p>home<br>用户的主目录，在 Linux 中，每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的</p>
-<p>lib<br>lib 是 Library(库) 的缩写这个目录里存放着系统最基本的动态连接共享库，其作用类似于 Windows 里的 DLL 文件。几乎所有的应用程序都需要用到这些共享库。</p>
-<p>通过/bin和/sbin中的二进制文件。</p>
-<p><a target="_blank" rel="noopener" href="https://qastack.cn/unix/74646/difference-between-lib-lib32-lib64-libx32-and-libexec">https://qastack.cn/unix/74646/difference-between-lib-lib32-lib64-libx32-and-libexec</a></p>
-<p>lib64<br>存放64位lib库</p>
-<p>/lost+found：<br>这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。</p>
-<p>media<br>linux 系统会自动识别一些设备，例如U盘、光驱等等，当识别后，Linux 会把识别的设备挂载到这个目录下。</p>
-<p>mnt<br>系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将光驱挂载在 /mnt/ 上，然后进入该目录就可以查看光驱里的内容了。</p>
-<p>opt<br>opt 是 optional(可选) 的缩写，这是给主机额外安装软件所摆放的目录。比如你安装一个ORACLE数据库则就可以放到这个目录下。默认是空的。</p>
-<p>proc<br>proc 是 Processes(进程) 的缩写，/proc 是一种伪文件系统（也即虚拟文件系统），存储的是当前内核运行状态的一系列特殊文件，这个目录是一个虚拟的目录，它是系统内存的映射，我们可以通过直接访问这个目录来获取系统信息。</p>
-<p>这个目录的内容不在硬盘上而是在内存里，我们也可以直接修改里面的某些文件，比如可以通过下面的命令来屏蔽主机的ping命令，使别人无法ping你的机器：<br>echo 1 &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all</p>
-<p>root<br>该目录为系统管理员，也称作超级权限者的用户主目录。</p>
-<p>run<br>是一个临时文件系统，存储系统启动以来的信息。当系统重启时，这个目录下的文件应该被删掉或清除。如果你的系统上有 /var/run 目录，应该让它指向 run。</p>
-<p>sbin<br>s 就是 Super User 的意思，是 Superuser Binaries (超级用户的二进制文件)的缩写，这里存放的是系统管理员使用的系统管理程序。</p>
-<p>/selinux：<br> 这个目录是 Redhat/CentOS 所特有的目录，Selinux 是一个安全机制，类似于 windows 的防火墙，但是这套机制比较复杂，这个目录就是存放selinux相关的文件的。</p>
-<p>src</p>
-<p>srv<br>该目录存放一些服务启动之后需要提取的数据。</p>
-<p>sys<br>这是 Linux2.6 内核的一个很大的变化。该目录下安装了<br>2.6 内核中新出现的一个文件系统 sysfs 。</p>
-<p>sysfs 文件系统集成了下面3种文件系统的信息：<br>针对进程信息的 proc 文件系统、<br>针对设备的 devfs 文件系统<br>以及针对伪终端的 devpts 文件系统。</p>
-<p>该文件系统是内核设备树的一个直观反映。</p>
-<p>当一个内核对象被创建的时候，对应的文件和目录也在内核对象子系统中被创建。</p>
-<p>tmp<br>tmp 是 temporary(临时) 的缩写这个目录是用来存放一些临时文件的。</p>
-<p>usr<br>usr 是 unix shared resources(共享资源) 的缩写，这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于 windows 下的 program files 目录。</p>
-<p>var<br>var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放在这个目录下。包括各种日志文件。</p>
+                <p>centos7的启动过程</p>
+<p>一、终端态启动顺序：</p>
+<p>开机启过程<br>POST–&gt;BOOT<br>SEQUENCE–&gt;BOOTLOADER–&gt;KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS–&gt;/sbin/init</p>
+<p>POST:加电自检</p>
+<p>检查内存，CPU等</p>
+<p>Boot sequence：选择引导顺序</p>
+<p>光盘启动，硬盘启动，网络启动，还是U盘启动(同windows)</p>
+<p>Bootloader：引导加载器</p>
+<p>MBR引导记录大小为512字节，其中前446个字节就是Bootloader,主要用来引导用户选择要启动的系统或不同的内核版本，把用户选定的内核装载到RAM中的特定空间中，解压，展开，而后把系统控制权移交给内核。</p>
+<p>grub2分两部分：<br>1.在MBR引导记录中，大小为446字节，主要功能是引导启动介质的grub主体文件<br>2.partition,/boot/grub[2],此为grub的主体。</p>
+<p>KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS：加载内核</p>
+<p>内核初始化，生成一个ramdisk文件，用来模拟系统环境。退出ramdisk,下一步加载到真正的根文件系统。</p>
+<p>ramdisk：内存上临时虚拟的系统<br>ramdisk(虚拟磁盘，双缓冲，双缓存）—-&gt; ramfs（虚拟文件系统）<br>centos5:initrd</p>
+<p>工具程序：mkinitrd</p>
+<p>centos6,7:initramfs</p>
+<p>工具程序：dracut,mkinitrd</p>
+<p>/sbin/init：运行用户空间的第一个应用程序</p>
+<p>init:</p>
+<p>Centos 5: SysV init    配置文件：/etc/inittab<br>Centos 6: Upstart      配置文件：/etc/inittab;/etc/init/*.conf(主要）<br>Centos 7: systemd      配置文件：/etc/systemd/system;/usr/lib/systemd/system</p>
+<p>至此，内核空间就已经启动完毕，内核启动完成接着开始启动用户态启动过程。<br>systemd是个守护进程，pid号为1,<br>后面所有启动的服务或进程都是systemd的子进程及子进程的子进程。</p>
+<p>二、用户态的启动顺序</p>
+<p>设置默认允许级别—&gt;初始化脚本，<br>完成系统初始化—&gt;关闭及启动对应级别下的服务—–&gt;设置登录终端—–&gt;[启动图形终端]</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.51cto.com/m51cto/1958856">https://blog.51cto.com/m51cto/1958856</a></p>
 
                 
             </div>
@@ -540,7 +539,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://trojan20161207.github.io/2021/10/20/linux-mu-lu-jie-gou/">https://trojan20161207.github.io/2021/10/20/linux-mu-lu-jie-gou/</a>
+                    <a href="https://trojan20161207.github.io/2020/11/01/centos7-de-qi-dong-guo-cheng/">https://trojan20161207.github.io/2020/11/01/centos7-de-qi-dong-guo-cheng/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -577,7 +576,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/centos/">
+                                    <span class="chip bg-color">centos</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -702,7 +705,7 @@
                 <div class="reward-tabs">
                     <ul class="tabs row">
                         <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
-                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat2">微 信</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
                         <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
@@ -749,13 +752,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/10/20/readme/">
+                <a href="/2020/12/01/centos7.6-jin-ru-dan-yong-hu-mo-shi/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/19.jpg" class="responsive-img" alt="CentOS7.6进入单用户模式">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">CentOS7.6进入单用户模式</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -766,7 +769,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-20
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-01
                         </span>
                         <span class="publish-author">
                             
@@ -775,6 +778,14 @@
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/centos/">
+                        <span class="chip bg-color">centos</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -786,13 +797,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/10/20/hello-world/">
+                <a href="/2019/11/01/gai-jin-ci-guan-dao-zhong-zi-dong-hua-xing-neng-ce-shi-de-10-tiao-ji-qiao-di-1-bu-fen/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/16.jpg" class="responsive-img" alt="改进CI管道中自动化性能测试的10条技巧（第1部分）">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">改进CI管道中自动化性能测试的10条技巧（第1部分）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -803,7 +814,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-01
                             </span>
                         <span class="publish-author">
                             
@@ -812,6 +823,14 @@
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">
+                        <span class="chip bg-color">自动化测试</span>
+                    </a>
+                    
                 </div>
                 
             </div>

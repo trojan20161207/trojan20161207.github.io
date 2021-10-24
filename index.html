@@ -466,56 +466,6 @@
         
             
             <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/3.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">11 个 Nginx 参数性能优化工作</div>
-                            <div class="description center-align">
-                                
-                                    工作上，需要配置 Nginx，要投入生产使用，做了一点优化工作，加上以前也经常折腾 Nginx，故记下一些优化工作。
-优化 Nginx 进程数量配置参数如下：
-worker_processes  1; # 指定 Nginx 要开启的进程数，
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/2019/09/01/11-ge-nginx-can-shu-xing-neng-you-hua-gong-zuo/" class="waves-effect waves-light btn"
-                                   target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
-                 style="background-image: url('https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/9.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col s10 offset-s1">
-                            <div class="title center-align">DevOps角色：您梦寐以求的工作是什么？</div>
-                            <div class="description center-align">
-                                
-                                    在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。
-有这么多DevOps角色可供选择，您将是哪个构建基块？
-当IT专业人员迫切希望成为DevOps的专家时，对于各种DevOps角色还有很多困惑。因此，本文致力于使实施Dev
-                                
-                            </div>
-                            <div class="cover-btns">
-                                <a href="/2019/11/01/devops-jiao-se-nin-meng-mei-yi-qiu-de-gong-zuo-shi-shi-me/" class="waves-effect waves-light btn"
-                                   target="_blank">
-                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="carousel-item amber white-text carousel-post bg-cover"
                  style="background-image: url('https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/5.jpg');">
                 <div class="container">
                     <div class="row">
@@ -716,28 +666,72 @@ worker_processes  1; # 指定 Nginx 要开启的进程数，
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2021/10/20/centos7-de-qi-dong-guo-cheng/">
+                    <a href="/2020/12/01/centos7.6-jin-ru-dan-yong-hu-mo-shi/">
                         <div class="card-image">
                             
                             
-                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/19.jpg" class="responsive-img" alt="CentOS7.6进入单用户模式">
                             
-                            <span class="card-title"></span>
+                            <span class="card-title">CentOS7.6进入单用户模式</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                参考：https://blog.51cto.com/m51cto/1958856
-centos7的启动过程
+                                -
+CentOS7.6进入单用户模式
+1、在启动grub菜单，选择编辑启动选项2、按键盘e键，来进入编辑界面3、找到Linux 16那行，将ro改为rw init=/sysroot/bin/sh如果用的是kvm做了console连接授权，还
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-01
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                Xiaochong
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/centos/">
+                            <span class="chip bg-color">centos</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2020/11/01/centos7-de-qi-dong-guo-cheng/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/18.jpg" class="responsive-img" alt="centos7的启动过程">
+                            
+                            <span class="card-title">centos7的启动过程</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                centos7的启动过程
 一、终端态启动顺序：
-开机启过程POST–&gt;BOOTSEQUENCE–&gt;BOOTLOADER–&gt;KERNEL+IN
+开机启过程POST–&gt;BOOTSEQUENCE–&gt;BOOTLOADER–&gt;KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS–&gt;/sbin/init
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-01
                             </span>
                             <span class="publish-author">
                                 
@@ -749,31 +743,40 @@ centos7的启动过程
                     </div>
 
                     
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/centos/">
+                            <span class="chip bg-color">centos</span>
+                        </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2021/10/20/centos7.6-jin-ru-dan-yong-hu-mo-shi/">
+                    <a href="/2019/11/01/gai-jin-ci-guan-dao-zhong-zi-dong-hua-xing-neng-ce-shi-de-10-tiao-ji-qiao-di-1-bu-fen/">
                         <div class="card-image">
                             
                             
-                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/16.jpg" class="responsive-img" alt="改进CI管道中自动化性能测试的10条技巧（第1部分）">
                             
-                            <span class="card-title"></span>
+                            <span class="card-title">改进CI管道中自动化性能测试的10条技巧（第1部分）</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                CentOS7.6进入单用户模式
-1、在启动grub菜单，选择编辑启动选项2、按键盘e键，来进入编辑界面3、找到Linux 16那行，将ro改为rw init=/sysroot/bin/sh如果用的是kvm做了console连接授权，还要把
+                                看一看如何通过连续测试和SLA改善CI管道的性能。
+这是创建更好的CI管道的方法的1和2。
+在持续集成管道中正确进行测试是Web规模软件开发的关键部分。对于许多公司而言，这是一个挑战，尤其是在自动化性能测试方面。这不是因为缺乏努力。许多公司
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-01
                             </span>
                             <span class="publish-author">
                                 
@@ -785,33 +788,40 @@ centos7的启动过程
                     </div>
 
                     
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">
+                            <span class="chip bg-color">自动化测试</span>
+                        </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2021/10/20/zai-kubernetes-zhong-bu-shu-elasticsearch/">
+                    <a href="/2019/11/01/devops-jiao-se-nin-meng-mei-yi-qiu-de-gong-zuo-shi-shi-me/">
                         <div class="card-image">
                             
                             
-                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/9.jpg" class="responsive-img" alt="DevOps角色：您梦寐以求的工作是什么？">
                             
-                            <span class="card-title"></span>
+                            <span class="card-title">DevOps角色：您梦寐以求的工作是什么？</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                在Kubernetes中部署Elasticsearch原创 CALIN RUS RancherLabs 2018-12-25
-modified by Devin hao 2020-05-23
-介绍
-
+                                在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。
+有这么多DevOps角色可供选择，您将是哪个构建基块？
+当IT专业人员迫切希望成为DevOps的专家时，对于各种DevOps角色还有很多困惑。因此，本文致力于使实施Dev
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-01
                             </span>
                             <span class="publish-author">
                                 
@@ -823,32 +833,40 @@ modified by Devin hao 2020-05-23
                     </div>
 
                     
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/devops/">
+                            <span class="chip bg-color">devops</span>
+                        </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2021/10/20/yi-wei-nian-qing-de-dong-shi-chang-gei-da-xue-sheng-de-18-tiao-hao-jian-yi/">
+                    <a href="/2019/10/15/rong-qi-he-pei-zhi-3-ge-devops-gong-ju-yi-ji-dui-ying-de-su-cha-biao/">
                         <div class="card-image">
                             
                             
-                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/0.jpg" class="responsive-img" alt=" 容器和配置：3个DevOps工具以及对应的速查表">
                             
-                            <span class="card-title"></span>
+                            <span class="card-title"> 容器和配置：3个DevOps工具以及对应的速查表</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                做每件事情之前一定要考虑好，从而才能做到胸有成竹啊！
-一位年轻的董事长给大学生的18条好建议1.一定要有独立的人格、独立的思想。一个经过独立思考而坚持错误观点的人比一个不假思索而接受正确观点的人更值得肯定。不要成为灌输教育的牺牲品。
-　　2
+                                Puppet，Docker和Ansible速查表有助于简化DevOps的实现。
+这些DevOps工具使每个DevOps实施都更加容易。
+PuppetPuppet是使用最广泛的DevOps工具之一。它通过支持版本控制，自动测试和连续交付的功能
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-15
                             </span>
                             <span class="publish-author">
                                 
@@ -860,41 +878,13 @@ modified by Devin hao 2020-05-23
                     </div>
 
                     
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2021/10/20/readme/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="">
-                            
-                            <span class="card-title"></span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                mdblog-md
-
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-20
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                Xiaochong
-                                
-                            </span>
-                        </div>
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/devops/">
+                            <span class="chip bg-color">devops</span>
+                        </a>
+                        
                     </div>
-
                     
                 </div>
             </div>
