@@ -352,20 +352,20 @@
             <div class="tag-chips">
                 
                 
-                <a href="/tags/nginx/" title="nginx: 18">
+                <a href="/tags/centos/" title="centos: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="nginx" style="background-color: #F9EBEA;">nginx
-                        <span class="tag-length">18</span>
+                            data-tagname="centos" style="background-color: #F9EBEA;">centos
+                        <span class="tag-length">2</span>
                     </span>
                 </a>
                 
                 
-                <a href="/tags/centos/" title="centos: 2">
+                <a href="/tags/nginx/" title="nginx: 18">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="centos" style="background-color: #F5EEF8;">centos
-                        <span class="tag-length">2</span>
+                            data-tagname="nginx" style="background-color: #F5EEF8;">nginx
+                        <span class="tag-length">18</span>
                     </span>
                 </a>
                 
@@ -478,19 +478,19 @@
                 </a>
                 
                 
-                <a href="/tags/%E6%91%98%E6%8A%84/" title="摘抄: 1">
+                <a href="/tags/new-world/" title="new world: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="摘抄" style="background-color: #F9EBEA;">摘抄
+                            data-tagname="new world" style="background-color: #FEF9E7;">new world
                         <span class="tag-length">1</span>
                     </span>
                 </a>
                 
                 
-                <a href="/tags/new-world/" title="new world: 1">
+                <a href="/tags/%E6%91%98%E6%8A%84/" title="摘抄: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="new world" style="background-color: #FEF9E7;">new world
+                            data-tagname="摘抄" style="background-color: #F9EBEA;">摘抄
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -582,7 +582,7 @@
 <script type="text/javascript">
     
 
-    $('#tag-wordcloud').jQCloud([{"text":"nginx","weight":18,"link":"/tags/nginx/"},{"text":"centos","weight":2,"link":"/tags/centos/"},{"text":"devops","weight":2,"link":"/tags/devops/"},{"text":"Linux","weight":1,"link":"/tags/Linux/"},{"text":"docker","weight":2,"link":"/tags/docker/"},{"text":"Linux运维, 进阶","weight":1,"link":"/tags/Linux运维-进阶/"},{"text":"感悟","weight":1,"link":"/tags/感悟/"},{"text":"微服务架构, 微服务, 微服务最佳实践, 事件驱动架构","weight":1,"link":"/tags/微服务架构-微服务-微服务最佳实践-事件驱动架构/"},{"text":"kubernetes, docker","weight":1,"link":"/tags/kubernetes-docker/"},{"text":"DevOps","weight":1,"link":"/tags/DevOps/"},{"text":"linux","weight":1,"link":"/tags/linux/"},{"text":"机器学习","weight":1,"link":"/tags/机器学习/"},{"text":"docker, shell","weight":1,"link":"/tags/docker-shell/"},{"text":"自动化测试","weight":1,"link":"/tags/自动化测试/"},{"text":"摘抄","weight":1,"link":"/tags/摘抄/"},{"text":"new world","weight":1,"link":"/tags/new-world/"},{"text":"Linux运维","weight":1,"link":"/tags/Linux运维/"},{"text":"music","weight":1,"link":"/tags/music/"},{"text":"高并发, 网站调优","weight":1,"link":"/tags/高并发-网站调优/"},{"text":"shell, 巡检","weight":1,"link":"/tags/shell-巡检/"},{"text":"blog","weight":1,"link":"/tags/blog/"},{"text":"hexo","weight":1,"link":"/tags/hexo/"},{"text":"go","weight":1,"link":"/tags/go/"}], {
+    $('#tag-wordcloud').jQCloud([{"text":"centos","weight":2,"link":"/tags/centos/"},{"text":"nginx","weight":18,"link":"/tags/nginx/"},{"text":"devops","weight":2,"link":"/tags/devops/"},{"text":"Linux","weight":1,"link":"/tags/Linux/"},{"text":"docker","weight":2,"link":"/tags/docker/"},{"text":"Linux运维, 进阶","weight":1,"link":"/tags/Linux运维-进阶/"},{"text":"感悟","weight":1,"link":"/tags/感悟/"},{"text":"微服务架构, 微服务, 微服务最佳实践, 事件驱动架构","weight":1,"link":"/tags/微服务架构-微服务-微服务最佳实践-事件驱动架构/"},{"text":"kubernetes, docker","weight":1,"link":"/tags/kubernetes-docker/"},{"text":"DevOps","weight":1,"link":"/tags/DevOps/"},{"text":"linux","weight":1,"link":"/tags/linux/"},{"text":"机器学习","weight":1,"link":"/tags/机器学习/"},{"text":"docker, shell","weight":1,"link":"/tags/docker-shell/"},{"text":"自动化测试","weight":1,"link":"/tags/自动化测试/"},{"text":"new world","weight":1,"link":"/tags/new-world/"},{"text":"摘抄","weight":1,"link":"/tags/摘抄/"},{"text":"Linux运维","weight":1,"link":"/tags/Linux运维/"},{"text":"music","weight":1,"link":"/tags/music/"},{"text":"高并发, 网站调优","weight":1,"link":"/tags/高并发-网站调优/"},{"text":"shell, 巡检","weight":1,"link":"/tags/shell-巡检/"},{"text":"blog","weight":1,"link":"/tags/blog/"},{"text":"hexo","weight":1,"link":"/tags/hexo/"},{"text":"go","weight":1,"link":"/tags/go/"}], {
         autoResize: true
     });
 </script>
@@ -606,7 +606,16 @@
     .aplayer .aplayer-lrc p.aplayer-lrc-current {
         
         font-size: 15px;
-        color: pink;
+        color: green;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
     }
 
     
@@ -616,11 +625,11 @@
     <div class="row">
         <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
                    server="netease"
-                   type="playlist"
-                   id="3019130805"
+                   type="album"
+                   id="3156738"
                    fixed='true'
                    autoplay='false'
-                   theme='pink'
+                   theme='green'
                    loop='all'
                    order='random'
                    preload='auto'
@@ -646,6 +655,9 @@
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">69.1k</span>&nbsp;字
             
             
             

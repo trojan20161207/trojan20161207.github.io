@@ -353,27 +353,21 @@
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2019/09/23/nginx-zheng-xiang-dai-li-shi-li/">
+                    <a href="/2019/09/23/nginx-pei-zhi-xi-tong/">
                         <div class="card-image">
                             
                             
-                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="nginx 正向代理示例">
+                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="nginx配置系统">
                             
-                            <span class="card-title">nginx 正向代理示例</span>
+                            <span class="card-title">nginx配置系统</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                
-nginx正向代理配置如下：
-server
-{
-  listen       8080;
-  server_name www.baidu.com;
-  index index.html index.htm index.php;
-  roo
+                                　　nginx的配置系统由一个主配置文件和其他一些辅助的配置文件构成。这些配置文件均是纯文本文件，全部位于nginx安装目录下的conf目录下。
+　　配置文件中以*#*开始的行，或者是前面有若干空格或者TAB，然后再跟#的行，都被认为是注释
                             
                         </div>
                         <div class="publish-info">
@@ -407,23 +401,20 @@ server
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2019/09/23/nginx-xu-ni-zhu-ji-shi-li/">
+                    <a href="/2019/09/23/nginx-chu-ti-yan/">
                         <div class="card-image">
                             
                             
-                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/1.jpg" class="responsive-img" alt="nginx 虚拟主机示例">
+                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/2.jpg" class="responsive-img" alt="nginx初体验">
                             
-                            <span class="card-title">nginx 虚拟主机示例</span>
+                            <span class="card-title">nginx初体验</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                
-　　Nginx做虚拟主机，尤其是仅仅支持纯静态-html，这是最简单的应用了，可以理解为一个仅支持静态页面的最简单的Web服务器。
-　　例子，同时支持两个虚拟主机（纯静态-html支持）的配置，我们只需要理改server段，如下：
-ser
+                                当我们安装完nginx后，我们首先进入nginx的安装目录，启动nginx的服务，然后在地址中输入 http://127.0.0.1/ ， 然后我们就会看到”welcome to nginx“。　　下面的代码为nginx.conf配置文件中
                             
                         </div>
                         <div class="publish-info">
@@ -457,22 +448,26 @@ ser
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2019/09/23/nginx-fan-xiang-dai-li-shi-li/">
+                    <a href="/2019/09/23/nginx-chang-yong-ming-ling/">
                         <div class="card-image">
                             
                             
-                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/1.jpg" class="responsive-img" alt="nginx 反向代理示例">
+                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="nginx常用命令">
                             
-                            <span class="card-title">nginx 反向代理示例</span>
+                            <span class="card-title">nginx常用命令</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                
-　　反向代理（Reverse Proxy）是指代理服务器来接收来自Internet上的连接请求，并将请求转发给内部网络上的服务器，并从服务器上得到的结果返回给Internet上请求连接的客户端。
-　　比如要配置后端跑 apache 服务的
+                                1.nginx启动
+nginx   -c /etc/nginx/nginx.conf
+
+其中参数-c指定nginx启动时加载的配置文件，当然也可以不指定配置文件，省略-c，也可以启动，表示使用默认的配置文件。
+nginx
+
+2.nginx停
                             
                         </div>
                         <div class="publish-info">
@@ -506,70 +501,22 @@ ser
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2019/09/23/xie-zi-ji-de-nginx-pei-zhi-wen-jian/">
+                    <a href="/2019/09/23/nginx-gai-shu/">
                         <div class="card-image">
                             
                             
-                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="写自己的nginx配置文件">
+                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/3.jpg" class="responsive-img" alt="nginx概述">
                             
-                            <span class="card-title">写自己的nginx配置文件</span>
+                            <span class="card-title">nginx概述</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                前面几节中我们已经学过了nginx配置文件中的各个段的配置指令，下面我们就来写一个自己配置文件。如下代码：
-worker_processes  1;
-events {
-    worker_connections  1024;
-}
-http
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-23
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                Xiaochong
-                                
-                            </span>
-                        </div>
-                    </div>
+                                Nginx ("engine x") 是一个高性能的 HTTP 和 *反向代理* 服务器，也是一个 IMAP/POP3/SMTP *代理服务器*。 
 
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/nginx/">
-                            <span class="chip bg-color">nginx</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2019/09/23/nginxrewrite-gui-ze/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="nginx rewrite规则">
-                            
-                            <span class="card-title">nginx rewrite规则</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                
-　　Nginx Rewrite 规则相关指令有if,rewrite,set,return,break等，其中最关键的就是rewrite。一个简单的Nginx Rewrite规则语法如下：
-rewrite ^/b/(.\*)\.html /
+Nginx 是由 Igor Sysoev 为*俄罗斯*访问量第二的 Rambler.ru
                             
                         </div>
                         <div class="publish-info">
@@ -603,34 +550,34 @@ rewrite ^/b/(.\*)\.html /
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2019/09/23/nginxlocation-pei-zhi/">
+                    <a href="/2019/09/19/linux-ri-chang-xun-jian-shell/">
                         <div class="card-image">
                             
                             
-                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="nginx location配置">
+                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/1.jpg" class="responsive-img" alt="Linux日常巡检shell">
                             
-                            <span class="card-title">nginx location配置</span>
+                            <span class="card-title">Linux日常巡检shell</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                
-语法规则： location [=|||^~] /uri/ { … }*
-| — | — || 通配符 |  说明 || =   |开头表示精确匹配 || ^~ |  开头表示uri以某个常规字符串开头，理解为匹配 url路径即可 || 
+                                #!/bin/bash
+###################################################################
+# Functions: this script from polling sy
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-19
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/nginx/" class="post-category">
-                                    nginx
+                                <a href="/categories/shell/" class="post-category">
+                                    shell
                                 </a>
                                 
                                 
@@ -641,8 +588,357 @@ rewrite ^/b/(.\*)\.html /
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/nginx/">
-                            <span class="chip bg-color">nginx</span>
+                        <a href="/tags/shell-%E5%B7%A1%E6%A3%80/">
+                            <span class="chip bg-color">shell, 巡检</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/09/19/yun-wei-jia-gou-ceng-ji/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/1.jpg" class="responsive-img" alt="运维架构层级">
+                            
+                            <span class="card-title">运维架构层级</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                 
+来源：https://www.unixhot.com/page/ops
+
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E6%9E%B6%E6%9E%84/" class="post-category">
+                                    架构
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Linux%E8%BF%90%E7%BB%B4/">
+                            <span class="chip bg-color">Linux运维</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/09/19/docker-ming-ling-shi-yong/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="docker命令使用">
+                            
+                            <span class="card-title">docker命令使用</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                docker01
+List Docker CLI commandsdocker container --help
+
+Display Docker version and infodocker --version
+docker version
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/docker/" class="post-category">
+                                    docker
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/docker/">
+                            <span class="chip bg-color">docker</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/09/19/kuai-su-shell-an-zhuang-dockerce/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/4.jpg" class="responsive-img" alt="快速shell安装docker-ce">
+                            
+                            <span class="card-title">快速shell安装docker-ce</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                我们以18.09.8为例，以下为详细shell：
+#!/bin/sh
+set -e
+
+CHANNEL="stable"
+
+docker_version=18.09.8
+apt_url="https://apt.dockerproject.o
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/docker-shell/" class="post-category">
+                                    docker, shell
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/docker-shell/">
+                            <span class="chip bg-color">docker, shell</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/09/19/linux-mu-lu-jie-gou/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="Linux 目录结构">
+                            
+                            <span class="card-title">Linux 目录结构</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                binbin 是 Binaries (二进制文件) 的缩写, 这个目录存放着最经常使用的命令。
+boot这里存放的是启动 Linux 时使用的一些核心文件，包括一些连接文件以及镜像文件。
+devdev 是 Device(设备) 的缩写, 该
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Linux/" class="post-category">
+                                    Linux
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Linux/">
+                            <span class="chip bg-color">Linux</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/09/19/docker-an-zhuang-yu-jian-dan-shi-yong/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/1.jpg" class="responsive-img" alt="docker安装与简单使用">
+                            
+                            <span class="card-title">docker安装与简单使用</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                docker安装与简单使用(来自docker官方)系统要求：Docker CE 支持 64 位版本 CentOS 7，并且要求内核版本不低于 3.10,安装最新版CE，推荐使用CentOS 7.6
+卸载旧版本：sudo yum remove
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/docker/" class="post-category">
+                                    docker
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/docker/">
+                            <span class="chip bg-color">docker</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/09/19/linux-yun-wei-de-ge-ren-jin-jie/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/3.jpg" class="responsive-img" alt="linux运维的个人进阶">
+                            
+                            <span class="card-title">linux运维的个人进阶</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。本文简单介绍了其中一种linux运维的个人进阶路线，有需要的朋友可以参考下。
+第一阶段：企业级Linux运维工程师1、Linux运维最佳学习方法”5W1H”六何分析法全面介
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/linux/" class="post-category">
+                                    linux
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Linux%E8%BF%90%E7%BB%B4-%E8%BF%9B%E9%98%B6/">
+                            <span class="chip bg-color">Linux运维, 进阶</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2019/09/19/gao-bing-fa-da-liu-liang-wang-zhan-10-ge-diao-you-ce-lue/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://cdn.jsdelivr.net/gh/trojan20161207/trojan20161207.github.io/medias/featureimages/0.jpg" class="responsive-img" alt="高并发大流量网站10个调优策略">
+                            
+                            <span class="card-title">高并发大流量网站10个调优策略</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1. 硬件升级
+普通的P4服务器一般最多能支持每天10万独立IP，如果访问量比这个还要大，那么必须首先配置一台更高性能的专用服务器才能解决问题，否则怎么优化都不可能彻底解决性能问题。
+2. 负载均衡
+它是根据某种负载均衡策略把请求分发到集群
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-09-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E7%BD%91%E7%AB%99%E8%B0%83%E4%BC%98/" class="post-category">
+                                    网站调优
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/%E9%AB%98%E5%B9%B6%E5%8F%91-%E7%BD%91%E7%AB%99%E8%B0%83%E4%BC%98/">
+                            <span class="chip bg-color">高并发, 网站调优</span>
                         </a>
                         
                     </div>
@@ -667,7 +963,7 @@ rewrite ^/b/(.\*)\.html /
             
         </div>
         <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">3 / 7</div>
+            <div class="center-align b-text-gray">3 / 4</div>
         </div>
         <div class="col s6 m4 l4">
             
@@ -697,7 +993,16 @@ rewrite ^/b/(.\*)\.html /
     .aplayer .aplayer-lrc p.aplayer-lrc-current {
         
         font-size: 15px;
-        color: pink;
+        color: green;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
     }
 
     
@@ -707,11 +1012,11 @@ rewrite ^/b/(.\*)\.html /
     <div class="row">
         <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
                    server="netease"
-                   type="playlist"
-                   id="3019130805"
+                   type="album"
+                   id="3156738"
                    fixed='true'
                    autoplay='false'
-                   theme='pink'
+                   theme='green'
                    loop='all'
                    order='random'
                    preload='auto'
@@ -737,6 +1042,9 @@ rewrite ^/b/(.\*)\.html /
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">69.1k</span>&nbsp;字
             
             
             
