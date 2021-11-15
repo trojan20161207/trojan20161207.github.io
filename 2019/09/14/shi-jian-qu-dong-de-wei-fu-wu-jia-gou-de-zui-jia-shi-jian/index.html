@@ -21,7 +21,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"blog.xiaochong2021.top","root":"/","language":"zh-CN","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"用希望迎接太阳，用笑声相伴时光，用快乐涂满心房。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"用希望迎接太阳，用笑声相伴时光，用快乐涂满心房。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.3"};
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
   </script>
 <style type="text/css" lang="css">
@@ -345,7 +345,7 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="事件驱动的微服务架构的最佳实践"><a href="#事件驱动的微服务架构的最佳实践" class="headerlink" title="事件驱动的微服务架构的最佳实践"></a>事件驱动的微服务架构的最佳实践</h1><h3 id="你做到了吗？"><a href="#你做到了吗？" class="headerlink" title="你做到了吗？"></a>你做到了吗？</h3><p><img lazyload="" src="/images/loading.svg" data-src="https://dzone.com/storage/temp/12455990-she-is-doing-her-22best-practice22.jpeg" alt="她正在做她的“最佳实践”。"></p>
+            <h1 id="事件驱动的微服务架构的最佳实践"><a href="#事件驱动的微服务架构的最佳实践" class="headerlink" title="事件驱动的微服务架构的最佳实践"></a>事件驱动的微服务架构的最佳实践</h1><h3 id="你做到了吗？"><a href="#你做到了吗？" class="headerlink" title="你做到了吗？"></a>你做到了吗？</h3><p><img src="https://dzone.com/storage/temp/12455990-she-is-doing-her-22best-practice22.jpeg" alt="她正在做她的“最佳实践”。"></p>
 <p><em>她正在做她的“最佳实践”。</em></p>
 <p>如果您是企业架构师，您可能已经听说过并使用过微服务架构。虽然您过去可能已将REST用作服务通信层，但越来越多的项目正在转向事件驱动的体系结构。让我们深入探讨这种流行架构的优缺点，它所包含的一些关键设计选择以及常见的反模式。</p>
 <h2 id="什么是事件驱动的微服务架构？"><a href="#什么是事件驱动的微服务架构？" class="headerlink" title="什么是事件驱动的微服务架构？"></a>什么是事件驱动的微服务架构？</h2><p>在事件驱动的体系结构中，当服务执行其他服务可能感兴趣的某项工作时，该服务会生成事件 - 执行操作的记录。其他服务使用这些事件，以便他们可以执行事件所需的任何自己的任务。与REST不同，创建请求的服务不需要知道使用请求的服务的详细信息。</p>
@@ -414,9 +414,9 @@
 <h3 id="期待事件驱动来解决所有问题"><a href="#期待事件驱动来解决所有问题" class="headerlink" title="期待事件驱动来解决所有问题"></a>期待事件驱动来解决所有问题</h3><p>在技​​术水平较低的情况下，不要指望事件驱动的架构能够解决您的所有问题。虽然这种架构肯定可以改善技术功能障碍的许多方面，但它无法解决核心问题，例如缺乏自动化测试，团队沟通不畅或者过时的开发实践。</p>
 <h2 id="学到更多"><a href="#学到更多" class="headerlink" title="学到更多"></a>学到更多</h2><p>了解事件驱动架构的优缺点，以及一些最常见的设计决策和挑战是创建最佳设计的重要部分。</p>
 <p>如果您想了解更多信息，请查看这个<a class="link" target="_blank" rel="noopener" href="https://devcenter.heroku.com/articles/event-driven-microservices-with-apache-kafka">事件驱动的参考架构<i class="fas fa-external-link-alt"></i></a>，它允许您通过单击在Heroku上部署工作项目。该参考架构创建了一个销售虚构咖啡产品的网上商店。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://lh4.googleusercontent.com/OOp9l49cyvKMzp6ESmHAlu5oP4oDNQDiM-T0b5aKDJHiA9ecNb8HNLxAzwYJAWyhQewIiy3yPW6g3YkAkN6vaJt1kcES6xflzajp6lEpMaQwJRi5bszEsBrPZTVVat6aP9pR07e9" alt="null"></p>
+<p><img src="https://lh4.googleusercontent.com/OOp9l49cyvKMzp6ESmHAlu5oP4oDNQDiM-T0b5aKDJHiA9ecNb8HNLxAzwYJAWyhQewIiy3yPW6g3YkAkN6vaJt1kcES6xflzajp6lEpMaQwJRi5bszEsBrPZTVVat6aP9pR07e9" alt="null"></p>
 <p>产品点击次数作为事件进行跟踪并存储在Kafka中。然后，它们被报告仪表板使用。</p>
-<p><img lazyload="" src="/images/loading.svg" data-src="https://lh4.googleusercontent.com/4ILhHjd5e6fAzp5VVm5eqhNtk71GdqSOY4HKd-8exLhMkqT-G2xboGZxDPAdH-KvJpFgXRbg1kfO_7u4i4mEhkLB4rndZ4O4XFzI3ehyd-qZC-FrkZ_9ZotjJQmaD9jMMMoFX7pG" alt="null"></p>
+<p><img src="https://lh4.googleusercontent.com/4ILhHjd5e6fAzp5VVm5eqhNtk71GdqSOY4HKd-8exLhMkqT-G2xboGZxDPAdH-KvJpFgXRbg1kfO_7u4i4mEhkLB4rndZ4O4XFzI3ehyd-qZC-FrkZ_9ZotjJQmaD9jMMMoFX7pG" alt="null"></p>
 <p>代码是开源的，因此您可以根据需要对其进行修改并运行您自己的实验。</p>
 
         </div>
@@ -656,8 +656,6 @@
     <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/code-copy.js"></script>
 
 
-
-    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.3/source/js/lazyload.js"></script>
 
 
 <div class="post-scripts pjax">
