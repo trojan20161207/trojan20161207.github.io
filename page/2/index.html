@@ -278,6 +278,63 @@
                 
 
                 <h3 class="home-article-title">
+                    <a href="/2019/09/23/nginx-fu-zai-jun-heng-shi-li/">
+                        nginx 负载均衡示例
+                    </a>
+                </h3>
+
+                <div class="home-article-content markdown-body">
+                    
+                        
+upstream backend{
+      #定义负载均衡设备的Ip及设备状态
+      server 127.0.0.1:9090 down;
+      server 192.168.1.12:8080 weight=2 ;
+      ...
+                    
+                </div>
+
+                <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Sep 23 2019 15:21:08 GMT+0800">2019-09-23</span></span>
+        
+            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/categories/nginx/">nginx</a>&nbsp;
+                        </li>
+                    
+                    
+                </ul>
+            </span>
+        
+        
+            <span class="home-article-tag">
+                <i class="fas fa-tags"></i>&nbsp;
+                <ul>
+                    
+                        <li>
+                            
+                            <a href="/tags/nginx/">nginx</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            </span>
+        
+    </div>
+
+    <a href="/2019/09/23/nginx-fu-zai-jun-heng-shi-li/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+</div>
+
+            </li>
+        
+            <li class="home-article-item">
+
+                
+
+                <h3 class="home-article-title">
                     <a href="/2019/09/23/nginx-zheng-xiang-dai-li-shi-li/">
                         nginx 正向代理示例
                     </a>
@@ -870,58 +927,6 @@ worker_processes 8;
     </div>
 
     <a href="/2019/09/23/nginxmain-pei-zhi-zhi-ling/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2019/09/23/nginx.conf-pei-zhi-wen-jian-jie-gou/">
-                        nginx.conf配置文件结构
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        　Nginx的核心模块为Main和Events，此外还包括标准HTTP模块、可选HTTP模块和邮件模块，其还可以支持诸多第三方模块。Main用于配置错误日志、进程及权限等相关的参数，Events用于配置IO模型，如epoll、kqueue、selec...
-                    
-                </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Mon Sep 23 2019 14:41:53 GMT+0800">2019-09-23</span></span>
-        
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/nginx/">nginx</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
-            </span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/nginx/">nginx</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2019/09/23/nginx.conf-pei-zhi-wen-jian-jie-gou/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
 </div>
 
             </li>
