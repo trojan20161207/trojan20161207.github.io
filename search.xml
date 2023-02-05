@@ -135,6 +135,485 @@
       </tags>
   </entry>
   <entry>
+    <title>Cloudflare 5XX 错误故障排除</title>
+    <url>/2023/02/05/Cloudflare%205XX%20%E9%94%99%E8%AF%AF%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4/</url>
+    <content><![CDATA[<p><em>诊断并解决 Cloudflare 代理的站点的 5XX 错误。</em></p>
+<h3 id="本文内容"><a href="#本文内容" class="headerlink" title="本文内容"></a>本文内容</h3><ul>
+<li>[概述]</li>
+<li>[错误分析](</li>
+<li>[Error 500: internal server error]</li>
+<li>[Error 502 bad gateway 或 Error 504 gateway timeout]</li>
+<li>[Error 503: service temporarily unavailable]</li>
+<li>[Error 520: web server returns an unknown error]</li>
+<li>[Error 521: web server is down]</li>
+<li>[Error 522: connection timed out]</li>
+<li>[Error 523: origin is unreachable]</li>
+<li>[Error 524: a timeout occurred]</li>
+<li>[错误 525：SSL 握手失败]</li>
+<li>[Error 526: invalid SSL certificate]</li>
+<li>[527 错误：Railgun Listener 至源站错误]</li>
+<li>[Error 530]</li>
+</ul>
+<hr>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在排查 5XX 错误时，正确的操作步骤是先联系您的主机提供商或站点管理员来排除故障并收集数据。</p>
+<p>Cloudflare 支持仅协助域所有者解决问题。如果您是网站访问者，请联系网站所有者。</p>
+<h3 id="需要向主机提供商提供的错误详情"><a href="#需要向主机提供商提供的错误详情" class="headerlink" title="需要向主机提供商提供的错误详情"></a>需要向主机提供商提供的错误详情</h3><ol>
+<li>具体的 5XX 错误代码和消息</li>
+<li>发生 5XX 错误的时间和时区</li>
+<li>造成 HTTP 5XX 错误的 URL（例如：<em><a class="link"   href="https://www.example.com/images/icons/image1.png" >https://www.example.com/images/icons/image1.png<i class="fas fa-external-link-alt"></i></a></em>）</li>
+</ol>
+<p>错误原因未必都能在源站错误日志中找到。请检查 Cloudflare 和源站 Web 服务器之间的所有负载平衡器、缓存、代理或防火墙。</p>
+<p>下方的各个错误描述中列出了应向主机提供商或站点管理员提供的其他详情。Cloudflare <a class="link"   href="https://support.cloudflare.com/hc/articles/200172706" >Custom Error Pages<i class="fas fa-external-link-alt"></i></a> 可更改本文探讨的默认错误页面的外观。</p>
+<hr>
+<h2 id="错误分析"><a href="#错误分析" class="headerlink" title="错误分析"></a>错误分析</h2><p>每个域的错误分析可在您的帐户的支持门户中获得。通过错误分析，您可以按 HTTP 错误代码深入了解总体错误情况，它还提供了诊断和解决问题所需的 URL、响应、源站 IP 地址和 Cloudflare 数据中心。错误分析基于的是 1% 的流量样本。</p>
+<p>要查看错误分析：</p>
+<ul>
+<li>导航到 Cloudflare 支持门户。请参阅关于<a class="link"   href="https://support.cloudflare.com/hc/articles/200172476#h_4b8753c8-f422-4c74-9e8e-07026c4da730" >提交支持票证<i class="fas fa-external-link-alt"></i></a>的说明，了解如何访问支持门户。</li>
+<li>往下滚动到<strong>错误分析</strong>部分。</li>
+<li>点击<strong>查看错误分析</strong>。</li>
+<li>输入要调查的域。</li>
+<li>此时将显示<strong>一段时间内的错误</strong>。</li>
+<li>点击图表下方表格中的状态代码，展开流量错误详情。</li>
+</ul>
+<hr>
+<h2 id="Error-500-internal-server-error"><a href="#Error-500-internal-server-error" class="headerlink" title="Error 500: internal server error"></a>Error 500: internal server error</h2><p>500 错误通常表示您的源站 Web 服务器存在问题。<em>Error establishing database</em> <em>connection</em> 是源站 Web 服务器生成的常见 HTTP 500 错误消息。<a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商<i class="fas fa-external-link-alt"></i></a>来解决。</p>
+<p><strong>解决方案</strong></p>
+<p><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >向主机提供商提供详细信息<i class="fas fa-external-link-alt"></i></a>，协助对问题进行故障排除。</p>
+<p>不过，如果 500 错误的 HTML 响应代码中包含“cloudflare”或“cloudflare-nginx”，请将以下信息提供给 <a class="link"   href="https://support.cloudflare.com/hc/articles/200172476" >Cloudflare 支持<i class="fas fa-external-link-alt"></i></a>：</p>
+<ol>
+<li>您的域名</li>
+<li>发生 500 错误的时间和时区</li>
+<li>观察到 500 错误的浏览器的 <em><a class="link"   href="http://www.example.com/cdn-cgi/trace" >www.example.com/cdn-cgi/trace<i class="fas fa-external-link-alt"></i></a></em> 输出（将 <em><a class="link"   href="http://www.example.com/" >www.example.com<i class="fas fa-external-link-alt"></i></a></em> 替换为您实际的域名和主机名）。</li>
+</ol>
+<p>如果发现访问您的网站时显示空白页，请确认问题是否在<a class="link"   href="https://support.cloudflare.com/hc/articles/203118044#h_8654c523-e31e-4f40-a3c7-0674336a2753" >暂停 Cloudflare<i class="fas fa-external-link-alt"></i></a> 时发生，并联系您的主机提供商寻求帮助。</p>
+<hr>
+<h2 id="Error-502-bad-gateway-或-Error-504-gateway-timeout"><a href="#Error-502-bad-gateway-或-Error-504-gateway-timeout" class="headerlink" title="Error 502 bad gateway 或 Error 504 gateway timeout"></a>Error 502 bad gateway 或 Error 504 gateway timeout</h2><p>当 Cloudflare 无法与您的源站 Web 服务器建立联系时，会发生 HTTP 502 或 504 错误。</p>
+<p>可能的原因有两种：</p>
+<ul>
+<li>（最常见原因）<a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_85e06a1a-fa89-4685-aa24-2aaf57c0141b" >502&#x2F;504 源自您的源站 Web 服务器<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_845d633d-0842-4315-9dd2-53185cc4e1de" >502&#x2F;504 源自 Cloudflare<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h3 id="502-x2F-504-源自您的源站-Web-服务器"><a href="#502-x2F-504-源自您的源站-Web-服务器" class="headerlink" title="502&#x2F;504 源自您的源站 Web 服务器"></a>502&#x2F;504 源自您的源站 Web 服务器</h3><p>当您的源站 Web 服务器标准的 HTTP 502 网关损坏或 504 网关超时错误响应时，Cloudflare 将返回带有 Cloudflare 标志的 HTTTP 502 或 504 错误：</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://images.ctfassets.net/slt3lc6tev37/CTIa7Nqay9uZoBZnh7ao7/e61d8968ea919d75b26e0098437f7174/image1.png"
+                      alt="Cloudflare 品牌化错误 502 的示例。"
+                ></p>
+<p><strong>解决方案</strong></p>
+<p>联系您的主机提供商，在您的源站 Web 服务器上排查这些常见的原因：</p>
+<ul>
+<li>确保在请求生成生成 502 或 504 错误的访问者 URL 中的主机名和域名时，源站服务器能够响应请求。</li>
+<li>调查服务器过载、崩溃或网络故障。</li>
+<li>识别发生超时或被阻止的应用程序或服务。</li>
+</ul>
+<h3 id="502-x2F-504-源自-Cloudflare"><a href="#502-x2F-504-源自-Cloudflare" class="headerlink" title="502&#x2F;504 源自 Cloudflare"></a>502&#x2F;504 源自 Cloudflare</h3><p>源自 Cloudflare 的 502 或 504 错误如下方所示：</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://images.ctfassets.net/slt3lc6tev37/2BPhw2fUEiOLLFaHqCIsTP/679902b3c75ec783371cb3fecdc1066f/image5.png"
+                      alt="非品牌化错误 502 的示例。"
+                ></p>
+<p>如果错误未提及“cloudflare”，请联系主机提供商来寻求与<a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_85e06a1a-fa89-4685-aa24-2aaf57c0141b" >源自源站的 502&#x2F;504 错误<i class="fas fa-external-link-alt"></i></a>相关的帮助。</p>
+<p><strong>解决方案</strong></p>
+<p>为避免处理您的查询时发生延迟，请向 <a class="link"   href="https://support.cloudflare.com/hc/articles/200172476" >Cloudflare 支持<i class="fas fa-external-link-alt"></i></a>提供以下必要详情：</p>
+<ol>
+<li>发生问题的时间和时区</li>
+<li>造成 HTTP 502 或 504 错误的 URL（例如：<em><a class="link"   href="https://www.example.com/images/icons/image1.png" >https://www.example.com/images/icons/image1.png<i class="fas fa-external-link-alt"></i></a></em>）</li>
+<li>浏览 <em><a class="link"   href="http://www.example.com/cdn-cgi/trace" >www.example.com/cdn-cgi/trace<i class="fas fa-external-link-alt"></i></a></em> 时的输出（将 <em><a class="link"   href="http://www.example.com/" >www.example.com<i class="fas fa-external-link-alt"></i></a></em> 替换为导致 HTTP 502 或 504 错误的域名和主机名）</li>
+</ol>
+<hr>
+<h2 id="Error-503-service-temporarily-unavailable"><a href="#Error-503-service-temporarily-unavailable" class="headerlink" title="Error 503: service temporarily unavailable"></a>Error 503: service temporarily unavailable</h2><p>HTTP 错误 503 在源站 Web 服务器过载时发生。 可能的原因有两种，可通过错误消息来辨别：</p>
+<ul>
+<li>错误的 HTML 响应正文中不包含“cloudflare”或“cloudflare-nginx”。</li>
+</ul>
+<p><strong>解决方案</strong>：联系您的主机提供商，以核实是否针对您的源站 Web 服务器的请求实施了速率限制。</p>
+<ul>
+<li>错误的 HTML 响应正文中包含“cloudflare”或“cloudflare-nginx”。</li>
+</ul>
+<p><strong>解决方案</strong>：Cloudflare 数据中心中发生了连接问题。向 <a class="link"   href="https://support.cloudflare.com/hc/articles/200172476" >Cloudflare 支持<i class="fas fa-external-link-alt"></i></a>提供以下信息：</p>
+<ol>
+<li>您的域名</li>
+<li>发生 503 错误的时间和时区</li>
+<li>观察到 503 错误的浏览器的 <em><a class="link"   href="http://www.example.com/cdn-cgi/trace" >www.example.com/cdn-cgi/trace<i class="fas fa-external-link-alt"></i></a></em> 输出（将 <em><a class="link"   href="http://www.example.com/" >www.example.com<i class="fas fa-external-link-alt"></i></a></em> 替换为您实际的域名和主机名）。</li>
+</ol>
+<hr>
+<h2 id="Error-520-web-server-returns-an-unknown-error"><a href="#Error-520-web-server-returns-an-unknown-error" class="headerlink" title="Error 520: web server returns an unknown error"></a>Error 520: web server returns an unknown error</h2><p>当源站服务器向 Cloudflare 返回空白、未知或意外响应时，会发生 520 错误。</p>
+<p><strong>解决方案</strong></p>
+<p>在进一步调查 520 错误期间采用以下快速解决办法：将 Cloudflare <strong>DNS</strong> 应用中的记录设为<a class="link"   href="https://developers.cloudflare.com/dns/manage-dns-records/reference/proxied-dns-records" >“仅限 DNS”<i class="fas fa-external-link-alt"></i></a>，或<a class="link"   href="https://support.cloudflare.com/hc/articles/203118044#h_8654c523-e31e-4f40-a3c7-0674336a2753" >暂停 Cloudflare<i class="fas fa-external-link-alt"></i></a>。</p>
+<p><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商或站点管理员<i class="fas fa-external-link-alt"></i></a>，请他们核查您的源站 Web 服务器日志中的崩溃并检查以下常见原因：</p>
+<ul>
+<li><p>源站 Web 服务器应用程序崩溃</p>
+</li>
+<li><p>您的源站上未允许 <a class="link"   href="https://www.cloudflare.com/ips" >Cloudflare IP<i class="fas fa-external-link-alt"></i></a>。</p>
+</li>
+<li><p>标头超过 16 KB（通常因为 Cookie 数量过多）</p>
+</li>
+<li><p>源站 Web 服务器的空响应中缺少 HTTP 状态代码或响应正文</p>
+</li>
+<li><p>缺少响应标头或源站 Web 服务器未返回</p>
+<p>正确的 HTTP 错误响应</p>
+<p>。</p>
+<ul>
+<li><code>在从上游读取响应标头时，上游过早地关闭了连接</code>，这是我们在日志中可能注意到的一个常见错误。这表明源站 Web 服务器有问题，导致Cloudflare 生成 520 错误。</li>
+</ul>
+</li>
+</ul>
+<p>520 错误普遍发生于造成源站 Web 服务器崩溃的 PHP 应用程序。</p>
+<p>如果在联系主机提供商或站点管理员后仍然出现 520 错误，请向 <a class="link"   href="https://support.cloudflare.com/hc/articles/200172476" >Cloudflare 支持<i class="fas fa-external-link-alt"></i></a>提供以下信息：</p>
+<ul>
+<li><p>发生错误时所请求资源的完整 URL</p>
+</li>
+<li><p>520 错误消息中的 Cloudflare <strong>cf-ray</strong></p>
+</li>
+<li><p>来自 <em><a class="link"   href="http://www.example.com/cdn-cgi/trace" >http://www.example.com/cdn-cgi/trace<i class="fas fa-external-link-alt"></i></a></em> 时的输出（将 <em><a class="link"   href="http://www.example.com/" >www.example.com<i class="fas fa-external-link-alt"></i></a></em> 替换为您发生 520 错误时的您的域名和主机名）</p>
+</li>
+<li><p>两个</p>
+<p>HAR 文件</p>
+<p>：</p>
+<ul>
+<li>一个在您网站上启用了 Cloudflare 时生成</li>
+<li>另一个在<a class="link"   href="https://support.cloudflare.com/hc/articles/200169176" >临时禁用 Cloudflare<i class="fas fa-external-link-alt"></i></a> 后生成。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="Error-521-web-server-is-down"><a href="#Error-521-web-server-is-down" class="headerlink" title="Error 521: web server is down"></a>Error 521: web server is down</h2><p>源站 Web 服务器拒绝来自 Cloudflare 的连接时，会发生 521 错误。源站上的安全解决方案可能阻止了来自某些 <a class="link"   href="https://www.cloudflare.com/ips" >Cloudflare IP 地址<i class="fas fa-external-link-alt"></i></a>的合法连接。</p>
+<p>521 错误的两个最常见原因：</p>
+<ul>
+<li>源站 Web 服务器应用程序离线</li>
+<li>Cloudflare 请求被阻止</li>
+</ul>
+<p><strong>解决方案</strong></p>
+<p><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的站点管理员或主机提供商<i class="fas fa-external-link-alt"></i></a>以排除这些常见原因：</p>
+<ul>
+<li>确保您的源站 Web 服务器正常响应</li>
+<li>查看源站 Web 服务器错误日志，以确定 Web 服务器应用程序崩溃或中断。</li>
+<li>确认没有阻止 <a class="link"   href="https://www.cloudflare.com/ips" >Cloudflare IP 地址<i class="fas fa-external-link-alt"></i></a>或对其施加速率限制</li>
+<li>在您的源站 Web 服务器的防火墙或其他安全软件中允许所有 <a class="link"   href="https://www.cloudflare.com/ips" >Cloudflare IP 范围<i class="fas fa-external-link-alt"></i></a></li>
+<li>确认您是否将 <strong>SSL&#x2F;TLS 模式</strong>设置为 <strong>Full</strong> 或 <strong>Full (Strict</strong>)，以及您是否安装了 <a class="link"   href="https://developers.cloudflare.com/ssl/origin-configuration/origin-ca" >Cloudflare Origin 证书<i class="fas fa-external-link-alt"></i></a></li>
+<li>查找 <a class="link"   href="https://community.cloudflare.com/t/community-tip-fixing-error-521-web-server-is-down/42461" >Cloudflare 社区<i class="fas fa-external-link-alt"></i></a>的更多故障排除信息。</li>
+</ul>
+<hr>
+<h2 id="Error-522-connection-timed-out"><a href="#Error-522-connection-timed-out" class="headerlink" title="Error 522: connection timed out"></a>Error 522: connection timed out</h2><p>Cloudflare 联系源站 Web 服务器时超时会发生 522 错误。 有两种不同的错误导致 HTTP 错误 522，具体取决于 Cloudflare 和源站 Web 服务器之间发生超时的时间：</p>
+<ol>
+<li>在连接建立之前，源站 Web 服务器未在 Cloudflare 发送 SYN 后 15 秒内将 SYN + ACK 返回给 Cloudflare。</li>
+<li>在连接建立之后，源站 Web 服务器未在 90 秒内确认（ACK）Cloudflare 的资源请求。</li>
+</ol>
+<p>如果源站 Web 服务器在连接建立之后确认（<em>ACK</em>）了资源请求，但没有及时发送响应，则发生 <a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Cloudflare-5XX-%E9%94%99%E8%AF%AF%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4#524error" >HTTP 524 错误<i class="fas fa-external-link-alt"></i></a>。</p>
+<p><strong>解决方案</strong></p>
+<p><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商<i class="fas fa-external-link-alt"></i></a>，从源站 Web 服务器上排查下列常见原因：</p>
+<ul>
+<li>（最常见）.htaccess、iptables 或防火墙中阻止了 <a class="link"   href="https://www.cloudflare.com/ips/" >Cloudflare IP 地址<i class="fas fa-external-link-alt"></i></a>或对其设置了速率限制。确认您的主机提供商允许 Cloudflare IP 地址。</li>
+<li>源站 Web 服务器过载或离线，因而丢弃了传入的请求。</li>
+<li>源站 Web 服务器上禁用了 <a class="link"   href="http://tldp.org/HOWTO/TCP-Keepalive-HOWTO/overview.html" >Keepalives<i class="fas fa-external-link-alt"></i></a> 功能。</li>
+<li>Cloudflare <strong>DNS</strong> 应用中的源站 IP 地址与主机提供商当前为您的源站 Web 服务器置备的 IP 地址不匹配。</li>
+<li>您的源站 Web 服务器上丢弃了数据包。</li>
+</ul>
+<p>如果您使用的是 <a class="link"   href="https://developers.cloudflare.com/pages/" >Cloudflare Pages<i class="fas fa-external-link-alt"></i></a>，请确认您已经设置了自定义域，并且您的 CNAME 记录指向您的自定义 Pages 域。如需了解如何设置自定义 Pages 域，请点击<a class="link"   href="https://developers.cloudflare.com/pages/getting-started#adding-a-custom-domain" >此处<i class="fas fa-external-link-alt"></i></a>。</p>
+<p>如果上述原因都未能促成解决方案，请向主机提供商或站点管理员索取以下信息，然后<a class="link"   href="https://support.cloudflare.com/hc/articles/200172476" >联系 Cloudflare 支持<i class="fas fa-external-link-alt"></i></a>：</p>
+<ul>
+<li>从源站 Web 服务器到发生问题前最常连接您的源站 Web 服务器的 <a class="link"   href="http://www.cloudflare.com/ips" >Cloudflare IP 地址<i class="fas fa-external-link-alt"></i></a>的 <a class="link"   href="https://support.cloudflare.com/hc/articles/203118044#h_b8cebafd-9243-40e9-9c44-d4b94ccd3a87" >MTR 或 traceroute<i class="fas fa-external-link-alt"></i></a> 结果。在源站 Web 服务器日志记录的 IP 中，找到一个可成功连接的 IP。</li>
+<li>来自主机提供商调查的详细信息，如相关的日志或与主机提供商的对话。</li>
+</ul>
+<hr>
+<h2 id="Error-523-origin-is-unreachable"><a href="#Error-523-origin-is-unreachable" class="headerlink" title="Error 523: origin is unreachable"></a>Error 523: origin is unreachable</h2><p>当 Cloudflare 无法联系您的源站 Web 服务器时，会发生 523 错误。这通常在 Cloudflare 和源站 Web 服务器之间的网络设备没有通向源站 IP 地址的路由时发生。</p>
+<p><strong>解决方案</strong> <a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商<i class="fas fa-external-link-alt"></i></a>，在您的源站 Web 服务器上排查下列常见原因：</p>
+<ul>
+<li>确认您的 Cloudflare DNS 应用中为 A 或 AAAA 记录列出了正确的源站 IP 地址。</li>
+<li>对源站与 Cloudflare 之间的互联网路由问题进行故障排除，或者对源站本身的问题进行故障排除。</li>
+</ul>
+<p>如果主机提供商经常更改该您的源站 Web 服务器 IP 地址，请参考有关<a class="link"   href="https://developers.cloudflare.com/dns/manage-dns-records/how-to/managing-dynamic-ip-addresses" >动态 DNS 更新<i class="fas fa-external-link-alt"></i></a>的 Cloudflare 文档。</p>
+<p>如果上述原因都未能促成解决方案，请向主机提供商或站点管理员索取以下信息：</p>
+<ul>
+<li>从源站 Web 服务器到发生问题前最常连接您的源站 Web 服务器的 <a class="link"   href="http://www.cloudflare.com/ips" >Cloudflare IP 地址<i class="fas fa-external-link-alt"></i></a>的 <a class="link"   href="https://support.cloudflare.com/hc/articles/203118044#h_b8cebafd-9243-40e9-9c44-d4b94ccd3a87" >MTR 或 traceroute<i class="fas fa-external-link-alt"></i></a> 结果。从源站 Web 服务器日志查找一个可连接的 Cloudflare IP。</li>
+<li>如果您通过 Cloudflare 托管服务合作伙伴使用 Railgun，请<a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商<i class="fas fa-external-link-alt"></i></a>来排查 523 错误。</li>
+<li>如果您自己管理 Railgun 安装，请提供以下信息：<ul>
+<li>从 Railgun 服务器到源站 Web 服务器的 <a class="link"   href="https://support.cloudflare.com/hc/articles/203118044#h_b8cebafd-9243-40e9-9c44-d4b94ccd3a87" >traceroute<i class="fas fa-external-link-alt"></i></a> 结果。</li>
+<li>来自 Railgun 服务器的最新系统日志文件。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="Error-524-a-timeout-occurred"><a href="#Error-524-a-timeout-occurred" class="headerlink" title="Error 524: a timeout occurred"></a>Error 524: a timeout occurred</h2><p>524 错误表明 Cloudflare 成功连接了源服务器，但源站 Web 服务器没有在默认的 100 秒连接超时结束前提供 HTTP 响应。如果源站服务器由于要做太多工作而花费太长时间（例如，大数据查询），或者因为服务器在争抢资源而无法及时返回任何数据，那么可能会发生这种情况。</p>
+<p><strong>解决方案</strong></p>
+<p>以下是我们建议的解决这一问题的方案：</p>
+<ul>
+<li><p>实施大型 HTTP 进程的状态轮询，以避免遇到该错误。</p>
+</li>
+<li><p>联系您的主机提供商</p>
+<p>，从您的源站 Web 服务器上排查下列常见原因：</p>
+<ul>
+<li>源站 Web 服务器上长时间运行的进程。</li>
+<li>发生过载的源站 Web 服务器。</li>
+</ul>
+</li>
+</ul>
+<p>源站 Web 服务器上记录请求响应时间有助于辨别资源速度缓慢的原因。联系您的主机提供商或站点管理员，以协助调整日志格式，或者搜索适用于您的 Web 服务器品牌（如 <a class="link"   href="http://httpd.apache.org/docs/current/mod/mod_log_config.html" >Apache<i class="fas fa-external-link-alt"></i></a> 或 <a class="link"   href="http://nginx.org/en/docs/http/ngx_http_log_module.html#log_format" >Nginx<i class="fas fa-external-link-alt"></i></a>）的日志文档。</p>
+<ul>
+<li>Enterprise 客户可以使用 <a class="link"   href="https://api.cloudflare.com/#zone-settings-change-proxy-read-timeout-setting" >proxy_read_timeout API 端点<i class="fas fa-external-link-alt"></i></a>将 524 超时延长到最长 600 秒。</li>
+<li>如果您经常运行需要超过 100 秒才能完成的 HTTP 请求（例如大量数据导出），请在 Cloudflare <strong>DNS</strong> 应用中将这些进程移动到未由 Cloudflare 代理的子域后面。</li>
+<li>如果使用 Cloudflare Railgun 的域发生错误 524，请确保 <em>lan.timeout</em> 设置的值高于默认的 30 秒，再重启 railgun 服务。</li>
+</ul>
+<hr>
+<h2 id="错误-525：SSL-握手失败"><a href="#错误-525：SSL-握手失败" class="headerlink" title="错误 525：SSL 握手失败"></a>错误 525：SSL 握手失败</h2><p>525 错误表示 Cloudflare 与源站 Web 服务器之间的 SSL 握手失败。满足以下两个条件时会发生 525 错误：</p>
+<ol>
+<li>Cloudflare 与源站 Web 服务器之间的 <a class="link"   href="https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake/" >SSL 握手<i class="fas fa-external-link-alt"></i></a>失败，以及</li>
+<li>Cloudflare <strong>SSL&#x2F;TLS</strong> 应用的<strong>概述</strong>选项卡中设置了 <a href="https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes"><em>Full</em> 或 <em>Full (Strict)</em></a> <strong>SSL</strong>。</li>
+</ol>
+<p><strong>解决方案</strong></p>
+<p><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商<i class="fas fa-external-link-alt"></i></a>，从您的源站 Web 服务器上排查下列常见原因：</p>
+<ul>
+<li>未安装有效的 SSL 证书</li>
+<li>未开启 443 端口（或其他自定义安全端口）</li>
+<li>无 <a class="link"   href="https://support.cloudflare.com/hc/articles/360026016272" >SNI<i class="fas fa-external-link-alt"></i></a> 支持</li>
+<li>Cloudflare 接受的加密套件与源站 Web 服务器支持的<a class="link"   href="https://developers.cloudflare.com/ssl/ssl-tls/cipher-suites" >加密套件<i class="fas fa-external-link-alt"></i></a>不匹配。</li>
+</ul>
+<p>如果间歇性发生 525 错误，请查看源站 Web 服务器错误日志来确定原因。配置 Apache 以<a class="link"   href="https://cwiki.apache.org/confluence/display/HTTPD/DebuggingSSLProblems#Enable_SSL_logging" >记录 mod_ssl 错误<i class="fas fa-external-link-alt"></i></a>。此外，nginx 的标准错误日志中包含 SSL 错误，但可能需要<a class="link"   href="https://docs.nginx.com/nginx/admin-guide/monitoring/logging/" >提高日志级别<i class="fas fa-external-link-alt"></i></a>。</p>
+<p><strong>其他检查</strong></p>
+<ul>
+<li>检查您的源站服务器上是否安装了证书。您可以查看<a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/203118044-Gathering-information-for-troubleshooting-sites#h_0c7f48b3-fc29-4266-8c63-477fe61a11c4" >这篇文章<i class="fas fa-external-link-alt"></i></a>，详细了解如何运行一些测试。如果您没有任何证书，你可以创建并安装免费的 <a class="link"   href="https://developers.cloudflare.com/ssl/origin-configuration/origin-ca" >Cloudflare Origin CA 证书<i class="fas fa-external-link-alt"></i></a>。使用 Origin CA 证书，您就加密 Cloudflare 与源站 Web 服务器之间的流量。</li>
+<li><a class="link"   href="https://developers.cloudflare.com/ssl/ssl-tls/cipher-suites" >检查服务器使用的密码套件<i class="fas fa-external-link-alt"></i></a>以确保它们与 Cloudflare 支持的密码套件匹配。</li>
+<li>根据看到的 525 的时间戳检查服务器的错误日志，以确保有错误可能导致在 SSL 握手期间重置连接。</li>
+</ul>
+<hr>
+<h2 id="Error-526-invalid-SSL-certificate"><a href="#Error-526-invalid-SSL-certificate" class="headerlink" title="Error 526: invalid SSL certificate"></a>Error 526: invalid SSL certificate</h2><p>满足以下两个条件时会发生 526 错误：</p>
+<ol>
+<li>Cloudflare 无法验证您的源站 Web 服务器上的 SSL 证书；</li>
+<li>Cloudflare <strong>SSL&#x2F;TLS</strong> 应用的<strong>概述</strong>选项卡中设置了 <a href="https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes#full-strict"><em>Full SSL (Strict)</em></a> <strong>SSL</strong>。</li>
+</ol>
+<p><strong>解决方案</strong></p>
+<p>在 Cloudflare <strong>SSL&#x2F;TLS</strong> 应用的<strong>概述</strong>选项卡中将域的 <strong>SSL</strong> 设为 <em>Full</em> 而非 *Full (strict)*，这可能是一种快速修复方法。</p>
+<p>请您服务器管理员或主机提供商核查源站 Web 服务器的 SSL 证书，并进行以下验证：</p>
+<ul>
+<li>证书没有到期</li>
+<li>证书没有撤销</li>
+<li>证书由<a class="link"   href="https://support.cloudflare.com/hc/articles/360026016272" >证书颁发机构<i class="fas fa-external-link-alt"></i></a>签名（而非自签名）</li>
+<li>所请求的域名或目标域名和主机名列在证书的 <strong>Common Name</strong> 或 <strong>Subject Alternative Name</strong> 中</li>
+<li>您的源站 Web 服务器接受通过 SSL 端口 443 进行连接</li>
+<li><a class="link"   href="https://support.cloudflare.com/hc/articles/200169176" >暂停 Cloudflare<i class="fas fa-external-link-alt"></i></a> 并访问 <a class="link"   href="https://www.sslshopper.com/ssl-checker.html#hostname=www.example.com%EF%BC%88%E5%B0%86" >https://www.sslshopper.com/ssl-checker.html#hostname=www.example.com（将<i class="fas fa-external-link-alt"></i></a> <a class="link"   href="http://www.example.com/" >www.example.com<i class="fas fa-external-link-alt"></i></a> 替换为您的主机名和域名），以验源站 SSL 证书并无问题：</li>
+</ul>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://images.ctfassets.net/slt3lc6tev37/5vKfYKeOgh0GAa9vnr0Qwb/1db00bea64cd5fb77a839f41273840b9/hc-import-troubleshooting_5xx_errors_sslshopper_output.png"
+                      alt="该屏幕显示了没有错误的 SSL 证书。"
+                ></p>
+<p>如果源站服务器使用自签名证书，请将域配置为使用 <em>Full</em> <em>SSL</em> 而非 *Full SSL (Strict)*。请参考<a class="link"   href="https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes" >适用于您的源站的 SSL 推荐设置<i class="fas fa-external-link-alt"></i></a>。</p>
+<hr>
+<h2 id="527-错误：Railgun-Listener-至源站错误"><a href="#527-错误：Railgun-Listener-至源站错误" class="headerlink" title="527 错误：Railgun Listener 至源站错误"></a>527 错误：Railgun Listener 至源站错误</h2><p>527 错误表示 Cloudflare 和源站的 <a class="link"   href="https://support.cloudflare.com/hc/articles/200168406" >Railgun 服务器（rg-listener）<i class="fas fa-external-link-alt"></i></a>之间发生连接中断。常见的原因包括：</p>
+<ul>
+<li>防火墙干扰</li>
+<li>Railgun 服务器和 Cloudflare 之间网络故障或数据包丢失</li>
+</ul>
+<p>如需其他详细信息来协助故障排除，请<a class="link"   href="https://support.cloudflare.com/hc/articles/218444227" >提高 Railgun 日志级别<i class="fas fa-external-link-alt"></i></a>。</p>
+<p>527 错误的最常见原因包括：</p>
+<ul>
+<li><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_c559b9e5-a342-47ed-bfae-66e10e42aade" >连接超时<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_f8e4890c-9459-4c9a-a4ab-e9b44fa16dbf" >超过 LAN 超时<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_2e3e4251-3642-4fce-bbcf-1a45bb2b2c11" >连接遭拒<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_c30fe02c-98f2-4cbf-af8c-bafa9b4f5b8f" >TLS&#x2F;SSL 相关错误<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<p>如果要联系 Cloudflare 支持，请提供以下来自 Railgun Listener 的信息：</p>
+<ul>
+<li><em>railgun.conf</em> 文件的完整内容</li>
+<li><em>railgun-nat.conf</em> 文件的完整内容内容</li>
+<li>详述观察到的错误的 Railgun 日志文件</li>
+</ul>
+<h3 id="连接超时"><a href="#连接超时" class="headerlink" title="连接超时"></a>连接超时</h3><p>下列 Railgun 日志错误表明 Railgun Listener 和源站 Web 服务器之间存在连接故障：</p>
+<pre class="line-numbers language-none"><code class="language-none">connection failed 0.0.0.0:443&#x2F;example.com:dial tcp 0.0.0.0:443: i&#x2F;o timeout
+no response from origin (timeout) 0.0.0.0:80&#x2F;example.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>解决方案</strong></p>
+<p>联系您的主机提供商，以协助测试源站 Web 服务器和 Railgun Listener 之间的连接问题。例如，运行 netcat 命令可以测试从 Railgun Listener 到源站 Web 服务器的 <em>SERVERIP</em> 和 <em>PORT</em>（80 用于 HTTP，或 443 用于 HTTPS）的连接：</p>
+<pre class="line-numbers language-none"><code class="language-none">nc -vz SERVERIP PORT<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="超过-LAN-超时"><a href="#超过-LAN-超时" class="headerlink" title="超过 LAN 超时"></a>超过 LAN 超时</h3><p>如果源站 Web 服务器未在 30 秒默认超时内向 Railgun Listener 发送 HTTP 响应，则生成以下 Railgun Listener 日志错误：</p>
+<pre class="line-numbers language-none"><code class="language-none">connection failed 0.0.0.0:443&#x2F;example.com: dial tcp 0.0.0.0:443: i&#x2F;o timeout<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>可以通过 railgun.conf 文件的 lan.timeout 参数调整这一时间。</p>
+<p><strong>解决方案</strong></p>
+<p>提高 <em>railgun.conf</em> 中的 <em>lan.timeout</em> 限值，或检查 Web 服务器配置。联系您的主机提供商，以确认源站 Web 服务器是否过载。</p>
+<h3 id="连接遭拒"><a href="#连接遭拒" class="headerlink" title="连接遭拒"></a>连接遭拒</h3><p>当来自 Railgun Listener 的请求遭到拒绝时，Railgun 日志中会出现以下错误：</p>
+<pre class="line-numbers language-none"><code class="language-none">Error getting page: dial tcp 0.0.0.0:80:connection refused<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>解决方案</strong></p>
+<p>允许 Railgun Listener 的 IP 处于源站 Web 服务器的防火墙中。</p>
+<h3 id="TLS-x2F-SSL-相关错误"><a href="#TLS-x2F-SSL-相关错误" class="headerlink" title="TLS&#x2F;SSL 相关错误"></a>TLS&#x2F;SSL 相关错误</h3><p>如果 TLS 连接失败，Railgun 日志中会出现以下错误：</p>
+<pre class="line-numbers language-none"><code class="language-none">connection failed 0.0.0.0:443&#x2F;example.com:remote error: handshake failure
+connection failed 0.0.0.0:443&#x2F;example.com:dial tcp 0.0.0.0:443:connection refused
+connection failed 127.0.0.1:443&#x2F;www.example.com:x509: certificate is valid for
+example.com,www.example.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>解决方案</strong></p>
+<p>如果发生 TLS&#x2F;SSL 错误，请在源站 Web 服务器上检查并确保：</p>
+<ul>
+<li>已开启 443 端口</li>
+<li>源站 Web 服务器出示了 SSL 证书</li>
+<li>源站 Web 服务器的 SSL 证书的 SAN 或 Common Name 中包含请求的主机名或目标主机名</li>
+<li>在 Cloudflare <strong>SSL&#x2F;TLS</strong> 应用的<strong>概述</strong>选项卡中将 <strong>SSL</strong> 设为 <a class="link"   href="https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes" >Full 或 Full (Strict)<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<p>如果源站 Web 服务器 SSL 证书采用自签名，请<a href="https://support.cloudflare.com/hc/articles/219336007">在 <em>railgun.conf</em> 中设置 <em>validate.cert&#x3D;0</em></a>。</p>
+<hr>
+<h2 id="Error-530"><a href="#Error-530" class="headerlink" title="Error 530"></a>Error 530</h2><p>返回 HTTP 错误 530 时会同时显示 1XXX 错误。后续我会总结，以了解故障排除信息。</p>
+]]></content>
+      <tags>
+        <tag>cloudflare</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DevOps角色：您梦寐以求的工作是什么？</title>
+    <url>/2019/11/01/DevOps%E8%A7%92%E8%89%B2%E6%82%A8%E6%A2%A6%E5%AF%90%E4%BB%A5%E6%B1%82%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%98%AF%E4%BB%80%E4%B9%88/</url>
+    <content><![CDATA[<h3 id="在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。"><a href="#在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。" class="headerlink" title="在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。"></a>在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。</h3><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://dzone.com/storage/temp/12646937-blocks.jpg"
+                      alt="建筑模块"
+                ></p>
+<p><em>有这么多DevOps角色可供选择，您将是哪个构建基块？</em></p>
+<p>当IT专业人员迫切希望成为DevOps的专家时，对于各种DevOps角色还有很多困惑。因此，本文致力于使实施DevOps的公司的团队结构更加清晰。</p>
+<p>您可能一直听说，在DevOps中，每个参与人员都扮演着共同的角色：DevOps，这是两种实践的结合：<em>Development</em>和<em>Operations</em>。但这远非事实。</p>
+<h2 id="DevOps实践"><a href="#DevOps实践" class="headerlink" title="DevOps实践"></a><strong>DevOps实践</strong></h2><p>实际上，DevOps实践强调，开发人员应该能够执行由Ops家伙执行的任务，而Ops则应该能够执行由Dev家伙执行的任务。</p>
+<p>既然您知道DevOps专业人员是具有多种技能的人员，那么您可能还想知道DevOps专业人员在其组织中负责的各种任务。如果是这样，请继续阅读。</p>
+<p>要真正理解这个概念，您需要从另一个角度看待它。如果您置身于实施DevOps的公司中，那么它就更容易理解，因为您必须根据要求分配各种DevOps角色。</p>
+<h2 id="DevOps角色"><a href="#DevOps角色" class="headerlink" title="DevOps角色"></a><strong>DevOps角色</strong></h2><p>首先让我列出各种角色及其描述。</p>
+<ol>
+<li><strong>DevOps传播者</strong> –负责实施DevOps的首席官（领导）</li>
+<li><strong>发布管理器</strong> –发布新功能并确保发布后产品稳定性的工具</li>
+<li><strong>自动化专家</strong> –负责实现工具自动化和编排的人</li>
+<li><strong>软件开发人员&#x2F;测试人员</strong> –实际开发代码并对其进行测试的人</li>
+<li><strong>质量保证</strong> –确保产品质量符合其要求的人</li>
+<li><strong>安全工程师</strong> –始终监视产品安全性和健康状况的<strong>工程师</strong></li>
+</ol>
+<p>这里要注意的重要一点是，其中许多角色将涉及一个团队或一组专业人员，例如软件开发人员&#x2F;测试人员，安全工程师和质量保证。因此，您应该以层次结构的形式考虑这些角色及其关系。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://www.edureka.co/blog/wp-content/uploads/2018/02/DevOps-Roles.png"
+                      alt="DevOps角色"
+                ></p>
+<p>根据公司的要求，甚至自动化专家也可以由多个人担任该角色。因此，让我更多地谈谈这些DevOps角色。</p>
+<h3 id="DevOps传播者"><a href="#DevOps传播者" class="headerlink" title="DevOps传播者"></a><strong>DevOps传播者</strong></h3><p>就像我之前提到的那样，这是DevOps中的关键角色。由领导者或负责确保在产品的端到端开发中实施DevOps策略并带来环境积极影响的人员来担任此角色。</p>
+<p>DevOps传播者还考虑到可用的各种自动化工具以及Dev和Ops团队具有的技能，还找到了改进产品现有体系结构的方法。他的主要目标是管理其他DevOps角色并从团队中获得全面的效率。</p>
+<h3 id="发布经理"><a href="#发布经理" class="headerlink" title="发布经理"></a><strong>发布经理</strong></h3><p>该角色是产品可交付成果的关键角色，因为他需要将新功能&#x2F;更新功能与现有框架集成在一起。该角色可以是担任发布工程师的角色的同一个人，也可以是领导发布工程师团队的发布经理。</p>
+<p>该角色的主要重点领域是从开发到部署，以协调和管理产品。由于此角色是以重要方式参与的，因此应由了解该技术的工作原理和各种结构的技术人员（经理）来担任。</p>
+<p>根据需求，将有多位经理领导各自的团队来处理多个功能（项目）。</p>
+<h3 id="自动化专家"><a href="#自动化专家" class="headerlink" title="自动化专家"></a><strong>自动化专家</strong></h3><p>无需再次强调该角色的重要性，因为DevOps完全是关于自动化的。作为自动化专家，此角色应该能够理解什么可以自动化以及如何将一个产品堆栈与另一个产品堆栈集成。</p>
+<p>此人也称为集成专家，负责分析，设计和实施持续部署的策略，同时确保生产和预生产系统的高可用性。</p>
+<h3 id="软件开发人员-x2F-测试人员"><a href="#软件开发人员-x2F-测试人员" class="headerlink" title="软件开发人员&#x2F;测试人员"></a><strong>软件开发人员&#x2F;测试人员</strong></h3><p>该角色负责软件的实际根级开发。传统的编码人员和程序员属于这一类。除开发外，专业人员还负责测试代码。</p>
+<p>名称可能保持不变，但是软件开发人员&#x2F;测试人员的新角色大大增加了职责范围，因为他们不仅负责将新需求转化为代码，还负责单元测试，部署和持续监控。</p>
+<h3 id="质量保证"><a href="#质量保证" class="headerlink" title="质量保证"></a><strong>质量保证</strong></h3><p>这是DevOps中引入的新角色，实际上可以保证产品的质量。通常也称为“体验保证”，此角色是传统测试和质量检查之外的一步。</p>
+<p>在此，对产品的功能进行了极限测试，以发现每个缺陷并改善每个独立功能的性能欠佳，因为客户的经验至关重要。这个角色一直在寻找机会，以改善所有功能以提高客户满意度。</p>
+<h3 id="安全工程师"><a href="#安全工程师" class="headerlink" title="安全工程师"></a><strong>安全工程师</strong></h3><p>安全工程师与任何其他角色一样重要，因为他们是负责监视产品交付能力的人员。他们与开发人员并肩工作，在过程中更早地嵌入了他们的建议（安全补丁）。</p>
+<p>除了外部安全性之外，他们还监视系统以检查其性能，报告系统面临的任何停机时间并深入分析以找出造成该问题的原因。防止再次发生停机或安全风险是安全工程师的一项重要任务。</p>
+<p>我希望到目前为止，您对组织中可能存在的各种DevOps角色有了很好的了解。</p>
+]]></content>
+      <tags>
+        <tag>devops</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTTP状态码含义</title>
+    <url>/2023/02/06/HTTP%E7%8A%B6%E6%80%81%E7%A0%81%E5%90%AB%E4%B9%89/</url>
+    <content><![CDATA[<h1 id="HTTP状态码含义"><a href="#HTTP状态码含义" class="headerlink" title="HTTP状态码含义"></a>HTTP状态码含义</h1><h3 id="100"><a href="#100" class="headerlink" title="100"></a>100</h3><p>客户端应当继续发送请求。这个临时响应是用来通知客户端它的部分请求已经被服务器接收，且仍未被拒绝。客户端应当继续发送请求的剩余部分，或者如果请求已经完成，忽略这个响应。服务器必须在请求完成后向客户端发送一个最终响应。</p>
+<h3 id="101"><a href="#101" class="headerlink" title="101"></a>101</h3><p>服务器已经理解了客户端的请求，并将通过Upgrade 消息头通知客户端采用不同的协议来完成这个请求。在发送完这个响应最后的空行后，服务器将会切换到在Upgrade 消息头中定义的那些协议。 只有在切换新的协议更有好处的时候才应该采取类似措施。例如，切换到新的HTTP 版本比旧版本更有优势，或者切换到一个实时且同步的协议以传送利用此类特性的资源。</p>
+<h3 id="102"><a href="#102" class="headerlink" title="102"></a>102</h3><p>由WebDAV（RFC 2518）扩展的状态码，代表处理将被继续执行。</p>
+<h3 id="200"><a href="#200" class="headerlink" title="200"></a>200</h3><p>请求已成功，请求所希望的响应头或数据体将随此响应返回。</p>
+<h3 id="201"><a href="#201" class="headerlink" title="201"></a>201</h3><p>请求已经被实现，而且有一个新的资源已经依据请求的需要而建立，且其 URI 已经随Location 头信息返回。假如需要的资源无法及时建立的话，应当返回 ‘202 Accepted’。</p>
+<h3 id="202"><a href="#202" class="headerlink" title="202"></a>202</h3><p>服务器已接受请求，但尚未处理。正如它可能被拒绝一样，最终该请求可能会也可能不会被执行。在异步操作的场合下，没有比发送这个状态码更方便的做法了。 返回202状态码的响应的目的是允许服务器接受其他过程的请求（例如某个每天只执行一次的基于批处理的操作），而不必让客户端一直保持与服务器的连接直到批处理操作全部完成。在接受请求处理并返回202状态码的响应应当在返回的实体中包含一些指示处理当前状态的信息，以及指向处理状态监视器或状态预测的指针，以便用户能够估计操作是否已经完成。</p>
+<h3 id="203"><a href="#203" class="headerlink" title="203"></a>203</h3><p>服务器已成功处理了请求，但返回的实体头部元信息不是在原始服务器上有效的确定集合，而是来自本地或者第三方的拷贝。当前的信息可能是原始版本的子集或者超集。例如，包含资源的元数据可能导致原始服务器知道元信息的超级。使用此状态码不是必须的，而且只有在响应不使用此状态码便会返回200 OK的情况下才是合适的。</p>
+<h3 id="204"><a href="#204" class="headerlink" title="204"></a>204</h3><p>服务器成功处理了请求，但不需要返回任何实体内容，并且希望返回更新了的元信息。响应可能通过实体头部的形式，返回新的或更新后的元信息。如果存在这些头部信息，则应当与所请求的变量相呼应。 如果客户端是浏览器的话，那么用户浏览器应保留发送了该请求的页面，而不产生任何文档视图上的变化，即使按照规范新的或更新后的元信息应当被应用到用户浏览器活动视图中的文档。 由于204响应被禁止包含任何消息体，因此它始终以消息头后的第一个空行结尾。</p>
+<h3 id="205"><a href="#205" class="headerlink" title="205"></a>205</h3><p>服务器成功处理了请求，且没有返回任何内容。但是与204响应不同，返回此状态码的响应要求请求者重置文档视图。该响应主要是被用于接受用户输入后，立即重置表单，以便用户能够轻松地开始另一次输入。 与204响应一样，该响应也被禁止包含任何消息体，且以消息头后的第一个空行结束。</p>
+<h3 id="206"><a href="#206" class="headerlink" title="206"></a>206</h3><p>服务器已经成功处理了部分 GET 请求。类似于 FlashGet 或者迅雷这类的 HTTP 下载工具都是使用此类响应实现断点续传或者将一个大文档分解为多个下载段同时下载。 该请求必须包含 Range 头信息来指示客户端希望得到的内容范围，并且可能包含 If-Range 来作为请求条件。 响应必须包含如下的头部域： Content-Range 用以指示本次响应中返回的内容的范围；如果是 Content-Type 为 multipart&#x2F;byteranges 的多段下载，则每一 multipart 段中都应包含 Content-Range 域用以指示本段的内容范围。假如响应中包含 Content-Length，那么它的数值必须匹配它返回的内容范围的真实字节数。 Date ETag 和&#x2F;或 Content-Location，假如同样的请求本应该返回200响应。 Expires, Cache-Control，和&#x2F;或 Vary，假如其值可能与之前相同变量的其他响应对应的值不同的话。 假如本响应请求使用了 If-Range 强缓存验证，那么本次响应不应该包含其他实体头；假如本响应的请求使用了 If-Range 弱缓存验证，那么本次响应禁止包含其他实体头；这避免了缓存的实体内容和更新了的实体头信息之间的不一致。否则，本响应就应当包含所有本应该返回200响应中应当返回的所有实体头部域。 假如 ETag 或 Last-Modified 头部不能精确匹配的话，则客户端缓存应禁止将206响应返回的内容与之前任何缓存过的内容组合在一起。 任何不支持 Range 以及 Content-Range 头的缓存都禁止缓存206响应返回的内容。</p>
+<h3 id="207"><a href="#207" class="headerlink" title="207"></a>207</h3><p>由WebDAV(RFC 2518)扩展的状态码，代表之后的消息体将是一个XML消息，并且可能依照之前子请求数量的不同，包含一系列独立的响应代码。</p>
+<h3 id="300"><a href="#300" class="headerlink" title="300"></a>300</h3><p>被请求的资源有一系列可供选择的回馈信息，每个都有自己特定的地址和浏览器驱动的商议信息。用户或浏览器能够自行选择一个首选的地址进行重定向。 除非这是一个 HEAD 请求，否则该响应应当包括一个资源特性及地址的列表的实体，以便用户或浏览器从中选择最合适的重定向地址。这个实体的格式由 Content-Type 定义的格式所决定。浏览器可能根据响应的格式以及浏览器自身能力，自动作出最合适的选择。当然，RFC 2616规范并没有规定这样的自动选择该如何进行。 如果服务器本身已经有了首选的回馈选择，那么在 Location 中应当指明这个回馈的 URI；浏览器可能会将这个 Location 值作为自动重定向的地址。此外，除非额外指定，否则这个响应也是可缓存的。</p>
+<h3 id="301"><a href="#301" class="headerlink" title="301"></a>301</h3><p>被请求的资源已永久移动到新位置，并且将来任何对此资源的引用都应该使用本响应返回的若干个 URI 之一。如果可能，拥有链接编辑功能的客户端应当自动把请求的地址修改为从服务器反馈回来的地址。除非额外指定，否则这个响应也是可缓存的。 新的永久性的 URI 应当在响应的 Location 域中返回。除非这是一个 HEAD 请求，否则响应的实体中应当包含指向新的 URI 的超链接及简短说明。 如果这不是一个 GET 或者 HEAD 请求，因此浏览器禁止自动进行重定向，除非得到用户的确认，因为请求的条件可能因此发生变化。 注意：对于某些使用 HTTP&#x2F;1.0 协议的浏览器，当它们发送的 POST 请求得到了一个301响应的话，接下来的重定向请求将会变成 GET 方式。</p>
+<h3 id="302"><a href="#302" class="headerlink" title="302"></a>302</h3><p>请求的资源现在临时从不同的 URI 响应请求。由于这样的重定向是临时的，客户端应当继续向原有地址发送以后的请求。只有在Cache-Control或Expires中进行了指定的情况下，这个响应才是可缓存的。 新的临时性的 URI 应当在响应的 Location 域中返回。除非这是一个 HEAD 请求，否则响应的实体中应当包含指向新的 URI 的超链接及简短说明。 如果这不是一个 GET 或者 HEAD 请求，那么浏览器禁止自动进行重定向，除非得到用户的确认，因为请求的条件可能因此发生变化。 注意：虽然RFC 1945和RFC 2068规范不允许客户端在重定向时改变请求的方法，但是很多现存的浏览器将302响应视作为303响应，并且使用 GET 方式访问在 Location 中规定的 URI，而无视原先请求的方法。状态码303和307被添加了进来，用以明确服务器期待客户端进行何种反应。</p>
+<h3 id="303"><a href="#303" class="headerlink" title="303"></a>303</h3><p>对应当前请求的响应可以在另一个 URI 上被找到，而且客户端应当采用 GET 的方式访问那个资源。这个方法的存在主要是为了允许由脚本激活的POST请求输出重定向到一个新的资源。这个新的 URI 不是原始资源的替代引用。同时，303响应禁止被缓存。当然，第二个请求（重定向）可能被缓存。 新的 URI 应当在响应的 Location 域中返回。除非这是一个 HEAD 请求，否则响应的实体中应当包含指向新的 URI 的超链接及简短说明。 注意：许多 HTTP&#x2F;1.1 版以前的 浏览器不能正确理解303状态。如果需要考虑与这些浏览器之间的互动，302状态码应该可以胜任，因为大多数的浏览器处理302响应时的方式恰恰就是上述规范要求客户端处理303响应时应当做的。</p>
+<h3 id="304"><a href="#304" class="headerlink" title="304"></a>304</h3><p>如果客户端发送了一个带条件的 GET 请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个状态码。304响应禁止包含消息体，因此始终以消息头后的第一个空行结尾。 该响应必须包含以下的头信息： Date，除非这个服务器没有时钟。假如没有时钟的服务器也遵守这些规则，那么代理服务器以及客户端可以自行将 Date 字段添加到接收到的响应头中去（正如RFC 2068中规定的一样），缓存机制将会正常工作。 ETag 和&#x2F;或 Content-Location，假如同样的请求本应返回200响应。 Expires, Cache-Control，和&#x2F;或Vary，假如其值可能与之前相同变量的其他响应对应的值不同的话。 假如本响应请求使用了强缓存验证，那么本次响应不应该包含其他实体头；否则（例如，某个带条件的 GET 请求使用了弱缓存验证），本次响应禁止包含其他实体头；这避免了缓存了的实体内容和更新了的实体头信息之间的不一致。 假如某个304响应指明了当前某个实体没有缓存，那么缓存系统必须忽视这个响应，并且重复发送不包含限制条件的请求。 假如接收到一个要求更新某个缓存条目的304响应，那么缓存系统必须更新整个条目以反映所有在响应中被更新的字段的值。</p>
+<h3 id="305"><a href="#305" class="headerlink" title="305"></a>305</h3><p>被请求的资源必须通过指定的代理才能被访问。Location 域中将给出指定的代理所在的 URI 信息，接收者需要重复发送一个单独的请求，通过这个代理才能访问相应资源。只有原始服务器才能建立305响应。 注意：RFC 2068中没有明确305响应是为了重定向一个单独的请求，而且只能被原始服务器建立。忽视这些限制可能导致严重的安全后果。</p>
+<h3 id="306"><a href="#306" class="headerlink" title="306"></a>306</h3><p>在最新版的规范中，306状态码已经不再被使用。</p>
+<h3 id="307"><a href="#307" class="headerlink" title="307"></a>307</h3><p>请求的资源现在临时从不同的URI 响应请求。由于这样的重定向是临时的，客户端应当继续向原有地址发送以后的请求。只有在Cache-Control或Expires中进行了指定的情况下，这个响应才是可缓存的。 新的临时性的URI 应当在响应的 Location 域中返回。除非这是一个HEAD 请求，否则响应的实体中应当包含指向新的URI 的超链接及简短说明。因为部分浏览器不能识别307响应，因此需要添加上述必要信息以便用户能够理解并向新的 URI 发出访问请求。 如果这不是一个GET 或者 HEAD 请求，那么浏览器禁止自动进行重定向，除非得到用户的确认，因为请求的条件可能因此发生变化。</p>
+<h3 id="400"><a href="#400" class="headerlink" title="400"></a>400</h3><p>1、语义有误，当前请求无法被服务器理解。除非进行修改，否则客户端不应该重复提交这个请求。</p>
+<p>2、请求参数有误。</p>
+<h3 id="401"><a href="#401" class="headerlink" title="401"></a>401</h3><p>当前请求需要用户验证。该响应必须包含一个适用于被请求资源的 WWW-Authenticate 信息头用以询问用户信息。客户端可以重复提交一个包含恰当的 Authorization 头信息的请求。如果当前请求已经包含了 Authorization 证书，那么401响应代表着服务器验证已经拒绝了那些证书。如果401响应包含了与前一个响应相同的身份验证询问，且浏览器已经至少尝试了一次验证，那么浏览器应当向用户展示响应中包含的实体信息，因为这个实体信息中可能包含了相关诊断信息。参见RFC 2617。</p>
+<h3 id="402"><a href="#402" class="headerlink" title="402"></a>402</h3><p>该状态码是为了将来可能的需求而预留的。</p>
+<h3 id="403"><a href="#403" class="headerlink" title="403"></a>403</h3><p>服务器已经理解请求，但是拒绝执行它。与401响应不同的是，身份验证并不能提供任何帮助，而且这个请求也不应该被重复提交。如果这不是一个 HEAD 请求，而且服务器希望能够讲清楚为何请求不能被执行，那么就应该在实体内描述拒绝的原因。当然服务器也可以返回一个404响应，假如它不希望让客户端获得任何信息。</p>
+<h3 id="404"><a href="#404" class="headerlink" title="404"></a>404</h3><p>请求失败，请求所希望得到的资源未被在服务器上发现。没有信息能够告诉用户这个状况到底是暂时的还是永久的。假如服务器知道情况的话，应当使用410状态码来告知旧资源因为某些内部的配置机制问题，已经永久的不可用，而且没有任何可以跳转的地址。404这个状态码被广泛应用于当服务器不想揭示到底为何请求被拒绝或者没有其他适合的响应可用的情况下。</p>
+<h3 id="405"><a href="#405" class="headerlink" title="405"></a>405</h3><p>请求行中指定的请求方法不能被用于请求相应的资源。该响应必须返回一个Allow 头信息用以表示出当前资源能够接受的请求方法的列表。 鉴于 PUT，DELETE 方法会对服务器上的资源进行写操作，因而绝大部分的网页服务器都不支持或者在默认配置下不允许上述请求方法，对于此类请求均会返回405错误。</p>
+<h3 id="406"><a href="#406" class="headerlink" title="406"></a>406</h3><p>请求的资源的内容特性无法满足请求头中的条件，因而无法生成响应实体。 除非这是一个 HEAD 请求，否则该响应就应当返回一个包含可以让用户或者浏览器从中选择最合适的实体特性以及地址列表的实体。实体的格式由 Content-Type 头中定义的媒体类型决定。浏览器可以根据格式及自身能力自行作出最佳选择。但是，规范中并没有定义任何作出此类自动选择的标准。 </p>
+<h3 id="407"><a href="#407" class="headerlink" title="407"></a>407</h3><p>与401响应类似，只不过客户端必须在代理服务器上进行身份验证。代理服务器必须返回一个 Proxy-Authenticate 用以进行身份询问。客户端可以返回一个 Proxy-Authorization 信息头用以验证。参见RFC 2617。</p>
+<h3 id="408"><a href="#408" class="headerlink" title="408"></a>408</h3><p>请求超时。客户端没有在服务器预备等待的时间内完成一个请求的发送。客户端可以随时再次提交这一请求而无需进行任何更改。</p>
+<h3 id="409"><a href="#409" class="headerlink" title="409"></a>409</h3><p>由于和被请求的资源的当前状态之间存在冲突，请求无法完成。这个代码只允许用在这样的情况下才能被使用：用户被认为能够解决冲突，并且会重新提交新的请求。该响应应当包含足够的信息以便用户发现冲突的源头。 冲突通常发生于对 PUT 请求的处理中。例如，在采用版本检查的环境下，某次 PUT 提交的对特定资源的修改请求所附带的版本信息与之前的某个（第三方）请求向冲突，那么此时服务器就应该返回一个409错误，告知用户请求无法完成。此时，响应实体中很可能会包含两个冲突版本之间的差异比较，以便用户重新提交归并以后的新版本。</p>
+<h3 id="410"><a href="#410" class="headerlink" title="410"></a>410</h3><p>被请求的资源在服务器上已经不再可用，而且没有任何已知的转发地址。这样的状况应当被认为是永久性的。如果可能，拥有链接编辑功能的客户端应当在获得用户许可后删除所有指向这个地址的引用。如果服务器不知道或者无法确定这个状况是否是永久的，那么就应该使用404状态码。除非额外说明，否则这个响应是可缓存的。 410响应的目的主要是帮助网站管理员维护网站，通知用户该资源已经不再可用，并且服务器拥有者希望所有指向这个资源的远端连接也被删除。这类事件在限时、增值服务中很普遍。同样，410响应也被用于通知客户端在当前服务器站点上，原本属于某个个人的资源已经不再可用。当然，是否需要把所有永久不可用的资源标记为’410 Gone’，以及是否需要保持此标记多长时间，完全取决于服务器拥有者。</p>
+<h3 id="411"><a href="#411" class="headerlink" title="411"></a>411</h3><p>服务器拒绝在没有定义 Content-Length 头的情况下接受请求。在添加了表明请求消息体长度的有效 Content-Length 头之后，客户端可以再次提交该请求。</p>
+<h3 id="412"><a href="#412" class="headerlink" title="412"></a>412</h3><p>服务器在验证在请求的头字段中给出先决条件时，没能满足其中的一个或多个。这个状态码允许客户端在获取资源时在请求的元信息（请求头字段数据）中设置先决条件，以此避免该请求方法被应用到其希望的内容以外的资源上。</p>
+<h3 id="413"><a href="#413" class="headerlink" title="413"></a>413</h3><p>服务器拒绝处理当前请求，因为该请求提交的实体数据大小超过了服务器愿意或者能够处理的范围。此种情况下，服务器可以关闭连接以免客户端继续发送此请求。 如果这个状况是临时的，服务器应当返回一个 Retry-After 的响应头，以告知客户端可以在多少时间以后重新尝试。</p>
+<h3 id="414"><a href="#414" class="headerlink" title="414"></a>414</h3><p>请求的URI 长度超过了服务器能够解释的长度，因此服务器拒绝对该请求提供服务。这比较少见，通常的情况包括： 本应使用POST方法的表单提交变成了GET方法，导致查询字符串（Query String）过长。 重定向URI “黑洞”，例如每次重定向把旧的 URI 作为新的 URI 的一部分，导致在若干次重定向后 URI 超长。 客户端正在尝试利用某些服务器中存在的安全漏洞攻击服务器。这类服务器使用固定长度的缓冲读取或操作请求的 URI，当 GET 后的参数超过某个数值后，可能会产生缓冲区溢出，导致任意代码被执行[1]。没有此类漏洞的服务器，应当返回414状态码。</p>
+<h3 id="415"><a href="#415" class="headerlink" title="415"></a>415</h3><p>对于当前请求的方法和所请求的资源，请求中提交的实体并不是服务器中所支持的格式，因此请求被拒绝。</p>
+<h3 id="416"><a href="#416" class="headerlink" title="416"></a>416</h3><p>如果请求中包含了 Range 请求头，并且 Range 中指定的任何数据范围都与当前资源的可用范围不重合，同时请求中又没有定义 If-Range 请求头，那么服务器就应当返回416状态码。 假如 Range 使用的是字节范围，那么这种情况就是指请求指定的所有数据范围的首字节位置都超过了当前资源的长度。服务器也应当在返回416状态码的同时，包含一个 Content-Range 实体头，用以指明当前资源的长度。这个响应也被禁止使用 multipart&#x2F;byteranges 作为其 Content-Type。</p>
+<h3 id="417"><a href="#417" class="headerlink" title="417"></a>417</h3><p>在请求头 Expect 中指定的预期内容无法被服务器满足，或者这个服务器是一个代理服务器，它有明显的证据证明在当前路由的下一个节点上，Expect 的内容无法被满足。</p>
+<h3 id="421"><a href="#421" class="headerlink" title="421"></a>421</h3><p>从当前客户端所在的IP地址到服务器的连接数超过了服务器许可的最大范围。通常，这里的IP地址指的是从服务器上看到的客户端地址（比如用户的网关或者代理服务器地址）。在这种情况下，连接数的计算可能涉及到不止一个终端用户。</p>
+<h3 id="422"><a href="#422" class="headerlink" title="422"></a>422</h3><p>请求格式正确，但是由于含有语义错误，无法响应。（RFC 4918 WebDAV）423 Locked 当前资源被锁定。（RFC 4918 WebDAV）</p>
+<h3 id="424"><a href="#424" class="headerlink" title="424"></a>424</h3><p>由于之前的某个请求发生的错误，导致当前请求失败，例如 PROPPATCH。（RFC 4918 WebDAV）</p>
+<h3 id="425"><a href="#425" class="headerlink" title="425"></a>425</h3><p>在WebDav Advanced Collections 草案中定义，但是未出现在《WebDAV 顺序集协议》（RFC 3658）中。</p>
+<h3 id="426"><a href="#426" class="headerlink" title="426"></a>426</h3><p>客户端应当切换到TLS&#x2F;1.0。（RFC 2817）</p>
+<h3 id="449"><a href="#449" class="headerlink" title="449"></a>449</h3><p>由微软扩展，代表请求应当在执行完适当的操作后进行重试。</p>
+<h3 id="500"><a href="#500" class="headerlink" title="500"></a>500</h3><p>服务器遇到了一个未曾预料的状况，导致了它无法完成对请求的处理。一般来说，这个问题都会在服务器的程序码出错时出现。</p>
+<h3 id="501"><a href="#501" class="headerlink" title="501"></a>501</h3><p>服务器不支持当前请求所需要的某个功能。当服务器无法识别请求的方法，并且无法支持其对任何资源的请求。</p>
+<h3 id="502"><a href="#502" class="headerlink" title="502"></a>502</h3><p>作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。</p>
+<h3 id="503"><a href="#503" class="headerlink" title="503"></a>503</h3><p>由于临时的服务器维护或者过载，服务器当前无法处理请求。这个状况是临时的，并且将在一段时间以后恢复。如果能够预计延迟时间，那么响应中可以包含一个 Retry-After 头用以标明这个延迟时间。如果没有给出这个 Retry-After 信息，那么客户端应当以处理500响应的方式处理它。 注意：503状态码的存在并不意味着服务器在过载的时候必须使用它。某些服务器只不过是希望拒绝客户端的连接。</p>
+<h3 id="504"><a href="#504" class="headerlink" title="504"></a>504</h3><p>作为网关或者代理工作的服务器尝试执行请求时，未能及时从上游服务器（URI标识出的服务器，例如HTTP、FTP、LDAP）或者辅助服务器（例如DNS）收到响应。 注意：某些代理服务器在DNS查询超时时会返回400或者500错误</p>
+<h3 id="505"><a href="#505" class="headerlink" title="505"></a>505</h3><p>服务器不支持，或者拒绝支持在请求中使用的 HTTP 版本。这暗示着服务器不能或不愿使用与客户端相同的版本。响应中应当包含一个描述了为何版本不被支持以及服务器支持哪些协议的实体。</p>
+<h3 id="506"><a href="#506" class="headerlink" title="506"></a>506</h3><p>由《透明内容协商协议》（RFC 2295）扩展，代表服务器存在内部配置错误：被请求的协商变元资源被配置为在透明内容协商中使用自己，因此在一个协商处理中不是一个合适的重点。</p>
+<h3 id="507"><a href="#507" class="headerlink" title="507"></a>507</h3><p>服务器无法存储完成请求所必须的内容。这个状况被认为是临时的。WebDAV (RFC 4918)</p>
+<h3 id="509"><a href="#509" class="headerlink" title="509"></a>509</h3><p>服务器达到带宽限制。这不是一个官方的状态码，但是仍被广泛使用</p>
+<h3 id="510"><a href="#510" class="headerlink" title="510"></a>510</h3><p>获取资源所需要的策略并没有没满足。（RFC 2774）</p>
+]]></content>
+      <tags>
+        <tag>http</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux 目录结构</title>
+    <url>/2019/09/19/Linux%20%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<p>bin<br>bin 是 Binaries (二进制文件) 的缩写, 这个目录存放着最经常使用的命令。</p>
+<p>boot<br>这里存放的是启动 Linux 时使用的一些核心文件，包括一些连接文件以及镜像文件。</p>
+<p>dev<br>dev 是 Device(设备) 的缩写, 该目录下存放的是 Linux 的外部设备，在 Linux 中访问设备的方式和访问文件的方式是相同的。</p>
+<p>etc<br>etc 是 Etcetera(等等) 的缩写,这个目录用来存放所有的系统管理所需要的配置文件和子目录。</p>
+<p>home<br>用户的主目录，在 Linux 中，每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的</p>
+<p>lib<br>lib 是 Library(库) 的缩写这个目录里存放着系统最基本的动态连接共享库，其作用类似于 Windows 里的 DLL 文件。几乎所有的应用程序都需要用到这些共享库。</p>
+<p>通过&#x2F;bin和&#x2F;sbin中的二进制文件。</p>
+<p><a class="link"   href="https://qastack.cn/unix/74646/difference-between-lib-lib32-lib64-libx32-and-libexec" >https://qastack.cn/unix/74646/difference-between-lib-lib32-lib64-libx32-and-libexec<i class="fas fa-external-link-alt"></i></a></p>
+<p>lib64<br>存放64位lib库</p>
+<p>&#x2F;lost+found：<br>这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。</p>
+<p>media<br>linux 系统会自动识别一些设备，例如U盘、光驱等等，当识别后，Linux 会把识别的设备挂载到这个目录下。</p>
+<p>mnt<br>系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将光驱挂载在 &#x2F;mnt&#x2F; 上，然后进入该目录就可以查看光驱里的内容了。</p>
+<p>opt<br>opt 是 optional(可选) 的缩写，这是给主机额外安装软件所摆放的目录。比如你安装一个ORACLE数据库则就可以放到这个目录下。默认是空的。</p>
+<p>proc<br>proc 是 Processes(进程) 的缩写，&#x2F;proc 是一种伪文件系统（也即虚拟文件系统），存储的是当前内核运行状态的一系列特殊文件，这个目录是一个虚拟的目录，它是系统内存的映射，我们可以通过直接访问这个目录来获取系统信息。</p>
+<p>这个目录的内容不在硬盘上而是在内存里，我们也可以直接修改里面的某些文件，比如可以通过下面的命令来屏蔽主机的ping命令，使别人无法ping你的机器：<br>echo 1 &gt; &#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;icmp_echo_ignore_all</p>
+<p>root<br>该目录为系统管理员，也称作超级权限者的用户主目录。</p>
+<p>run<br>是一个临时文件系统，存储系统启动以来的信息。当系统重启时，这个目录下的文件应该被删掉或清除。如果你的系统上有 &#x2F;var&#x2F;run 目录，应该让它指向 run。</p>
+<p>sbin<br>s 就是 Super User 的意思，是 Superuser Binaries (超级用户的二进制文件)的缩写，这里存放的是系统管理员使用的系统管理程序。</p>
+<p>&#x2F;selinux：<br> 这个目录是 Redhat&#x2F;CentOS 所特有的目录，Selinux 是一个安全机制，类似于 windows 的防火墙，但是这套机制比较复杂，这个目录就是存放selinux相关的文件的。</p>
+<p>src</p>
+<p>srv<br>该目录存放一些服务启动之后需要提取的数据。</p>
+<p>sys<br>这是 Linux2.6 内核的一个很大的变化。该目录下安装了<br>2.6 内核中新出现的一个文件系统 sysfs 。</p>
+<p>sysfs 文件系统集成了下面3种文件系统的信息：<br>针对进程信息的 proc 文件系统、<br>针对设备的 devfs 文件系统<br>以及针对伪终端的 devpts 文件系统。</p>
+<p>该文件系统是内核设备树的一个直观反映。</p>
+<p>当一个内核对象被创建的时候，对应的文件和目录也在内核对象子系统中被创建。</p>
+<p>tmp<br>tmp 是 temporary(临时) 的缩写这个目录是用来存放一些临时文件的。</p>
+<p>usr<br>usr 是 unix shared resources(共享资源) 的缩写，这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于 windows 下的 program files 目录。</p>
+<p>var<br>var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放在这个目录下。包括各种日志文件。</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Awesome Mac</title>
     <url>/2023/02/08/Awesome-Mac/</url>
     <content><![CDATA[<h1 id="Awesome-Mac"><a href="#Awesome-Mac" class="headerlink" title="Awesome Mac"></a>Awesome Mac</h1><!--rehype:style=font-size: 38px; border-bottom: 0; display: flex; min-height: 260px; align-items: center; justify-content: center;-->
@@ -5300,485 +5779,6 @@ description: 收集分享大量非常好用的Mac应用程序、软件以及工�
 -->]]></content>
   </entry>
   <entry>
-    <title>Cloudflare 5XX 错误故障排除</title>
-    <url>/2023/02/05/Cloudflare%205XX%20%E9%94%99%E8%AF%AF%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4/</url>
-    <content><![CDATA[<p><em>诊断并解决 Cloudflare 代理的站点的 5XX 错误。</em></p>
-<h3 id="本文内容"><a href="#本文内容" class="headerlink" title="本文内容"></a>本文内容</h3><ul>
-<li>[概述]</li>
-<li>[错误分析](</li>
-<li>[Error 500: internal server error]</li>
-<li>[Error 502 bad gateway 或 Error 504 gateway timeout]</li>
-<li>[Error 503: service temporarily unavailable]</li>
-<li>[Error 520: web server returns an unknown error]</li>
-<li>[Error 521: web server is down]</li>
-<li>[Error 522: connection timed out]</li>
-<li>[Error 523: origin is unreachable]</li>
-<li>[Error 524: a timeout occurred]</li>
-<li>[错误 525：SSL 握手失败]</li>
-<li>[Error 526: invalid SSL certificate]</li>
-<li>[527 错误：Railgun Listener 至源站错误]</li>
-<li>[Error 530]</li>
-</ul>
-<hr>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在排查 5XX 错误时，正确的操作步骤是先联系您的主机提供商或站点管理员来排除故障并收集数据。</p>
-<p>Cloudflare 支持仅协助域所有者解决问题。如果您是网站访问者，请联系网站所有者。</p>
-<h3 id="需要向主机提供商提供的错误详情"><a href="#需要向主机提供商提供的错误详情" class="headerlink" title="需要向主机提供商提供的错误详情"></a>需要向主机提供商提供的错误详情</h3><ol>
-<li>具体的 5XX 错误代码和消息</li>
-<li>发生 5XX 错误的时间和时区</li>
-<li>造成 HTTP 5XX 错误的 URL（例如：<em><a class="link"   href="https://www.example.com/images/icons/image1.png" >https://www.example.com/images/icons/image1.png<i class="fas fa-external-link-alt"></i></a></em>）</li>
-</ol>
-<p>错误原因未必都能在源站错误日志中找到。请检查 Cloudflare 和源站 Web 服务器之间的所有负载平衡器、缓存、代理或防火墙。</p>
-<p>下方的各个错误描述中列出了应向主机提供商或站点管理员提供的其他详情。Cloudflare <a class="link"   href="https://support.cloudflare.com/hc/articles/200172706" >Custom Error Pages<i class="fas fa-external-link-alt"></i></a> 可更改本文探讨的默认错误页面的外观。</p>
-<hr>
-<h2 id="错误分析"><a href="#错误分析" class="headerlink" title="错误分析"></a>错误分析</h2><p>每个域的错误分析可在您的帐户的支持门户中获得。通过错误分析，您可以按 HTTP 错误代码深入了解总体错误情况，它还提供了诊断和解决问题所需的 URL、响应、源站 IP 地址和 Cloudflare 数据中心。错误分析基于的是 1% 的流量样本。</p>
-<p>要查看错误分析：</p>
-<ul>
-<li>导航到 Cloudflare 支持门户。请参阅关于<a class="link"   href="https://support.cloudflare.com/hc/articles/200172476#h_4b8753c8-f422-4c74-9e8e-07026c4da730" >提交支持票证<i class="fas fa-external-link-alt"></i></a>的说明，了解如何访问支持门户。</li>
-<li>往下滚动到<strong>错误分析</strong>部分。</li>
-<li>点击<strong>查看错误分析</strong>。</li>
-<li>输入要调查的域。</li>
-<li>此时将显示<strong>一段时间内的错误</strong>。</li>
-<li>点击图表下方表格中的状态代码，展开流量错误详情。</li>
-</ul>
-<hr>
-<h2 id="Error-500-internal-server-error"><a href="#Error-500-internal-server-error" class="headerlink" title="Error 500: internal server error"></a>Error 500: internal server error</h2><p>500 错误通常表示您的源站 Web 服务器存在问题。<em>Error establishing database</em> <em>connection</em> 是源站 Web 服务器生成的常见 HTTP 500 错误消息。<a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商<i class="fas fa-external-link-alt"></i></a>来解决。</p>
-<p><strong>解决方案</strong></p>
-<p><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >向主机提供商提供详细信息<i class="fas fa-external-link-alt"></i></a>，协助对问题进行故障排除。</p>
-<p>不过，如果 500 错误的 HTML 响应代码中包含“cloudflare”或“cloudflare-nginx”，请将以下信息提供给 <a class="link"   href="https://support.cloudflare.com/hc/articles/200172476" >Cloudflare 支持<i class="fas fa-external-link-alt"></i></a>：</p>
-<ol>
-<li>您的域名</li>
-<li>发生 500 错误的时间和时区</li>
-<li>观察到 500 错误的浏览器的 <em><a class="link"   href="http://www.example.com/cdn-cgi/trace" >www.example.com/cdn-cgi/trace<i class="fas fa-external-link-alt"></i></a></em> 输出（将 <em><a class="link"   href="http://www.example.com/" >www.example.com<i class="fas fa-external-link-alt"></i></a></em> 替换为您实际的域名和主机名）。</li>
-</ol>
-<p>如果发现访问您的网站时显示空白页，请确认问题是否在<a class="link"   href="https://support.cloudflare.com/hc/articles/203118044#h_8654c523-e31e-4f40-a3c7-0674336a2753" >暂停 Cloudflare<i class="fas fa-external-link-alt"></i></a> 时发生，并联系您的主机提供商寻求帮助。</p>
-<hr>
-<h2 id="Error-502-bad-gateway-或-Error-504-gateway-timeout"><a href="#Error-502-bad-gateway-或-Error-504-gateway-timeout" class="headerlink" title="Error 502 bad gateway 或 Error 504 gateway timeout"></a>Error 502 bad gateway 或 Error 504 gateway timeout</h2><p>当 Cloudflare 无法与您的源站 Web 服务器建立联系时，会发生 HTTP 502 或 504 错误。</p>
-<p>可能的原因有两种：</p>
-<ul>
-<li>（最常见原因）<a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_85e06a1a-fa89-4685-aa24-2aaf57c0141b" >502&#x2F;504 源自您的源站 Web 服务器<i class="fas fa-external-link-alt"></i></a></li>
-<li><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_845d633d-0842-4315-9dd2-53185cc4e1de" >502&#x2F;504 源自 Cloudflare<i class="fas fa-external-link-alt"></i></a></li>
-</ul>
-<h3 id="502-x2F-504-源自您的源站-Web-服务器"><a href="#502-x2F-504-源自您的源站-Web-服务器" class="headerlink" title="502&#x2F;504 源自您的源站 Web 服务器"></a>502&#x2F;504 源自您的源站 Web 服务器</h3><p>当您的源站 Web 服务器标准的 HTTP 502 网关损坏或 504 网关超时错误响应时，Cloudflare 将返回带有 Cloudflare 标志的 HTTTP 502 或 504 错误：</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://images.ctfassets.net/slt3lc6tev37/CTIa7Nqay9uZoBZnh7ao7/e61d8968ea919d75b26e0098437f7174/image1.png"
-                      alt="Cloudflare 品牌化错误 502 的示例。"
-                ></p>
-<p><strong>解决方案</strong></p>
-<p>联系您的主机提供商，在您的源站 Web 服务器上排查这些常见的原因：</p>
-<ul>
-<li>确保在请求生成生成 502 或 504 错误的访问者 URL 中的主机名和域名时，源站服务器能够响应请求。</li>
-<li>调查服务器过载、崩溃或网络故障。</li>
-<li>识别发生超时或被阻止的应用程序或服务。</li>
-</ul>
-<h3 id="502-x2F-504-源自-Cloudflare"><a href="#502-x2F-504-源自-Cloudflare" class="headerlink" title="502&#x2F;504 源自 Cloudflare"></a>502&#x2F;504 源自 Cloudflare</h3><p>源自 Cloudflare 的 502 或 504 错误如下方所示：</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://images.ctfassets.net/slt3lc6tev37/2BPhw2fUEiOLLFaHqCIsTP/679902b3c75ec783371cb3fecdc1066f/image5.png"
-                      alt="非品牌化错误 502 的示例。"
-                ></p>
-<p>如果错误未提及“cloudflare”，请联系主机提供商来寻求与<a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_85e06a1a-fa89-4685-aa24-2aaf57c0141b" >源自源站的 502&#x2F;504 错误<i class="fas fa-external-link-alt"></i></a>相关的帮助。</p>
-<p><strong>解决方案</strong></p>
-<p>为避免处理您的查询时发生延迟，请向 <a class="link"   href="https://support.cloudflare.com/hc/articles/200172476" >Cloudflare 支持<i class="fas fa-external-link-alt"></i></a>提供以下必要详情：</p>
-<ol>
-<li>发生问题的时间和时区</li>
-<li>造成 HTTP 502 或 504 错误的 URL（例如：<em><a class="link"   href="https://www.example.com/images/icons/image1.png" >https://www.example.com/images/icons/image1.png<i class="fas fa-external-link-alt"></i></a></em>）</li>
-<li>浏览 <em><a class="link"   href="http://www.example.com/cdn-cgi/trace" >www.example.com/cdn-cgi/trace<i class="fas fa-external-link-alt"></i></a></em> 时的输出（将 <em><a class="link"   href="http://www.example.com/" >www.example.com<i class="fas fa-external-link-alt"></i></a></em> 替换为导致 HTTP 502 或 504 错误的域名和主机名）</li>
-</ol>
-<hr>
-<h2 id="Error-503-service-temporarily-unavailable"><a href="#Error-503-service-temporarily-unavailable" class="headerlink" title="Error 503: service temporarily unavailable"></a>Error 503: service temporarily unavailable</h2><p>HTTP 错误 503 在源站 Web 服务器过载时发生。 可能的原因有两种，可通过错误消息来辨别：</p>
-<ul>
-<li>错误的 HTML 响应正文中不包含“cloudflare”或“cloudflare-nginx”。</li>
-</ul>
-<p><strong>解决方案</strong>：联系您的主机提供商，以核实是否针对您的源站 Web 服务器的请求实施了速率限制。</p>
-<ul>
-<li>错误的 HTML 响应正文中包含“cloudflare”或“cloudflare-nginx”。</li>
-</ul>
-<p><strong>解决方案</strong>：Cloudflare 数据中心中发生了连接问题。向 <a class="link"   href="https://support.cloudflare.com/hc/articles/200172476" >Cloudflare 支持<i class="fas fa-external-link-alt"></i></a>提供以下信息：</p>
-<ol>
-<li>您的域名</li>
-<li>发生 503 错误的时间和时区</li>
-<li>观察到 503 错误的浏览器的 <em><a class="link"   href="http://www.example.com/cdn-cgi/trace" >www.example.com/cdn-cgi/trace<i class="fas fa-external-link-alt"></i></a></em> 输出（将 <em><a class="link"   href="http://www.example.com/" >www.example.com<i class="fas fa-external-link-alt"></i></a></em> 替换为您实际的域名和主机名）。</li>
-</ol>
-<hr>
-<h2 id="Error-520-web-server-returns-an-unknown-error"><a href="#Error-520-web-server-returns-an-unknown-error" class="headerlink" title="Error 520: web server returns an unknown error"></a>Error 520: web server returns an unknown error</h2><p>当源站服务器向 Cloudflare 返回空白、未知或意外响应时，会发生 520 错误。</p>
-<p><strong>解决方案</strong></p>
-<p>在进一步调查 520 错误期间采用以下快速解决办法：将 Cloudflare <strong>DNS</strong> 应用中的记录设为<a class="link"   href="https://developers.cloudflare.com/dns/manage-dns-records/reference/proxied-dns-records" >“仅限 DNS”<i class="fas fa-external-link-alt"></i></a>，或<a class="link"   href="https://support.cloudflare.com/hc/articles/203118044#h_8654c523-e31e-4f40-a3c7-0674336a2753" >暂停 Cloudflare<i class="fas fa-external-link-alt"></i></a>。</p>
-<p><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商或站点管理员<i class="fas fa-external-link-alt"></i></a>，请他们核查您的源站 Web 服务器日志中的崩溃并检查以下常见原因：</p>
-<ul>
-<li><p>源站 Web 服务器应用程序崩溃</p>
-</li>
-<li><p>您的源站上未允许 <a class="link"   href="https://www.cloudflare.com/ips" >Cloudflare IP<i class="fas fa-external-link-alt"></i></a>。</p>
-</li>
-<li><p>标头超过 16 KB（通常因为 Cookie 数量过多）</p>
-</li>
-<li><p>源站 Web 服务器的空响应中缺少 HTTP 状态代码或响应正文</p>
-</li>
-<li><p>缺少响应标头或源站 Web 服务器未返回</p>
-<p>正确的 HTTP 错误响应</p>
-<p>。</p>
-<ul>
-<li><code>在从上游读取响应标头时，上游过早地关闭了连接</code>，这是我们在日志中可能注意到的一个常见错误。这表明源站 Web 服务器有问题，导致Cloudflare 生成 520 错误。</li>
-</ul>
-</li>
-</ul>
-<p>520 错误普遍发生于造成源站 Web 服务器崩溃的 PHP 应用程序。</p>
-<p>如果在联系主机提供商或站点管理员后仍然出现 520 错误，请向 <a class="link"   href="https://support.cloudflare.com/hc/articles/200172476" >Cloudflare 支持<i class="fas fa-external-link-alt"></i></a>提供以下信息：</p>
-<ul>
-<li><p>发生错误时所请求资源的完整 URL</p>
-</li>
-<li><p>520 错误消息中的 Cloudflare <strong>cf-ray</strong></p>
-</li>
-<li><p>来自 <em><a class="link"   href="http://www.example.com/cdn-cgi/trace" >http://www.example.com/cdn-cgi/trace<i class="fas fa-external-link-alt"></i></a></em> 时的输出（将 <em><a class="link"   href="http://www.example.com/" >www.example.com<i class="fas fa-external-link-alt"></i></a></em> 替换为您发生 520 错误时的您的域名和主机名）</p>
-</li>
-<li><p>两个</p>
-<p>HAR 文件</p>
-<p>：</p>
-<ul>
-<li>一个在您网站上启用了 Cloudflare 时生成</li>
-<li>另一个在<a class="link"   href="https://support.cloudflare.com/hc/articles/200169176" >临时禁用 Cloudflare<i class="fas fa-external-link-alt"></i></a> 后生成。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="Error-521-web-server-is-down"><a href="#Error-521-web-server-is-down" class="headerlink" title="Error 521: web server is down"></a>Error 521: web server is down</h2><p>源站 Web 服务器拒绝来自 Cloudflare 的连接时，会发生 521 错误。源站上的安全解决方案可能阻止了来自某些 <a class="link"   href="https://www.cloudflare.com/ips" >Cloudflare IP 地址<i class="fas fa-external-link-alt"></i></a>的合法连接。</p>
-<p>521 错误的两个最常见原因：</p>
-<ul>
-<li>源站 Web 服务器应用程序离线</li>
-<li>Cloudflare 请求被阻止</li>
-</ul>
-<p><strong>解决方案</strong></p>
-<p><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的站点管理员或主机提供商<i class="fas fa-external-link-alt"></i></a>以排除这些常见原因：</p>
-<ul>
-<li>确保您的源站 Web 服务器正常响应</li>
-<li>查看源站 Web 服务器错误日志，以确定 Web 服务器应用程序崩溃或中断。</li>
-<li>确认没有阻止 <a class="link"   href="https://www.cloudflare.com/ips" >Cloudflare IP 地址<i class="fas fa-external-link-alt"></i></a>或对其施加速率限制</li>
-<li>在您的源站 Web 服务器的防火墙或其他安全软件中允许所有 <a class="link"   href="https://www.cloudflare.com/ips" >Cloudflare IP 范围<i class="fas fa-external-link-alt"></i></a></li>
-<li>确认您是否将 <strong>SSL&#x2F;TLS 模式</strong>设置为 <strong>Full</strong> 或 <strong>Full (Strict</strong>)，以及您是否安装了 <a class="link"   href="https://developers.cloudflare.com/ssl/origin-configuration/origin-ca" >Cloudflare Origin 证书<i class="fas fa-external-link-alt"></i></a></li>
-<li>查找 <a class="link"   href="https://community.cloudflare.com/t/community-tip-fixing-error-521-web-server-is-down/42461" >Cloudflare 社区<i class="fas fa-external-link-alt"></i></a>的更多故障排除信息。</li>
-</ul>
-<hr>
-<h2 id="Error-522-connection-timed-out"><a href="#Error-522-connection-timed-out" class="headerlink" title="Error 522: connection timed out"></a>Error 522: connection timed out</h2><p>Cloudflare 联系源站 Web 服务器时超时会发生 522 错误。 有两种不同的错误导致 HTTP 错误 522，具体取决于 Cloudflare 和源站 Web 服务器之间发生超时的时间：</p>
-<ol>
-<li>在连接建立之前，源站 Web 服务器未在 Cloudflare 发送 SYN 后 15 秒内将 SYN + ACK 返回给 Cloudflare。</li>
-<li>在连接建立之后，源站 Web 服务器未在 90 秒内确认（ACK）Cloudflare 的资源请求。</li>
-</ol>
-<p>如果源站 Web 服务器在连接建立之后确认（<em>ACK</em>）了资源请求，但没有及时发送响应，则发生 <a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Cloudflare-5XX-%E9%94%99%E8%AF%AF%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4#524error" >HTTP 524 错误<i class="fas fa-external-link-alt"></i></a>。</p>
-<p><strong>解决方案</strong></p>
-<p><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商<i class="fas fa-external-link-alt"></i></a>，从源站 Web 服务器上排查下列常见原因：</p>
-<ul>
-<li>（最常见）.htaccess、iptables 或防火墙中阻止了 <a class="link"   href="https://www.cloudflare.com/ips/" >Cloudflare IP 地址<i class="fas fa-external-link-alt"></i></a>或对其设置了速率限制。确认您的主机提供商允许 Cloudflare IP 地址。</li>
-<li>源站 Web 服务器过载或离线，因而丢弃了传入的请求。</li>
-<li>源站 Web 服务器上禁用了 <a class="link"   href="http://tldp.org/HOWTO/TCP-Keepalive-HOWTO/overview.html" >Keepalives<i class="fas fa-external-link-alt"></i></a> 功能。</li>
-<li>Cloudflare <strong>DNS</strong> 应用中的源站 IP 地址与主机提供商当前为您的源站 Web 服务器置备的 IP 地址不匹配。</li>
-<li>您的源站 Web 服务器上丢弃了数据包。</li>
-</ul>
-<p>如果您使用的是 <a class="link"   href="https://developers.cloudflare.com/pages/" >Cloudflare Pages<i class="fas fa-external-link-alt"></i></a>，请确认您已经设置了自定义域，并且您的 CNAME 记录指向您的自定义 Pages 域。如需了解如何设置自定义 Pages 域，请点击<a class="link"   href="https://developers.cloudflare.com/pages/getting-started#adding-a-custom-domain" >此处<i class="fas fa-external-link-alt"></i></a>。</p>
-<p>如果上述原因都未能促成解决方案，请向主机提供商或站点管理员索取以下信息，然后<a class="link"   href="https://support.cloudflare.com/hc/articles/200172476" >联系 Cloudflare 支持<i class="fas fa-external-link-alt"></i></a>：</p>
-<ul>
-<li>从源站 Web 服务器到发生问题前最常连接您的源站 Web 服务器的 <a class="link"   href="http://www.cloudflare.com/ips" >Cloudflare IP 地址<i class="fas fa-external-link-alt"></i></a>的 <a class="link"   href="https://support.cloudflare.com/hc/articles/203118044#h_b8cebafd-9243-40e9-9c44-d4b94ccd3a87" >MTR 或 traceroute<i class="fas fa-external-link-alt"></i></a> 结果。在源站 Web 服务器日志记录的 IP 中，找到一个可成功连接的 IP。</li>
-<li>来自主机提供商调查的详细信息，如相关的日志或与主机提供商的对话。</li>
-</ul>
-<hr>
-<h2 id="Error-523-origin-is-unreachable"><a href="#Error-523-origin-is-unreachable" class="headerlink" title="Error 523: origin is unreachable"></a>Error 523: origin is unreachable</h2><p>当 Cloudflare 无法联系您的源站 Web 服务器时，会发生 523 错误。这通常在 Cloudflare 和源站 Web 服务器之间的网络设备没有通向源站 IP 地址的路由时发生。</p>
-<p><strong>解决方案</strong> <a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商<i class="fas fa-external-link-alt"></i></a>，在您的源站 Web 服务器上排查下列常见原因：</p>
-<ul>
-<li>确认您的 Cloudflare DNS 应用中为 A 或 AAAA 记录列出了正确的源站 IP 地址。</li>
-<li>对源站与 Cloudflare 之间的互联网路由问题进行故障排除，或者对源站本身的问题进行故障排除。</li>
-</ul>
-<p>如果主机提供商经常更改该您的源站 Web 服务器 IP 地址，请参考有关<a class="link"   href="https://developers.cloudflare.com/dns/manage-dns-records/how-to/managing-dynamic-ip-addresses" >动态 DNS 更新<i class="fas fa-external-link-alt"></i></a>的 Cloudflare 文档。</p>
-<p>如果上述原因都未能促成解决方案，请向主机提供商或站点管理员索取以下信息：</p>
-<ul>
-<li>从源站 Web 服务器到发生问题前最常连接您的源站 Web 服务器的 <a class="link"   href="http://www.cloudflare.com/ips" >Cloudflare IP 地址<i class="fas fa-external-link-alt"></i></a>的 <a class="link"   href="https://support.cloudflare.com/hc/articles/203118044#h_b8cebafd-9243-40e9-9c44-d4b94ccd3a87" >MTR 或 traceroute<i class="fas fa-external-link-alt"></i></a> 结果。从源站 Web 服务器日志查找一个可连接的 Cloudflare IP。</li>
-<li>如果您通过 Cloudflare 托管服务合作伙伴使用 Railgun，请<a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商<i class="fas fa-external-link-alt"></i></a>来排查 523 错误。</li>
-<li>如果您自己管理 Railgun 安装，请提供以下信息：<ul>
-<li>从 Railgun 服务器到源站 Web 服务器的 <a class="link"   href="https://support.cloudflare.com/hc/articles/203118044#h_b8cebafd-9243-40e9-9c44-d4b94ccd3a87" >traceroute<i class="fas fa-external-link-alt"></i></a> 结果。</li>
-<li>来自 Railgun 服务器的最新系统日志文件。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="Error-524-a-timeout-occurred"><a href="#Error-524-a-timeout-occurred" class="headerlink" title="Error 524: a timeout occurred"></a>Error 524: a timeout occurred</h2><p>524 错误表明 Cloudflare 成功连接了源服务器，但源站 Web 服务器没有在默认的 100 秒连接超时结束前提供 HTTP 响应。如果源站服务器由于要做太多工作而花费太长时间（例如，大数据查询），或者因为服务器在争抢资源而无法及时返回任何数据，那么可能会发生这种情况。</p>
-<p><strong>解决方案</strong></p>
-<p>以下是我们建议的解决这一问题的方案：</p>
-<ul>
-<li><p>实施大型 HTTP 进程的状态轮询，以避免遇到该错误。</p>
-</li>
-<li><p>联系您的主机提供商</p>
-<p>，从您的源站 Web 服务器上排查下列常见原因：</p>
-<ul>
-<li>源站 Web 服务器上长时间运行的进程。</li>
-<li>发生过载的源站 Web 服务器。</li>
-</ul>
-</li>
-</ul>
-<p>源站 Web 服务器上记录请求响应时间有助于辨别资源速度缓慢的原因。联系您的主机提供商或站点管理员，以协助调整日志格式，或者搜索适用于您的 Web 服务器品牌（如 <a class="link"   href="http://httpd.apache.org/docs/current/mod/mod_log_config.html" >Apache<i class="fas fa-external-link-alt"></i></a> 或 <a class="link"   href="http://nginx.org/en/docs/http/ngx_http_log_module.html#log_format" >Nginx<i class="fas fa-external-link-alt"></i></a>）的日志文档。</p>
-<ul>
-<li>Enterprise 客户可以使用 <a class="link"   href="https://api.cloudflare.com/#zone-settings-change-proxy-read-timeout-setting" >proxy_read_timeout API 端点<i class="fas fa-external-link-alt"></i></a>将 524 超时延长到最长 600 秒。</li>
-<li>如果您经常运行需要超过 100 秒才能完成的 HTTP 请求（例如大量数据导出），请在 Cloudflare <strong>DNS</strong> 应用中将这些进程移动到未由 Cloudflare 代理的子域后面。</li>
-<li>如果使用 Cloudflare Railgun 的域发生错误 524，请确保 <em>lan.timeout</em> 设置的值高于默认的 30 秒，再重启 railgun 服务。</li>
-</ul>
-<hr>
-<h2 id="错误-525：SSL-握手失败"><a href="#错误-525：SSL-握手失败" class="headerlink" title="错误 525：SSL 握手失败"></a>错误 525：SSL 握手失败</h2><p>525 错误表示 Cloudflare 与源站 Web 服务器之间的 SSL 握手失败。满足以下两个条件时会发生 525 错误：</p>
-<ol>
-<li>Cloudflare 与源站 Web 服务器之间的 <a class="link"   href="https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake/" >SSL 握手<i class="fas fa-external-link-alt"></i></a>失败，以及</li>
-<li>Cloudflare <strong>SSL&#x2F;TLS</strong> 应用的<strong>概述</strong>选项卡中设置了 <a href="https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes"><em>Full</em> 或 <em>Full (Strict)</em></a> <strong>SSL</strong>。</li>
-</ol>
-<p><strong>解决方案</strong></p>
-<p><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商<i class="fas fa-external-link-alt"></i></a>，从您的源站 Web 服务器上排查下列常见原因：</p>
-<ul>
-<li>未安装有效的 SSL 证书</li>
-<li>未开启 443 端口（或其他自定义安全端口）</li>
-<li>无 <a class="link"   href="https://support.cloudflare.com/hc/articles/360026016272" >SNI<i class="fas fa-external-link-alt"></i></a> 支持</li>
-<li>Cloudflare 接受的加密套件与源站 Web 服务器支持的<a class="link"   href="https://developers.cloudflare.com/ssl/ssl-tls/cipher-suites" >加密套件<i class="fas fa-external-link-alt"></i></a>不匹配。</li>
-</ul>
-<p>如果间歇性发生 525 错误，请查看源站 Web 服务器错误日志来确定原因。配置 Apache 以<a class="link"   href="https://cwiki.apache.org/confluence/display/HTTPD/DebuggingSSLProblems#Enable_SSL_logging" >记录 mod_ssl 错误<i class="fas fa-external-link-alt"></i></a>。此外，nginx 的标准错误日志中包含 SSL 错误，但可能需要<a class="link"   href="https://docs.nginx.com/nginx/admin-guide/monitoring/logging/" >提高日志级别<i class="fas fa-external-link-alt"></i></a>。</p>
-<p><strong>其他检查</strong></p>
-<ul>
-<li>检查您的源站服务器上是否安装了证书。您可以查看<a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/203118044-Gathering-information-for-troubleshooting-sites#h_0c7f48b3-fc29-4266-8c63-477fe61a11c4" >这篇文章<i class="fas fa-external-link-alt"></i></a>，详细了解如何运行一些测试。如果您没有任何证书，你可以创建并安装免费的 <a class="link"   href="https://developers.cloudflare.com/ssl/origin-configuration/origin-ca" >Cloudflare Origin CA 证书<i class="fas fa-external-link-alt"></i></a>。使用 Origin CA 证书，您就加密 Cloudflare 与源站 Web 服务器之间的流量。</li>
-<li><a class="link"   href="https://developers.cloudflare.com/ssl/ssl-tls/cipher-suites" >检查服务器使用的密码套件<i class="fas fa-external-link-alt"></i></a>以确保它们与 Cloudflare 支持的密码套件匹配。</li>
-<li>根据看到的 525 的时间戳检查服务器的错误日志，以确保有错误可能导致在 SSL 握手期间重置连接。</li>
-</ul>
-<hr>
-<h2 id="Error-526-invalid-SSL-certificate"><a href="#Error-526-invalid-SSL-certificate" class="headerlink" title="Error 526: invalid SSL certificate"></a>Error 526: invalid SSL certificate</h2><p>满足以下两个条件时会发生 526 错误：</p>
-<ol>
-<li>Cloudflare 无法验证您的源站 Web 服务器上的 SSL 证书；</li>
-<li>Cloudflare <strong>SSL&#x2F;TLS</strong> 应用的<strong>概述</strong>选项卡中设置了 <a href="https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes#full-strict"><em>Full SSL (Strict)</em></a> <strong>SSL</strong>。</li>
-</ol>
-<p><strong>解决方案</strong></p>
-<p>在 Cloudflare <strong>SSL&#x2F;TLS</strong> 应用的<strong>概述</strong>选项卡中将域的 <strong>SSL</strong> 设为 <em>Full</em> 而非 *Full (strict)*，这可能是一种快速修复方法。</p>
-<p>请您服务器管理员或主机提供商核查源站 Web 服务器的 SSL 证书，并进行以下验证：</p>
-<ul>
-<li>证书没有到期</li>
-<li>证书没有撤销</li>
-<li>证书由<a class="link"   href="https://support.cloudflare.com/hc/articles/360026016272" >证书颁发机构<i class="fas fa-external-link-alt"></i></a>签名（而非自签名）</li>
-<li>所请求的域名或目标域名和主机名列在证书的 <strong>Common Name</strong> 或 <strong>Subject Alternative Name</strong> 中</li>
-<li>您的源站 Web 服务器接受通过 SSL 端口 443 进行连接</li>
-<li><a class="link"   href="https://support.cloudflare.com/hc/articles/200169176" >暂停 Cloudflare<i class="fas fa-external-link-alt"></i></a> 并访问 <a class="link"   href="https://www.sslshopper.com/ssl-checker.html#hostname=www.example.com%EF%BC%88%E5%B0%86" >https://www.sslshopper.com/ssl-checker.html#hostname=www.example.com（将<i class="fas fa-external-link-alt"></i></a> <a class="link"   href="http://www.example.com/" >www.example.com<i class="fas fa-external-link-alt"></i></a> 替换为您的主机名和域名），以验源站 SSL 证书并无问题：</li>
-</ul>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://images.ctfassets.net/slt3lc6tev37/5vKfYKeOgh0GAa9vnr0Qwb/1db00bea64cd5fb77a839f41273840b9/hc-import-troubleshooting_5xx_errors_sslshopper_output.png"
-                      alt="该屏幕显示了没有错误的 SSL 证书。"
-                ></p>
-<p>如果源站服务器使用自签名证书，请将域配置为使用 <em>Full</em> <em>SSL</em> 而非 *Full SSL (Strict)*。请参考<a class="link"   href="https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes" >适用于您的源站的 SSL 推荐设置<i class="fas fa-external-link-alt"></i></a>。</p>
-<hr>
-<h2 id="527-错误：Railgun-Listener-至源站错误"><a href="#527-错误：Railgun-Listener-至源站错误" class="headerlink" title="527 错误：Railgun Listener 至源站错误"></a>527 错误：Railgun Listener 至源站错误</h2><p>527 错误表示 Cloudflare 和源站的 <a class="link"   href="https://support.cloudflare.com/hc/articles/200168406" >Railgun 服务器（rg-listener）<i class="fas fa-external-link-alt"></i></a>之间发生连接中断。常见的原因包括：</p>
-<ul>
-<li>防火墙干扰</li>
-<li>Railgun 服务器和 Cloudflare 之间网络故障或数据包丢失</li>
-</ul>
-<p>如需其他详细信息来协助故障排除，请<a class="link"   href="https://support.cloudflare.com/hc/articles/218444227" >提高 Railgun 日志级别<i class="fas fa-external-link-alt"></i></a>。</p>
-<p>527 错误的最常见原因包括：</p>
-<ul>
-<li><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_c559b9e5-a342-47ed-bfae-66e10e42aade" >连接超时<i class="fas fa-external-link-alt"></i></a></li>
-<li><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_f8e4890c-9459-4c9a-a4ab-e9b44fa16dbf" >超过 LAN 超时<i class="fas fa-external-link-alt"></i></a></li>
-<li><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_2e3e4251-3642-4fce-bbcf-1a45bb2b2c11" >连接遭拒<i class="fas fa-external-link-alt"></i></a></li>
-<li><a class="link"   href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_c30fe02c-98f2-4cbf-af8c-bafa9b4f5b8f" >TLS&#x2F;SSL 相关错误<i class="fas fa-external-link-alt"></i></a></li>
-</ul>
-<p>如果要联系 Cloudflare 支持，请提供以下来自 Railgun Listener 的信息：</p>
-<ul>
-<li><em>railgun.conf</em> 文件的完整内容</li>
-<li><em>railgun-nat.conf</em> 文件的完整内容内容</li>
-<li>详述观察到的错误的 Railgun 日志文件</li>
-</ul>
-<h3 id="连接超时"><a href="#连接超时" class="headerlink" title="连接超时"></a>连接超时</h3><p>下列 Railgun 日志错误表明 Railgun Listener 和源站 Web 服务器之间存在连接故障：</p>
-<pre class="line-numbers language-none"><code class="language-none">connection failed 0.0.0.0:443&#x2F;example.com:dial tcp 0.0.0.0:443: i&#x2F;o timeout
-no response from origin (timeout) 0.0.0.0:80&#x2F;example.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p><strong>解决方案</strong></p>
-<p>联系您的主机提供商，以协助测试源站 Web 服务器和 Railgun Listener 之间的连接问题。例如，运行 netcat 命令可以测试从 Railgun Listener 到源站 Web 服务器的 <em>SERVERIP</em> 和 <em>PORT</em>（80 用于 HTTP，或 443 用于 HTTPS）的连接：</p>
-<pre class="line-numbers language-none"><code class="language-none">nc -vz SERVERIP PORT<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="超过-LAN-超时"><a href="#超过-LAN-超时" class="headerlink" title="超过 LAN 超时"></a>超过 LAN 超时</h3><p>如果源站 Web 服务器未在 30 秒默认超时内向 Railgun Listener 发送 HTTP 响应，则生成以下 Railgun Listener 日志错误：</p>
-<pre class="line-numbers language-none"><code class="language-none">connection failed 0.0.0.0:443&#x2F;example.com: dial tcp 0.0.0.0:443: i&#x2F;o timeout<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>可以通过 railgun.conf 文件的 lan.timeout 参数调整这一时间。</p>
-<p><strong>解决方案</strong></p>
-<p>提高 <em>railgun.conf</em> 中的 <em>lan.timeout</em> 限值，或检查 Web 服务器配置。联系您的主机提供商，以确认源站 Web 服务器是否过载。</p>
-<h3 id="连接遭拒"><a href="#连接遭拒" class="headerlink" title="连接遭拒"></a>连接遭拒</h3><p>当来自 Railgun Listener 的请求遭到拒绝时，Railgun 日志中会出现以下错误：</p>
-<pre class="line-numbers language-none"><code class="language-none">Error getting page: dial tcp 0.0.0.0:80:connection refused<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><strong>解决方案</strong></p>
-<p>允许 Railgun Listener 的 IP 处于源站 Web 服务器的防火墙中。</p>
-<h3 id="TLS-x2F-SSL-相关错误"><a href="#TLS-x2F-SSL-相关错误" class="headerlink" title="TLS&#x2F;SSL 相关错误"></a>TLS&#x2F;SSL 相关错误</h3><p>如果 TLS 连接失败，Railgun 日志中会出现以下错误：</p>
-<pre class="line-numbers language-none"><code class="language-none">connection failed 0.0.0.0:443&#x2F;example.com:remote error: handshake failure
-connection failed 0.0.0.0:443&#x2F;example.com:dial tcp 0.0.0.0:443:connection refused
-connection failed 127.0.0.1:443&#x2F;www.example.com:x509: certificate is valid for
-example.com,www.example.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>解决方案</strong></p>
-<p>如果发生 TLS&#x2F;SSL 错误，请在源站 Web 服务器上检查并确保：</p>
-<ul>
-<li>已开启 443 端口</li>
-<li>源站 Web 服务器出示了 SSL 证书</li>
-<li>源站 Web 服务器的 SSL 证书的 SAN 或 Common Name 中包含请求的主机名或目标主机名</li>
-<li>在 Cloudflare <strong>SSL&#x2F;TLS</strong> 应用的<strong>概述</strong>选项卡中将 <strong>SSL</strong> 设为 <a class="link"   href="https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes" >Full 或 Full (Strict)<i class="fas fa-external-link-alt"></i></a></li>
-</ul>
-<p>如果源站 Web 服务器 SSL 证书采用自签名，请<a href="https://support.cloudflare.com/hc/articles/219336007">在 <em>railgun.conf</em> 中设置 <em>validate.cert&#x3D;0</em></a>。</p>
-<hr>
-<h2 id="Error-530"><a href="#Error-530" class="headerlink" title="Error 530"></a>Error 530</h2><p>返回 HTTP 错误 530 时会同时显示 1XXX 错误。后续我会总结，以了解故障排除信息。</p>
-]]></content>
-      <tags>
-        <tag>cloudflare</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>DevOps角色：您梦寐以求的工作是什么？</title>
-    <url>/2019/11/01/DevOps%E8%A7%92%E8%89%B2%E6%82%A8%E6%A2%A6%E5%AF%90%E4%BB%A5%E6%B1%82%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%98%AF%E4%BB%80%E4%B9%88/</url>
-    <content><![CDATA[<h3 id="在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。"><a href="#在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。" class="headerlink" title="在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。"></a>在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。</h3><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://dzone.com/storage/temp/12646937-blocks.jpg"
-                      alt="建筑模块"
-                ></p>
-<p><em>有这么多DevOps角色可供选择，您将是哪个构建基块？</em></p>
-<p>当IT专业人员迫切希望成为DevOps的专家时，对于各种DevOps角色还有很多困惑。因此，本文致力于使实施DevOps的公司的团队结构更加清晰。</p>
-<p>您可能一直听说，在DevOps中，每个参与人员都扮演着共同的角色：DevOps，这是两种实践的结合：<em>Development</em>和<em>Operations</em>。但这远非事实。</p>
-<h2 id="DevOps实践"><a href="#DevOps实践" class="headerlink" title="DevOps实践"></a><strong>DevOps实践</strong></h2><p>实际上，DevOps实践强调，开发人员应该能够执行由Ops家伙执行的任务，而Ops则应该能够执行由Dev家伙执行的任务。</p>
-<p>既然您知道DevOps专业人员是具有多种技能的人员，那么您可能还想知道DevOps专业人员在其组织中负责的各种任务。如果是这样，请继续阅读。</p>
-<p>要真正理解这个概念，您需要从另一个角度看待它。如果您置身于实施DevOps的公司中，那么它就更容易理解，因为您必须根据要求分配各种DevOps角色。</p>
-<h2 id="DevOps角色"><a href="#DevOps角色" class="headerlink" title="DevOps角色"></a><strong>DevOps角色</strong></h2><p>首先让我列出各种角色及其描述。</p>
-<ol>
-<li><strong>DevOps传播者</strong> –负责实施DevOps的首席官（领导）</li>
-<li><strong>发布管理器</strong> –发布新功能并确保发布后产品稳定性的工具</li>
-<li><strong>自动化专家</strong> –负责实现工具自动化和编排的人</li>
-<li><strong>软件开发人员&#x2F;测试人员</strong> –实际开发代码并对其进行测试的人</li>
-<li><strong>质量保证</strong> –确保产品质量符合其要求的人</li>
-<li><strong>安全工程师</strong> –始终监视产品安全性和健康状况的<strong>工程师</strong></li>
-</ol>
-<p>这里要注意的重要一点是，其中许多角色将涉及一个团队或一组专业人员，例如软件开发人员&#x2F;测试人员，安全工程师和质量保证。因此，您应该以层次结构的形式考虑这些角色及其关系。</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://www.edureka.co/blog/wp-content/uploads/2018/02/DevOps-Roles.png"
-                      alt="DevOps角色"
-                ></p>
-<p>根据公司的要求，甚至自动化专家也可以由多个人担任该角色。因此，让我更多地谈谈这些DevOps角色。</p>
-<h3 id="DevOps传播者"><a href="#DevOps传播者" class="headerlink" title="DevOps传播者"></a><strong>DevOps传播者</strong></h3><p>就像我之前提到的那样，这是DevOps中的关键角色。由领导者或负责确保在产品的端到端开发中实施DevOps策略并带来环境积极影响的人员来担任此角色。</p>
-<p>DevOps传播者还考虑到可用的各种自动化工具以及Dev和Ops团队具有的技能，还找到了改进产品现有体系结构的方法。他的主要目标是管理其他DevOps角色并从团队中获得全面的效率。</p>
-<h3 id="发布经理"><a href="#发布经理" class="headerlink" title="发布经理"></a><strong>发布经理</strong></h3><p>该角色是产品可交付成果的关键角色，因为他需要将新功能&#x2F;更新功能与现有框架集成在一起。该角色可以是担任发布工程师的角色的同一个人，也可以是领导发布工程师团队的发布经理。</p>
-<p>该角色的主要重点领域是从开发到部署，以协调和管理产品。由于此角色是以重要方式参与的，因此应由了解该技术的工作原理和各种结构的技术人员（经理）来担任。</p>
-<p>根据需求，将有多位经理领导各自的团队来处理多个功能（项目）。</p>
-<h3 id="自动化专家"><a href="#自动化专家" class="headerlink" title="自动化专家"></a><strong>自动化专家</strong></h3><p>无需再次强调该角色的重要性，因为DevOps完全是关于自动化的。作为自动化专家，此角色应该能够理解什么可以自动化以及如何将一个产品堆栈与另一个产品堆栈集成。</p>
-<p>此人也称为集成专家，负责分析，设计和实施持续部署的策略，同时确保生产和预生产系统的高可用性。</p>
-<h3 id="软件开发人员-x2F-测试人员"><a href="#软件开发人员-x2F-测试人员" class="headerlink" title="软件开发人员&#x2F;测试人员"></a><strong>软件开发人员&#x2F;测试人员</strong></h3><p>该角色负责软件的实际根级开发。传统的编码人员和程序员属于这一类。除开发外，专业人员还负责测试代码。</p>
-<p>名称可能保持不变，但是软件开发人员&#x2F;测试人员的新角色大大增加了职责范围，因为他们不仅负责将新需求转化为代码，还负责单元测试，部署和持续监控。</p>
-<h3 id="质量保证"><a href="#质量保证" class="headerlink" title="质量保证"></a><strong>质量保证</strong></h3><p>这是DevOps中引入的新角色，实际上可以保证产品的质量。通常也称为“体验保证”，此角色是传统测试和质量检查之外的一步。</p>
-<p>在此，对产品的功能进行了极限测试，以发现每个缺陷并改善每个独立功能的性能欠佳，因为客户的经验至关重要。这个角色一直在寻找机会，以改善所有功能以提高客户满意度。</p>
-<h3 id="安全工程师"><a href="#安全工程师" class="headerlink" title="安全工程师"></a><strong>安全工程师</strong></h3><p>安全工程师与任何其他角色一样重要，因为他们是负责监视产品交付能力的人员。他们与开发人员并肩工作，在过程中更早地嵌入了他们的建议（安全补丁）。</p>
-<p>除了外部安全性之外，他们还监视系统以检查其性能，报告系统面临的任何停机时间并深入分析以找出造成该问题的原因。防止再次发生停机或安全风险是安全工程师的一项重要任务。</p>
-<p>我希望到目前为止，您对组织中可能存在的各种DevOps角色有了很好的了解。</p>
-]]></content>
-      <tags>
-        <tag>devops</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HTTP状态码含义</title>
-    <url>/2023/02/06/HTTP%E7%8A%B6%E6%80%81%E7%A0%81%E5%90%AB%E4%B9%89/</url>
-    <content><![CDATA[<h1 id="HTTP状态码含义"><a href="#HTTP状态码含义" class="headerlink" title="HTTP状态码含义"></a>HTTP状态码含义</h1><h3 id="100"><a href="#100" class="headerlink" title="100"></a>100</h3><p>客户端应当继续发送请求。这个临时响应是用来通知客户端它的部分请求已经被服务器接收，且仍未被拒绝。客户端应当继续发送请求的剩余部分，或者如果请求已经完成，忽略这个响应。服务器必须在请求完成后向客户端发送一个最终响应。</p>
-<h3 id="101"><a href="#101" class="headerlink" title="101"></a>101</h3><p>服务器已经理解了客户端的请求，并将通过Upgrade 消息头通知客户端采用不同的协议来完成这个请求。在发送完这个响应最后的空行后，服务器将会切换到在Upgrade 消息头中定义的那些协议。 只有在切换新的协议更有好处的时候才应该采取类似措施。例如，切换到新的HTTP 版本比旧版本更有优势，或者切换到一个实时且同步的协议以传送利用此类特性的资源。</p>
-<h3 id="102"><a href="#102" class="headerlink" title="102"></a>102</h3><p>由WebDAV（RFC 2518）扩展的状态码，代表处理将被继续执行。</p>
-<h3 id="200"><a href="#200" class="headerlink" title="200"></a>200</h3><p>请求已成功，请求所希望的响应头或数据体将随此响应返回。</p>
-<h3 id="201"><a href="#201" class="headerlink" title="201"></a>201</h3><p>请求已经被实现，而且有一个新的资源已经依据请求的需要而建立，且其 URI 已经随Location 头信息返回。假如需要的资源无法及时建立的话，应当返回 ‘202 Accepted’。</p>
-<h3 id="202"><a href="#202" class="headerlink" title="202"></a>202</h3><p>服务器已接受请求，但尚未处理。正如它可能被拒绝一样，最终该请求可能会也可能不会被执行。在异步操作的场合下，没有比发送这个状态码更方便的做法了。 返回202状态码的响应的目的是允许服务器接受其他过程的请求（例如某个每天只执行一次的基于批处理的操作），而不必让客户端一直保持与服务器的连接直到批处理操作全部完成。在接受请求处理并返回202状态码的响应应当在返回的实体中包含一些指示处理当前状态的信息，以及指向处理状态监视器或状态预测的指针，以便用户能够估计操作是否已经完成。</p>
-<h3 id="203"><a href="#203" class="headerlink" title="203"></a>203</h3><p>服务器已成功处理了请求，但返回的实体头部元信息不是在原始服务器上有效的确定集合，而是来自本地或者第三方的拷贝。当前的信息可能是原始版本的子集或者超集。例如，包含资源的元数据可能导致原始服务器知道元信息的超级。使用此状态码不是必须的，而且只有在响应不使用此状态码便会返回200 OK的情况下才是合适的。</p>
-<h3 id="204"><a href="#204" class="headerlink" title="204"></a>204</h3><p>服务器成功处理了请求，但不需要返回任何实体内容，并且希望返回更新了的元信息。响应可能通过实体头部的形式，返回新的或更新后的元信息。如果存在这些头部信息，则应当与所请求的变量相呼应。 如果客户端是浏览器的话，那么用户浏览器应保留发送了该请求的页面，而不产生任何文档视图上的变化，即使按照规范新的或更新后的元信息应当被应用到用户浏览器活动视图中的文档。 由于204响应被禁止包含任何消息体，因此它始终以消息头后的第一个空行结尾。</p>
-<h3 id="205"><a href="#205" class="headerlink" title="205"></a>205</h3><p>服务器成功处理了请求，且没有返回任何内容。但是与204响应不同，返回此状态码的响应要求请求者重置文档视图。该响应主要是被用于接受用户输入后，立即重置表单，以便用户能够轻松地开始另一次输入。 与204响应一样，该响应也被禁止包含任何消息体，且以消息头后的第一个空行结束。</p>
-<h3 id="206"><a href="#206" class="headerlink" title="206"></a>206</h3><p>服务器已经成功处理了部分 GET 请求。类似于 FlashGet 或者迅雷这类的 HTTP 下载工具都是使用此类响应实现断点续传或者将一个大文档分解为多个下载段同时下载。 该请求必须包含 Range 头信息来指示客户端希望得到的内容范围，并且可能包含 If-Range 来作为请求条件。 响应必须包含如下的头部域： Content-Range 用以指示本次响应中返回的内容的范围；如果是 Content-Type 为 multipart&#x2F;byteranges 的多段下载，则每一 multipart 段中都应包含 Content-Range 域用以指示本段的内容范围。假如响应中包含 Content-Length，那么它的数值必须匹配它返回的内容范围的真实字节数。 Date ETag 和&#x2F;或 Content-Location，假如同样的请求本应该返回200响应。 Expires, Cache-Control，和&#x2F;或 Vary，假如其值可能与之前相同变量的其他响应对应的值不同的话。 假如本响应请求使用了 If-Range 强缓存验证，那么本次响应不应该包含其他实体头；假如本响应的请求使用了 If-Range 弱缓存验证，那么本次响应禁止包含其他实体头；这避免了缓存的实体内容和更新了的实体头信息之间的不一致。否则，本响应就应当包含所有本应该返回200响应中应当返回的所有实体头部域。 假如 ETag 或 Last-Modified 头部不能精确匹配的话，则客户端缓存应禁止将206响应返回的内容与之前任何缓存过的内容组合在一起。 任何不支持 Range 以及 Content-Range 头的缓存都禁止缓存206响应返回的内容。</p>
-<h3 id="207"><a href="#207" class="headerlink" title="207"></a>207</h3><p>由WebDAV(RFC 2518)扩展的状态码，代表之后的消息体将是一个XML消息，并且可能依照之前子请求数量的不同，包含一系列独立的响应代码。</p>
-<h3 id="300"><a href="#300" class="headerlink" title="300"></a>300</h3><p>被请求的资源有一系列可供选择的回馈信息，每个都有自己特定的地址和浏览器驱动的商议信息。用户或浏览器能够自行选择一个首选的地址进行重定向。 除非这是一个 HEAD 请求，否则该响应应当包括一个资源特性及地址的列表的实体，以便用户或浏览器从中选择最合适的重定向地址。这个实体的格式由 Content-Type 定义的格式所决定。浏览器可能根据响应的格式以及浏览器自身能力，自动作出最合适的选择。当然，RFC 2616规范并没有规定这样的自动选择该如何进行。 如果服务器本身已经有了首选的回馈选择，那么在 Location 中应当指明这个回馈的 URI；浏览器可能会将这个 Location 值作为自动重定向的地址。此外，除非额外指定，否则这个响应也是可缓存的。</p>
-<h3 id="301"><a href="#301" class="headerlink" title="301"></a>301</h3><p>被请求的资源已永久移动到新位置，并且将来任何对此资源的引用都应该使用本响应返回的若干个 URI 之一。如果可能，拥有链接编辑功能的客户端应当自动把请求的地址修改为从服务器反馈回来的地址。除非额外指定，否则这个响应也是可缓存的。 新的永久性的 URI 应当在响应的 Location 域中返回。除非这是一个 HEAD 请求，否则响应的实体中应当包含指向新的 URI 的超链接及简短说明。 如果这不是一个 GET 或者 HEAD 请求，因此浏览器禁止自动进行重定向，除非得到用户的确认，因为请求的条件可能因此发生变化。 注意：对于某些使用 HTTP&#x2F;1.0 协议的浏览器，当它们发送的 POST 请求得到了一个301响应的话，接下来的重定向请求将会变成 GET 方式。</p>
-<h3 id="302"><a href="#302" class="headerlink" title="302"></a>302</h3><p>请求的资源现在临时从不同的 URI 响应请求。由于这样的重定向是临时的，客户端应当继续向原有地址发送以后的请求。只有在Cache-Control或Expires中进行了指定的情况下，这个响应才是可缓存的。 新的临时性的 URI 应当在响应的 Location 域中返回。除非这是一个 HEAD 请求，否则响应的实体中应当包含指向新的 URI 的超链接及简短说明。 如果这不是一个 GET 或者 HEAD 请求，那么浏览器禁止自动进行重定向，除非得到用户的确认，因为请求的条件可能因此发生变化。 注意：虽然RFC 1945和RFC 2068规范不允许客户端在重定向时改变请求的方法，但是很多现存的浏览器将302响应视作为303响应，并且使用 GET 方式访问在 Location 中规定的 URI，而无视原先请求的方法。状态码303和307被添加了进来，用以明确服务器期待客户端进行何种反应。</p>
-<h3 id="303"><a href="#303" class="headerlink" title="303"></a>303</h3><p>对应当前请求的响应可以在另一个 URI 上被找到，而且客户端应当采用 GET 的方式访问那个资源。这个方法的存在主要是为了允许由脚本激活的POST请求输出重定向到一个新的资源。这个新的 URI 不是原始资源的替代引用。同时，303响应禁止被缓存。当然，第二个请求（重定向）可能被缓存。 新的 URI 应当在响应的 Location 域中返回。除非这是一个 HEAD 请求，否则响应的实体中应当包含指向新的 URI 的超链接及简短说明。 注意：许多 HTTP&#x2F;1.1 版以前的 浏览器不能正确理解303状态。如果需要考虑与这些浏览器之间的互动，302状态码应该可以胜任，因为大多数的浏览器处理302响应时的方式恰恰就是上述规范要求客户端处理303响应时应当做的。</p>
-<h3 id="304"><a href="#304" class="headerlink" title="304"></a>304</h3><p>如果客户端发送了一个带条件的 GET 请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个状态码。304响应禁止包含消息体，因此始终以消息头后的第一个空行结尾。 该响应必须包含以下的头信息： Date，除非这个服务器没有时钟。假如没有时钟的服务器也遵守这些规则，那么代理服务器以及客户端可以自行将 Date 字段添加到接收到的响应头中去（正如RFC 2068中规定的一样），缓存机制将会正常工作。 ETag 和&#x2F;或 Content-Location，假如同样的请求本应返回200响应。 Expires, Cache-Control，和&#x2F;或Vary，假如其值可能与之前相同变量的其他响应对应的值不同的话。 假如本响应请求使用了强缓存验证，那么本次响应不应该包含其他实体头；否则（例如，某个带条件的 GET 请求使用了弱缓存验证），本次响应禁止包含其他实体头；这避免了缓存了的实体内容和更新了的实体头信息之间的不一致。 假如某个304响应指明了当前某个实体没有缓存，那么缓存系统必须忽视这个响应，并且重复发送不包含限制条件的请求。 假如接收到一个要求更新某个缓存条目的304响应，那么缓存系统必须更新整个条目以反映所有在响应中被更新的字段的值。</p>
-<h3 id="305"><a href="#305" class="headerlink" title="305"></a>305</h3><p>被请求的资源必须通过指定的代理才能被访问。Location 域中将给出指定的代理所在的 URI 信息，接收者需要重复发送一个单独的请求，通过这个代理才能访问相应资源。只有原始服务器才能建立305响应。 注意：RFC 2068中没有明确305响应是为了重定向一个单独的请求，而且只能被原始服务器建立。忽视这些限制可能导致严重的安全后果。</p>
-<h3 id="306"><a href="#306" class="headerlink" title="306"></a>306</h3><p>在最新版的规范中，306状态码已经不再被使用。</p>
-<h3 id="307"><a href="#307" class="headerlink" title="307"></a>307</h3><p>请求的资源现在临时从不同的URI 响应请求。由于这样的重定向是临时的，客户端应当继续向原有地址发送以后的请求。只有在Cache-Control或Expires中进行了指定的情况下，这个响应才是可缓存的。 新的临时性的URI 应当在响应的 Location 域中返回。除非这是一个HEAD 请求，否则响应的实体中应当包含指向新的URI 的超链接及简短说明。因为部分浏览器不能识别307响应，因此需要添加上述必要信息以便用户能够理解并向新的 URI 发出访问请求。 如果这不是一个GET 或者 HEAD 请求，那么浏览器禁止自动进行重定向，除非得到用户的确认，因为请求的条件可能因此发生变化。</p>
-<h3 id="400"><a href="#400" class="headerlink" title="400"></a>400</h3><p>1、语义有误，当前请求无法被服务器理解。除非进行修改，否则客户端不应该重复提交这个请求。</p>
-<p>2、请求参数有误。</p>
-<h3 id="401"><a href="#401" class="headerlink" title="401"></a>401</h3><p>当前请求需要用户验证。该响应必须包含一个适用于被请求资源的 WWW-Authenticate 信息头用以询问用户信息。客户端可以重复提交一个包含恰当的 Authorization 头信息的请求。如果当前请求已经包含了 Authorization 证书，那么401响应代表着服务器验证已经拒绝了那些证书。如果401响应包含了与前一个响应相同的身份验证询问，且浏览器已经至少尝试了一次验证，那么浏览器应当向用户展示响应中包含的实体信息，因为这个实体信息中可能包含了相关诊断信息。参见RFC 2617。</p>
-<h3 id="402"><a href="#402" class="headerlink" title="402"></a>402</h3><p>该状态码是为了将来可能的需求而预留的。</p>
-<h3 id="403"><a href="#403" class="headerlink" title="403"></a>403</h3><p>服务器已经理解请求，但是拒绝执行它。与401响应不同的是，身份验证并不能提供任何帮助，而且这个请求也不应该被重复提交。如果这不是一个 HEAD 请求，而且服务器希望能够讲清楚为何请求不能被执行，那么就应该在实体内描述拒绝的原因。当然服务器也可以返回一个404响应，假如它不希望让客户端获得任何信息。</p>
-<h3 id="404"><a href="#404" class="headerlink" title="404"></a>404</h3><p>请求失败，请求所希望得到的资源未被在服务器上发现。没有信息能够告诉用户这个状况到底是暂时的还是永久的。假如服务器知道情况的话，应当使用410状态码来告知旧资源因为某些内部的配置机制问题，已经永久的不可用，而且没有任何可以跳转的地址。404这个状态码被广泛应用于当服务器不想揭示到底为何请求被拒绝或者没有其他适合的响应可用的情况下。</p>
-<h3 id="405"><a href="#405" class="headerlink" title="405"></a>405</h3><p>请求行中指定的请求方法不能被用于请求相应的资源。该响应必须返回一个Allow 头信息用以表示出当前资源能够接受的请求方法的列表。 鉴于 PUT，DELETE 方法会对服务器上的资源进行写操作，因而绝大部分的网页服务器都不支持或者在默认配置下不允许上述请求方法，对于此类请求均会返回405错误。</p>
-<h3 id="406"><a href="#406" class="headerlink" title="406"></a>406</h3><p>请求的资源的内容特性无法满足请求头中的条件，因而无法生成响应实体。 除非这是一个 HEAD 请求，否则该响应就应当返回一个包含可以让用户或者浏览器从中选择最合适的实体特性以及地址列表的实体。实体的格式由 Content-Type 头中定义的媒体类型决定。浏览器可以根据格式及自身能力自行作出最佳选择。但是，规范中并没有定义任何作出此类自动选择的标准。 </p>
-<h3 id="407"><a href="#407" class="headerlink" title="407"></a>407</h3><p>与401响应类似，只不过客户端必须在代理服务器上进行身份验证。代理服务器必须返回一个 Proxy-Authenticate 用以进行身份询问。客户端可以返回一个 Proxy-Authorization 信息头用以验证。参见RFC 2617。</p>
-<h3 id="408"><a href="#408" class="headerlink" title="408"></a>408</h3><p>请求超时。客户端没有在服务器预备等待的时间内完成一个请求的发送。客户端可以随时再次提交这一请求而无需进行任何更改。</p>
-<h3 id="409"><a href="#409" class="headerlink" title="409"></a>409</h3><p>由于和被请求的资源的当前状态之间存在冲突，请求无法完成。这个代码只允许用在这样的情况下才能被使用：用户被认为能够解决冲突，并且会重新提交新的请求。该响应应当包含足够的信息以便用户发现冲突的源头。 冲突通常发生于对 PUT 请求的处理中。例如，在采用版本检查的环境下，某次 PUT 提交的对特定资源的修改请求所附带的版本信息与之前的某个（第三方）请求向冲突，那么此时服务器就应该返回一个409错误，告知用户请求无法完成。此时，响应实体中很可能会包含两个冲突版本之间的差异比较，以便用户重新提交归并以后的新版本。</p>
-<h3 id="410"><a href="#410" class="headerlink" title="410"></a>410</h3><p>被请求的资源在服务器上已经不再可用，而且没有任何已知的转发地址。这样的状况应当被认为是永久性的。如果可能，拥有链接编辑功能的客户端应当在获得用户许可后删除所有指向这个地址的引用。如果服务器不知道或者无法确定这个状况是否是永久的，那么就应该使用404状态码。除非额外说明，否则这个响应是可缓存的。 410响应的目的主要是帮助网站管理员维护网站，通知用户该资源已经不再可用，并且服务器拥有者希望所有指向这个资源的远端连接也被删除。这类事件在限时、增值服务中很普遍。同样，410响应也被用于通知客户端在当前服务器站点上，原本属于某个个人的资源已经不再可用。当然，是否需要把所有永久不可用的资源标记为’410 Gone’，以及是否需要保持此标记多长时间，完全取决于服务器拥有者。</p>
-<h3 id="411"><a href="#411" class="headerlink" title="411"></a>411</h3><p>服务器拒绝在没有定义 Content-Length 头的情况下接受请求。在添加了表明请求消息体长度的有效 Content-Length 头之后，客户端可以再次提交该请求。</p>
-<h3 id="412"><a href="#412" class="headerlink" title="412"></a>412</h3><p>服务器在验证在请求的头字段中给出先决条件时，没能满足其中的一个或多个。这个状态码允许客户端在获取资源时在请求的元信息（请求头字段数据）中设置先决条件，以此避免该请求方法被应用到其希望的内容以外的资源上。</p>
-<h3 id="413"><a href="#413" class="headerlink" title="413"></a>413</h3><p>服务器拒绝处理当前请求，因为该请求提交的实体数据大小超过了服务器愿意或者能够处理的范围。此种情况下，服务器可以关闭连接以免客户端继续发送此请求。 如果这个状况是临时的，服务器应当返回一个 Retry-After 的响应头，以告知客户端可以在多少时间以后重新尝试。</p>
-<h3 id="414"><a href="#414" class="headerlink" title="414"></a>414</h3><p>请求的URI 长度超过了服务器能够解释的长度，因此服务器拒绝对该请求提供服务。这比较少见，通常的情况包括： 本应使用POST方法的表单提交变成了GET方法，导致查询字符串（Query String）过长。 重定向URI “黑洞”，例如每次重定向把旧的 URI 作为新的 URI 的一部分，导致在若干次重定向后 URI 超长。 客户端正在尝试利用某些服务器中存在的安全漏洞攻击服务器。这类服务器使用固定长度的缓冲读取或操作请求的 URI，当 GET 后的参数超过某个数值后，可能会产生缓冲区溢出，导致任意代码被执行[1]。没有此类漏洞的服务器，应当返回414状态码。</p>
-<h3 id="415"><a href="#415" class="headerlink" title="415"></a>415</h3><p>对于当前请求的方法和所请求的资源，请求中提交的实体并不是服务器中所支持的格式，因此请求被拒绝。</p>
-<h3 id="416"><a href="#416" class="headerlink" title="416"></a>416</h3><p>如果请求中包含了 Range 请求头，并且 Range 中指定的任何数据范围都与当前资源的可用范围不重合，同时请求中又没有定义 If-Range 请求头，那么服务器就应当返回416状态码。 假如 Range 使用的是字节范围，那么这种情况就是指请求指定的所有数据范围的首字节位置都超过了当前资源的长度。服务器也应当在返回416状态码的同时，包含一个 Content-Range 实体头，用以指明当前资源的长度。这个响应也被禁止使用 multipart&#x2F;byteranges 作为其 Content-Type。</p>
-<h3 id="417"><a href="#417" class="headerlink" title="417"></a>417</h3><p>在请求头 Expect 中指定的预期内容无法被服务器满足，或者这个服务器是一个代理服务器，它有明显的证据证明在当前路由的下一个节点上，Expect 的内容无法被满足。</p>
-<h3 id="421"><a href="#421" class="headerlink" title="421"></a>421</h3><p>从当前客户端所在的IP地址到服务器的连接数超过了服务器许可的最大范围。通常，这里的IP地址指的是从服务器上看到的客户端地址（比如用户的网关或者代理服务器地址）。在这种情况下，连接数的计算可能涉及到不止一个终端用户。</p>
-<h3 id="422"><a href="#422" class="headerlink" title="422"></a>422</h3><p>请求格式正确，但是由于含有语义错误，无法响应。（RFC 4918 WebDAV）423 Locked 当前资源被锁定。（RFC 4918 WebDAV）</p>
-<h3 id="424"><a href="#424" class="headerlink" title="424"></a>424</h3><p>由于之前的某个请求发生的错误，导致当前请求失败，例如 PROPPATCH。（RFC 4918 WebDAV）</p>
-<h3 id="425"><a href="#425" class="headerlink" title="425"></a>425</h3><p>在WebDav Advanced Collections 草案中定义，但是未出现在《WebDAV 顺序集协议》（RFC 3658）中。</p>
-<h3 id="426"><a href="#426" class="headerlink" title="426"></a>426</h3><p>客户端应当切换到TLS&#x2F;1.0。（RFC 2817）</p>
-<h3 id="449"><a href="#449" class="headerlink" title="449"></a>449</h3><p>由微软扩展，代表请求应当在执行完适当的操作后进行重试。</p>
-<h3 id="500"><a href="#500" class="headerlink" title="500"></a>500</h3><p>服务器遇到了一个未曾预料的状况，导致了它无法完成对请求的处理。一般来说，这个问题都会在服务器的程序码出错时出现。</p>
-<h3 id="501"><a href="#501" class="headerlink" title="501"></a>501</h3><p>服务器不支持当前请求所需要的某个功能。当服务器无法识别请求的方法，并且无法支持其对任何资源的请求。</p>
-<h3 id="502"><a href="#502" class="headerlink" title="502"></a>502</h3><p>作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。</p>
-<h3 id="503"><a href="#503" class="headerlink" title="503"></a>503</h3><p>由于临时的服务器维护或者过载，服务器当前无法处理请求。这个状况是临时的，并且将在一段时间以后恢复。如果能够预计延迟时间，那么响应中可以包含一个 Retry-After 头用以标明这个延迟时间。如果没有给出这个 Retry-After 信息，那么客户端应当以处理500响应的方式处理它。 注意：503状态码的存在并不意味着服务器在过载的时候必须使用它。某些服务器只不过是希望拒绝客户端的连接。</p>
-<h3 id="504"><a href="#504" class="headerlink" title="504"></a>504</h3><p>作为网关或者代理工作的服务器尝试执行请求时，未能及时从上游服务器（URI标识出的服务器，例如HTTP、FTP、LDAP）或者辅助服务器（例如DNS）收到响应。 注意：某些代理服务器在DNS查询超时时会返回400或者500错误</p>
-<h3 id="505"><a href="#505" class="headerlink" title="505"></a>505</h3><p>服务器不支持，或者拒绝支持在请求中使用的 HTTP 版本。这暗示着服务器不能或不愿使用与客户端相同的版本。响应中应当包含一个描述了为何版本不被支持以及服务器支持哪些协议的实体。</p>
-<h3 id="506"><a href="#506" class="headerlink" title="506"></a>506</h3><p>由《透明内容协商协议》（RFC 2295）扩展，代表服务器存在内部配置错误：被请求的协商变元资源被配置为在透明内容协商中使用自己，因此在一个协商处理中不是一个合适的重点。</p>
-<h3 id="507"><a href="#507" class="headerlink" title="507"></a>507</h3><p>服务器无法存储完成请求所必须的内容。这个状况被认为是临时的。WebDAV (RFC 4918)</p>
-<h3 id="509"><a href="#509" class="headerlink" title="509"></a>509</h3><p>服务器达到带宽限制。这不是一个官方的状态码，但是仍被广泛使用</p>
-<h3 id="510"><a href="#510" class="headerlink" title="510"></a>510</h3><p>获取资源所需要的策略并没有没满足。（RFC 2774）</p>
-]]></content>
-      <tags>
-        <tag>http</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux 目录结构</title>
-    <url>/2019/09/19/Linux%20%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/</url>
-    <content><![CDATA[<p>bin<br>bin 是 Binaries (二进制文件) 的缩写, 这个目录存放着最经常使用的命令。</p>
-<p>boot<br>这里存放的是启动 Linux 时使用的一些核心文件，包括一些连接文件以及镜像文件。</p>
-<p>dev<br>dev 是 Device(设备) 的缩写, 该目录下存放的是 Linux 的外部设备，在 Linux 中访问设备的方式和访问文件的方式是相同的。</p>
-<p>etc<br>etc 是 Etcetera(等等) 的缩写,这个目录用来存放所有的系统管理所需要的配置文件和子目录。</p>
-<p>home<br>用户的主目录，在 Linux 中，每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的</p>
-<p>lib<br>lib 是 Library(库) 的缩写这个目录里存放着系统最基本的动态连接共享库，其作用类似于 Windows 里的 DLL 文件。几乎所有的应用程序都需要用到这些共享库。</p>
-<p>通过&#x2F;bin和&#x2F;sbin中的二进制文件。</p>
-<p><a class="link"   href="https://qastack.cn/unix/74646/difference-between-lib-lib32-lib64-libx32-and-libexec" >https://qastack.cn/unix/74646/difference-between-lib-lib32-lib64-libx32-and-libexec<i class="fas fa-external-link-alt"></i></a></p>
-<p>lib64<br>存放64位lib库</p>
-<p>&#x2F;lost+found：<br>这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。</p>
-<p>media<br>linux 系统会自动识别一些设备，例如U盘、光驱等等，当识别后，Linux 会把识别的设备挂载到这个目录下。</p>
-<p>mnt<br>系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将光驱挂载在 &#x2F;mnt&#x2F; 上，然后进入该目录就可以查看光驱里的内容了。</p>
-<p>opt<br>opt 是 optional(可选) 的缩写，这是给主机额外安装软件所摆放的目录。比如你安装一个ORACLE数据库则就可以放到这个目录下。默认是空的。</p>
-<p>proc<br>proc 是 Processes(进程) 的缩写，&#x2F;proc 是一种伪文件系统（也即虚拟文件系统），存储的是当前内核运行状态的一系列特殊文件，这个目录是一个虚拟的目录，它是系统内存的映射，我们可以通过直接访问这个目录来获取系统信息。</p>
-<p>这个目录的内容不在硬盘上而是在内存里，我们也可以直接修改里面的某些文件，比如可以通过下面的命令来屏蔽主机的ping命令，使别人无法ping你的机器：<br>echo 1 &gt; &#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;icmp_echo_ignore_all</p>
-<p>root<br>该目录为系统管理员，也称作超级权限者的用户主目录。</p>
-<p>run<br>是一个临时文件系统，存储系统启动以来的信息。当系统重启时，这个目录下的文件应该被删掉或清除。如果你的系统上有 &#x2F;var&#x2F;run 目录，应该让它指向 run。</p>
-<p>sbin<br>s 就是 Super User 的意思，是 Superuser Binaries (超级用户的二进制文件)的缩写，这里存放的是系统管理员使用的系统管理程序。</p>
-<p>&#x2F;selinux：<br> 这个目录是 Redhat&#x2F;CentOS 所特有的目录，Selinux 是一个安全机制，类似于 windows 的防火墙，但是这套机制比较复杂，这个目录就是存放selinux相关的文件的。</p>
-<p>src</p>
-<p>srv<br>该目录存放一些服务启动之后需要提取的数据。</p>
-<p>sys<br>这是 Linux2.6 内核的一个很大的变化。该目录下安装了<br>2.6 内核中新出现的一个文件系统 sysfs 。</p>
-<p>sysfs 文件系统集成了下面3种文件系统的信息：<br>针对进程信息的 proc 文件系统、<br>针对设备的 devfs 文件系统<br>以及针对伪终端的 devpts 文件系统。</p>
-<p>该文件系统是内核设备树的一个直观反映。</p>
-<p>当一个内核对象被创建的时候，对应的文件和目录也在内核对象子系统中被创建。</p>
-<p>tmp<br>tmp 是 temporary(临时) 的缩写这个目录是用来存放一些临时文件的。</p>
-<p>usr<br>usr 是 unix shared resources(共享资源) 的缩写，这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于 windows 下的 program files 目录。</p>
-<p>var<br>var 是 variable(变量) 的缩写，这个目录中存放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放在这个目录下。包括各种日志文件。</p>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux 系统日常巡检脚本</title>
     <url>/2023/02/04/Linux%20%E7%B3%BB%E7%BB%9F%E6%97%A5%E5%B8%B8%E5%B7%A1%E6%A3%80%E8%84%9A%E6%9C%AC2021/</url>
     <content><![CDATA[<h3 id="主要巡检内容"><a href="#主要巡检内容" class="headerlink" title="主要巡检内容:"></a>主要巡检内容:</h3><p>磁盘、内存、cpu、进程、文件更改、用户登录等一系列的操作，开箱即用。报告以邮件发送到邮箱 在log下生成巡检报告。</p>
@@ -7282,6 +7282,37 @@ echo &quot;Check the result：$RESULTFILE&quot;
       </tags>
   </entry>
   <entry>
+    <title>CentOS7的启动过程</title>
+    <url>/2020/11/01/centos7%E7%9A%84%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<p>centos7的启动过程</p>
+<p>一、终端态启动顺序：</p>
+<p>开机启过程<br>POST–&gt;BOOT<br>SEQUENCE–&gt;BOOTLOADER–&gt;KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS–&gt;&#x2F;sbin&#x2F;init</p>
+<p>POST:加电自检</p>
+<p>检查内存，CPU等</p>
+<p>Boot sequence：选择引导顺序</p>
+<p>光盘启动，硬盘启动，网络启动，还是U盘启动(同windows)</p>
+<p>Bootloader：引导加载器</p>
+<p>MBR引导记录大小为512字节，其中前446个字节就是Bootloader,主要用来引导用户选择要启动的系统或不同的内核版本，把用户选定的内核装载到RAM中的特定空间中，解压，展开，而后把系统控制权移交给内核。</p>
+<p>grub2分两部分：<br>1.在MBR引导记录中，大小为446字节，主要功能是引导启动介质的grub主体文件<br>2.partition,&#x2F;boot&#x2F;grub[2],此为grub的主体。</p>
+<p>KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS：加载内核</p>
+<p>内核初始化，生成一个ramdisk文件，用来模拟系统环境。退出ramdisk,下一步加载到真正的根文件系统。</p>
+<p>ramdisk：内存上临时虚拟的系统<br>ramdisk(虚拟磁盘，双缓冲，双缓存）—-&gt; ramfs（虚拟文件系统）<br>centos5:initrd</p>
+<p>工具程序：mkinitrd</p>
+<p>centos6,7:initramfs</p>
+<p>工具程序：dracut,mkinitrd</p>
+<p>&#x2F;sbin&#x2F;init：运行用户空间的第一个应用程序</p>
+<p>init:</p>
+<p>Centos 5: SysV init    配置文件：&#x2F;etc&#x2F;inittab<br>Centos 6: Upstart      配置文件：&#x2F;etc&#x2F;inittab;&#x2F;etc&#x2F;init&#x2F;*.conf(主要）<br>Centos 7: systemd      配置文件：&#x2F;etc&#x2F;systemd&#x2F;system;&#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system</p>
+<p>至此，内核空间就已经启动完毕，内核启动完成接着开始启动用户态启动过程。<br>systemd是个守护进程，pid号为1,<br>后面所有启动的服务或进程都是systemd的子进程及子进程的子进程。</p>
+<p>二、用户态的启动顺序</p>
+<p>设置默认允许级别—&gt;初始化脚本，<br>完成系统初始化—&gt;关闭及启动对应级别下的服务—–&gt;设置登录终端—–&gt;[启动图形终端]</p>
+<p>参考：<a class="link"   href="https://blog.51cto.com/m51cto/1958856" >https://blog.51cto.com/m51cto/1958856<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <tags>
+        <tag>centos</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>docker命令使用</title>
     <url>/2019/09/19/docker%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<p>docker01</p>
@@ -7329,37 +7360,6 @@ docker container ls -aq<span aria-hidden="true" class="line-numbers-rows"><span>
       </categories>
       <tags>
         <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CentOS7的启动过程</title>
-    <url>/2020/11/01/centos7%E7%9A%84%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[<p>centos7的启动过程</p>
-<p>一、终端态启动顺序：</p>
-<p>开机启过程<br>POST–&gt;BOOT<br>SEQUENCE–&gt;BOOTLOADER–&gt;KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS–&gt;&#x2F;sbin&#x2F;init</p>
-<p>POST:加电自检</p>
-<p>检查内存，CPU等</p>
-<p>Boot sequence：选择引导顺序</p>
-<p>光盘启动，硬盘启动，网络启动，还是U盘启动(同windows)</p>
-<p>Bootloader：引导加载器</p>
-<p>MBR引导记录大小为512字节，其中前446个字节就是Bootloader,主要用来引导用户选择要启动的系统或不同的内核版本，把用户选定的内核装载到RAM中的特定空间中，解压，展开，而后把系统控制权移交给内核。</p>
-<p>grub2分两部分：<br>1.在MBR引导记录中，大小为446字节，主要功能是引导启动介质的grub主体文件<br>2.partition,&#x2F;boot&#x2F;grub[2],此为grub的主体。</p>
-<p>KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS：加载内核</p>
-<p>内核初始化，生成一个ramdisk文件，用来模拟系统环境。退出ramdisk,下一步加载到真正的根文件系统。</p>
-<p>ramdisk：内存上临时虚拟的系统<br>ramdisk(虚拟磁盘，双缓冲，双缓存）—-&gt; ramfs（虚拟文件系统）<br>centos5:initrd</p>
-<p>工具程序：mkinitrd</p>
-<p>centos6,7:initramfs</p>
-<p>工具程序：dracut,mkinitrd</p>
-<p>&#x2F;sbin&#x2F;init：运行用户空间的第一个应用程序</p>
-<p>init:</p>
-<p>Centos 5: SysV init    配置文件：&#x2F;etc&#x2F;inittab<br>Centos 6: Upstart      配置文件：&#x2F;etc&#x2F;inittab;&#x2F;etc&#x2F;init&#x2F;*.conf(主要）<br>Centos 7: systemd      配置文件：&#x2F;etc&#x2F;systemd&#x2F;system;&#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system</p>
-<p>至此，内核空间就已经启动完毕，内核启动完成接着开始启动用户态启动过程。<br>systemd是个守护进程，pid号为1,<br>后面所有启动的服务或进程都是systemd的子进程及子进程的子进程。</p>
-<p>二、用户态的启动顺序</p>
-<p>设置默认允许级别—&gt;初始化脚本，<br>完成系统初始化—&gt;关闭及启动对应级别下的服务—–&gt;设置登录终端—–&gt;[启动图形终端]</p>
-<p>参考：<a class="link"   href="https://blog.51cto.com/m51cto/1958856" >https://blog.51cto.com/m51cto/1958856<i class="fas fa-external-link-alt"></i></a></p>
-]]></content>
-      <tags>
-        <tag>centos</tag>
       </tags>
   </entry>
   <entry>
@@ -7606,135 +7606,15 @@ jshebuebyxg45h3<span aria-hidden="true" class="line-numbers-rows"><span></span><
 <span class="token number">172.16</span>.190.100 <span class="token number">172.16</span>.190.100.sslip.io<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>熟悉的界面出现了！ok大功告成！</p>
-<img  
+<h3 id=""><a href="#" class="headerlink" title=""></a><img  
                      lazyload
                      alt="image"
-                     data-src="https://cdn.staticaly.com/gh/trojan20161207/blogpic@master/20230204/image-20221203172300525.1xxjl88mwj8g.webp"
-                      style="zoom:100%;" 
-                >
-
-
-
-
-
-]]></content>
+                     data-src="https://cdn.staticaly.com/gh/trojan20161207/blogpic@master/20230205/image-20221203172300525.6bto9r4omsw0.webp"
+                      alt="image-20221203172300525"
+                ></h3>]]></content>
       <tags>
         <tag>k3s</tag>
         <tag>rancher</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux运维的个人进阶</title>
-    <url>/2019/09/19/linux%E8%BF%90%E7%BB%B4%E7%9A%84%E4%B8%AA%E4%BA%BA%E8%BF%9B%E9%98%B6/</url>
-    <content><![CDATA[<h2 id="一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。"><a href="#一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。" class="headerlink" title="一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。"></a>一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。</h2><p>本文简单介绍了其中一种linux运维的个人进阶路线，有需要的朋友可以参考下。</p>
-<h3 id="第一阶段：企业级Linux运维工程师"><a href="#第一阶段：企业级Linux运维工程师" class="headerlink" title="第一阶段：企业级Linux运维工程师"></a>第一阶段：企业级Linux运维工程师</h3><p>1、Linux运维最佳学习方法”5W1H”六何分析法全面介绍，独家Linux快速入门学习技巧</p>
-<p>2、冯诺依曼体系（CPU架构、操作系统概念、发展演变、应用场景、业内形态）</p>
-<p>3、Linux运维基础实战入门，用户管理，权限，文件查找，文本编辑及实战讲解</p>
-<p>4、Linux运维系统管理和技能进阶，磁盘管理，软件安装，文件系统、内核使用方法和高级技巧</p>
-<p>5、Linux系统环境及日常管理，结合日常工作常用20个场景，排错思路、面试和工作中注意事项</p>
-<p>6、以实战方式全方位展示Bash八大特性和高级用法介绍以及高级企业级使用技巧实战演练</p>
-<p>7、Shell脚本工作原理、学习方法、配罝技巧、企业级书写规范、开发环境定制全面实战介绍</p>
-<p>8、职场人价值体系-知识、技能、成长目标和方向定位年薪30W运维人员必备知识体系关键技能点</p>
-<h3 id="第二阶段：Linux应用运维工程师-amp-DBA"><a href="#第二阶段：Linux应用运维工程师-amp-DBA" class="headerlink" title="第二阶段：Linux应用运维工程师&amp;DBA"></a>第二阶段：Linux应用运维工程师&amp;DBA</h3><p>1、TCP&#x2F;IP网络通信协议，IP地址含义、TCP有限状态机转换原理，路由协议</p>
-<p>2、利用Kickstart文件实现企业级自动化安装环境定制，百台并发安装实战</p>
-<p>3、Linux常见系统故障案例分析，企业级Linux运维工程师常犯错误Top5</p>
-<p>4、全面讲解CDN核心技术理念，实现智能DNS流量分发和用户策略引导</p>
-<p>5、实战讲解LAMP运维架构，Apache+PHP+Mysql架构体系和文件存储</p>
-<p>6、介绍企业级安全体系，iptables构建安全架构以及软硬防火墙优劣势</p>
-<p>7、深入讲解运维必备Web服务开源解决方案Nginx及LNMP企业高级用法</p>
-<p>8、企业级DBA实战课程，Mysql企业级实战应用，调优及redis企业级应用</p>
-<h3 id="第三阶段：企业级Linux云计算工程师"><a href="#第三阶段：企业级Linux云计算工程师" class="headerlink" title="第三阶段：企业级Linux云计算工程师"></a>第三阶段：企业级Linux云计算工程师</h3><p>1、全面讲解企业级LNMP架构及12条策略建议，实现互联网电子商务、博客、论坛等实战案例</p>
-<p>2、专业压测评估体系，从并发、响应时间、持久连接、pv、峰值、带宽，以及ab等压测方案实施</p>
-<p>4、讲解Linux Cluster集群，全面分析集群类别，讲解F5和LVS、haproxy、nginx的4-7层负载均衡</p>
-<p>5、实战带领在Centos7上实现LVS集群配罝、服务管理、调度算法修改、后端服务器上下线、服务状态监控，状态监测方实现NAT、DR、TUN等模型演练</p>
-<p>6、全面实现基于Nginx负载均衡功能，实现Nginx反代后端、Nginx负载均衡实现网站动静分离详解</p>
-<p>7、实战带领实现Keepalived主从架构及双主切换方案、报警定制、日志分析等</p>
-<p>8、全面讲解Zabbix3.X监控特性、Web服务监控、Zabbix内部监控、Zabbix特性及功能详解</p>
-<p>9、全面讲解Varnish缓存技术，深入Varnish工作机制、核心架构、及主流开源缓存技术解决方案</p>
-<p>10、laaS、PaaS和SaaS云平台功能及常见实现方式及OpenStack的功能特性及其实现的增强功能</p>
-<p>11、全面讲解KVM虚拟化技术，docker技术实现互联网容器和Docker容器云以及Kubemetes管理</p>
-<h3 id="第四阶段：Linux自动化运维工程师-amp-DevOps"><a href="#第四阶段：Linux自动化运维工程师-amp-DevOps" class="headerlink" title="第四阶段：Linux自动化运维工程师&amp;DevOps"></a>第四阶段：Linux自动化运维工程师&amp;DevOps</h3><p>1、以自动化运维框架为主线，讲解Devops运维自动化趋和核心技术</p>
-<p>2、自动化运维工具Puppet、Ansible、Cobbler、Saltstack、 Fabric对比</p>
-<p>3、Ansible生产环境应用案例和实战操练、批量进行上百台服务器管理</p>
-<p>4、企业自动化工具Puppet使用场景，实现搭建企业运维自动化平台架构</p>
-<p>5、全面讲解Git版本控制、脚本自动化管理、Git分支合并，Git服务器搭建</p>
-<p>6、深入讲解基于Shell脚本企业级高级用法和常见实现Shell自动化管理</p>
-<p>7、python基本语法和自动化工具应用，及开源跳板机Jumpserver实现</p>
-<p>8、实战：基于生产环境持续集成案例，Jenkins+gitlab+maven+shell实现代码自动化上线部署，可持续集成</p>
-<p>9、生产环境基于自动化运维常见场景如自动化发布、灰度发布、批量上线、降级方案、无缝切换等核心技术</p>
-<h3 id="第五阶段：Linux系统架构师-amp-运维架构师"><a href="#第五阶段：Linux系统架构师-amp-运维架构师" class="headerlink" title="第五阶段：Linux系统架构师&amp;运维架构师"></a>第五阶段：Linux系统架构师&amp;运维架构师</h3><p>1、全面介绍缓存技术要点，讲解数据流式化、代理式缓存、旁路式缓存、缓存算法、缓存设定策略、一致性哈希算法优劣势等</p>
-<p>2、全面讲解正向代理、反向代理机制，实战实现Nginx反向代理负载均衡，跳转规則实现动静分离、IP曰志记录、头部信息改写、缓存模块、缓存策略、请求超时机制、健康状态监测、判定规则、状态码定义、实现后端故障及自动上线等能力</p>
-<p>3、实战带领实现千万级大型互联网Web架构核心技术，运用LVS、Haproxy、Vamish、 Nginx、tomcat、MySQL等实现高并发运维体系Web架构，实现分布式集群存储Fastdfs和mogileFS架构</p>
-<p>4、全面讲解MySQL—主多从、一从多主企业级用法，深入讲解MySQL读写分离、连接池及sharding技术，以及MMM、MHA、Galera-Cluster核心技术， MySQL读写分离Amoeba实现</p>
-<p>5、实战:分布式收集Nginx日志于Elk集群，并通过Kibana展示；实战:分布式收集 JAVA日志于Elk集群，并通过Kibana展示；实战:分布式收集Syslog曰志于Elk集群，并通过Kibana展示</p>
-<p>6、结合自动化工具实现企业业务服务管理，持续化集成，实现Devops运维管理模型及架构设计。</p>
-<p>7、实现基于k8s的企业级容器云架构管理，以及docker容器的服务应用，实现私有云架构方案</p>
-<p>8、全面讲解大众点评、美团、滴滴、饿了么等亿级别PV大型互联网架构方案，以及设计规范，包含负载均衡、缓存、高可用、数据库、分布式存储、消息队列、自动化、运维规范、监控体系等</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>Linux运维, 进阶</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>nginx.conf配置文件结构</title>
-    <url>/2019/09/23/nginx.conf%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/</url>
-    <content><![CDATA[<p>　Nginx的核心模块为<em>Main</em>和<em>Events</em>，此外还包括标准<em>HTTP模块</em>、可选<em>HTTP模块</em>和<em>邮件模块</em>，其还可以支持诸多第三方模块。Main用于配置错误日志、进程及权限等相关的参数，Events用于配置IO模型，如epoll、kqueue、select或poll等，它们是必备模块，HTTP模块用于控制Nginx的HTTP进程。</p>
-<p>　　Nginx的主配置文件由几个段组成，这个段通常也被称为nginx的上下文，每个段的定义格式如下所示。需要注意的是，其每一个指令都必须使用分号(<em>;</em>)结束，否则为语法错误。</p>
-<pre class="line-numbers language-none"><code class="language-none">&lt;section&gt; &#123;
-     &lt;directive&gt; &lt;parameters&gt;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>主要结构（所有配置以分号结尾）如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">## Main段，定义全局属性
-events &#123;
-          ##定义不同IO模型下的工作机制；
-&#125;
-http &#123; 
-    ##定义作为web服务器的相关属性（还可以反向代理mail）
-    server &#123; 
-        ##定义一个虚拟主机的属性，所有web服务必须定义成一个虚拟主机，与httpd不同
-        location [option] uri &#123; 
-            ##定义一个URI的特性
-            ##location中可以嵌套location的
-            location [option] uri &#123; 
-                #嵌套location
-            &#125;
-               if (condition) &#123;
-                ##定义URL重写
-            &#125;
-        &#125;
-    &#125;
-    upstream  &amp;ltName&amp;gt &#123;
-        ##将多个server结合在一起，实现负载均衡
-    &#125;
- &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>nginx event配置指令</title>
-    <url>/2019/09/23/nginxevent%E9%85%8D%E7%BD%AE%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<hr>
-<p>　　参考事件模型指令：<em>use [ kqueue | rtsig | epoll | &#x2F;dev&#x2F;poll | select | poll ];</em></p>
-<pre class="line-numbers language-none"><code class="language-none">use epoll;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>　　注：epoll模型是Linux 2.6以上版本内核中的高性能网络I&#x2F;O模型，如果跑在FreeBSD上面，就用kqueue模型。</p>
-<p>　　设置单个进程最大连接数用指令：_worker<em>connections</em>（最大连接数&#x3D;连接数*进程数）</p>
-<pre class="line-numbers language-none"><code class="language-none">worker_connections 65535;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -10628,6 +10508,65 @@ bits <span class="token operator">=</span> <span class="token operator">*</span>
       </tags>
   </entry>
   <entry>
+    <title>nginx.conf配置文件结构</title>
+    <url>/2019/09/23/nginx.conf%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<p>　Nginx的核心模块为<em>Main</em>和<em>Events</em>，此外还包括标准<em>HTTP模块</em>、可选<em>HTTP模块</em>和<em>邮件模块</em>，其还可以支持诸多第三方模块。Main用于配置错误日志、进程及权限等相关的参数，Events用于配置IO模型，如epoll、kqueue、select或poll等，它们是必备模块，HTTP模块用于控制Nginx的HTTP进程。</p>
+<p>　　Nginx的主配置文件由几个段组成，这个段通常也被称为nginx的上下文，每个段的定义格式如下所示。需要注意的是，其每一个指令都必须使用分号(<em>;</em>)结束，否则为语法错误。</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;section&gt; &#123;
+     &lt;directive&gt; &lt;parameters&gt;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>主要结构（所有配置以分号结尾）如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">## Main段，定义全局属性
+events &#123;
+          ##定义不同IO模型下的工作机制；
+&#125;
+http &#123; 
+    ##定义作为web服务器的相关属性（还可以反向代理mail）
+    server &#123; 
+        ##定义一个虚拟主机的属性，所有web服务必须定义成一个虚拟主机，与httpd不同
+        location [option] uri &#123; 
+            ##定义一个URI的特性
+            ##location中可以嵌套location的
+            location [option] uri &#123; 
+                #嵌套location
+            &#125;
+               if (condition) &#123;
+                ##定义URL重写
+            &#125;
+        &#125;
+    &#125;
+    upstream  &amp;ltName&amp;gt &#123;
+        ##将多个server结合在一起，实现负载均衡
+    &#125;
+ &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nginx event配置指令</title>
+    <url>/2019/09/23/nginxevent%E9%85%8D%E7%BD%AE%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<hr>
+<p>　　参考事件模型指令：<em>use [ kqueue | rtsig | epoll | &#x2F;dev&#x2F;poll | select | poll ];</em></p>
+<pre class="line-numbers language-none"><code class="language-none">use epoll;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>　　注：epoll模型是Linux 2.6以上版本内核中的高性能网络I&#x2F;O模型，如果跑在FreeBSD上面，就用kqueue模型。</p>
+<p>　　设置单个进程最大连接数用指令：_worker<em>connections</em>（最大连接数&#x3D;连接数*进程数）</p>
+<pre class="line-numbers language-none"><code class="language-none">worker_connections 65535;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>nginx Rewrite简单示例</title>
     <url>/2019/09/23/nginxRewrite%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/</url>
     <content><![CDATA[<hr>
@@ -10746,6 +10685,61 @@ location ~ \.(gif|jpg|png|js|css)$ &#123;
       </tags>
   </entry>
   <entry>
+    <title>linux运维的个人进阶</title>
+    <url>/2019/09/19/linux%E8%BF%90%E7%BB%B4%E7%9A%84%E4%B8%AA%E4%BA%BA%E8%BF%9B%E9%98%B6/</url>
+    <content><![CDATA[<h2 id="一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。"><a href="#一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。" class="headerlink" title="一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。"></a>一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。</h2><p>本文简单介绍了其中一种linux运维的个人进阶路线，有需要的朋友可以参考下。</p>
+<h3 id="第一阶段：企业级Linux运维工程师"><a href="#第一阶段：企业级Linux运维工程师" class="headerlink" title="第一阶段：企业级Linux运维工程师"></a>第一阶段：企业级Linux运维工程师</h3><p>1、Linux运维最佳学习方法”5W1H”六何分析法全面介绍，独家Linux快速入门学习技巧</p>
+<p>2、冯诺依曼体系（CPU架构、操作系统概念、发展演变、应用场景、业内形态）</p>
+<p>3、Linux运维基础实战入门，用户管理，权限，文件查找，文本编辑及实战讲解</p>
+<p>4、Linux运维系统管理和技能进阶，磁盘管理，软件安装，文件系统、内核使用方法和高级技巧</p>
+<p>5、Linux系统环境及日常管理，结合日常工作常用20个场景，排错思路、面试和工作中注意事项</p>
+<p>6、以实战方式全方位展示Bash八大特性和高级用法介绍以及高级企业级使用技巧实战演练</p>
+<p>7、Shell脚本工作原理、学习方法、配罝技巧、企业级书写规范、开发环境定制全面实战介绍</p>
+<p>8、职场人价值体系-知识、技能、成长目标和方向定位年薪30W运维人员必备知识体系关键技能点</p>
+<h3 id="第二阶段：Linux应用运维工程师-amp-DBA"><a href="#第二阶段：Linux应用运维工程师-amp-DBA" class="headerlink" title="第二阶段：Linux应用运维工程师&amp;DBA"></a>第二阶段：Linux应用运维工程师&amp;DBA</h3><p>1、TCP&#x2F;IP网络通信协议，IP地址含义、TCP有限状态机转换原理，路由协议</p>
+<p>2、利用Kickstart文件实现企业级自动化安装环境定制，百台并发安装实战</p>
+<p>3、Linux常见系统故障案例分析，企业级Linux运维工程师常犯错误Top5</p>
+<p>4、全面讲解CDN核心技术理念，实现智能DNS流量分发和用户策略引导</p>
+<p>5、实战讲解LAMP运维架构，Apache+PHP+Mysql架构体系和文件存储</p>
+<p>6、介绍企业级安全体系，iptables构建安全架构以及软硬防火墙优劣势</p>
+<p>7、深入讲解运维必备Web服务开源解决方案Nginx及LNMP企业高级用法</p>
+<p>8、企业级DBA实战课程，Mysql企业级实战应用，调优及redis企业级应用</p>
+<h3 id="第三阶段：企业级Linux云计算工程师"><a href="#第三阶段：企业级Linux云计算工程师" class="headerlink" title="第三阶段：企业级Linux云计算工程师"></a>第三阶段：企业级Linux云计算工程师</h3><p>1、全面讲解企业级LNMP架构及12条策略建议，实现互联网电子商务、博客、论坛等实战案例</p>
+<p>2、专业压测评估体系，从并发、响应时间、持久连接、pv、峰值、带宽，以及ab等压测方案实施</p>
+<p>4、讲解Linux Cluster集群，全面分析集群类别，讲解F5和LVS、haproxy、nginx的4-7层负载均衡</p>
+<p>5、实战带领在Centos7上实现LVS集群配罝、服务管理、调度算法修改、后端服务器上下线、服务状态监控，状态监测方实现NAT、DR、TUN等模型演练</p>
+<p>6、全面实现基于Nginx负载均衡功能，实现Nginx反代后端、Nginx负载均衡实现网站动静分离详解</p>
+<p>7、实战带领实现Keepalived主从架构及双主切换方案、报警定制、日志分析等</p>
+<p>8、全面讲解Zabbix3.X监控特性、Web服务监控、Zabbix内部监控、Zabbix特性及功能详解</p>
+<p>9、全面讲解Varnish缓存技术，深入Varnish工作机制、核心架构、及主流开源缓存技术解决方案</p>
+<p>10、laaS、PaaS和SaaS云平台功能及常见实现方式及OpenStack的功能特性及其实现的增强功能</p>
+<p>11、全面讲解KVM虚拟化技术，docker技术实现互联网容器和Docker容器云以及Kubemetes管理</p>
+<h3 id="第四阶段：Linux自动化运维工程师-amp-DevOps"><a href="#第四阶段：Linux自动化运维工程师-amp-DevOps" class="headerlink" title="第四阶段：Linux自动化运维工程师&amp;DevOps"></a>第四阶段：Linux自动化运维工程师&amp;DevOps</h3><p>1、以自动化运维框架为主线，讲解Devops运维自动化趋和核心技术</p>
+<p>2、自动化运维工具Puppet、Ansible、Cobbler、Saltstack、 Fabric对比</p>
+<p>3、Ansible生产环境应用案例和实战操练、批量进行上百台服务器管理</p>
+<p>4、企业自动化工具Puppet使用场景，实现搭建企业运维自动化平台架构</p>
+<p>5、全面讲解Git版本控制、脚本自动化管理、Git分支合并，Git服务器搭建</p>
+<p>6、深入讲解基于Shell脚本企业级高级用法和常见实现Shell自动化管理</p>
+<p>7、python基本语法和自动化工具应用，及开源跳板机Jumpserver实现</p>
+<p>8、实战：基于生产环境持续集成案例，Jenkins+gitlab+maven+shell实现代码自动化上线部署，可持续集成</p>
+<p>9、生产环境基于自动化运维常见场景如自动化发布、灰度发布、批量上线、降级方案、无缝切换等核心技术</p>
+<h3 id="第五阶段：Linux系统架构师-amp-运维架构师"><a href="#第五阶段：Linux系统架构师-amp-运维架构师" class="headerlink" title="第五阶段：Linux系统架构师&amp;运维架构师"></a>第五阶段：Linux系统架构师&amp;运维架构师</h3><p>1、全面介绍缓存技术要点，讲解数据流式化、代理式缓存、旁路式缓存、缓存算法、缓存设定策略、一致性哈希算法优劣势等</p>
+<p>2、全面讲解正向代理、反向代理机制，实战实现Nginx反向代理负载均衡，跳转规則实现动静分离、IP曰志记录、头部信息改写、缓存模块、缓存策略、请求超时机制、健康状态监测、判定规则、状态码定义、实现后端故障及自动上线等能力</p>
+<p>3、实战带领实现千万级大型互联网Web架构核心技术，运用LVS、Haproxy、Vamish、 Nginx、tomcat、MySQL等实现高并发运维体系Web架构，实现分布式集群存储Fastdfs和mogileFS架构</p>
+<p>4、全面讲解MySQL—主多从、一从多主企业级用法，深入讲解MySQL读写分离、连接池及sharding技术，以及MMM、MHA、Galera-Cluster核心技术， MySQL读写分离Amoeba实现</p>
+<p>5、实战:分布式收集Nginx日志于Elk集群，并通过Kibana展示；实战:分布式收集 JAVA日志于Elk集群，并通过Kibana展示；实战:分布式收集Syslog曰志于Elk集群，并通过Kibana展示</p>
+<p>6、结合自动化工具实现企业业务服务管理，持续化集成，实现Devops运维管理模型及架构设计。</p>
+<p>7、实现基于k8s的企业级容器云架构管理，以及docker容器的服务应用，实现私有云架构方案</p>
+<p>8、全面讲解大众点评、美团、滴滴、饿了么等亿级别PV大型互联网架构方案，以及设计规范，包含负载均衡、缓存、高可用、数据库、分布式存储、消息队列、自动化、运维规范、监控体系等</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>Linux运维, 进阶</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>nginx  main配置指令</title>
     <url>/2019/09/23/nginxmain%E9%85%8D%E7%BD%AE%E6%8C%87%E4%BB%A4/</url>
     <content><![CDATA[<hr>
@@ -10814,34 +10808,6 @@ location ~ \.(gif|jpg|png|js|css)$ &#123;
       </tags>
   </entry>
   <entry>
-    <title>nginx初体验</title>
-    <url>/2019/09/23/nginx%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
-    <content><![CDATA[<p>当我们安装完nginx后，我们首先进入nginx的安装目录，启动nginx的服务，然后在地址中输入 <a class="link"   href="http://127.0.0.1/" >http://127.0.0.1/<i class="fas fa-external-link-alt"></i></a> ， 然后我们就会看到”<em>welcome to nginx</em>“。<br>　　下面的代码为nginx.conf配置文件中的server段的默认配置，nginx所实现的功能都基于这个文件。我们将在后面的内容中继续进行讲解。</p>
-<pre class="line-numbers language-none"><code class="language-none"> server &#123;
-   listen       80;
-   server_name  localhost;
-   #charset koi8-r;
-   #access_log  logs&#x2F;host.access.log  main;
-   location &#x2F; &#123;
-           root   &#x2F;root;      #定义服务器的默认网站根目录位置
-           index index.php index.html index.htm;   #定义首页索引文件的名称
-   &#125;
-   #error_page  404              &#x2F;404.html;
-   # redirect server error pages to the static page &#x2F;50x.html
-   error_page   500 502 503 504  &#x2F;50x.html;
-   location &#x3D; &#x2F;50x.html &#123;
-           root   html;
-   &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>nginx 反向代理示例</title>
     <url>/2019/09/23/nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E7%A4%BA%E4%BE%8B/</url>
     <content><![CDATA[<hr>
@@ -10866,6 +10832,34 @@ location ~ \.(gif|jpg|png|js|css)$ &#123;
                 #……………………
 &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nginx初体验</title>
+    <url>/2019/09/23/nginx%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
+    <content><![CDATA[<p>当我们安装完nginx后，我们首先进入nginx的安装目录，启动nginx的服务，然后在地址中输入 <a class="link"   href="http://127.0.0.1/" >http://127.0.0.1/<i class="fas fa-external-link-alt"></i></a> ， 然后我们就会看到”<em>welcome to nginx</em>“。<br>　　下面的代码为nginx.conf配置文件中的server段的默认配置，nginx所实现的功能都基于这个文件。我们将在后面的内容中继续进行讲解。</p>
+<pre class="line-numbers language-none"><code class="language-none"> server &#123;
+   listen       80;
+   server_name  localhost;
+   #charset koi8-r;
+   #access_log  logs&#x2F;host.access.log  main;
+   location &#x2F; &#123;
+           root   &#x2F;root;      #定义服务器的默认网站根目录位置
+           index index.php index.html index.htm;   #定义首页索引文件的名称
+   &#125;
+   #error_page  404              &#x2F;404.html;
+   # redirect server error pages to the static page &#x2F;50x.html
+   error_page   500 502 503 504  &#x2F;50x.html;
+   location &#x3D; &#x2F;50x.html &#123;
+           root   html;
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
       <categories>
         <category>nginx</category>
@@ -10926,38 +10920,6 @@ Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（I
       </tags>
   </entry>
   <entry>
-    <title>nginx 正向代理示例</title>
-    <url>/2019/09/23/nginx%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E7%A4%BA%E4%BE%8B/</url>
-    <content><![CDATA[<hr>
-<p>nginx正向代理配置如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">server
-&#123;
-  listen       8080;
-  server_name www.baidu.com;
-  index index.html index.htm index.php;
-  root  &#x2F;home&#x2F;wwwroot;
-     location &#x2F; &#123;
-         resolver        192.168.8.88;
-         proxy_pass      $scheme:&#x2F;&#x2F;$http_host$request_uri;
-         proxy_buffers   256 4k;
- &#125;
-   access_log off;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>　　以上配置的注意事项：</p>
-<p>1，不能有hostname。</p>
-<p>2，必须有resolver, 即dns，即上面的x.x.x.x，换成当前机器的DNS服务器ip即可(查看dns方法 cat &#x2F;etc&#x2F;resolv.conf 代理使用)。</p>
-<p>3，$http_host和$request_uri是nginx系统变量，保持原样即可。</p>
-<p>　　检测配置文件无误后，重启nginx，在浏览器中添加代理服务器的IP地址，就可以使用该Nginx正向代理了。</p>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>nginx 虚拟主机示例</title>
     <url>/2019/09/23/nginx%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E7%A4%BA%E4%BE%8B/</url>
     <content><![CDATA[<hr>
@@ -10994,6 +10956,38 @@ server &#123;
         &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nginx 正向代理示例</title>
+    <url>/2019/09/23/nginx%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E7%A4%BA%E4%BE%8B/</url>
+    <content><![CDATA[<hr>
+<p>nginx正向代理配置如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">server
+&#123;
+  listen       8080;
+  server_name www.baidu.com;
+  index index.html index.htm index.php;
+  root  &#x2F;home&#x2F;wwwroot;
+     location &#x2F; &#123;
+         resolver        192.168.8.88;
+         proxy_pass      $scheme:&#x2F;&#x2F;$http_host$request_uri;
+         proxy_buffers   256 4k;
+ &#125;
+   access_log off;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>　　以上配置的注意事项：</p>
+<p>1，不能有hostname。</p>
+<p>2，必须有resolver, 即dns，即上面的x.x.x.x，换成当前机器的DNS服务器ip即可(查看dns方法 cat &#x2F;etc&#x2F;resolv.conf 代理使用)。</p>
+<p>3，$http_host和$request_uri是nginx系统变量，保持原样即可。</p>
+<p>　　检测配置文件无误后，重启nginx，在浏览器中添加代理服务器的IP地址，就可以使用该Nginx正向代理了。</p>
 ]]></content>
       <categories>
         <category>nginx</category>
@@ -11220,6 +11214,305 @@ server&#123;
       </categories>
       <tags>
         <tag>微服务架构, 微服务, 微服务最佳实践, 事件驱动架构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于阿里云镜像站安装Kubernetes 1.15</title>
+    <url>/2019/09/06/%E5%9F%BA%E4%BA%8E%E9%98%BF%E9%87%8C%E4%BA%91%E9%95%9C%E5%83%8F%E7%AB%99%E5%AE%89%E8%A3%85Kubernetes1.15/</url>
+    <content><![CDATA[<pre><code>kubernetes官网的文档比较详细，但是所有的安装步骤都有个前提(你有足够自由的互联络)，之前在香港和亚马逊的服务器都是直接照着手册执行脚本一路顺畅。无奈天朝的网络只能够借助于阿里云镜像站了，先前只是在使用该站点的各种linux发行版安装包，最近发现还支持了kubernetes。具体可以访问[阿里巴巴开源镜像站](https://opsx.alibaba.com/mirror)。
+# 安装docker-ce
+</code></pre>
+<h1 id="❤️-以下适用于centos-7"><a href="#❤️-以下适用于centos-7" class="headerlink" title="❤️ 以下适用于centos 7"></a>❤️ 以下适用于centos 7</h1><h1 id="step-1-安装必要的一些系统工具"><a href="#step-1-安装必要的一些系统工具" class="headerlink" title="step 1: 安装必要的一些系统工具"></a>step 1: 安装必要的一些系统工具</h1><pre class="line-numbers language-none"><code class="language-none">sudo yum install -y yum-utils device-mapper-persistent-data lvm2  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="Step-2-添加软件源信息"><a href="#Step-2-添加软件源信息" class="headerlink" title="Step 2: 添加软件源信息"></a>Step 2: 添加软件源信息</h1><pre class="line-numbers language-none"><code class="language-none">sudo yum-config-manager --add-repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo  
+yum-config-manager --disable docker-ce-edge  
+yum-config-manager --disable docker-ce-test  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h1 id="Step-3-更新并安装-Docker-CE"><a href="#Step-3-更新并安装-Docker-CE" class="headerlink" title="Step 3: 更新并安装 Docker-CE"></a>Step 3: 更新并安装 Docker-CE</h1><pre class="line-numbers language-none"><code class="language-none">sudo yum makecache fast  
+sudo yum -y install docker-ce  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h1 id="Step-4-开启Docker服务"><a href="#Step-4-开启Docker服务" class="headerlink" title="Step 4: 开启Docker服务"></a>Step 4: 开启Docker服务</h1><pre class="line-numbers language-none"><code class="language-none">sudo service docker start  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="Step-5-更改cgroup-driver"><a href="#Step-5-更改cgroup-driver" class="headerlink" title="Step 5: 更改cgroup driver"></a>Step 5: 更改cgroup driver</h1><pre class="line-numbers language-none"><code class="language-none">cat &gt; &#x2F;etc&#x2F;docker&#x2F;daemon.json &lt;&lt;EOF  
+&#123;  
+ &quot;exec-opts&quot;: [&quot;native.cgroupdriver&#x3D;systemd&quot;],  
+ &quot;log-driver&quot;: &quot;json-file&quot;,  
+ &quot;log-opts&quot;: &#123;  
+ &quot;max-size&quot;: &quot;100m&quot;  
+ &#125;,  
+ &quot;storage-driver&quot;: &quot;overlay2&quot;,  
+ &quot;storage-opts&quot;: [  
+ &quot;overlay2.override_kernel_check&#x3D;true&quot;  
+ ]  
+&#125;  
+EOF <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="❤️-以下命令适用于ubuntu"><a href="#❤️-以下命令适用于ubuntu" class="headerlink" title="❤️ 以下命令适用于ubuntu"></a>❤️ 以下命令适用于ubuntu</h1><h1 id="step-1-安装必要的一些系统工具-1"><a href="#step-1-安装必要的一些系统工具-1" class="headerlink" title="step 1: 安装必要的一些系统工具"></a>step 1: 安装必要的一些系统工具</h1><pre class="line-numbers language-none"><code class="language-none">sudo apt-get update  
+sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h1 id="step-2-安装GPG证书"><a href="#step-2-安装GPG证书" class="headerlink" title="step 2: 安装GPG证书"></a>step 2: 安装GPG证书</h1><pre class="line-numbers language-none"><code class="language-none">curl -fsSL http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;ubuntu&#x2F;gpg | sudo apt-key add -  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="Step-3-写入软件源信息"><a href="#Step-3-写入软件源信息" class="headerlink" title="Step 3: 写入软件源信息"></a>Step 3: 写入软件源信息</h1><pre class="line-numbers language-none"><code class="language-none">sudo add-apt-repository &quot;deb [arch&#x3D;amd64] http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;ubuntu $(lsb_release -cs) stable&quot;  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="Step-4-更新并安装-Docker-CE"><a href="#Step-4-更新并安装-Docker-CE" class="headerlink" title="Step 4: 更新并安装 Docker-CE"></a>Step 4: 更新并安装 Docker-CE</h1><pre class="line-numbers language-none"><code class="language-none">sudo apt-get -y update  
+sudo apt-get -y install docker-ce  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h1 id="Step-5-更改cgroup-driver-1"><a href="#Step-5-更改cgroup-driver-1" class="headerlink" title="Step 5: 更改cgroup driver"></a>Step 5: 更改cgroup driver</h1><pre class="line-numbers language-none"><code class="language-none">cat &gt; &#x2F;etc&#x2F;docker&#x2F;daemon.json &lt;&lt;EOF  
+&#123;  
+ &quot;exec-opts&quot;: [&quot;native.cgroupdriver&#x3D;systemd&quot;],  
+ &quot;log-driver&quot;: &quot;json-file&quot;,  
+ &quot;log-opts&quot;: &#123;  
+ &quot;max-size&quot;: &quot;100m&quot;  
+ &#125;,  
+ &quot;storage-driver&quot;: &quot;overlay2&quot;,  
+ &quot;storage-opts&quot;: [  
+ &quot;overlay2.override_kernel_check&#x3D;true&quot;  
+ ]  
+&#125;  
+EOF  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h1 id="安装二进制文件"><a href="#安装二进制文件" class="headerlink" title="安装二进制文件"></a>安装二进制文件</h1><p>主要是安装<code>kubelet</code>、<code>kubeadm</code>以及<code>kubectl</code>这三个可执行文件。其中kubeadm是官方的安装工具，kubectl是客户端，kubelet这个就不用介绍了。</p>
+<h1 id="安装阿里云的k8s-yum源"><a href="#安装阿里云的k8s-yum源" class="headerlink" title="安装阿里云的k8s-yum源"></a>安装阿里云的k8s-yum源</h1><p>以下是针对于CentOS的yum源，官方也有针对Ubuntu的源</p>
+<pre class="line-numbers language-none"><code class="language-none">cat &lt;&lt;EOF &gt; &#x2F;etc&#x2F;yum.repos.d&#x2F;kubernetes.repo  
+[kubernetes]  
+name&#x3D;Kubernetes  
+baseurl&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;yum&#x2F;repos&#x2F;kubernetes-el7-x86_64  
+enabled&#x3D;1  
+gpgcheck&#x3D;0  
+repo_gpgcheck&#x3D;0  
+gpgkey&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;yum&#x2F;doc&#x2F;yum-key.gpg  
+ http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;yum&#x2F;doc&#x2F;rpm-package-key.gpg  
+EOF  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="安装kubelet"><a href="#安装kubelet" class="headerlink" title="安装kubelet"></a>安装kubelet</h1><p>如果你希望直接安装最新发布版本的k8s，请直接执行（最终安装的版本关键看你安装的kubeadm版本）。</p>
+<pre class="line-numbers language-none"><code class="language-none">setenforce 0  
+yum install -y kubelet kubeadm kubectl --disableexcludes&#x3D;kubernetes  
+systemctl enable docker &amp;&amp; systemctl start docker  
+systemctl enable kubelet &amp;&amp; systemctl start kubelet  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="调参运行"><a href="#调参运行" class="headerlink" title="调参运行"></a>调参运行</h1><p>照着执行就行了。</p>
+<pre class="line-numbers language-none"><code class="language-none">cat &lt;&lt;EOF &gt;  &#x2F;etc&#x2F;sysctl.d&#x2F;k8s.conf  
+net.bridge.bridge-nf-call-ip6tables &#x3D; 1  
+net.bridge.bridge-nf-call-iptables &#x3D; 1  
+EOF  
+sysctl --system  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-none"><code class="language-none">systemctl daemon-reload  
+systemctl restart kubelet  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h1 id="容器组件"><a href="#容器组件" class="headerlink" title="容器组件"></a>容器组件</h1><h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><p>google和docker似乎是有意要对着干的，虽然阿里云也有docker registry的加速器，但是google并没有将kubernetes的镜像放到docker hub上。所以，我们需要先使用脚本，从阿里云的google_containers命名空间下载对应的克隆镜像，然后再通过docker tag将其labels修改为kubeadm生成的static-pod yaml文件对应的镜像标签。从而欺骗kubeadm，所有镜像都已经ready了，不用再去公网上拉取了。</p>
+<p>具体操作如下：</p>
+<h2 id="镜像列表"><a href="#镜像列表" class="headerlink" title="镜像列表"></a>镜像列表</h2><p>你肯定会疑问，我怎么知道我要使用哪些镜像？</p>
+<p>好在v1.12.2以上的版本，kubeadm提示可以使用以下命令来获取到镜像信息：（本例是v1.15.0）  </p>
+<pre class="line-numbers language-none"><code class="language-none">[root@k8s-master manifests]# kubeadm config images list
+k8s.gcr.io&#x2F;kube-apiserver:v1.15.0
+k8s.gcr.io&#x2F;kube-controller-manager:v1.15.0
+k8s.gcr.io&#x2F;kube-scheduler:v1.15.0
+k8s.gcr.io&#x2F;kube-proxy:v1.15.0
+k8s.gcr.io&#x2F;pause:3.1
+k8s.gcr.io&#x2F;etcd:3.3.10
+k8s.gcr.io&#x2F;coredns:1.3.1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>从阿里云拉取镜像  </p>
+<pre class="line-numbers language-none"><code class="language-none">[root@k8s-master manifests]# cat .&#x2F;pull.sh  
+for i in &#96;kubeadm config images list&#96;; do   
+ imageName&#x3D;$&#123;i#k8s.gcr.io&#x2F;&#125;  
+ docker pull registry.aliyuncs.com&#x2F;google_containers&#x2F;$imageName  
+ docker tag registry.aliyuncs.com&#x2F;google_containers&#x2F;$imageName k8s.gcr.io&#x2F;$imageName  
+ docker rmi registry.aliyuncs.com&#x2F;google_containers&#x2F;$imageName  
+done;  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="安装k8s"><a href="#安装k8s" class="headerlink" title="安装k8s"></a>安装k8s</h2><p>这就是kubeadm的安装流程了；下面是部署单节点k8s的命令，如果需要部署k8s集群，可以通过指定config文件的方式来指定其etcd集群，并使用相同的方式部署多个api-server、controller-manager以及scheduler。</p>
+<h3 id="k8s"><a href="#k8s" class="headerlink" title="k8s"></a>k8s</h3><pre class="line-numbers language-none"><code class="language-none">[root@k8s-master manifests]# kubeadm init --kubernetes-version&#x3D;$(kubeadm version -o short)  --pod-network-cidr&#x3D;10.244.0.0&#x2F;16  
+[init] using Kubernetes version: v1.15.0 
+[preflight] running pre-flight checks  
+[preflight&#x2F;images] Pulling images required for setting up a Kubernetes cluster  
+[preflight&#x2F;images] This might take a minute or two, depending on the speed of your internet connection  
+[preflight&#x2F;images] You can also perform this action in beforehand using &#39;kubeadm config images pull&#39;  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="安装网络组件"><a href="#安装网络组件" class="headerlink" title="安装网络组件"></a>安装网络组件</h2><p>我比较喜欢使用flannel，可以配置不同的backend来支持多种类型的网络。当然，如果对网络安全有特殊的限制，可以考虑其他的组件.</p>
+<pre class="line-numbers language-none"><code class="language-none">kubectl apply -f https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;coreos&#x2F;flannel&#x2F;bc79dd1505b0c8681ece4de4c0d86c5cd2643275&#x2F;Documentation&#x2F;kube-flannel.yml  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="取消污点"><a href="#取消污点" class="headerlink" title="取消污点"></a>取消污点</h2><p>这是因为我就只有一台机器，如果不干掉这个taint就无法调度pod。</p>
+<pre class="line-numbers language-none"><code class="language-none">kubectl taint nodes --all node-role.kubernetes.io&#x2F;master- <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="安装dashboard"><a href="#安装dashboard" class="headerlink" title="安装dashboard"></a>安装dashboard</h2><p>从官网拷贝dashboard的yaml文件到本地，保存为dashboard.yaml，需要注意版本。<br>#Create a new ServiceAccount  </p>
+<pre class="line-numbers language-none"><code class="language-none">kubectl create serviceaccount k8sadmin -n kube-system  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>#Create a ClusterRoleBinding with Cluster Admin Privileges  </p>
+<pre class="line-numbers language-none"><code class="language-none">kubectl create clusterrolebinding k8sadmin --clusterrole&#x3D;cluster-admin --serviceaccount&#x3D;kube-system:k8sadmin  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>#Get the token  </p>
+<pre class="line-numbers language-none"><code class="language-none">kubectl get secret -n kube-system | grep k8sadmin | cut -d &quot; &quot; -f1 | xargs -n 1 | xargs kubectl get secret  -o &#39;jsonpath&#x3D;&#123;.data.token&#125;&#39; -n kube-system | base64 --decode  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>执行以上命令，最后一条命令或获取到一串token，直接使用得到的token登录dashboard。</p>
+<h1 id="安装dashboard-1"><a href="#安装dashboard-1" class="headerlink" title="安装dashboard"></a>安装dashboard</h1><pre class="line-numbers language-none"><code class="language-none">kubectl apply -f https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kubernetes&#x2F;dashboard&#x2F;v1.10.1&#x2F;src&#x2F;deploy&#x2F;recommended&#x2F;kubernetes-dashboard.yaml  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果无法下载墙外镜像，修改image信息：</p>
+<p><code>k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1   =&gt; ljchen/k8s_gcr_io_kubernetes-dashboard-amd64:v1.10.1</code></p>
+<h2 id="安装WeaveScope"><a href="#安装WeaveScope" class="headerlink" title="安装WeaveScope"></a>安装WeaveScope</h2><pre class="line-numbers language-none"><code class="language-none">kubectl apply -f &quot;https:&#x2F;&#x2F;cloud.weave.works&#x2F;k8s&#x2F;scope.yaml?k8s-version&#x3D;$(kubectl version | base64 | tr -d &#39;\n&#39;)&quot;  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="设置端口映射"><a href="#设置端口映射" class="headerlink" title="设置端口映射"></a>设置端口映射</h1><pre class="line-numbers language-none"><code class="language-none">kubectl port-forward --address&#x3D;0.0.0.0 -n weave &quot;$(kubectl get -n weave pod --selector&#x3D;weave-scope-component&#x3D;app -o jsonpath&#x3D;&#39;&#123;.items..metadata.name&#125;&#39;)&quot; 4040  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>执行完以上命令后，在浏览器里面访问执行命令所在的节点的http:&#x2F;&#x2F;{IP}:4040，将看到以下界面。是不是很炫酷！</p>
+<h1 id="阿里巴巴开源镜像站"><a href="#阿里巴巴开源镜像站" class="headerlink" title="阿里巴巴开源镜像站"></a><a class="link"   href="http://ljchen.net/2018/10/23/%E5%9F%BA%E4%BA%8E%E9%98%BF%E9%87%8C%E4%BA%91%E9%95%9C%E5%83%8F%E7%AB%99%E5%AE%89%E8%A3%85kubernetes/#%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%BC%80%E6%BA%90%E9%95%9C%E5%83%8F%E7%AB%99"  title="阿里巴巴开源镜像站"><i class="fas fa-external-link-alt"></i></a>阿里巴巴开源镜像站</h1><blockquote>
+<p>请自行点击kubernetes的帮助。</p>
+</blockquote>
+<p>记录以下命令，便于添加其他节点主机：</p>
+<pre class="line-numbers language-none"><code class="language-none">kubeadm join 192.168.56.201:6443 --token 59mifb.diod87cm1ivbqw6n 
+--discovery-token-ca-cert-hash sha256:685b3c121d11f92c5b2af15b163c3860d0188f7795e48e272dde35e4d8435700<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>kubernetes, docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>写自己的nginx配置文件</title>
+    <url>/2019/09/23/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<p>前面几节中我们已经学过了nginx配置文件中的各个段的配置指令，下面我们就来写一个自己配置文件。如下代码：</p>
+<pre class="line-numbers language-none"><code class="language-none">worker_processes  1;
+events &#123;
+    worker_connections  1024;
+&#125;
+http &#123;
+       server &#123;
+            location &#x2F; &#123;
+                      #root   html;      #定义服务器的默认网站根目录位置
+                      #index index.php index.html index.htm;   #定义首页索引文件的名称
+                      proxy_pass http:&#x2F;&#x2F;www.baidu.com;
+             &#125;
+            error_page   500 502 503 504  &#x2F;50x.html;
+            location &#x3D; &#x2F;50x.html &#123;
+                root   html;
+           &#125;
+         &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>　　这样我们自己的配置文件就完成了，先将nginx的服务停止，然后我们用<em>nginx -c <em>.conf</em>命令来重新启动nginx，</em>.conf 为我们自己的配置文件所在的路径，nginx启动以后，然后点击【访问测试】，看看会出现什么情况，是不是已经转到我们所配置的站点了。</p>
+<p>　　在右面的编辑页面中编辑一个配置文件，我自己的配置文件名为Mynginx.conf,其中的内容就是以上面代码的内容，保存在&#x2F;etc&#x2F;nginx目录下，完成以后我们做如下操作：</p>
+<pre class="line-numbers language-none"><code class="language-none">nginx -s stop   
+nginx -c &#x2F;etc&#x2F;nginx&#x2F;Mynginx.conf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>然后点击【访问测试】</p>
+]]></content>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何为DevOps的面试做好充分准备</title>
+    <url>/2019/09/24/%E5%A6%82%E4%BD%95%E4%B8%BADevOps%E7%9A%84%E9%9D%A2%E8%AF%95%E5%81%9A%E5%A5%BD%E5%85%85%E5%88%86%E5%87%86%E5%A4%87/</url>
+    <content><![CDATA[<h3 id="这是您为DevOps热点准备的面试准备。"><a href="#这是您为DevOps热点准备的面试准备。" class="headerlink" title="这是您为DevOps热点准备的面试准备。"></a>这是您为DevOps热点准备的面试准备。</h3><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://dzone.com/storage/temp/12433224-interiew-chairs-and-table.jpg"
+                      alt="面试桌椅"
+                ></p>
+<p><em>那么，为什么他们要雇用您呢？</em></p>
+<p>在过去的十年中，DevOps成为一种新的技术文化和职业，将软件开发所需的快速迭代与基础架构运营团队的坚如磐石的稳定性相结合。对于系统管理员，运营工程师以及其他拥有强大系统和软件背景的人员来说，过渡到DevOps的时间可能比现在更好。截至2019年8月，仅在美国，目前就有超过50,000个 LinkedIn DevOps工作岗位。</p>
+<p>假设您已经了解了基础知识，并准备开始寻找工作。您如何评价DevOps面试？DevOps工程师必须既是优秀的软件开发人员，又是基础架构专家，因此，他们应该知道Linux基础架构，网络，算法和DevOps工具（例如Terraform，Docker和Kubernetes）。范围从标准软件工程师编码问题到有关系统设计，再到Linux调试和DevOps工具的问题等等。</p>
+<p>这是一个令人生畏的清单，但请不要害怕！在Insight上，DevOps奖学金将许多具有可转让技能的个人的职业推向了人们所期望的行业DevOps职位。这是我们为他们准备面试的方式。</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>动机是一个好的开始，但是您需要纪律才能有效地做好准备。我编写了这本指南，以帮助您制定有规律的面试准备程序。面试真的很烂-这是随机的，可能会让您对自己感到难过。在此过程中，<strong>不可</strong>控制的事情太多了，但是您<strong>可以</strong>控制自己的准备方式。</p>
+<p>在这里有很多值得一试的东西，所以不要指望能够一次学习所有东西。也许有一天您会选择一个主题来关注。也许您将连续一个星期专注于另一个主题。不过，通常来说，您应该每天习惯性地进行两到三项活动，轮流讨论不同的主题，以使您的思想保持新鲜和投入。这些类别按重要性顺序列出：</p>
+<ol>
+<li>Linux基础</li>
+<li>数据结构与算法</li>
+<li>系统设计</li>
+<li>解析</li>
+<li>DevOps工具</li>
+</ol>
+<p>首先，要建立广泛而浅薄的知识基础，这样一来，以循环方式首先在各个主题之间实现负载平衡是一件好事。这将扩大您的DevOps空间的概念框架，以便您可以更轻松地将新信息放入上下文中。每个类别中的活动也按重要性顺序或多或少地排名。某些活动适合日常实践，例如CodeSignal问题或OverTheWire挑战。其他人则适合深入学习。</p>
+<p>如果您想快点走，那就一个人走。但是，如果您想走得更远，那就一起走吧。与您的同龄人一起创建一个学习小组。互相追究责任。每周或每天签到和信息共享会话。在这段时间里，您会感到无动力，请记住，做某事总比什么都不做好。在您动力十足的那段时间里，请记住，睡眠和运动对您的成功至为重要。这些活动是人生下一阶段的垫脚石，但请记住让自己着迷于每块石头的形状。</p>
+<h2 id="Linux基础"><a href="#Linux基础" class="headerlink" title="Linux基础"></a>Linux基础</h2><p>作为一名DevOps工程师，你应该对Linux了如指掌。从内核到网络再到命令行命令，有关Linux的任何问题都是公平的游戏。</p>
+<h3 id="示例问题"><a href="#示例问题" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
+<li>Linux计算机加电时发生的步骤顺序是什么？</li>
+<li>当您在浏览器中键入google.com并导致网页返回给您时，会发生什么情况？如果没有出现网页怎么办？如何调试问题？</li>
+<li>您如何检查文件系统是否空间不足？如何打印最大文件列表？如何删除所有大于1 GB的.mov文件？</li>
+</ul>
+<h3 id="活动"><a href="#活动" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>通读<a href="http://solutionsproj.net/software/The_Linux_Command_Linex.pdf"><em>Linux命令</em></a>行书</li>
+<li>通过<a class="link"   href="https://overthewire.org/wargames/" >OverTheWire<i class="fas fa-external-link-alt"></i></a>战争游戏进行工作。这些是通过精心设计的Linux系统进行的有趣的寻宝游戏，旨在教您一些基本概念。至少通过强盗等级。如果遇到困难，请不要担心Google解决方案。我强烈建议您随时随地在GitHub中记录进度。</li>
+<li>只需使用vimtutor命令来学习vim。它是有史以来最好的编辑器，请勿让任何人说服您。</li>
+<li>考虑购买课程以获取Linux基础知识认证（Linux +，RedHat等）。的确，一磅的认证比一盎司的经验没有价值，但是，如果您经验不足，那么认证可以帮助填补您的知识空白，并证明您具有基本的了解。</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li>最好参考手册Linux命令是<a class="link"   href="https://tldr.sh/" >tldr.sh<i class="fas fa-external-link-alt"></i></a>。我强烈建议您下载tl; dr移动应用程序以快速参考。这在电话采访中帮助了我，我当时根本不知道该怎么做。</li>
+<li><a class="link"   href="https://devhints.io/" >devhints.io<i class="fas fa-external-link-alt"></i></a>是各种备忘单的重要来源。</li>
+<li>它看上去并不浮华，但是<a class="link"   href="https://www.tldp.org/LDP/abs/html/" >Advanced Bash脚本指南<i class="fas fa-external-link-alt"></i></a>是个巨大的财产库。</li>
+</ul>
+<h2 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h2><p>请记住，DevOps是<strong>开发</strong> +运营，因此您应该知道如何编码。选择一种您选择的语言（不是Bash-如果您不太喜欢，我建议使用Python）并练习，练习，练习。这不仅仅是寻找最佳解决方案-您必须与面试官清楚地交流问题的参数，传达您的思考过程，并计算不同算法的时间和空间复杂度。</p>
+<h3 id="示例问题-1"><a href="#示例问题-1" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
+<li>从列表中删除所有重复项。</li>
+<li>在包含除一个以外的所有可能IP的文件中找到丢失的IP。</li>
+<li>对二叉树的所有节点进行排序。</li>
+</ul>
+<h3 id="活动-1"><a href="#活动-1" class="headerlink" title="活动"></a>活动</h3><ul>
+<li><a class="link"   href="https://www.khanacademy.org/computing/computer-science/algorithms" >可汗学院<i class="fas fa-external-link-alt"></i></a>有一个非常好的数据结构和算法入门。它使用Javascript，但不要反对它。该课程是与汤姆·科门（Tom Cormen）合作完成的，汤姆·科门（Tom Cormen）是<a class="link"   href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms" >一本有关数据结构和算法<i class="fas fa-external-link-alt"></i></a>的权威<a class="link"   href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms" >著作<i class="fas fa-external-link-alt"></i></a>，绝对值得拥有。</li>
+<li><a class="link"   href="https://leetcode.com/" >LeetCode<i class="fas fa-external-link-alt"></i></a>拥有大量的问题库，这些问题库与真实的面试问题非常接近。实际上，许多公司都会直接问您LeetCode问题！每种算法至少要回答10个简单和中等问题。当您解决了100个问题后，您就可以开始感到准备好了，并且实际上可以解决这些问题而无需查找任何内容。</li>
+<li>每天在<a class="link"   href="https://codesignal.com/developers/interview-practice/" >CodeSignal<i class="fas fa-external-link-alt"></i></a>上<a class="link"   href="https://codesignal.com/developers/interview-practice/" >完成<i class="fas fa-external-link-alt"></i></a>面试准备材料。我建议使用Python，但您可以使用任何语言。将代码复制并粘贴到文件中，并使用Gi​​tHub对其进行版本控制。每天，仔细阅读您昨天做的代码，并详细记录下来。编写代码比阅读旧代码并记住发生的事情要容易。一两天后重新访问旧代码将迫使您综合所学的概念。</li>
+<li>通过CodeSignal的Python Arcade进行工作。这是对所有重要的标准Python库的很好的浏览。有些练习确实没有达到目标，但总体而言，这是一个不错的播放列表。</li>
+<li>研究动态规划，有向无环图，拓扑排序。</li>
+<li>每个人都需要一点SQL。无需花费大量时间，但是您应该在<a class="link"   href="https://mode.com/" >Mode Analytics<i class="fas fa-external-link-alt"></i></a>上注册一个免费帐户，并利用其使用真实公共数据库的出色互动SQL教程。</li>
+<li>随着您对编码技能的适应程度提高，请使用<a class="link"   href="https://www.pramp.com/" >Pramp<i class="fas fa-external-link-alt"></i></a>进行现场技术面试。这是重要的组成部分。像练习技术电话屏幕一样，您没有比技术电话屏幕更充分的准备。</li>
+<li>请记住，唯一有价值的知识是您可以在白板或实时编码上在面试官面前展示的内容。如果您倾向于在高压情况下停滞不前，那么您就远非唯一的人了-请确保与同伴一起做很多练习。</li>
+</ul>
+<h3 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a class="link"   href="https://learnxinyminutes.com/docs/python3/" >LearnXinYminutes<i class="fas fa-external-link-alt"></i></a>是一个很棒的示例驱动的Python备忘单</li>
+<li><a class="link"   href="https://gto76.github.io/python-cheatsheet/#main" >Python<i class="fas fa-external-link-alt"></i></a>备忘<a class="link"   href="https://gto76.github.io/python-cheatsheet/#main" >单<i class="fas fa-external-link-alt"></i></a>：最好的Python备忘单，尽管它很简洁</li>
+<li><a class="link"   href="https://docs.python-guide.org/" >Hitchhiker的Python指南<i class="fas fa-external-link-alt"></i></a>：最佳的Python文档。</li>
+<li>我的<a class="link"   href="https://github.com/chuckinator0/Projects/tree/master/scripts" >脚本GitHub存储库中<i class="fas fa-external-link-alt"></i></a>有很多示例文件，这些文件经过了详细记录，尽管实际上是无组织的！</li>
+</ul>
+<h2 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h2><p>系统设计面试可测试您的整体思维，架构复杂基础架构的能力以及沟通技巧。确保采用自上而下的设计方法，并具有清晰的基础结构图和DevOps注意事项。</p>
+<h3 id="示例问题-2"><a href="#示例问题-2" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
+<li>设计一个基于微博消息的社交网络，如Twitter。您将如何确保不同地区的高可用性？</li>
+</ul>
+<h3 id="活动-2"><a href="#活动-2" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>消除<a class="link"   href="https://github.com/donnemartin/system-design-primer/blob/master/README.md" >系统设计入门知识<i class="fas fa-external-link-alt"></i></a>。一个有趣的事情是选择一个主题，然后请朋友选择另一个主题，然后花2个小时研究您的主题，然后再花一两个小时进行分享。轮流扮演面试官和受访者的角色。</li>
+<li>阅读<a class="link"   href="https://landing.google.com/sre/sre-book/toc/index.html" >Google SRE图书<i class="fas fa-external-link-alt"></i></a>。这是现代DevOps必读的书。</li>
+</ul>
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>系统管理员经常分析系统输出和日志，以获得系统见解和调试问题。使用grep，awk和sed之类的工具进行命令行解析是DevOps工具库的一项重要技能。</p>
+<h3 id="示例问题-3"><a href="#示例问题-3" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
+<li>给定一个Apache Web服务器日志，每天有多少个请求？哪些IP是最常访问的访客？最需要哪些页面和图像？</li>
+</ul>
+<h3 id="活动-3"><a href="#活动-3" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>通过Insight的<a class="link"   href="https://github.com/InsightDataScience/Parsing-Workshop" >解析研讨会资料<i class="fas fa-external-link-alt"></i></a>中的<strong>练习进行练习</strong>。专注于awk。本章材料不错，是练习是最重要的部分。<a class="link"   href="https://github.com/InsightDataScience/Parsing-Workshop" ><i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h3 id="参考-2"><a href="#参考-2" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a class="link"   href="https://learnxinyminutes.com/docs/awk/" >LearnXinYminutes<i class="fas fa-external-link-alt"></i></a>：另一个出色的示例驱动参考-这次是awk。</li>
+<li><a class="link"   href="https://regexr.com/" >Regexr<i class="fas fa-external-link-alt"></i></a>：最佳正则表达式参考。</li>
+</ul>
+<h2 id="DevOps工具"><a href="#DevOps工具" class="headerlink" title="DevOps工具"></a>DevOps工具</h2><p>Docker，Terraform和Kubernetes是必不可少的DevOps工具，并且彻底学习它们不会出错。您还应该知道至少一种CI&#x2F;CD工具，例如Jenkins。强烈建议您至少在三大云之一上学习这些工具：AWS，GCP或Azure。</p>
+<h3 id="示例问题："><a href="#示例问题：" class="headerlink" title="示例问题："></a>示例问题：</h3><ul>
+<li>使用Terraform将Docker应用程序部署到新的AWS EC2实例上。</li>
+</ul>
+<h3 id="活动-4"><a href="#活动-4" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>您需要学习Kubernetes。为了学习Kubernetes，您需要了解容器化和Docker。</li>
+<li>通过<a class="link"   href="https://github.com/docker/labs/blob/master/beginner/readme.md" >Docker初学者<i class="fas fa-external-link-alt"></i></a>实验</li>
+<li>通过<a class="link"   href="https://training.play-with-docker.com/" >Docker课堂<i class="fas fa-external-link-alt"></i></a>进行<a class="link"   href="https://training.play-with-docker.com/" >游戏<i class="fas fa-external-link-alt"></i></a></li>
+<li>Kubernetes（概念：容器编排）</li>
+<li>阅读<a class="link"   href="https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/" >Kubernetes概念<i class="fas fa-external-link-alt"></i></a></li>
+<li>通过<a class="link"   href="https://kubernetes.io/docs/tutorials/kubernetes-basics/" >Kubernetes基础<i class="fas fa-external-link-alt"></i></a>教程学习</li>
+<li>若要进行更深入的潜水，请完成<a class="link"   href="https://www.katacoda.com/courses/kubernetes" >Katacoda课程<i class="fas fa-external-link-alt"></i></a></li>
+<li>通过一两个入门性的<a class="link"   href="https://jenkins.io/doc/tutorials/build-a-python-app-with-pyinstaller/" >Jenkins教程<i class="fas fa-external-link-alt"></i></a>来学习有关CI &#x2F; CD的更多信息（概念：部署管道作为代码）。老实说，我对Jenkins知之甚少，所以我不了解更好的资源。</li>
+<li>使用<a class="link"   href="https://www.vagrantup.com/intro/getting-started/index.html" >Vagrant<i class="fas fa-external-link-alt"></i></a>声明性地定义VM，然后使用<a class="link"   href="https://www.virtualbox.org/" >VirtualBox<i class="fas fa-external-link-alt"></i></a>或<a class="link"   href="https://www.packer.io/intro/getting-started/install.html" >Packer<i class="fas fa-external-link-alt"></i></a>将该VM导出为OVA文件（概念：不可变的基础结构，配置为代码）。</li>
+<li>Terraform（概念：基础架构作为代码）</li>
+<li>阅读Terragrunt的<a class="link"   href="https://blog.gruntwork.io/a-comprehensive-guide-to-terraform-b3d32832baca" >Terraform综合指南<i class="fas fa-external-link-alt"></i></a></li>
+<li>通过<a class="link"   href="https://learn.hashicorp.com/terraform/" >Terraform教程进行工作<i class="fas fa-external-link-alt"></i></a></li>
+<li>Ansible（概念：配置为代码）</li>
+<li>观看<a class="link"   href="https://www.ansible.com/resources/videos/quick-start-video" >介绍视频<i class="fas fa-external-link-alt"></i></a></li>
+<li>对于一些动手实验，我认为Linux Academy可能是最好的选择（不是免费的）</li>
+<li>进行<a class="link"   href="https://docs.honeycomb.io/learning-about-observability/quick-start/" >Honeycomb Quickstart，<i class="fas fa-external-link-alt"></i></a>以提供一种监视&#x2F;跟踪工具（概念：全栈跟踪）</li>
+<li>完成<a class="link"   href="https://learn.hashicorp.com/consul/" >Consul教程<i class="fas fa-external-link-alt"></i></a>（概念：服务发现）。</li>
+<li>完成<a class="link"   href="https://learn.hashicorp.com/vault/" >Vault教程<i class="fas fa-external-link-alt"></i></a>（概念：企业级机密管理）</li>
+<li>玩<a class="link"   href="https://linkerd.io/2/getting-started/" >Linkerd<i class="fas fa-external-link-alt"></i></a>（概念：服务网格）</li>
+<li>Apache Kafka（概念：容错，高吞吐量事件流）</li>
+<li>适用于Apache Kafka的无耻插件—  在该网站上免费找到<a class="link"   href="https://cloud.contentraven.com/confluent/self-userpackage" >Confluent培训<i class="fas fa-external-link-alt"></i></a>课程，以获取有关Kafka基础知识的不错的视频集</li>
+<li>查看<a class="link"   href="https://github.com/confluentinc/training-operations-src" >操作培训仓库，<i class="fas fa-external-link-alt"></i></a>以建立自己的本地docker-组成Kafka集群，并开始使用Kafka</li>
+</ul>
+<h3 id="参考-3"><a href="#参考-3" class="headerlink" title="参考"></a>参考</h3><ul>
+<li>Ansible：<a class="link"   href="https://docs.ansible.com/ansible/latest/user_guide/index.html" >用户指南<i class="fas fa-external-link-alt"></i></a>。</li>
+<li>想在Kubernetes中做一些特定的事情吗？检查文档的“ <a class="link"   href="https://kubernetes.io/docs/tasks/" >任务”<i class="fas fa-external-link-alt"></i></a>部分。有许多特定于任务的指南。</li>
+<li>Docker的“demo”(<a class="link"   href="https://docs.docker.com/samples/)%E9%A1%B5%E9%9D%A2%E6%8F%90%E4%BE%9B%E4%BA%86%E5%AE%8C%E6%95%B4%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%89%AF%E5%A5%BD%E7%A4%BA%E4%BE%8B%E4%BB%A5%E5%8F%8A%E4%B8%80%E4%BA%9B%E5%AE%9E%E7%94%A8%E7%9A%84%E6%95%99%E7%A8%8B%E3%80%82%E6%88%91%E5%96%9C%E6%AC%A2[Django" >https://docs.docker.com/samples/)页面提供了完整应用程序的良好示例以及一些实用的教程。我喜欢[Django<i class="fas fa-external-link-alt"></i></a> + Postgres](<a class="link"   href="https://docs.docker.com/compose/django/)%E7%A4%BA%E4%BE%8B%E3%80%82" >https://docs.docker.com/compose/django/)示例。<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h2 id="其他具有高价值物品"><a href="#其他具有高价值物品" class="headerlink" title="其他具有高价值物品"></a>其他具有高价值物品</h2><h3 id="活动-5"><a href="#活动-5" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>定期收听《软件工程日报》(<a class="link"   href="https://softwareengineeringdaily.com/)%E6%92%AD%E5%AE%A2%E3%80%82%E5%88%B0%E7%9B%AE%E5%89%8D%E4%B8%BA%E6%AD%A2%EF%BC%8C%E8%BF%99%E6%98%AF%E4%BF%9D%E6%8C%81DevOps%E4%B8%96%E7%95%8C%E8%84%89%E6%90%8F%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%B3%95%E3%80%82%E5%BB%BA%E8%AE%AE%E6%82%A8%E5%AE%89%E8%A3%85%E8%AF%A5%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%EF%BC%8C%E4%BB%A5%E4%BE%BF%E6%82%A8%E5%8F%AF%E4%BB%A5%E8%BD%BB%E6%9D%BE%E6%90%9C%E7%B4%A2%E6%97%A7%E5%89%A7%E9%9B%86%EF%BC%8C%E4%BB%A5%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3%E6%AD%A3%E5%9C%A8%E7%A0%94%E7%A9%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%92%8C%E6%A6%82%E5%BF%B5%E3%80%82%E5%9C%A8%E2%80%9C" >https://softwareengineeringdaily.com/)播客。到目前为止，这是保持DevOps世界脉搏的最佳方法。建议您安装该应用程序，以便您可以轻松搜索旧剧集，以深入了解正在研究的技术和概念。在“<i class="fas fa-external-link-alt"></i></a> DevOps工具”部分中，我为每个工具背后的概念提供了关键字。您可以使用这些关键字在SEdaily中搜索相关的播客。</li>
+<li>阅读有关看板(<a class="link"   href="https://www.atlassian.com/agile/kanban/boards)%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%8C%E5%B9%B6%E4%BD%BF%E7%94%A8%E5%AE%83%E4%BB%AC%E6%9D%A5%E5%A2%9E%E5%BC%BA%E6%82%A8%E7%9A%84%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%92%8C%E7%94%9F%E4%BA%A7%E5%8A%9B%E3%80%82GitHub%E6%9C%89%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E7%9C%8B%E6%9D%BF%EF%BC%8C%E6%82%A8%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E5%AE%83%E6%9D%A5%E4%BF%9D%E6%8C%81%E7%94%9F%E4%BA%A7%E5%8A%9B%E3%80%82%E6%88%91%E4%B8%AA%E4%BA%BA%E4%B9%9F%E5%96%9C%E6%AC%A2[%E5%AD%90%E5%BC%B9%E5%BC%8F%E6%97%A5%E8%AE%B0](https://www.youtube.com/watch?v=fm15cmYU0IM)%E5%92%8C%5BPomodoro%E6%96%B9%E6%B3%95%5D(https://en.wikipedia.org/wiki/Pomodoro_Technique)%E3%80%82" >https://www.atlassian.com/agile/kanban/boards)的知识，并使用它们来增强您的注意力和生产力。GitHub有一个简单的看板，您可以使用它来保持生产力。我个人也喜欢[子弹式日记](https://www.youtube.com/watch?v=fm15cmYU0IM)和[Pomodoro方法](https://en.wikipedia.org/wiki/Pomodoro_Technique)。<i class="fas fa-external-link-alt"></i></a></li>
+<li>深入了解一些您喜欢的工具的技术细节。从文档开始。配对并分享技术深层次的收获。</li>
+<li>考虑为Linux Academy或acloudguru课程付费以获得AWS，GCP或Azure认证。</li>
+</ul>
+<h3 id="参考-4"><a href="#参考-4" class="headerlink" title="参考"></a>参考</h3><ul>
+<li>Digital Ocean有很棒的教程。当我使用Google时，我倾向于首先尝试“ <research topic> site：digitalocean.com”。当您第一次学习手动安装某些东西时，这特别有用。</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>DevOps</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -11892,305 +12185,6 @@ bbtime:
       </tags>
   </entry>
   <entry>
-    <title>写自己的nginx配置文件</title>
-    <url>/2019/09/23/%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[<p>前面几节中我们已经学过了nginx配置文件中的各个段的配置指令，下面我们就来写一个自己配置文件。如下代码：</p>
-<pre class="line-numbers language-none"><code class="language-none">worker_processes  1;
-events &#123;
-    worker_connections  1024;
-&#125;
-http &#123;
-       server &#123;
-            location &#x2F; &#123;
-                      #root   html;      #定义服务器的默认网站根目录位置
-                      #index index.php index.html index.htm;   #定义首页索引文件的名称
-                      proxy_pass http:&#x2F;&#x2F;www.baidu.com;
-             &#125;
-            error_page   500 502 503 504  &#x2F;50x.html;
-            location &#x3D; &#x2F;50x.html &#123;
-                root   html;
-           &#125;
-         &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>　　这样我们自己的配置文件就完成了，先将nginx的服务停止，然后我们用<em>nginx -c <em>.conf</em>命令来重新启动nginx，</em>.conf 为我们自己的配置文件所在的路径，nginx启动以后，然后点击【访问测试】，看看会出现什么情况，是不是已经转到我们所配置的站点了。</p>
-<p>　　在右面的编辑页面中编辑一个配置文件，我自己的配置文件名为Mynginx.conf,其中的内容就是以上面代码的内容，保存在&#x2F;etc&#x2F;nginx目录下，完成以后我们做如下操作：</p>
-<pre class="line-numbers language-none"><code class="language-none">nginx -s stop   
-nginx -c &#x2F;etc&#x2F;nginx&#x2F;Mynginx.conf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>然后点击【访问测试】</p>
-]]></content>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基于阿里云镜像站安装Kubernetes 1.15</title>
-    <url>/2019/09/06/%E5%9F%BA%E4%BA%8E%E9%98%BF%E9%87%8C%E4%BA%91%E9%95%9C%E5%83%8F%E7%AB%99%E5%AE%89%E8%A3%85Kubernetes1.15/</url>
-    <content><![CDATA[<pre><code>kubernetes官网的文档比较详细，但是所有的安装步骤都有个前提(你有足够自由的互联络)，之前在香港和亚马逊的服务器都是直接照着手册执行脚本一路顺畅。无奈天朝的网络只能够借助于阿里云镜像站了，先前只是在使用该站点的各种linux发行版安装包，最近发现还支持了kubernetes。具体可以访问[阿里巴巴开源镜像站](https://opsx.alibaba.com/mirror)。
-# 安装docker-ce
-</code></pre>
-<h1 id="❤️-以下适用于centos-7"><a href="#❤️-以下适用于centos-7" class="headerlink" title="❤️ 以下适用于centos 7"></a>❤️ 以下适用于centos 7</h1><h1 id="step-1-安装必要的一些系统工具"><a href="#step-1-安装必要的一些系统工具" class="headerlink" title="step 1: 安装必要的一些系统工具"></a>step 1: 安装必要的一些系统工具</h1><pre class="line-numbers language-none"><code class="language-none">sudo yum install -y yum-utils device-mapper-persistent-data lvm2  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="Step-2-添加软件源信息"><a href="#Step-2-添加软件源信息" class="headerlink" title="Step 2: 添加软件源信息"></a>Step 2: 添加软件源信息</h1><pre class="line-numbers language-none"><code class="language-none">sudo yum-config-manager --add-repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo  
-yum-config-manager --disable docker-ce-edge  
-yum-config-manager --disable docker-ce-test  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h1 id="Step-3-更新并安装-Docker-CE"><a href="#Step-3-更新并安装-Docker-CE" class="headerlink" title="Step 3: 更新并安装 Docker-CE"></a>Step 3: 更新并安装 Docker-CE</h1><pre class="line-numbers language-none"><code class="language-none">sudo yum makecache fast  
-sudo yum -y install docker-ce  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h1 id="Step-4-开启Docker服务"><a href="#Step-4-开启Docker服务" class="headerlink" title="Step 4: 开启Docker服务"></a>Step 4: 开启Docker服务</h1><pre class="line-numbers language-none"><code class="language-none">sudo service docker start  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="Step-5-更改cgroup-driver"><a href="#Step-5-更改cgroup-driver" class="headerlink" title="Step 5: 更改cgroup driver"></a>Step 5: 更改cgroup driver</h1><pre class="line-numbers language-none"><code class="language-none">cat &gt; &#x2F;etc&#x2F;docker&#x2F;daemon.json &lt;&lt;EOF  
-&#123;  
- &quot;exec-opts&quot;: [&quot;native.cgroupdriver&#x3D;systemd&quot;],  
- &quot;log-driver&quot;: &quot;json-file&quot;,  
- &quot;log-opts&quot;: &#123;  
- &quot;max-size&quot;: &quot;100m&quot;  
- &#125;,  
- &quot;storage-driver&quot;: &quot;overlay2&quot;,  
- &quot;storage-opts&quot;: [  
- &quot;overlay2.override_kernel_check&#x3D;true&quot;  
- ]  
-&#125;  
-EOF <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h1 id="❤️-以下命令适用于ubuntu"><a href="#❤️-以下命令适用于ubuntu" class="headerlink" title="❤️ 以下命令适用于ubuntu"></a>❤️ 以下命令适用于ubuntu</h1><h1 id="step-1-安装必要的一些系统工具-1"><a href="#step-1-安装必要的一些系统工具-1" class="headerlink" title="step 1: 安装必要的一些系统工具"></a>step 1: 安装必要的一些系统工具</h1><pre class="line-numbers language-none"><code class="language-none">sudo apt-get update  
-sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h1 id="step-2-安装GPG证书"><a href="#step-2-安装GPG证书" class="headerlink" title="step 2: 安装GPG证书"></a>step 2: 安装GPG证书</h1><pre class="line-numbers language-none"><code class="language-none">curl -fsSL http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;ubuntu&#x2F;gpg | sudo apt-key add -  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="Step-3-写入软件源信息"><a href="#Step-3-写入软件源信息" class="headerlink" title="Step 3: 写入软件源信息"></a>Step 3: 写入软件源信息</h1><pre class="line-numbers language-none"><code class="language-none">sudo add-apt-repository &quot;deb [arch&#x3D;amd64] http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;ubuntu $(lsb_release -cs) stable&quot;  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="Step-4-更新并安装-Docker-CE"><a href="#Step-4-更新并安装-Docker-CE" class="headerlink" title="Step 4: 更新并安装 Docker-CE"></a>Step 4: 更新并安装 Docker-CE</h1><pre class="line-numbers language-none"><code class="language-none">sudo apt-get -y update  
-sudo apt-get -y install docker-ce  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h1 id="Step-5-更改cgroup-driver-1"><a href="#Step-5-更改cgroup-driver-1" class="headerlink" title="Step 5: 更改cgroup driver"></a>Step 5: 更改cgroup driver</h1><pre class="line-numbers language-none"><code class="language-none">cat &gt; &#x2F;etc&#x2F;docker&#x2F;daemon.json &lt;&lt;EOF  
-&#123;  
- &quot;exec-opts&quot;: [&quot;native.cgroupdriver&#x3D;systemd&quot;],  
- &quot;log-driver&quot;: &quot;json-file&quot;,  
- &quot;log-opts&quot;: &#123;  
- &quot;max-size&quot;: &quot;100m&quot;  
- &#125;,  
- &quot;storage-driver&quot;: &quot;overlay2&quot;,  
- &quot;storage-opts&quot;: [  
- &quot;overlay2.override_kernel_check&#x3D;true&quot;  
- ]  
-&#125;  
-EOF  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-<h1 id="安装二进制文件"><a href="#安装二进制文件" class="headerlink" title="安装二进制文件"></a>安装二进制文件</h1><p>主要是安装<code>kubelet</code>、<code>kubeadm</code>以及<code>kubectl</code>这三个可执行文件。其中kubeadm是官方的安装工具，kubectl是客户端，kubelet这个就不用介绍了。</p>
-<h1 id="安装阿里云的k8s-yum源"><a href="#安装阿里云的k8s-yum源" class="headerlink" title="安装阿里云的k8s-yum源"></a>安装阿里云的k8s-yum源</h1><p>以下是针对于CentOS的yum源，官方也有针对Ubuntu的源</p>
-<pre class="line-numbers language-none"><code class="language-none">cat &lt;&lt;EOF &gt; &#x2F;etc&#x2F;yum.repos.d&#x2F;kubernetes.repo  
-[kubernetes]  
-name&#x3D;Kubernetes  
-baseurl&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;yum&#x2F;repos&#x2F;kubernetes-el7-x86_64  
-enabled&#x3D;1  
-gpgcheck&#x3D;0  
-repo_gpgcheck&#x3D;0  
-gpgkey&#x3D;http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;yum&#x2F;doc&#x2F;yum-key.gpg  
- http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;yum&#x2F;doc&#x2F;rpm-package-key.gpg  
-EOF  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h1 id="安装kubelet"><a href="#安装kubelet" class="headerlink" title="安装kubelet"></a>安装kubelet</h1><p>如果你希望直接安装最新发布版本的k8s，请直接执行（最终安装的版本关键看你安装的kubeadm版本）。</p>
-<pre class="line-numbers language-none"><code class="language-none">setenforce 0  
-yum install -y kubelet kubeadm kubectl --disableexcludes&#x3D;kubernetes  
-systemctl enable docker &amp;&amp; systemctl start docker  
-systemctl enable kubelet &amp;&amp; systemctl start kubelet  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h1 id="调参运行"><a href="#调参运行" class="headerlink" title="调参运行"></a>调参运行</h1><p>照着执行就行了。</p>
-<pre class="line-numbers language-none"><code class="language-none">cat &lt;&lt;EOF &gt;  &#x2F;etc&#x2F;sysctl.d&#x2F;k8s.conf  
-net.bridge.bridge-nf-call-ip6tables &#x3D; 1  
-net.bridge.bridge-nf-call-iptables &#x3D; 1  
-EOF  
-sysctl --system  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre class="line-numbers language-none"><code class="language-none">systemctl daemon-reload  
-systemctl restart kubelet  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h1 id="容器组件"><a href="#容器组件" class="headerlink" title="容器组件"></a>容器组件</h1><h2 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h2><p>google和docker似乎是有意要对着干的，虽然阿里云也有docker registry的加速器，但是google并没有将kubernetes的镜像放到docker hub上。所以，我们需要先使用脚本，从阿里云的google_containers命名空间下载对应的克隆镜像，然后再通过docker tag将其labels修改为kubeadm生成的static-pod yaml文件对应的镜像标签。从而欺骗kubeadm，所有镜像都已经ready了，不用再去公网上拉取了。</p>
-<p>具体操作如下：</p>
-<h2 id="镜像列表"><a href="#镜像列表" class="headerlink" title="镜像列表"></a>镜像列表</h2><p>你肯定会疑问，我怎么知道我要使用哪些镜像？</p>
-<p>好在v1.12.2以上的版本，kubeadm提示可以使用以下命令来获取到镜像信息：（本例是v1.15.0）  </p>
-<pre class="line-numbers language-none"><code class="language-none">[root@k8s-master manifests]# kubeadm config images list
-k8s.gcr.io&#x2F;kube-apiserver:v1.15.0
-k8s.gcr.io&#x2F;kube-controller-manager:v1.15.0
-k8s.gcr.io&#x2F;kube-scheduler:v1.15.0
-k8s.gcr.io&#x2F;kube-proxy:v1.15.0
-k8s.gcr.io&#x2F;pause:3.1
-k8s.gcr.io&#x2F;etcd:3.3.10
-k8s.gcr.io&#x2F;coredns:1.3.1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>从阿里云拉取镜像  </p>
-<pre class="line-numbers language-none"><code class="language-none">[root@k8s-master manifests]# cat .&#x2F;pull.sh  
-for i in &#96;kubeadm config images list&#96;; do   
- imageName&#x3D;$&#123;i#k8s.gcr.io&#x2F;&#125;  
- docker pull registry.aliyuncs.com&#x2F;google_containers&#x2F;$imageName  
- docker tag registry.aliyuncs.com&#x2F;google_containers&#x2F;$imageName k8s.gcr.io&#x2F;$imageName  
- docker rmi registry.aliyuncs.com&#x2F;google_containers&#x2F;$imageName  
-done;  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="安装k8s"><a href="#安装k8s" class="headerlink" title="安装k8s"></a>安装k8s</h2><p>这就是kubeadm的安装流程了；下面是部署单节点k8s的命令，如果需要部署k8s集群，可以通过指定config文件的方式来指定其etcd集群，并使用相同的方式部署多个api-server、controller-manager以及scheduler。</p>
-<h3 id="k8s"><a href="#k8s" class="headerlink" title="k8s"></a>k8s</h3><pre class="line-numbers language-none"><code class="language-none">[root@k8s-master manifests]# kubeadm init --kubernetes-version&#x3D;$(kubeadm version -o short)  --pod-network-cidr&#x3D;10.244.0.0&#x2F;16  
-[init] using Kubernetes version: v1.15.0 
-[preflight] running pre-flight checks  
-[preflight&#x2F;images] Pulling images required for setting up a Kubernetes cluster  
-[preflight&#x2F;images] This might take a minute or two, depending on the speed of your internet connection  
-[preflight&#x2F;images] You can also perform this action in beforehand using &#39;kubeadm config images pull&#39;  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="安装网络组件"><a href="#安装网络组件" class="headerlink" title="安装网络组件"></a>安装网络组件</h2><p>我比较喜欢使用flannel，可以配置不同的backend来支持多种类型的网络。当然，如果对网络安全有特殊的限制，可以考虑其他的组件.</p>
-<pre class="line-numbers language-none"><code class="language-none">kubectl apply -f https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;coreos&#x2F;flannel&#x2F;bc79dd1505b0c8681ece4de4c0d86c5cd2643275&#x2F;Documentation&#x2F;kube-flannel.yml  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="取消污点"><a href="#取消污点" class="headerlink" title="取消污点"></a>取消污点</h2><p>这是因为我就只有一台机器，如果不干掉这个taint就无法调度pod。</p>
-<pre class="line-numbers language-none"><code class="language-none">kubectl taint nodes --all node-role.kubernetes.io&#x2F;master- <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="安装dashboard"><a href="#安装dashboard" class="headerlink" title="安装dashboard"></a>安装dashboard</h2><p>从官网拷贝dashboard的yaml文件到本地，保存为dashboard.yaml，需要注意版本。<br>#Create a new ServiceAccount  </p>
-<pre class="line-numbers language-none"><code class="language-none">kubectl create serviceaccount k8sadmin -n kube-system  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>#Create a ClusterRoleBinding with Cluster Admin Privileges  </p>
-<pre class="line-numbers language-none"><code class="language-none">kubectl create clusterrolebinding k8sadmin --clusterrole&#x3D;cluster-admin --serviceaccount&#x3D;kube-system:k8sadmin  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>#Get the token  </p>
-<pre class="line-numbers language-none"><code class="language-none">kubectl get secret -n kube-system | grep k8sadmin | cut -d &quot; &quot; -f1 | xargs -n 1 | xargs kubectl get secret  -o &#39;jsonpath&#x3D;&#123;.data.token&#125;&#39; -n kube-system | base64 --decode  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>执行以上命令，最后一条命令或获取到一串token，直接使用得到的token登录dashboard。</p>
-<h1 id="安装dashboard-1"><a href="#安装dashboard-1" class="headerlink" title="安装dashboard"></a>安装dashboard</h1><pre class="line-numbers language-none"><code class="language-none">kubectl apply -f https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kubernetes&#x2F;dashboard&#x2F;v1.10.1&#x2F;src&#x2F;deploy&#x2F;recommended&#x2F;kubernetes-dashboard.yaml  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>如果无法下载墙外镜像，修改image信息：</p>
-<p><code>k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1   =&gt; ljchen/k8s_gcr_io_kubernetes-dashboard-amd64:v1.10.1</code></p>
-<h2 id="安装WeaveScope"><a href="#安装WeaveScope" class="headerlink" title="安装WeaveScope"></a>安装WeaveScope</h2><pre class="line-numbers language-none"><code class="language-none">kubectl apply -f &quot;https:&#x2F;&#x2F;cloud.weave.works&#x2F;k8s&#x2F;scope.yaml?k8s-version&#x3D;$(kubectl version | base64 | tr -d &#39;\n&#39;)&quot;  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="设置端口映射"><a href="#设置端口映射" class="headerlink" title="设置端口映射"></a>设置端口映射</h1><pre class="line-numbers language-none"><code class="language-none">kubectl port-forward --address&#x3D;0.0.0.0 -n weave &quot;$(kubectl get -n weave pod --selector&#x3D;weave-scope-component&#x3D;app -o jsonpath&#x3D;&#39;&#123;.items..metadata.name&#125;&#39;)&quot; 4040  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>执行完以上命令后，在浏览器里面访问执行命令所在的节点的http:&#x2F;&#x2F;{IP}:4040，将看到以下界面。是不是很炫酷！</p>
-<h1 id="阿里巴巴开源镜像站"><a href="#阿里巴巴开源镜像站" class="headerlink" title="阿里巴巴开源镜像站"></a><a class="link"   href="http://ljchen.net/2018/10/23/%E5%9F%BA%E4%BA%8E%E9%98%BF%E9%87%8C%E4%BA%91%E9%95%9C%E5%83%8F%E7%AB%99%E5%AE%89%E8%A3%85kubernetes/#%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4%E5%BC%80%E6%BA%90%E9%95%9C%E5%83%8F%E7%AB%99"  title="阿里巴巴开源镜像站"><i class="fas fa-external-link-alt"></i></a>阿里巴巴开源镜像站</h1><blockquote>
-<p>请自行点击kubernetes的帮助。</p>
-</blockquote>
-<p>记录以下命令，便于添加其他节点主机：</p>
-<pre class="line-numbers language-none"><code class="language-none">kubeadm join 192.168.56.201:6443 --token 59mifb.diod87cm1ivbqw6n 
---discovery-token-ca-cert-hash sha256:685b3c121d11f92c5b2af15b163c3860d0188f7795e48e272dde35e4d8435700<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>kubernetes, docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何为DevOps的面试做好充分准备</title>
-    <url>/2019/09/24/%E5%A6%82%E4%BD%95%E4%B8%BADevOps%E7%9A%84%E9%9D%A2%E8%AF%95%E5%81%9A%E5%A5%BD%E5%85%85%E5%88%86%E5%87%86%E5%A4%87/</url>
-    <content><![CDATA[<h3 id="这是您为DevOps热点准备的面试准备。"><a href="#这是您为DevOps热点准备的面试准备。" class="headerlink" title="这是您为DevOps热点准备的面试准备。"></a>这是您为DevOps热点准备的面试准备。</h3><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://dzone.com/storage/temp/12433224-interiew-chairs-and-table.jpg"
-                      alt="面试桌椅"
-                ></p>
-<p><em>那么，为什么他们要雇用您呢？</em></p>
-<p>在过去的十年中，DevOps成为一种新的技术文化和职业，将软件开发所需的快速迭代与基础架构运营团队的坚如磐石的稳定性相结合。对于系统管理员，运营工程师以及其他拥有强大系统和软件背景的人员来说，过渡到DevOps的时间可能比现在更好。截至2019年8月，仅在美国，目前就有超过50,000个 LinkedIn DevOps工作岗位。</p>
-<p>假设您已经了解了基础知识，并准备开始寻找工作。您如何评价DevOps面试？DevOps工程师必须既是优秀的软件开发人员，又是基础架构专家，因此，他们应该知道Linux基础架构，网络，算法和DevOps工具（例如Terraform，Docker和Kubernetes）。范围从标准软件工程师编码问题到有关系统设计，再到Linux调试和DevOps工具的问题等等。</p>
-<p>这是一个令人生畏的清单，但请不要害怕！在Insight上，DevOps奖学金将许多具有可转让技能的个人的职业推向了人们所期望的行业DevOps职位。这是我们为他们准备面试的方式。</p>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>动机是一个好的开始，但是您需要纪律才能有效地做好准备。我编写了这本指南，以帮助您制定有规律的面试准备程序。面试真的很烂-这是随机的，可能会让您对自己感到难过。在此过程中，<strong>不可</strong>控制的事情太多了，但是您<strong>可以</strong>控制自己的准备方式。</p>
-<p>在这里有很多值得一试的东西，所以不要指望能够一次学习所有东西。也许有一天您会选择一个主题来关注。也许您将连续一个星期专注于另一个主题。不过，通常来说，您应该每天习惯性地进行两到三项活动，轮流讨论不同的主题，以使您的思想保持新鲜和投入。这些类别按重要性顺序列出：</p>
-<ol>
-<li>Linux基础</li>
-<li>数据结构与算法</li>
-<li>系统设计</li>
-<li>解析</li>
-<li>DevOps工具</li>
-</ol>
-<p>首先，要建立广泛而浅薄的知识基础，这样一来，以循环方式首先在各个主题之间实现负载平衡是一件好事。这将扩大您的DevOps空间的概念框架，以便您可以更轻松地将新信息放入上下文中。每个类别中的活动也按重要性顺序或多或少地排名。某些活动适合日常实践，例如CodeSignal问题或OverTheWire挑战。其他人则适合深入学习。</p>
-<p>如果您想快点走，那就一个人走。但是，如果您想走得更远，那就一起走吧。与您的同龄人一起创建一个学习小组。互相追究责任。每周或每天签到和信息共享会话。在这段时间里，您会感到无动力，请记住，做某事总比什么都不做好。在您动力十足的那段时间里，请记住，睡眠和运动对您的成功至为重要。这些活动是人生下一阶段的垫脚石，但请记住让自己着迷于每块石头的形状。</p>
-<h2 id="Linux基础"><a href="#Linux基础" class="headerlink" title="Linux基础"></a>Linux基础</h2><p>作为一名DevOps工程师，你应该对Linux了如指掌。从内核到网络再到命令行命令，有关Linux的任何问题都是公平的游戏。</p>
-<h3 id="示例问题"><a href="#示例问题" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
-<li>Linux计算机加电时发生的步骤顺序是什么？</li>
-<li>当您在浏览器中键入google.com并导致网页返回给您时，会发生什么情况？如果没有出现网页怎么办？如何调试问题？</li>
-<li>您如何检查文件系统是否空间不足？如何打印最大文件列表？如何删除所有大于1 GB的.mov文件？</li>
-</ul>
-<h3 id="活动"><a href="#活动" class="headerlink" title="活动"></a>活动</h3><ul>
-<li>通读<a href="http://solutionsproj.net/software/The_Linux_Command_Linex.pdf"><em>Linux命令</em></a>行书</li>
-<li>通过<a class="link"   href="https://overthewire.org/wargames/" >OverTheWire<i class="fas fa-external-link-alt"></i></a>战争游戏进行工作。这些是通过精心设计的Linux系统进行的有趣的寻宝游戏，旨在教您一些基本概念。至少通过强盗等级。如果遇到困难，请不要担心Google解决方案。我强烈建议您随时随地在GitHub中记录进度。</li>
-<li>只需使用vimtutor命令来学习vim。它是有史以来最好的编辑器，请勿让任何人说服您。</li>
-<li>考虑购买课程以获取Linux基础知识认证（Linux +，RedHat等）。的确，一磅的认证比一盎司的经验没有价值，但是，如果您经验不足，那么认证可以帮助填补您的知识空白，并证明您具有基本的了解。</li>
-</ul>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
-<li>最好参考手册Linux命令是<a class="link"   href="https://tldr.sh/" >tldr.sh<i class="fas fa-external-link-alt"></i></a>。我强烈建议您下载tl; dr移动应用程序以快速参考。这在电话采访中帮助了我，我当时根本不知道该怎么做。</li>
-<li><a class="link"   href="https://devhints.io/" >devhints.io<i class="fas fa-external-link-alt"></i></a>是各种备忘单的重要来源。</li>
-<li>它看上去并不浮华，但是<a class="link"   href="https://www.tldp.org/LDP/abs/html/" >Advanced Bash脚本指南<i class="fas fa-external-link-alt"></i></a>是个巨大的财产库。</li>
-</ul>
-<h2 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h2><p>请记住，DevOps是<strong>开发</strong> +运营，因此您应该知道如何编码。选择一种您选择的语言（不是Bash-如果您不太喜欢，我建议使用Python）并练习，练习，练习。这不仅仅是寻找最佳解决方案-您必须与面试官清楚地交流问题的参数，传达您的思考过程，并计算不同算法的时间和空间复杂度。</p>
-<h3 id="示例问题-1"><a href="#示例问题-1" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
-<li>从列表中删除所有重复项。</li>
-<li>在包含除一个以外的所有可能IP的文件中找到丢失的IP。</li>
-<li>对二叉树的所有节点进行排序。</li>
-</ul>
-<h3 id="活动-1"><a href="#活动-1" class="headerlink" title="活动"></a>活动</h3><ul>
-<li><a class="link"   href="https://www.khanacademy.org/computing/computer-science/algorithms" >可汗学院<i class="fas fa-external-link-alt"></i></a>有一个非常好的数据结构和算法入门。它使用Javascript，但不要反对它。该课程是与汤姆·科门（Tom Cormen）合作完成的，汤姆·科门（Tom Cormen）是<a class="link"   href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms" >一本有关数据结构和算法<i class="fas fa-external-link-alt"></i></a>的权威<a class="link"   href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms" >著作<i class="fas fa-external-link-alt"></i></a>，绝对值得拥有。</li>
-<li><a class="link"   href="https://leetcode.com/" >LeetCode<i class="fas fa-external-link-alt"></i></a>拥有大量的问题库，这些问题库与真实的面试问题非常接近。实际上，许多公司都会直接问您LeetCode问题！每种算法至少要回答10个简单和中等问题。当您解决了100个问题后，您就可以开始感到准备好了，并且实际上可以解决这些问题而无需查找任何内容。</li>
-<li>每天在<a class="link"   href="https://codesignal.com/developers/interview-practice/" >CodeSignal<i class="fas fa-external-link-alt"></i></a>上<a class="link"   href="https://codesignal.com/developers/interview-practice/" >完成<i class="fas fa-external-link-alt"></i></a>面试准备材料。我建议使用Python，但您可以使用任何语言。将代码复制并粘贴到文件中，并使用Gi​​tHub对其进行版本控制。每天，仔细阅读您昨天做的代码，并详细记录下来。编写代码比阅读旧代码并记住发生的事情要容易。一两天后重新访问旧代码将迫使您综合所学的概念。</li>
-<li>通过CodeSignal的Python Arcade进行工作。这是对所有重要的标准Python库的很好的浏览。有些练习确实没有达到目标，但总体而言，这是一个不错的播放列表。</li>
-<li>研究动态规划，有向无环图，拓扑排序。</li>
-<li>每个人都需要一点SQL。无需花费大量时间，但是您应该在<a class="link"   href="https://mode.com/" >Mode Analytics<i class="fas fa-external-link-alt"></i></a>上注册一个免费帐户，并利用其使用真实公共数据库的出色互动SQL教程。</li>
-<li>随着您对编码技能的适应程度提高，请使用<a class="link"   href="https://www.pramp.com/" >Pramp<i class="fas fa-external-link-alt"></i></a>进行现场技术面试。这是重要的组成部分。像练习技术电话屏幕一样，您没有比技术电话屏幕更充分的准备。</li>
-<li>请记住，唯一有价值的知识是您可以在白板或实时编码上在面试官面前展示的内容。如果您倾向于在高压情况下停滞不前，那么您就远非唯一的人了-请确保与同伴一起做很多练习。</li>
-</ul>
-<h3 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h3><ul>
-<li><a class="link"   href="https://learnxinyminutes.com/docs/python3/" >LearnXinYminutes<i class="fas fa-external-link-alt"></i></a>是一个很棒的示例驱动的Python备忘单</li>
-<li><a class="link"   href="https://gto76.github.io/python-cheatsheet/#main" >Python<i class="fas fa-external-link-alt"></i></a>备忘<a class="link"   href="https://gto76.github.io/python-cheatsheet/#main" >单<i class="fas fa-external-link-alt"></i></a>：最好的Python备忘单，尽管它很简洁</li>
-<li><a class="link"   href="https://docs.python-guide.org/" >Hitchhiker的Python指南<i class="fas fa-external-link-alt"></i></a>：最佳的Python文档。</li>
-<li>我的<a class="link"   href="https://github.com/chuckinator0/Projects/tree/master/scripts" >脚本GitHub存储库中<i class="fas fa-external-link-alt"></i></a>有很多示例文件，这些文件经过了详细记录，尽管实际上是无组织的！</li>
-</ul>
-<h2 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h2><p>系统设计面试可测试您的整体思维，架构复杂基础架构的能力以及沟通技巧。确保采用自上而下的设计方法，并具有清晰的基础结构图和DevOps注意事项。</p>
-<h3 id="示例问题-2"><a href="#示例问题-2" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
-<li>设计一个基于微博消息的社交网络，如Twitter。您将如何确保不同地区的高可用性？</li>
-</ul>
-<h3 id="活动-2"><a href="#活动-2" class="headerlink" title="活动"></a>活动</h3><ul>
-<li>消除<a class="link"   href="https://github.com/donnemartin/system-design-primer/blob/master/README.md" >系统设计入门知识<i class="fas fa-external-link-alt"></i></a>。一个有趣的事情是选择一个主题，然后请朋友选择另一个主题，然后花2个小时研究您的主题，然后再花一两个小时进行分享。轮流扮演面试官和受访者的角色。</li>
-<li>阅读<a class="link"   href="https://landing.google.com/sre/sre-book/toc/index.html" >Google SRE图书<i class="fas fa-external-link-alt"></i></a>。这是现代DevOps必读的书。</li>
-</ul>
-<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>系统管理员经常分析系统输出和日志，以获得系统见解和调试问题。使用grep，awk和sed之类的工具进行命令行解析是DevOps工具库的一项重要技能。</p>
-<h3 id="示例问题-3"><a href="#示例问题-3" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
-<li>给定一个Apache Web服务器日志，每天有多少个请求？哪些IP是最常访问的访客？最需要哪些页面和图像？</li>
-</ul>
-<h3 id="活动-3"><a href="#活动-3" class="headerlink" title="活动"></a>活动</h3><ul>
-<li>通过Insight的<a class="link"   href="https://github.com/InsightDataScience/Parsing-Workshop" >解析研讨会资料<i class="fas fa-external-link-alt"></i></a>中的<strong>练习进行练习</strong>。专注于awk。本章材料不错，是练习是最重要的部分。<a class="link"   href="https://github.com/InsightDataScience/Parsing-Workshop" ><i class="fas fa-external-link-alt"></i></a></li>
-</ul>
-<h3 id="参考-2"><a href="#参考-2" class="headerlink" title="参考"></a>参考</h3><ul>
-<li><a class="link"   href="https://learnxinyminutes.com/docs/awk/" >LearnXinYminutes<i class="fas fa-external-link-alt"></i></a>：另一个出色的示例驱动参考-这次是awk。</li>
-<li><a class="link"   href="https://regexr.com/" >Regexr<i class="fas fa-external-link-alt"></i></a>：最佳正则表达式参考。</li>
-</ul>
-<h2 id="DevOps工具"><a href="#DevOps工具" class="headerlink" title="DevOps工具"></a>DevOps工具</h2><p>Docker，Terraform和Kubernetes是必不可少的DevOps工具，并且彻底学习它们不会出错。您还应该知道至少一种CI&#x2F;CD工具，例如Jenkins。强烈建议您至少在三大云之一上学习这些工具：AWS，GCP或Azure。</p>
-<h3 id="示例问题："><a href="#示例问题：" class="headerlink" title="示例问题："></a>示例问题：</h3><ul>
-<li>使用Terraform将Docker应用程序部署到新的AWS EC2实例上。</li>
-</ul>
-<h3 id="活动-4"><a href="#活动-4" class="headerlink" title="活动"></a>活动</h3><ul>
-<li>您需要学习Kubernetes。为了学习Kubernetes，您需要了解容器化和Docker。</li>
-<li>通过<a class="link"   href="https://github.com/docker/labs/blob/master/beginner/readme.md" >Docker初学者<i class="fas fa-external-link-alt"></i></a>实验</li>
-<li>通过<a class="link"   href="https://training.play-with-docker.com/" >Docker课堂<i class="fas fa-external-link-alt"></i></a>进行<a class="link"   href="https://training.play-with-docker.com/" >游戏<i class="fas fa-external-link-alt"></i></a></li>
-<li>Kubernetes（概念：容器编排）</li>
-<li>阅读<a class="link"   href="https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/" >Kubernetes概念<i class="fas fa-external-link-alt"></i></a></li>
-<li>通过<a class="link"   href="https://kubernetes.io/docs/tutorials/kubernetes-basics/" >Kubernetes基础<i class="fas fa-external-link-alt"></i></a>教程学习</li>
-<li>若要进行更深入的潜水，请完成<a class="link"   href="https://www.katacoda.com/courses/kubernetes" >Katacoda课程<i class="fas fa-external-link-alt"></i></a></li>
-<li>通过一两个入门性的<a class="link"   href="https://jenkins.io/doc/tutorials/build-a-python-app-with-pyinstaller/" >Jenkins教程<i class="fas fa-external-link-alt"></i></a>来学习有关CI &#x2F; CD的更多信息（概念：部署管道作为代码）。老实说，我对Jenkins知之甚少，所以我不了解更好的资源。</li>
-<li>使用<a class="link"   href="https://www.vagrantup.com/intro/getting-started/index.html" >Vagrant<i class="fas fa-external-link-alt"></i></a>声明性地定义VM，然后使用<a class="link"   href="https://www.virtualbox.org/" >VirtualBox<i class="fas fa-external-link-alt"></i></a>或<a class="link"   href="https://www.packer.io/intro/getting-started/install.html" >Packer<i class="fas fa-external-link-alt"></i></a>将该VM导出为OVA文件（概念：不可变的基础结构，配置为代码）。</li>
-<li>Terraform（概念：基础架构作为代码）</li>
-<li>阅读Terragrunt的<a class="link"   href="https://blog.gruntwork.io/a-comprehensive-guide-to-terraform-b3d32832baca" >Terraform综合指南<i class="fas fa-external-link-alt"></i></a></li>
-<li>通过<a class="link"   href="https://learn.hashicorp.com/terraform/" >Terraform教程进行工作<i class="fas fa-external-link-alt"></i></a></li>
-<li>Ansible（概念：配置为代码）</li>
-<li>观看<a class="link"   href="https://www.ansible.com/resources/videos/quick-start-video" >介绍视频<i class="fas fa-external-link-alt"></i></a></li>
-<li>对于一些动手实验，我认为Linux Academy可能是最好的选择（不是免费的）</li>
-<li>进行<a class="link"   href="https://docs.honeycomb.io/learning-about-observability/quick-start/" >Honeycomb Quickstart，<i class="fas fa-external-link-alt"></i></a>以提供一种监视&#x2F;跟踪工具（概念：全栈跟踪）</li>
-<li>完成<a class="link"   href="https://learn.hashicorp.com/consul/" >Consul教程<i class="fas fa-external-link-alt"></i></a>（概念：服务发现）。</li>
-<li>完成<a class="link"   href="https://learn.hashicorp.com/vault/" >Vault教程<i class="fas fa-external-link-alt"></i></a>（概念：企业级机密管理）</li>
-<li>玩<a class="link"   href="https://linkerd.io/2/getting-started/" >Linkerd<i class="fas fa-external-link-alt"></i></a>（概念：服务网格）</li>
-<li>Apache Kafka（概念：容错，高吞吐量事件流）</li>
-<li>适用于Apache Kafka的无耻插件—  在该网站上免费找到<a class="link"   href="https://cloud.contentraven.com/confluent/self-userpackage" >Confluent培训<i class="fas fa-external-link-alt"></i></a>课程，以获取有关Kafka基础知识的不错的视频集</li>
-<li>查看<a class="link"   href="https://github.com/confluentinc/training-operations-src" >操作培训仓库，<i class="fas fa-external-link-alt"></i></a>以建立自己的本地docker-组成Kafka集群，并开始使用Kafka</li>
-</ul>
-<h3 id="参考-3"><a href="#参考-3" class="headerlink" title="参考"></a>参考</h3><ul>
-<li>Ansible：<a class="link"   href="https://docs.ansible.com/ansible/latest/user_guide/index.html" >用户指南<i class="fas fa-external-link-alt"></i></a>。</li>
-<li>想在Kubernetes中做一些特定的事情吗？检查文档的“ <a class="link"   href="https://kubernetes.io/docs/tasks/" >任务”<i class="fas fa-external-link-alt"></i></a>部分。有许多特定于任务的指南。</li>
-<li>Docker的“demo”(<a class="link"   href="https://docs.docker.com/samples/)%E9%A1%B5%E9%9D%A2%E6%8F%90%E4%BE%9B%E4%BA%86%E5%AE%8C%E6%95%B4%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%89%AF%E5%A5%BD%E7%A4%BA%E4%BE%8B%E4%BB%A5%E5%8F%8A%E4%B8%80%E4%BA%9B%E5%AE%9E%E7%94%A8%E7%9A%84%E6%95%99%E7%A8%8B%E3%80%82%E6%88%91%E5%96%9C%E6%AC%A2[Django" >https://docs.docker.com/samples/)页面提供了完整应用程序的良好示例以及一些实用的教程。我喜欢[Django<i class="fas fa-external-link-alt"></i></a> + Postgres](<a class="link"   href="https://docs.docker.com/compose/django/)%E7%A4%BA%E4%BE%8B%E3%80%82" >https://docs.docker.com/compose/django/)示例。<i class="fas fa-external-link-alt"></i></a></li>
-</ul>
-<h2 id="其他具有高价值物品"><a href="#其他具有高价值物品" class="headerlink" title="其他具有高价值物品"></a>其他具有高价值物品</h2><h3 id="活动-5"><a href="#活动-5" class="headerlink" title="活动"></a>活动</h3><ul>
-<li>定期收听《软件工程日报》(<a class="link"   href="https://softwareengineeringdaily.com/)%E6%92%AD%E5%AE%A2%E3%80%82%E5%88%B0%E7%9B%AE%E5%89%8D%E4%B8%BA%E6%AD%A2%EF%BC%8C%E8%BF%99%E6%98%AF%E4%BF%9D%E6%8C%81DevOps%E4%B8%96%E7%95%8C%E8%84%89%E6%90%8F%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%B3%95%E3%80%82%E5%BB%BA%E8%AE%AE%E6%82%A8%E5%AE%89%E8%A3%85%E8%AF%A5%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%EF%BC%8C%E4%BB%A5%E4%BE%BF%E6%82%A8%E5%8F%AF%E4%BB%A5%E8%BD%BB%E6%9D%BE%E6%90%9C%E7%B4%A2%E6%97%A7%E5%89%A7%E9%9B%86%EF%BC%8C%E4%BB%A5%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3%E6%AD%A3%E5%9C%A8%E7%A0%94%E7%A9%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%92%8C%E6%A6%82%E5%BF%B5%E3%80%82%E5%9C%A8%E2%80%9C" >https://softwareengineeringdaily.com/)播客。到目前为止，这是保持DevOps世界脉搏的最佳方法。建议您安装该应用程序，以便您可以轻松搜索旧剧集，以深入了解正在研究的技术和概念。在“<i class="fas fa-external-link-alt"></i></a> DevOps工具”部分中，我为每个工具背后的概念提供了关键字。您可以使用这些关键字在SEdaily中搜索相关的播客。</li>
-<li>阅读有关看板(<a class="link"   href="https://www.atlassian.com/agile/kanban/boards)%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%8C%E5%B9%B6%E4%BD%BF%E7%94%A8%E5%AE%83%E4%BB%AC%E6%9D%A5%E5%A2%9E%E5%BC%BA%E6%82%A8%E7%9A%84%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%92%8C%E7%94%9F%E4%BA%A7%E5%8A%9B%E3%80%82GitHub%E6%9C%89%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E7%9C%8B%E6%9D%BF%EF%BC%8C%E6%82%A8%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E5%AE%83%E6%9D%A5%E4%BF%9D%E6%8C%81%E7%94%9F%E4%BA%A7%E5%8A%9B%E3%80%82%E6%88%91%E4%B8%AA%E4%BA%BA%E4%B9%9F%E5%96%9C%E6%AC%A2[%E5%AD%90%E5%BC%B9%E5%BC%8F%E6%97%A5%E8%AE%B0](https://www.youtube.com/watch?v=fm15cmYU0IM)%E5%92%8C%5BPomodoro%E6%96%B9%E6%B3%95%5D(https://en.wikipedia.org/wiki/Pomodoro_Technique)%E3%80%82" >https://www.atlassian.com/agile/kanban/boards)的知识，并使用它们来增强您的注意力和生产力。GitHub有一个简单的看板，您可以使用它来保持生产力。我个人也喜欢[子弹式日记](https://www.youtube.com/watch?v=fm15cmYU0IM)和[Pomodoro方法](https://en.wikipedia.org/wiki/Pomodoro_Technique)。<i class="fas fa-external-link-alt"></i></a></li>
-<li>深入了解一些您喜欢的工具的技术细节。从文档开始。配对并分享技术深层次的收获。</li>
-<li>考虑为Linux Academy或acloudguru课程付费以获得AWS，GCP或Azure认证。</li>
-</ul>
-<h3 id="参考-4"><a href="#参考-4" class="headerlink" title="参考"></a>参考</h3><ul>
-<li>Digital Ocean有很棒的教程。当我使用Google时，我倾向于首先尝试“ <research topic> site：digitalocean.com”。当您第一次学习手动安装某些东西时，这特别有用。</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>DevOps</tag>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>容器和配置：3个DevOps工具以及对应的速查表</title>
     <url>/2019/10/15/%E5%AE%B9%E5%99%A8%E5%92%8C%E9%85%8D%E7%BD%AE3%E4%B8%AADevOps%E5%B7%A5%E5%85%B7%E4%BB%A5%E5%8F%8A%E5%AF%B9%E5%BA%94%E7%9A%84%E9%80%9F%E6%9F%A5%E8%A1%A8/</url>
     <content><![CDATA[<h3 id="Puppet，Docker和Ansible速查表有助于简化DevOps的实现。"><a href="#Puppet，Docker和Ansible速查表有助于简化DevOps的实现。" class="headerlink" title="Puppet，Docker和Ansible速查表有助于简化DevOps的实现。"></a>Puppet，Docker和Ansible速查表有助于简化DevOps的实现。</h3><p><img  
@@ -12441,6 +12435,49 @@ st.write(&#39;## Metadata&#39;, metadata, &#39;## Summary&#39;, summary)<span ar
 ]]></content>
       <tags>
         <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>改进CI管道中自动化性能测试的10条技巧（第1部分）</title>
+    <url>/2019/11/01/%E6%94%B9%E8%BF%9BCI%E7%AE%A1%E9%81%93%E4%B8%AD%E8%87%AA%E5%8A%A8%E5%8C%96%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%9A%8410%E6%9D%A1%E6%8A%80%E5%B7%A7%E7%AC%AC1%E9%83%A8%E5%88%86/</url>
+    <content><![CDATA[<h3 id="看一看如何通过连续测试和SLA改善CI管道的性能。"><a href="#看一看如何通过连续测试和SLA改善CI管道的性能。" class="headerlink" title="看一看如何通过连续测试和SLA改善CI管道的性能。"></a>看一看如何通过连续测试和SLA改善CI管道的性能。</h3><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://dzone.com/storage/temp/12642760-10.jpg"
+                      alt="图片标题"
+                ></p>
+<p><em>这是创建更好的CI管道的方法的1和2。</em></p>
+<p>在持续集成管道中正确进行测试是Web规模软件开发的关键部分。对于许多公司而言，这是一个挑战，尤其是在自动化性能测试方面。这不是因为缺乏努力。许多公司似乎无法实现其努力的全部价值。原因很多。一些测试工作只是在重新发明轮子。其他人则只是出于执行目的而无明显意图地随机进行。确保测试既适当又旨在满足业务需求是事后才想到的。</p>
+<p>不必一定是以这种方式。</p>
+<p>任何公司都可以在自动化CI管道中进行有用，高效的性能测试。所需要的只是那些有知识的人的一些有用的知识。为了扩大“了解者”的圈子，我们创建了十个技巧列表，以改善CI Pipelines中的性能测试。</p>
+<p>1.根据产品的长期目标进行连续测试</p>
+<p>2.区分SLA，SLO和SLI</p>
+<p>3.保持测试规模小且目标明确</p>
+<p>4.在整体之前测试段</p>
+<p>5.自动化不易碎的东西</p>
+<p>6.节省时间，使用烟雾测试</p>
+<p>7.利用您的源代码管理管理系统</p>
+<p>8.没有反馈循环的期望不是</p>
+<p>9.已知的基础架构是可测试的基础架构</p>
+<p>10.使用您的CI &#x2F; CD管道，而不是反对</p>
+<p>今天的帖子将重点介绍前两个技巧，而其余建议将在单独的文章中介绍。</p>
+<h2 id="1-根据产品的长期目标进行连续测试"><a href="#1-根据产品的长期目标进行连续测试" class="headerlink" title="1.根据产品的长期目标进行连续测试"></a><strong>1.根据产品的长期目标进行连续测试</strong></h2><p>如果你想快速识别什么可怕的事情是否在进行与贵公司的测试流程，请考虑以下情形。现在该发布产品了。开发团队中的每个人都以焦虑不安的状态坐在会议室的桌子旁，等待端到端测试完成，以便可以将代码推送发布。无论哪种方式，您都无法自拔。为什么？毕竟，如果测试顺利，代码将继续进行。没关系吧？错误。</p>
+<p>发布的生存能力取决于单个引发焦虑的端到端测试的状态这一事实揭示了整个测试过程的重大缺陷。此类测试所承受的压力不应超过常规血液测试的压力。如果患者有定期体检，健康饮食和定期运动的病史，则血液检查应验证历史上的积极行为。但是，如果患者已经十年没有去看医生，只能依靠薯片和生啤酒的饮食生活，而且只能走到邮箱，那么简单的验血会改变您的生活。谁知道它可能揭示什么？</p>
+<p>类比适用于IT流程。如果公司的总体开发实践是健康的，并且在软件开发生命周期的各个级别进行连续测试，则端到端测试应该只是另一个验证复选框。如果发现问题所在，则无需费力即可解决它。</p>
+<p>当开发实践杂乱无章，而测试被拖到最后时，最后的端到端测试又怎会是一种焦虑的经历呢？谁知道代码中隐藏了多少技术债务，开发人员不再在公司工作留下了多少谜团。测试中有多少只不过是循环使用20％的代码库，而其余部分则保持不变？诸如此类的问题在开发环境中令人惊讶地普遍存在，在该环境中，长期产品目标尚不清楚，而测试事件则是偶然的。</p>
+<p>当创造了所有人都可以充分理解长期产品目标的条件时，开发过程和所产生的代码质量也会提高（前提是在整个生命周期阶段都进行了连续测试）。基于产品的长期目标进行连续测试是明智且实用的，并有助于改善自动化性能测试。</p>
+<h2 id="2-区分SLA，SLO和SLI"><a href="#2-区分SLA，SLO和SLI" class="headerlink" title="2.区分SLA，SLO和SLI"></a><strong>2.区分SLA，SLO和SLI</strong></h2><p>当大多数公司考虑定义软件&#x2F;软件服务的工作方式时，他们相信服务水平协议。定义明确的SLA是必不可少的。否则，就没有可靠的方法让公司作为服务提供商或消费者运营。从提供商的角度来看，缺少SLA意味着客户可以随时（并期望）要求任何东西。从消费者的角度来看，没有SLA会使技术人员处于等待数小时的危险之中，因为他们的公司的数字基础架构崩溃时，他们一直处于等待与关键任务支持人员联系的状态。</p>
+<p>SLA是必需的，但它们只能捕获部分图片。还需要更多。服务水平目标（SLO）和服务水平指标（SLI）的添加提供了必要的附加信息，以确保提供者和消费者之间的伙伴关系满足所有人的需求。</p>
+<p>SLA描述了提供者和消费者之间的承诺；其复杂性将根据各方的需求而变化。SLA将定义每个服务的职责和服务的可用性。该协议仅取决于其背后目标的定义以及确定服务级别的度量标准。这就是SLO和SLI变得重要的地方。</p>
+<p>如果提前定义了SLO，则建立SLA会容易得多。理解消费者希望从代码&#x2F;服务中获得什么，将提供必要的见解，以确认所提供的服务符合期望。定义明确的SLO将有助于制定对所有人都有意义的SLA。</p>
+<p>为了使SLA有效地满足SLO中规定的目标，必须定义一套标准的，易于理解的度量标准。否则，公司冒着将苹果与橙子进行比较的风险。因此，SLI的价值。服务水平指示器提供有关如何根据SLA衡量运营绩效的详细信息。SLI越精确，就越好。</p>
+<p>SLO &#x2F; SLI允许您根据SLA构造进行假设。确定了操作的需求和条件以及测量方法。“我需要喝点东西”和“我渴了，需要8盎司水来满足我的渴求”之间的区别。</p>
+<p>然后，基于定义明确的SLO的SLA，然后根据详细SLI的一组度量标准进行测量，这将有益于常规操作以及测试过程。根据SLI中明确定义的参数，满足SLA要求的测试与即席测试相比，提供了更高的准确性和更可靠的分析。</p>
+<p>在SLA，SLO和SLI之间进行区分将大大有助于在软件所涉及的各方（开发人员，测试人员和用户之间）之间建立有意义，可靠的关系。</p>
+<p><em>下周，在由十个技巧组成的三部分博客系列中的第二篇中，我们将深入探讨技巧3-6。</em></p>
+]]></content>
+      <tags>
+        <tag>自动化测试</tag>
       </tags>
   </entry>
   <entry>
@@ -12983,49 +13020,6 @@ do_install<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
       </tags>
   </entry>
   <entry>
-    <title>改进CI管道中自动化性能测试的10条技巧（第1部分）</title>
-    <url>/2019/11/01/%E6%94%B9%E8%BF%9BCI%E7%AE%A1%E9%81%93%E4%B8%AD%E8%87%AA%E5%8A%A8%E5%8C%96%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E7%9A%8410%E6%9D%A1%E6%8A%80%E5%B7%A7%E7%AC%AC1%E9%83%A8%E5%88%86/</url>
-    <content><![CDATA[<h3 id="看一看如何通过连续测试和SLA改善CI管道的性能。"><a href="#看一看如何通过连续测试和SLA改善CI管道的性能。" class="headerlink" title="看一看如何通过连续测试和SLA改善CI管道的性能。"></a>看一看如何通过连续测试和SLA改善CI管道的性能。</h3><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://dzone.com/storage/temp/12642760-10.jpg"
-                      alt="图片标题"
-                ></p>
-<p><em>这是创建更好的CI管道的方法的1和2。</em></p>
-<p>在持续集成管道中正确进行测试是Web规模软件开发的关键部分。对于许多公司而言，这是一个挑战，尤其是在自动化性能测试方面。这不是因为缺乏努力。许多公司似乎无法实现其努力的全部价值。原因很多。一些测试工作只是在重新发明轮子。其他人则只是出于执行目的而无明显意图地随机进行。确保测试既适当又旨在满足业务需求是事后才想到的。</p>
-<p>不必一定是以这种方式。</p>
-<p>任何公司都可以在自动化CI管道中进行有用，高效的性能测试。所需要的只是那些有知识的人的一些有用的知识。为了扩大“了解者”的圈子，我们创建了十个技巧列表，以改善CI Pipelines中的性能测试。</p>
-<p>1.根据产品的长期目标进行连续测试</p>
-<p>2.区分SLA，SLO和SLI</p>
-<p>3.保持测试规模小且目标明确</p>
-<p>4.在整体之前测试段</p>
-<p>5.自动化不易碎的东西</p>
-<p>6.节省时间，使用烟雾测试</p>
-<p>7.利用您的源代码管理管理系统</p>
-<p>8.没有反馈循环的期望不是</p>
-<p>9.已知的基础架构是可测试的基础架构</p>
-<p>10.使用您的CI &#x2F; CD管道，而不是反对</p>
-<p>今天的帖子将重点介绍前两个技巧，而其余建议将在单独的文章中介绍。</p>
-<h2 id="1-根据产品的长期目标进行连续测试"><a href="#1-根据产品的长期目标进行连续测试" class="headerlink" title="1.根据产品的长期目标进行连续测试"></a><strong>1.根据产品的长期目标进行连续测试</strong></h2><p>如果你想快速识别什么可怕的事情是否在进行与贵公司的测试流程，请考虑以下情形。现在该发布产品了。开发团队中的每个人都以焦虑不安的状态坐在会议室的桌子旁，等待端到端测试完成，以便可以将代码推送发布。无论哪种方式，您都无法自拔。为什么？毕竟，如果测试顺利，代码将继续进行。没关系吧？错误。</p>
-<p>发布的生存能力取决于单个引发焦虑的端到端测试的状态这一事实揭示了整个测试过程的重大缺陷。此类测试所承受的压力不应超过常规血液测试的压力。如果患者有定期体检，健康饮食和定期运动的病史，则血液检查应验证历史上的积极行为。但是，如果患者已经十年没有去看医生，只能依靠薯片和生啤酒的饮食生活，而且只能走到邮箱，那么简单的验血会改变您的生活。谁知道它可能揭示什么？</p>
-<p>类比适用于IT流程。如果公司的总体开发实践是健康的，并且在软件开发生命周期的各个级别进行连续测试，则端到端测试应该只是另一个验证复选框。如果发现问题所在，则无需费力即可解决它。</p>
-<p>当开发实践杂乱无章，而测试被拖到最后时，最后的端到端测试又怎会是一种焦虑的经历呢？谁知道代码中隐藏了多少技术债务，开发人员不再在公司工作留下了多少谜团。测试中有多少只不过是循环使用20％的代码库，而其余部分则保持不变？诸如此类的问题在开发环境中令人惊讶地普遍存在，在该环境中，长期产品目标尚不清楚，而测试事件则是偶然的。</p>
-<p>当创造了所有人都可以充分理解长期产品目标的条件时，开发过程和所产生的代码质量也会提高（前提是在整个生命周期阶段都进行了连续测试）。基于产品的长期目标进行连续测试是明智且实用的，并有助于改善自动化性能测试。</p>
-<h2 id="2-区分SLA，SLO和SLI"><a href="#2-区分SLA，SLO和SLI" class="headerlink" title="2.区分SLA，SLO和SLI"></a><strong>2.区分SLA，SLO和SLI</strong></h2><p>当大多数公司考虑定义软件&#x2F;软件服务的工作方式时，他们相信服务水平协议。定义明确的SLA是必不可少的。否则，就没有可靠的方法让公司作为服务提供商或消费者运营。从提供商的角度来看，缺少SLA意味着客户可以随时（并期望）要求任何东西。从消费者的角度来看，没有SLA会使技术人员处于等待数小时的危险之中，因为他们的公司的数字基础架构崩溃时，他们一直处于等待与关键任务支持人员联系的状态。</p>
-<p>SLA是必需的，但它们只能捕获部分图片。还需要更多。服务水平目标（SLO）和服务水平指标（SLI）的添加提供了必要的附加信息，以确保提供者和消费者之间的伙伴关系满足所有人的需求。</p>
-<p>SLA描述了提供者和消费者之间的承诺；其复杂性将根据各方的需求而变化。SLA将定义每个服务的职责和服务的可用性。该协议仅取决于其背后目标的定义以及确定服务级别的度量标准。这就是SLO和SLI变得重要的地方。</p>
-<p>如果提前定义了SLO，则建立SLA会容易得多。理解消费者希望从代码&#x2F;服务中获得什么，将提供必要的见解，以确认所提供的服务符合期望。定义明确的SLO将有助于制定对所有人都有意义的SLA。</p>
-<p>为了使SLA有效地满足SLO中规定的目标，必须定义一套标准的，易于理解的度量标准。否则，公司冒着将苹果与橙子进行比较的风险。因此，SLI的价值。服务水平指示器提供有关如何根据SLA衡量运营绩效的详细信息。SLI越精确，就越好。</p>
-<p>SLO &#x2F; SLI允许您根据SLA构造进行假设。确定了操作的需求和条件以及测量方法。“我需要喝点东西”和“我渴了，需要8盎司水来满足我的渴求”之间的区别。</p>
-<p>然后，基于定义明确的SLO的SLA，然后根据详细SLI的一组度量标准进行测量，这将有益于常规操作以及测试过程。根据SLI中明确定义的参数，满足SLA要求的测试与即席测试相比，提供了更高的准确性和更可靠的分析。</p>
-<p>在SLA，SLO和SLI之间进行区分将大大有助于在软件所涉及的各方（开发人员，测试人员和用户之间）之间建立有意义，可靠的关系。</p>
-<p><em>下周，在由十个技巧组成的三部分博客系列中的第二篇中，我们将深入探讨技巧3-6。</em></p>
-]]></content>
-      <tags>
-        <tag>自动化测试</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>新世界的大门</title>
     <url>/2019/08/26/%E6%96%B0%E4%B8%96%E7%95%8C/</url>
     <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo<i class="fas fa-external-link-alt"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation<i class="fas fa-external-link-alt"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fas fa-external-link-alt"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub<i class="fas fa-external-link-alt"></i></a>.</p>
@@ -13047,6 +13041,44 @@ do_install<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
       </categories>
       <tags>
         <tag>new world</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>运维架构层级</title>
+    <url>/2019/09/19/%E8%BF%90%E7%BB%B4%E6%9E%B6%E6%9E%84%E5%B1%82%E7%BA%A7/</url>
+    <content><![CDATA[<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/bing/20180330.jpg?imageView2/1/w/960/h/540/interlace/1/q/100"
+                     
+                > </p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/09/image-08604d6b.png"
+                      alt="image.png"
+                ><br><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/09/image-753a7fbe.png"
+                      alt="image.png"
+                ><br><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/09/image-8a1fb5a5.png"
+                      alt="image.png"
+                ><br><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/09/image-6fdcd397.png"
+                      alt="image.png"
+                ><br>来源：<a class="link"   href="https://www.unixhot.com/page/ops" >https://www.unixhot.com/page/ops<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <categories>
+        <category>架构</category>
+      </categories>
+      <tags>
+        <tag>Linux运维</tag>
       </tags>
   </entry>
   <entry>
@@ -13095,44 +13127,6 @@ do_install<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
       </categories>
       <tags>
         <tag>摘抄</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>运维架构层级</title>
-    <url>/2019/09/19/%E8%BF%90%E7%BB%B4%E6%9E%B6%E6%9E%84%E5%B1%82%E7%BA%A7/</url>
-    <content><![CDATA[<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img.hacpai.com/bing/20180330.jpg?imageView2/1/w/960/h/540/interlace/1/q/100"
-                     
-                > </p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img.hacpai.com/file/2019/09/image-08604d6b.png"
-                      alt="image.png"
-                ><br><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img.hacpai.com/file/2019/09/image-753a7fbe.png"
-                      alt="image.png"
-                ><br><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img.hacpai.com/file/2019/09/image-8a1fb5a5.png"
-                      alt="image.png"
-                ><br><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img.hacpai.com/file/2019/09/image-6fdcd397.png"
-                      alt="image.png"
-                ><br>来源：<a class="link"   href="https://www.unixhot.com/page/ops" >https://www.unixhot.com/page/ops<i class="fas fa-external-link-alt"></i></a></p>
-]]></content>
-      <categories>
-        <category>架构</category>
-      </categories>
-      <tags>
-        <tag>Linux运维</tag>
       </tags>
   </entry>
   <entry>
