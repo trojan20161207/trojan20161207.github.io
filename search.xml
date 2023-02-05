@@ -122,6 +122,19 @@
       </tags>
   </entry>
   <entry>
+    <title>CentOS7.6进入单用户模式</title>
+    <url>/2020/12/01/CentOS7.6%E8%BF%9B%E5%85%A5%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<ul>
+<li></li>
+</ul>
+<p>CentOS7.6进入单用户模式</p>
+<p>1、在启动grub菜单，选择编辑启动选项<br>2、按键盘e键，来进入编辑界面<br>3、找到Linux 16那行，将ro改为rw init&#x3D;&#x2F;sysroot&#x2F;bin&#x2F;sh<br>如果用的是kvm做了console连接授权，还要把授权的console&#x3D;ttyS0去掉<br>4、按下 Control+x ，使用单用户模式启动<br>5、使用下面的命令访问系统<br>chroot &#x2F;sysroot<br>6、重置密码<br>passwd root<br>7、更新系统信息（如果打开了selinux需要做这一步）<br>touch &#x2F;.autorelabel<br>8、退出chroot<br>exit<br>9、重启系统<br>reboot</p>
+]]></content>
+      <tags>
+        <tag>centos</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Cloudflare 5XX 错误故障排除</title>
     <url>/2023/02/05/Cloudflare%205XX%20%E9%94%99%E8%AF%AF%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4/</url>
     <content><![CDATA[<p><em>诊断并解决 Cloudflare 代理的站点的 5XX 错误。</em></p>
@@ -446,6 +459,57 @@ example.com,www.example.com<span aria-hidden="true" class="line-numbers-rows"><s
 ]]></content>
       <tags>
         <tag>cloudflare</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DevOps角色：您梦寐以求的工作是什么？</title>
+    <url>/2019/11/01/DevOps%E8%A7%92%E8%89%B2%E6%82%A8%E6%A2%A6%E5%AF%90%E4%BB%A5%E6%B1%82%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%98%AF%E4%BB%80%E4%B9%88/</url>
+    <content><![CDATA[<h3 id="在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。"><a href="#在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。" class="headerlink" title="在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。"></a>在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。</h3><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://dzone.com/storage/temp/12646937-blocks.jpg"
+                      alt="建筑模块"
+                ></p>
+<p><em>有这么多DevOps角色可供选择，您将是哪个构建基块？</em></p>
+<p>当IT专业人员迫切希望成为DevOps的专家时，对于各种DevOps角色还有很多困惑。因此，本文致力于使实施DevOps的公司的团队结构更加清晰。</p>
+<p>您可能一直听说，在DevOps中，每个参与人员都扮演着共同的角色：DevOps，这是两种实践的结合：<em>Development</em>和<em>Operations</em>。但这远非事实。</p>
+<h2 id="DevOps实践"><a href="#DevOps实践" class="headerlink" title="DevOps实践"></a><strong>DevOps实践</strong></h2><p>实际上，DevOps实践强调，开发人员应该能够执行由Ops家伙执行的任务，而Ops则应该能够执行由Dev家伙执行的任务。</p>
+<p>既然您知道DevOps专业人员是具有多种技能的人员，那么您可能还想知道DevOps专业人员在其组织中负责的各种任务。如果是这样，请继续阅读。</p>
+<p>要真正理解这个概念，您需要从另一个角度看待它。如果您置身于实施DevOps的公司中，那么它就更容易理解，因为您必须根据要求分配各种DevOps角色。</p>
+<h2 id="DevOps角色"><a href="#DevOps角色" class="headerlink" title="DevOps角色"></a><strong>DevOps角色</strong></h2><p>首先让我列出各种角色及其描述。</p>
+<ol>
+<li><strong>DevOps传播者</strong> –负责实施DevOps的首席官（领导）</li>
+<li><strong>发布管理器</strong> –发布新功能并确保发布后产品稳定性的工具</li>
+<li><strong>自动化专家</strong> –负责实现工具自动化和编排的人</li>
+<li><strong>软件开发人员&#x2F;测试人员</strong> –实际开发代码并对其进行测试的人</li>
+<li><strong>质量保证</strong> –确保产品质量符合其要求的人</li>
+<li><strong>安全工程师</strong> –始终监视产品安全性和健康状况的<strong>工程师</strong></li>
+</ol>
+<p>这里要注意的重要一点是，其中许多角色将涉及一个团队或一组专业人员，例如软件开发人员&#x2F;测试人员，安全工程师和质量保证。因此，您应该以层次结构的形式考虑这些角色及其关系。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://www.edureka.co/blog/wp-content/uploads/2018/02/DevOps-Roles.png"
+                      alt="DevOps角色"
+                ></p>
+<p>根据公司的要求，甚至自动化专家也可以由多个人担任该角色。因此，让我更多地谈谈这些DevOps角色。</p>
+<h3 id="DevOps传播者"><a href="#DevOps传播者" class="headerlink" title="DevOps传播者"></a><strong>DevOps传播者</strong></h3><p>就像我之前提到的那样，这是DevOps中的关键角色。由领导者或负责确保在产品的端到端开发中实施DevOps策略并带来环境积极影响的人员来担任此角色。</p>
+<p>DevOps传播者还考虑到可用的各种自动化工具以及Dev和Ops团队具有的技能，还找到了改进产品现有体系结构的方法。他的主要目标是管理其他DevOps角色并从团队中获得全面的效率。</p>
+<h3 id="发布经理"><a href="#发布经理" class="headerlink" title="发布经理"></a><strong>发布经理</strong></h3><p>该角色是产品可交付成果的关键角色，因为他需要将新功能&#x2F;更新功能与现有框架集成在一起。该角色可以是担任发布工程师的角色的同一个人，也可以是领导发布工程师团队的发布经理。</p>
+<p>该角色的主要重点领域是从开发到部署，以协调和管理产品。由于此角色是以重要方式参与的，因此应由了解该技术的工作原理和各种结构的技术人员（经理）来担任。</p>
+<p>根据需求，将有多位经理领导各自的团队来处理多个功能（项目）。</p>
+<h3 id="自动化专家"><a href="#自动化专家" class="headerlink" title="自动化专家"></a><strong>自动化专家</strong></h3><p>无需再次强调该角色的重要性，因为DevOps完全是关于自动化的。作为自动化专家，此角色应该能够理解什么可以自动化以及如何将一个产品堆栈与另一个产品堆栈集成。</p>
+<p>此人也称为集成专家，负责分析，设计和实施持续部署的策略，同时确保生产和预生产系统的高可用性。</p>
+<h3 id="软件开发人员-x2F-测试人员"><a href="#软件开发人员-x2F-测试人员" class="headerlink" title="软件开发人员&#x2F;测试人员"></a><strong>软件开发人员&#x2F;测试人员</strong></h3><p>该角色负责软件的实际根级开发。传统的编码人员和程序员属于这一类。除开发外，专业人员还负责测试代码。</p>
+<p>名称可能保持不变，但是软件开发人员&#x2F;测试人员的新角色大大增加了职责范围，因为他们不仅负责将新需求转化为代码，还负责单元测试，部署和持续监控。</p>
+<h3 id="质量保证"><a href="#质量保证" class="headerlink" title="质量保证"></a><strong>质量保证</strong></h3><p>这是DevOps中引入的新角色，实际上可以保证产品的质量。通常也称为“体验保证”，此角色是传统测试和质量检查之外的一步。</p>
+<p>在此，对产品的功能进行了极限测试，以发现每个缺陷并改善每个独立功能的性能欠佳，因为客户的经验至关重要。这个角色一直在寻找机会，以改善所有功能以提高客户满意度。</p>
+<h3 id="安全工程师"><a href="#安全工程师" class="headerlink" title="安全工程师"></a><strong>安全工程师</strong></h3><p>安全工程师与任何其他角色一样重要，因为他们是负责监视产品交付能力的人员。他们与开发人员并肩工作，在过程中更早地嵌入了他们的建议（安全补丁）。</p>
+<p>除了外部安全性之外，他们还监视系统以检查其性能，报告系统面临的任何停机时间并深入分析以找出造成该问题的原因。防止再次发生停机或安全风险是安全工程师的一项重要任务。</p>
+<p>我希望到目前为止，您对组织中可能存在的各种DevOps角色有了很好的了解。</p>
+]]></content>
+      <tags>
+        <tag>devops</tag>
       </tags>
   </entry>
   <entry>
@@ -5614,70 +5678,6 @@ description: 收集分享大量非常好用的Mac应用程序、软件以及工�
 -->]]></content>
   </entry>
   <entry>
-    <title>DevOps角色：您梦寐以求的工作是什么？</title>
-    <url>/2019/11/01/DevOps%E8%A7%92%E8%89%B2%E6%82%A8%E6%A2%A6%E5%AF%90%E4%BB%A5%E6%B1%82%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%98%AF%E4%BB%80%E4%B9%88/</url>
-    <content><![CDATA[<h3 id="在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。"><a href="#在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。" class="headerlink" title="在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。"></a>在DevOps环境中有很多可供选择的选择，每个人都可以找到一份工作。</h3><p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://dzone.com/storage/temp/12646937-blocks.jpg"
-                      alt="建筑模块"
-                ></p>
-<p><em>有这么多DevOps角色可供选择，您将是哪个构建基块？</em></p>
-<p>当IT专业人员迫切希望成为DevOps的专家时，对于各种DevOps角色还有很多困惑。因此，本文致力于使实施DevOps的公司的团队结构更加清晰。</p>
-<p>您可能一直听说，在DevOps中，每个参与人员都扮演着共同的角色：DevOps，这是两种实践的结合：<em>Development</em>和<em>Operations</em>。但这远非事实。</p>
-<h2 id="DevOps实践"><a href="#DevOps实践" class="headerlink" title="DevOps实践"></a><strong>DevOps实践</strong></h2><p>实际上，DevOps实践强调，开发人员应该能够执行由Ops家伙执行的任务，而Ops则应该能够执行由Dev家伙执行的任务。</p>
-<p>既然您知道DevOps专业人员是具有多种技能的人员，那么您可能还想知道DevOps专业人员在其组织中负责的各种任务。如果是这样，请继续阅读。</p>
-<p>要真正理解这个概念，您需要从另一个角度看待它。如果您置身于实施DevOps的公司中，那么它就更容易理解，因为您必须根据要求分配各种DevOps角色。</p>
-<h2 id="DevOps角色"><a href="#DevOps角色" class="headerlink" title="DevOps角色"></a><strong>DevOps角色</strong></h2><p>首先让我列出各种角色及其描述。</p>
-<ol>
-<li><strong>DevOps传播者</strong> –负责实施DevOps的首席官（领导）</li>
-<li><strong>发布管理器</strong> –发布新功能并确保发布后产品稳定性的工具</li>
-<li><strong>自动化专家</strong> –负责实现工具自动化和编排的人</li>
-<li><strong>软件开发人员&#x2F;测试人员</strong> –实际开发代码并对其进行测试的人</li>
-<li><strong>质量保证</strong> –确保产品质量符合其要求的人</li>
-<li><strong>安全工程师</strong> –始终监视产品安全性和健康状况的<strong>工程师</strong></li>
-</ol>
-<p>这里要注意的重要一点是，其中许多角色将涉及一个团队或一组专业人员，例如软件开发人员&#x2F;测试人员，安全工程师和质量保证。因此，您应该以层次结构的形式考虑这些角色及其关系。</p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://www.edureka.co/blog/wp-content/uploads/2018/02/DevOps-Roles.png"
-                      alt="DevOps角色"
-                ></p>
-<p>根据公司的要求，甚至自动化专家也可以由多个人担任该角色。因此，让我更多地谈谈这些DevOps角色。</p>
-<h3 id="DevOps传播者"><a href="#DevOps传播者" class="headerlink" title="DevOps传播者"></a><strong>DevOps传播者</strong></h3><p>就像我之前提到的那样，这是DevOps中的关键角色。由领导者或负责确保在产品的端到端开发中实施DevOps策略并带来环境积极影响的人员来担任此角色。</p>
-<p>DevOps传播者还考虑到可用的各种自动化工具以及Dev和Ops团队具有的技能，还找到了改进产品现有体系结构的方法。他的主要目标是管理其他DevOps角色并从团队中获得全面的效率。</p>
-<h3 id="发布经理"><a href="#发布经理" class="headerlink" title="发布经理"></a><strong>发布经理</strong></h3><p>该角色是产品可交付成果的关键角色，因为他需要将新功能&#x2F;更新功能与现有框架集成在一起。该角色可以是担任发布工程师的角色的同一个人，也可以是领导发布工程师团队的发布经理。</p>
-<p>该角色的主要重点领域是从开发到部署，以协调和管理产品。由于此角色是以重要方式参与的，因此应由了解该技术的工作原理和各种结构的技术人员（经理）来担任。</p>
-<p>根据需求，将有多位经理领导各自的团队来处理多个功能（项目）。</p>
-<h3 id="自动化专家"><a href="#自动化专家" class="headerlink" title="自动化专家"></a><strong>自动化专家</strong></h3><p>无需再次强调该角色的重要性，因为DevOps完全是关于自动化的。作为自动化专家，此角色应该能够理解什么可以自动化以及如何将一个产品堆栈与另一个产品堆栈集成。</p>
-<p>此人也称为集成专家，负责分析，设计和实施持续部署的策略，同时确保生产和预生产系统的高可用性。</p>
-<h3 id="软件开发人员-x2F-测试人员"><a href="#软件开发人员-x2F-测试人员" class="headerlink" title="软件开发人员&#x2F;测试人员"></a><strong>软件开发人员&#x2F;测试人员</strong></h3><p>该角色负责软件的实际根级开发。传统的编码人员和程序员属于这一类。除开发外，专业人员还负责测试代码。</p>
-<p>名称可能保持不变，但是软件开发人员&#x2F;测试人员的新角色大大增加了职责范围，因为他们不仅负责将新需求转化为代码，还负责单元测试，部署和持续监控。</p>
-<h3 id="质量保证"><a href="#质量保证" class="headerlink" title="质量保证"></a><strong>质量保证</strong></h3><p>这是DevOps中引入的新角色，实际上可以保证产品的质量。通常也称为“体验保证”，此角色是传统测试和质量检查之外的一步。</p>
-<p>在此，对产品的功能进行了极限测试，以发现每个缺陷并改善每个独立功能的性能欠佳，因为客户的经验至关重要。这个角色一直在寻找机会，以改善所有功能以提高客户满意度。</p>
-<h3 id="安全工程师"><a href="#安全工程师" class="headerlink" title="安全工程师"></a><strong>安全工程师</strong></h3><p>安全工程师与任何其他角色一样重要，因为他们是负责监视产品交付能力的人员。他们与开发人员并肩工作，在过程中更早地嵌入了他们的建议（安全补丁）。</p>
-<p>除了外部安全性之外，他们还监视系统以检查其性能，报告系统面临的任何停机时间并深入分析以找出造成该问题的原因。防止再次发生停机或安全风险是安全工程师的一项重要任务。</p>
-<p>我希望到目前为止，您对组织中可能存在的各种DevOps角色有了很好的了解。</p>
-]]></content>
-      <tags>
-        <tag>devops</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CentOS7.6进入单用户模式</title>
-    <url>/2020/12/01/CentOS7.6%E8%BF%9B%E5%85%A5%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<ul>
-<li></li>
-</ul>
-<p>CentOS7.6进入单用户模式</p>
-<p>1、在启动grub菜单，选择编辑启动选项<br>2、按键盘e键，来进入编辑界面<br>3、找到Linux 16那行，将ro改为rw init&#x3D;&#x2F;sysroot&#x2F;bin&#x2F;sh<br>如果用的是kvm做了console连接授权，还要把授权的console&#x3D;ttyS0去掉<br>4、按下 Control+x ，使用单用户模式启动<br>5、使用下面的命令访问系统<br>chroot &#x2F;sysroot<br>6、重置密码<br>passwd root<br>7、更新系统信息（如果打开了selinux需要做这一步）<br>touch &#x2F;.autorelabel<br>8、退出chroot<br>exit<br>9、重启系统<br>reboot</p>
-]]></content>
-      <tags>
-        <tag>centos</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>HTTP状态码含义</title>
     <url>/2023/02/06/HTTP%E7%8A%B6%E6%80%81%E7%A0%81%E5%90%AB%E4%B9%89/</url>
     <content><![CDATA[<h1 id="HTTP状态码含义"><a href="#HTTP状态码含义" class="headerlink" title="HTTP状态码含义"></a>HTTP状态码含义</h1><h3 id="100"><a href="#100" class="headerlink" title="100"></a>100</h3><p>客户端应当继续发送请求。这个临时响应是用来通知客户端它的部分请求已经被服务器接收，且仍未被拒绝。客户端应当继续发送请求的剩余部分，或者如果请求已经完成，忽略这个响应。服务器必须在请求完成后向客户端发送一个最终响应。</p>
@@ -6544,6 +6544,37 @@ check <span class="token operator">></span> <span class="token variable">$RESULT
       </tags>
   </entry>
   <entry>
+    <title>CentOS7的启动过程</title>
+    <url>/2020/11/01/centos7%E7%9A%84%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<p>centos7的启动过程</p>
+<p>一、终端态启动顺序：</p>
+<p>开机启过程<br>POST–&gt;BOOT<br>SEQUENCE–&gt;BOOTLOADER–&gt;KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS–&gt;&#x2F;sbin&#x2F;init</p>
+<p>POST:加电自检</p>
+<p>检查内存，CPU等</p>
+<p>Boot sequence：选择引导顺序</p>
+<p>光盘启动，硬盘启动，网络启动，还是U盘启动(同windows)</p>
+<p>Bootloader：引导加载器</p>
+<p>MBR引导记录大小为512字节，其中前446个字节就是Bootloader,主要用来引导用户选择要启动的系统或不同的内核版本，把用户选定的内核装载到RAM中的特定空间中，解压，展开，而后把系统控制权移交给内核。</p>
+<p>grub2分两部分：<br>1.在MBR引导记录中，大小为446字节，主要功能是引导启动介质的grub主体文件<br>2.partition,&#x2F;boot&#x2F;grub[2],此为grub的主体。</p>
+<p>KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS：加载内核</p>
+<p>内核初始化，生成一个ramdisk文件，用来模拟系统环境。退出ramdisk,下一步加载到真正的根文件系统。</p>
+<p>ramdisk：内存上临时虚拟的系统<br>ramdisk(虚拟磁盘，双缓冲，双缓存）—-&gt; ramfs（虚拟文件系统）<br>centos5:initrd</p>
+<p>工具程序：mkinitrd</p>
+<p>centos6,7:initramfs</p>
+<p>工具程序：dracut,mkinitrd</p>
+<p>&#x2F;sbin&#x2F;init：运行用户空间的第一个应用程序</p>
+<p>init:</p>
+<p>Centos 5: SysV init    配置文件：&#x2F;etc&#x2F;inittab<br>Centos 6: Upstart      配置文件：&#x2F;etc&#x2F;inittab;&#x2F;etc&#x2F;init&#x2F;*.conf(主要）<br>Centos 7: systemd      配置文件：&#x2F;etc&#x2F;systemd&#x2F;system;&#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system</p>
+<p>至此，内核空间就已经启动完毕，内核启动完成接着开始启动用户态启动过程。<br>systemd是个守护进程，pid号为1,<br>后面所有启动的服务或进程都是systemd的子进程及子进程的子进程。</p>
+<p>二、用户态的启动顺序</p>
+<p>设置默认允许级别—&gt;初始化脚本，<br>完成系统初始化—&gt;关闭及启动对应级别下的服务—–&gt;设置登录终端—–&gt;[启动图形终端]</p>
+<p>参考：<a class="link"   href="https://blog.51cto.com/m51cto/1958856" >https://blog.51cto.com/m51cto/1958856<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <tags>
+        <tag>centos</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux日常巡检shell</title>
     <url>/2019/09/19/Linux%E6%97%A5%E5%B8%B8%E5%B7%A1%E6%A3%80shell/</url>
     <content><![CDATA[<pre class="line-numbers language-none"><code class="language-none">#!&#x2F;bin&#x2F;bash
@@ -7282,87 +7313,6 @@ echo &quot;Check the result：$RESULTFILE&quot;
       </tags>
   </entry>
   <entry>
-    <title>CentOS7的启动过程</title>
-    <url>/2020/11/01/centos7%E7%9A%84%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[<p>centos7的启动过程</p>
-<p>一、终端态启动顺序：</p>
-<p>开机启过程<br>POST–&gt;BOOT<br>SEQUENCE–&gt;BOOTLOADER–&gt;KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS–&gt;&#x2F;sbin&#x2F;init</p>
-<p>POST:加电自检</p>
-<p>检查内存，CPU等</p>
-<p>Boot sequence：选择引导顺序</p>
-<p>光盘启动，硬盘启动，网络启动，还是U盘启动(同windows)</p>
-<p>Bootloader：引导加载器</p>
-<p>MBR引导记录大小为512字节，其中前446个字节就是Bootloader,主要用来引导用户选择要启动的系统或不同的内核版本，把用户选定的内核装载到RAM中的特定空间中，解压，展开，而后把系统控制权移交给内核。</p>
-<p>grub2分两部分：<br>1.在MBR引导记录中，大小为446字节，主要功能是引导启动介质的grub主体文件<br>2.partition,&#x2F;boot&#x2F;grub[2],此为grub的主体。</p>
-<p>KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS：加载内核</p>
-<p>内核初始化，生成一个ramdisk文件，用来模拟系统环境。退出ramdisk,下一步加载到真正的根文件系统。</p>
-<p>ramdisk：内存上临时虚拟的系统<br>ramdisk(虚拟磁盘，双缓冲，双缓存）—-&gt; ramfs（虚拟文件系统）<br>centos5:initrd</p>
-<p>工具程序：mkinitrd</p>
-<p>centos6,7:initramfs</p>
-<p>工具程序：dracut,mkinitrd</p>
-<p>&#x2F;sbin&#x2F;init：运行用户空间的第一个应用程序</p>
-<p>init:</p>
-<p>Centos 5: SysV init    配置文件：&#x2F;etc&#x2F;inittab<br>Centos 6: Upstart      配置文件：&#x2F;etc&#x2F;inittab;&#x2F;etc&#x2F;init&#x2F;*.conf(主要）<br>Centos 7: systemd      配置文件：&#x2F;etc&#x2F;systemd&#x2F;system;&#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system</p>
-<p>至此，内核空间就已经启动完毕，内核启动完成接着开始启动用户态启动过程。<br>systemd是个守护进程，pid号为1,<br>后面所有启动的服务或进程都是systemd的子进程及子进程的子进程。</p>
-<p>二、用户态的启动顺序</p>
-<p>设置默认允许级别—&gt;初始化脚本，<br>完成系统初始化—&gt;关闭及启动对应级别下的服务—–&gt;设置登录终端—–&gt;[启动图形终端]</p>
-<p>参考：<a class="link"   href="https://blog.51cto.com/m51cto/1958856" >https://blog.51cto.com/m51cto/1958856<i class="fas fa-external-link-alt"></i></a></p>
-]]></content>
-      <tags>
-        <tag>centos</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>docker命令使用</title>
-    <url>/2019/09/19/docker%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<p>docker01</p>
-<h2 id="List-Docker-CLI-commands"><a href="#List-Docker-CLI-commands" class="headerlink" title="List Docker CLI commands"></a>List Docker CLI commands</h2><pre class="line-numbers language-none"><code class="language-none">docker container --help<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="Display-Docker-version-and-info"><a href="#Display-Docker-version-and-info" class="headerlink" title="Display Docker version and info"></a>Display Docker version and info</h2><pre class="line-numbers language-none"><code class="language-none">docker --version
-docker version
-docker info<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="Execute-Docker-image"><a href="#Execute-Docker-image" class="headerlink" title="Execute Docker image"></a>Execute Docker image</h2><pre class="line-numbers language-none"><code class="language-none">docker run hello-world<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="List-Docker-images"><a href="#List-Docker-images" class="headerlink" title="List Docker images"></a>List Docker images</h2><pre class="line-numbers language-none"><code class="language-none">docker image ls<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="List-Docker-containers-running-all-all-in-quiet-mode"><a href="#List-Docker-containers-running-all-all-in-quiet-mode" class="headerlink" title="List Docker containers (running, all, all in quiet mode)"></a>List Docker containers (running, all, all in quiet mode)</h2><pre class="line-numbers language-none"><code class="language-none">docker container ls
-docker container ls --all
-docker container ls -aq<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>docker02</p>
-<h2 id="Create-image-using-this-directory’s-Dockerfile"><a href="#Create-image-using-this-directory’s-Dockerfile" class="headerlink" title="Create image using this directory’s Dockerfile"></a>Create image using this directory’s Dockerfile</h2><pre class="line-numbers language-none"><code class="language-none">docker build -t friendlyhello .  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="Run-“friendlyhello”-mapping-port-4000-to-80"><a href="#Run-“friendlyhello”-mapping-port-4000-to-80" class="headerlink" title="Run “friendlyhello” mapping port 4000 to 80"></a>Run “friendlyhello” mapping port 4000 to 80</h2><pre class="line-numbers language-none"><code class="language-none">docker run -p 4000:80 friendlyhello  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="Same-thing-but-in-detached-mode"><a href="#Same-thing-but-in-detached-mode" class="headerlink" title="Same thing, but in detached mode"></a>Same thing, but in detached mode</h2><pre class="line-numbers language-none"><code class="language-none">docker run -d -p 4000:80 friendlyhello <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="List-all-running-containers"><a href="#List-all-running-containers" class="headerlink" title="List all running containers"></a>List all running containers</h2><pre class="line-numbers language-none"><code class="language-none">docker container ls     <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="List-all-containers-even-those-not-running"><a href="#List-all-containers-even-those-not-running" class="headerlink" title="List all containers, even those not running"></a>List all containers, even those not running</h2><pre class="line-numbers language-none"><code class="language-none">docker container ls -a     <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="Gracefully-stop-the-specified-container"><a href="#Gracefully-stop-the-specified-container" class="headerlink" title="Gracefully stop the specified container"></a>Gracefully stop the specified container</h2><pre class="line-numbers language-none"><code class="language-none">docker container stop &lt;hash&gt; <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="Force-shutdown-of-the-specified-container"><a href="#Force-shutdown-of-the-specified-container" class="headerlink" title="Force shutdown of the specified container"></a>Force shutdown of the specified container</h2><pre class="line-numbers language-none"><code class="language-none">docker container kill &lt;hash&gt; <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="Remove-specified-container-from-this-machine"><a href="#Remove-specified-container-from-this-machine" class="headerlink" title="Remove specified container from this machine"></a>Remove specified container from this machine</h2><pre class="line-numbers language-none"><code class="language-none">docker container rm &lt;hash&gt;     <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="Remove-all-containers"><a href="#Remove-all-containers" class="headerlink" title="Remove all containers"></a>Remove all containers</h2><pre class="line-numbers language-none"><code class="language-none">docker container rm $(docker container ls -a -q)   <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="List-all-images-on-this-machine"><a href="#List-all-images-on-this-machine" class="headerlink" title="List all images on this machine"></a>List all images on this machine</h2><pre class="line-numbers language-none"><code class="language-none">docker image ls -a  
-&#96;&#96;&#96;                     
-## Remove specified image from this machine      <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>docker image rm <image id> </p>
-<pre class="line-numbers language-none"><code class="language-none">## Remove all images from this machine   <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>docker image rm $(docker image ls -a -q)  </p>
-<pre class="line-numbers language-none"><code class="language-none">## Log in this CLI session using your Docker credentials <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>docker login   </p>
-<pre class="line-numbers language-none"><code class="language-none">## Tag &lt;image&gt; for upload to registry<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>docker tag <image> username&#x2F;repository:tag  </p>
-<pre class="line-numbers language-none"><code class="language-none">## Upload tagged image to registry<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>docker push username&#x2F;repository:tag</p>
-<pre class="line-numbers language-none"><code class="language-none">## Run image from a registry <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>docker run username&#x2F;repository:tag<br>&#96;&#96;&#96;  </p>
-]]></content>
-      <categories>
-        <category>docker</category>
-      </categories>
-      <tags>
-        <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>docker安装与简单使用</title>
     <url>/2019/09/19/docker%E5%AE%89%E8%A3%85%E4%B8%8E%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<h2 id="docker安装与简单使用-来自docker官方"><a href="#docker安装与简单使用-来自docker官方" class="headerlink" title="docker安装与简单使用(来自docker官方)"></a>docker安装与简单使用(来自docker官方)</h2><h4 id="系统要求："><a href="#系统要求：" class="headerlink" title="系统要求："></a>系统要求：</h4><p>Docker CE 支持 64 位版本 CentOS 7，并且要求<strong>内核版本</strong>不低于 3.10,安装最新版CE，推荐使用CentOS 7.6</p>
@@ -7447,6 +7397,56 @@ docker image rm node@sha256:b4f0e0bdeb578043c1ea6862f0d40cc4afe32a4a582f3be235a3
 <li><a class="link"   href="https://docs.docker.com/install/linux/docker-ce/centos/#install-docker-ce-1" >https://docs.docker.com/install/linux/docker-ce/centos/#install-docker-ce-1<i class="fas fa-external-link-alt"></i></a></li>
 <li><a class="link"   href="https://blog.csdn.net/kamputer/article/details/79047765" >https://blog.csdn.net/kamputer/article/details/79047765<i class="fas fa-external-link-alt"></i></a></li>
 </ol>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>docker命令使用</title>
+    <url>/2019/09/19/docker%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>docker01</p>
+<h2 id="List-Docker-CLI-commands"><a href="#List-Docker-CLI-commands" class="headerlink" title="List Docker CLI commands"></a>List Docker CLI commands</h2><pre class="line-numbers language-none"><code class="language-none">docker container --help<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="Display-Docker-version-and-info"><a href="#Display-Docker-version-and-info" class="headerlink" title="Display Docker version and info"></a>Display Docker version and info</h2><pre class="line-numbers language-none"><code class="language-none">docker --version
+docker version
+docker info<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Execute-Docker-image"><a href="#Execute-Docker-image" class="headerlink" title="Execute Docker image"></a>Execute Docker image</h2><pre class="line-numbers language-none"><code class="language-none">docker run hello-world<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="List-Docker-images"><a href="#List-Docker-images" class="headerlink" title="List Docker images"></a>List Docker images</h2><pre class="line-numbers language-none"><code class="language-none">docker image ls<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="List-Docker-containers-running-all-all-in-quiet-mode"><a href="#List-Docker-containers-running-all-all-in-quiet-mode" class="headerlink" title="List Docker containers (running, all, all in quiet mode)"></a>List Docker containers (running, all, all in quiet mode)</h2><pre class="line-numbers language-none"><code class="language-none">docker container ls
+docker container ls --all
+docker container ls -aq<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>docker02</p>
+<h2 id="Create-image-using-this-directory’s-Dockerfile"><a href="#Create-image-using-this-directory’s-Dockerfile" class="headerlink" title="Create image using this directory’s Dockerfile"></a>Create image using this directory’s Dockerfile</h2><pre class="line-numbers language-none"><code class="language-none">docker build -t friendlyhello .  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="Run-“friendlyhello”-mapping-port-4000-to-80"><a href="#Run-“friendlyhello”-mapping-port-4000-to-80" class="headerlink" title="Run “friendlyhello” mapping port 4000 to 80"></a>Run “friendlyhello” mapping port 4000 to 80</h2><pre class="line-numbers language-none"><code class="language-none">docker run -p 4000:80 friendlyhello  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="Same-thing-but-in-detached-mode"><a href="#Same-thing-but-in-detached-mode" class="headerlink" title="Same thing, but in detached mode"></a>Same thing, but in detached mode</h2><pre class="line-numbers language-none"><code class="language-none">docker run -d -p 4000:80 friendlyhello <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="List-all-running-containers"><a href="#List-all-running-containers" class="headerlink" title="List all running containers"></a>List all running containers</h2><pre class="line-numbers language-none"><code class="language-none">docker container ls     <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="List-all-containers-even-those-not-running"><a href="#List-all-containers-even-those-not-running" class="headerlink" title="List all containers, even those not running"></a>List all containers, even those not running</h2><pre class="line-numbers language-none"><code class="language-none">docker container ls -a     <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="Gracefully-stop-the-specified-container"><a href="#Gracefully-stop-the-specified-container" class="headerlink" title="Gracefully stop the specified container"></a>Gracefully stop the specified container</h2><pre class="line-numbers language-none"><code class="language-none">docker container stop &lt;hash&gt; <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="Force-shutdown-of-the-specified-container"><a href="#Force-shutdown-of-the-specified-container" class="headerlink" title="Force shutdown of the specified container"></a>Force shutdown of the specified container</h2><pre class="line-numbers language-none"><code class="language-none">docker container kill &lt;hash&gt; <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="Remove-specified-container-from-this-machine"><a href="#Remove-specified-container-from-this-machine" class="headerlink" title="Remove specified container from this machine"></a>Remove specified container from this machine</h2><pre class="line-numbers language-none"><code class="language-none">docker container rm &lt;hash&gt;     <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="Remove-all-containers"><a href="#Remove-all-containers" class="headerlink" title="Remove all containers"></a>Remove all containers</h2><pre class="line-numbers language-none"><code class="language-none">docker container rm $(docker container ls -a -q)   <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="List-all-images-on-this-machine"><a href="#List-all-images-on-this-machine" class="headerlink" title="List all images on this machine"></a>List all images on this machine</h2><pre class="line-numbers language-none"><code class="language-none">docker image ls -a  
+&#96;&#96;&#96;                     
+## Remove specified image from this machine      <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>docker image rm <image id> </p>
+<pre class="line-numbers language-none"><code class="language-none">## Remove all images from this machine   <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>docker image rm $(docker image ls -a -q)  </p>
+<pre class="line-numbers language-none"><code class="language-none">## Log in this CLI session using your Docker credentials <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>docker login   </p>
+<pre class="line-numbers language-none"><code class="language-none">## Tag &lt;image&gt; for upload to registry<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>docker tag <image> username&#x2F;repository:tag  </p>
+<pre class="line-numbers language-none"><code class="language-none">## Upload tagged image to registry<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>docker push username&#x2F;repository:tag</p>
+<pre class="line-numbers language-none"><code class="language-none">## Run image from a registry <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>docker run username&#x2F;repository:tag<br>&#96;&#96;&#96;  </p>
 ]]></content>
       <categories>
         <category>docker</category>
@@ -10496,12 +10496,17 @@ jshebuebyxg45h3<span aria-hidden="true" class="line-numbers-rows"><span></span><
 <span class="token number">172.16</span>.190.100 <span class="token number">172.16</span>.190.100.sslip.io<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>熟悉的界面出现了！ok大功告成！</p>
-<p><img  
+<img  
                      lazyload
                      alt="image"
                      data-src="https://cdn.staticaly.com/gh/trojan20161207/blogpic@master/20230204/image-20221203172300525.1xxjl88mwj8g.webp"
-                      alt="image-20221203172300525"
-                ></p>
+                     
+                >
+
+
+
+
+
 ]]></content>
       <tags>
         <tag>k3s</tag>
@@ -10605,6 +10610,24 @@ http &#123;
       </tags>
   </entry>
   <entry>
+    <title>nginx event配置指令</title>
+    <url>/2019/09/23/nginxevent%E9%85%8D%E7%BD%AE%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<hr>
+<p>　　参考事件模型指令：<em>use [ kqueue | rtsig | epoll | &#x2F;dev&#x2F;poll | select | poll ];</em></p>
+<pre class="line-numbers language-none"><code class="language-none">use epoll;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>　　注：epoll模型是Linux 2.6以上版本内核中的高性能网络I&#x2F;O模型，如果跑在FreeBSD上面，就用kqueue模型。</p>
+<p>　　设置单个进程最大连接数用指令：_worker<em>connections</em>（最大连接数&#x3D;连接数*进程数）</p>
+<pre class="line-numbers language-none"><code class="language-none">worker_connections 65535;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>nginx Rewrite简单示例</title>
     <url>/2019/09/23/nginxRewrite%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/</url>
     <content><![CDATA[<hr>
@@ -10629,24 +10652,6 @@ http &#123;
 
 <p>　　按照前面讲的内容以及上面的代码，修改我们自己的配置文件，保存，重新加载nginx，然后点击【访问测试】，在地址栏给出的地址后面分别输入“*&#x2F;google<em>”、“</em>&#x2F;baidu*”，是不是会和我的结果一样呢？</p>
 <p>输入“&#x2F;google”转到谷歌，输入“&#x2F;baidu”是不是转到百度了呢？</p>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>nginx event配置指令</title>
-    <url>/2019/09/23/nginxevent%E9%85%8D%E7%BD%AE%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<hr>
-<p>　　参考事件模型指令：<em>use [ kqueue | rtsig | epoll | &#x2F;dev&#x2F;poll | select | poll ];</em></p>
-<pre class="line-numbers language-none"><code class="language-none">use epoll;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>　　注：epoll模型是Linux 2.6以上版本内核中的高性能网络I&#x2F;O模型，如果跑在FreeBSD上面，就用kqueue模型。</p>
-<p>　　设置单个进程最大连接数用指令：_worker<em>connections</em>（最大连接数&#x3D;连接数*进程数）</p>
-<pre class="line-numbers language-none"><code class="language-none">worker_connections 65535;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 ]]></content>
       <categories>
         <category>nginx</category>
