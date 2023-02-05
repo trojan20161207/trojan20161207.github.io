@@ -6544,37 +6544,6 @@ check <span class="token operator">></span> <span class="token variable">$RESULT
       </tags>
   </entry>
   <entry>
-    <title>CentOS7的启动过程</title>
-    <url>/2020/11/01/centos7%E7%9A%84%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/</url>
-    <content><![CDATA[<p>centos7的启动过程</p>
-<p>一、终端态启动顺序：</p>
-<p>开机启过程<br>POST–&gt;BOOT<br>SEQUENCE–&gt;BOOTLOADER–&gt;KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS–&gt;&#x2F;sbin&#x2F;init</p>
-<p>POST:加电自检</p>
-<p>检查内存，CPU等</p>
-<p>Boot sequence：选择引导顺序</p>
-<p>光盘启动，硬盘启动，网络启动，还是U盘启动(同windows)</p>
-<p>Bootloader：引导加载器</p>
-<p>MBR引导记录大小为512字节，其中前446个字节就是Bootloader,主要用来引导用户选择要启动的系统或不同的内核版本，把用户选定的内核装载到RAM中的特定空间中，解压，展开，而后把系统控制权移交给内核。</p>
-<p>grub2分两部分：<br>1.在MBR引导记录中，大小为446字节，主要功能是引导启动介质的grub主体文件<br>2.partition,&#x2F;boot&#x2F;grub[2],此为grub的主体。</p>
-<p>KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS：加载内核</p>
-<p>内核初始化，生成一个ramdisk文件，用来模拟系统环境。退出ramdisk,下一步加载到真正的根文件系统。</p>
-<p>ramdisk：内存上临时虚拟的系统<br>ramdisk(虚拟磁盘，双缓冲，双缓存）—-&gt; ramfs（虚拟文件系统）<br>centos5:initrd</p>
-<p>工具程序：mkinitrd</p>
-<p>centos6,7:initramfs</p>
-<p>工具程序：dracut,mkinitrd</p>
-<p>&#x2F;sbin&#x2F;init：运行用户空间的第一个应用程序</p>
-<p>init:</p>
-<p>Centos 5: SysV init    配置文件：&#x2F;etc&#x2F;inittab<br>Centos 6: Upstart      配置文件：&#x2F;etc&#x2F;inittab;&#x2F;etc&#x2F;init&#x2F;*.conf(主要）<br>Centos 7: systemd      配置文件：&#x2F;etc&#x2F;systemd&#x2F;system;&#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system</p>
-<p>至此，内核空间就已经启动完毕，内核启动完成接着开始启动用户态启动过程。<br>systemd是个守护进程，pid号为1,<br>后面所有启动的服务或进程都是systemd的子进程及子进程的子进程。</p>
-<p>二、用户态的启动顺序</p>
-<p>设置默认允许级别—&gt;初始化脚本，<br>完成系统初始化—&gt;关闭及启动对应级别下的服务—–&gt;设置登录终端—–&gt;[启动图形终端]</p>
-<p>参考：<a class="link"   href="https://blog.51cto.com/m51cto/1958856" >https://blog.51cto.com/m51cto/1958856<i class="fas fa-external-link-alt"></i></a></p>
-]]></content>
-      <tags>
-        <tag>centos</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux日常巡检shell</title>
     <url>/2019/09/19/Linux%E6%97%A5%E5%B8%B8%E5%B7%A1%E6%A3%80shell/</url>
     <content><![CDATA[<pre class="line-numbers language-none"><code class="language-none">#!&#x2F;bin&#x2F;bash
@@ -7313,6 +7282,56 @@ echo &quot;Check the result：$RESULTFILE&quot;
       </tags>
   </entry>
   <entry>
+    <title>docker命令使用</title>
+    <url>/2019/09/19/docker%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>docker01</p>
+<h2 id="List-Docker-CLI-commands"><a href="#List-Docker-CLI-commands" class="headerlink" title="List Docker CLI commands"></a>List Docker CLI commands</h2><pre class="line-numbers language-none"><code class="language-none">docker container --help<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="Display-Docker-version-and-info"><a href="#Display-Docker-version-and-info" class="headerlink" title="Display Docker version and info"></a>Display Docker version and info</h2><pre class="line-numbers language-none"><code class="language-none">docker --version
+docker version
+docker info<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Execute-Docker-image"><a href="#Execute-Docker-image" class="headerlink" title="Execute Docker image"></a>Execute Docker image</h2><pre class="line-numbers language-none"><code class="language-none">docker run hello-world<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="List-Docker-images"><a href="#List-Docker-images" class="headerlink" title="List Docker images"></a>List Docker images</h2><pre class="line-numbers language-none"><code class="language-none">docker image ls<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="List-Docker-containers-running-all-all-in-quiet-mode"><a href="#List-Docker-containers-running-all-all-in-quiet-mode" class="headerlink" title="List Docker containers (running, all, all in quiet mode)"></a>List Docker containers (running, all, all in quiet mode)</h2><pre class="line-numbers language-none"><code class="language-none">docker container ls
+docker container ls --all
+docker container ls -aq<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>docker02</p>
+<h2 id="Create-image-using-this-directory’s-Dockerfile"><a href="#Create-image-using-this-directory’s-Dockerfile" class="headerlink" title="Create image using this directory’s Dockerfile"></a>Create image using this directory’s Dockerfile</h2><pre class="line-numbers language-none"><code class="language-none">docker build -t friendlyhello .  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="Run-“friendlyhello”-mapping-port-4000-to-80"><a href="#Run-“friendlyhello”-mapping-port-4000-to-80" class="headerlink" title="Run “friendlyhello” mapping port 4000 to 80"></a>Run “friendlyhello” mapping port 4000 to 80</h2><pre class="line-numbers language-none"><code class="language-none">docker run -p 4000:80 friendlyhello  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="Same-thing-but-in-detached-mode"><a href="#Same-thing-but-in-detached-mode" class="headerlink" title="Same thing, but in detached mode"></a>Same thing, but in detached mode</h2><pre class="line-numbers language-none"><code class="language-none">docker run -d -p 4000:80 friendlyhello <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="List-all-running-containers"><a href="#List-all-running-containers" class="headerlink" title="List all running containers"></a>List all running containers</h2><pre class="line-numbers language-none"><code class="language-none">docker container ls     <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="List-all-containers-even-those-not-running"><a href="#List-all-containers-even-those-not-running" class="headerlink" title="List all containers, even those not running"></a>List all containers, even those not running</h2><pre class="line-numbers language-none"><code class="language-none">docker container ls -a     <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="Gracefully-stop-the-specified-container"><a href="#Gracefully-stop-the-specified-container" class="headerlink" title="Gracefully stop the specified container"></a>Gracefully stop the specified container</h2><pre class="line-numbers language-none"><code class="language-none">docker container stop &lt;hash&gt; <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="Force-shutdown-of-the-specified-container"><a href="#Force-shutdown-of-the-specified-container" class="headerlink" title="Force shutdown of the specified container"></a>Force shutdown of the specified container</h2><pre class="line-numbers language-none"><code class="language-none">docker container kill &lt;hash&gt; <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="Remove-specified-container-from-this-machine"><a href="#Remove-specified-container-from-this-machine" class="headerlink" title="Remove specified container from this machine"></a>Remove specified container from this machine</h2><pre class="line-numbers language-none"><code class="language-none">docker container rm &lt;hash&gt;     <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="Remove-all-containers"><a href="#Remove-all-containers" class="headerlink" title="Remove all containers"></a>Remove all containers</h2><pre class="line-numbers language-none"><code class="language-none">docker container rm $(docker container ls -a -q)   <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="List-all-images-on-this-machine"><a href="#List-all-images-on-this-machine" class="headerlink" title="List all images on this machine"></a>List all images on this machine</h2><pre class="line-numbers language-none"><code class="language-none">docker image ls -a  
+&#96;&#96;&#96;                     
+## Remove specified image from this machine      <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>docker image rm <image id> </p>
+<pre class="line-numbers language-none"><code class="language-none">## Remove all images from this machine   <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>docker image rm $(docker image ls -a -q)  </p>
+<pre class="line-numbers language-none"><code class="language-none">## Log in this CLI session using your Docker credentials <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>docker login   </p>
+<pre class="line-numbers language-none"><code class="language-none">## Tag &lt;image&gt; for upload to registry<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>docker tag <image> username&#x2F;repository:tag  </p>
+<pre class="line-numbers language-none"><code class="language-none">## Upload tagged image to registry<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>docker push username&#x2F;repository:tag</p>
+<pre class="line-numbers language-none"><code class="language-none">## Run image from a registry <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>docker run username&#x2F;repository:tag<br>&#96;&#96;&#96;  </p>
+]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>docker安装与简单使用</title>
     <url>/2019/09/19/docker%E5%AE%89%E8%A3%85%E4%B8%8E%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<h2 id="docker安装与简单使用-来自docker官方"><a href="#docker安装与简单使用-来自docker官方" class="headerlink" title="docker安装与简单使用(来自docker官方)"></a>docker安装与简单使用(来自docker官方)</h2><h4 id="系统要求："><a href="#系统要求：" class="headerlink" title="系统要求："></a>系统要求：</h4><p>Docker CE 支持 64 位版本 CentOS 7，并且要求<strong>内核版本</strong>不低于 3.10,安装最新版CE，推荐使用CentOS 7.6</p>
@@ -7406,53 +7425,349 @@ docker image rm node@sha256:b4f0e0bdeb578043c1ea6862f0d40cc4afe32a4a582f3be235a3
       </tags>
   </entry>
   <entry>
-    <title>docker命令使用</title>
-    <url>/2019/09/19/docker%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<p>docker01</p>
-<h2 id="List-Docker-CLI-commands"><a href="#List-Docker-CLI-commands" class="headerlink" title="List Docker CLI commands"></a>List Docker CLI commands</h2><pre class="line-numbers language-none"><code class="language-none">docker container --help<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="Display-Docker-version-and-info"><a href="#Display-Docker-version-and-info" class="headerlink" title="Display Docker version and info"></a>Display Docker version and info</h2><pre class="line-numbers language-none"><code class="language-none">docker --version
-docker version
-docker info<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="Execute-Docker-image"><a href="#Execute-Docker-image" class="headerlink" title="Execute Docker image"></a>Execute Docker image</h2><pre class="line-numbers language-none"><code class="language-none">docker run hello-world<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="List-Docker-images"><a href="#List-Docker-images" class="headerlink" title="List Docker images"></a>List Docker images</h2><pre class="line-numbers language-none"><code class="language-none">docker image ls<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="List-Docker-containers-running-all-all-in-quiet-mode"><a href="#List-Docker-containers-running-all-all-in-quiet-mode" class="headerlink" title="List Docker containers (running, all, all in quiet mode)"></a>List Docker containers (running, all, all in quiet mode)</h2><pre class="line-numbers language-none"><code class="language-none">docker container ls
-docker container ls --all
-docker container ls -aq<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>docker02</p>
-<h2 id="Create-image-using-this-directory’s-Dockerfile"><a href="#Create-image-using-this-directory’s-Dockerfile" class="headerlink" title="Create image using this directory’s Dockerfile"></a>Create image using this directory’s Dockerfile</h2><pre class="line-numbers language-none"><code class="language-none">docker build -t friendlyhello .  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="Run-“friendlyhello”-mapping-port-4000-to-80"><a href="#Run-“friendlyhello”-mapping-port-4000-to-80" class="headerlink" title="Run “friendlyhello” mapping port 4000 to 80"></a>Run “friendlyhello” mapping port 4000 to 80</h2><pre class="line-numbers language-none"><code class="language-none">docker run -p 4000:80 friendlyhello  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="Same-thing-but-in-detached-mode"><a href="#Same-thing-but-in-detached-mode" class="headerlink" title="Same thing, but in detached mode"></a>Same thing, but in detached mode</h2><pre class="line-numbers language-none"><code class="language-none">docker run -d -p 4000:80 friendlyhello <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="List-all-running-containers"><a href="#List-all-running-containers" class="headerlink" title="List all running containers"></a>List all running containers</h2><pre class="line-numbers language-none"><code class="language-none">docker container ls     <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="List-all-containers-even-those-not-running"><a href="#List-all-containers-even-those-not-running" class="headerlink" title="List all containers, even those not running"></a>List all containers, even those not running</h2><pre class="line-numbers language-none"><code class="language-none">docker container ls -a     <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="Gracefully-stop-the-specified-container"><a href="#Gracefully-stop-the-specified-container" class="headerlink" title="Gracefully stop the specified container"></a>Gracefully stop the specified container</h2><pre class="line-numbers language-none"><code class="language-none">docker container stop &lt;hash&gt; <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="Force-shutdown-of-the-specified-container"><a href="#Force-shutdown-of-the-specified-container" class="headerlink" title="Force shutdown of the specified container"></a>Force shutdown of the specified container</h2><pre class="line-numbers language-none"><code class="language-none">docker container kill &lt;hash&gt; <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="Remove-specified-container-from-this-machine"><a href="#Remove-specified-container-from-this-machine" class="headerlink" title="Remove specified container from this machine"></a>Remove specified container from this machine</h2><pre class="line-numbers language-none"><code class="language-none">docker container rm &lt;hash&gt;     <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="Remove-all-containers"><a href="#Remove-all-containers" class="headerlink" title="Remove all containers"></a>Remove all containers</h2><pre class="line-numbers language-none"><code class="language-none">docker container rm $(docker container ls -a -q)   <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="List-all-images-on-this-machine"><a href="#List-all-images-on-this-machine" class="headerlink" title="List all images on this machine"></a>List all images on this machine</h2><pre class="line-numbers language-none"><code class="language-none">docker image ls -a  
-&#96;&#96;&#96;                     
-## Remove specified image from this machine      <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>docker image rm <image id> </p>
-<pre class="line-numbers language-none"><code class="language-none">## Remove all images from this machine   <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>docker image rm $(docker image ls -a -q)  </p>
-<pre class="line-numbers language-none"><code class="language-none">## Log in this CLI session using your Docker credentials <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>docker login   </p>
-<pre class="line-numbers language-none"><code class="language-none">## Tag &lt;image&gt; for upload to registry<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>docker tag <image> username&#x2F;repository:tag  </p>
-<pre class="line-numbers language-none"><code class="language-none">## Upload tagged image to registry<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>docker push username&#x2F;repository:tag</p>
-<pre class="line-numbers language-none"><code class="language-none">## Run image from a registry <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>docker run username&#x2F;repository:tag<br>&#96;&#96;&#96;  </p>
+    <title>CentOS7的启动过程</title>
+    <url>/2020/11/01/centos7%E7%9A%84%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<p>centos7的启动过程</p>
+<p>一、终端态启动顺序：</p>
+<p>开机启过程<br>POST–&gt;BOOT<br>SEQUENCE–&gt;BOOTLOADER–&gt;KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS–&gt;&#x2F;sbin&#x2F;init</p>
+<p>POST:加电自检</p>
+<p>检查内存，CPU等</p>
+<p>Boot sequence：选择引导顺序</p>
+<p>光盘启动，硬盘启动，网络启动，还是U盘启动(同windows)</p>
+<p>Bootloader：引导加载器</p>
+<p>MBR引导记录大小为512字节，其中前446个字节就是Bootloader,主要用来引导用户选择要启动的系统或不同的内核版本，把用户选定的内核装载到RAM中的特定空间中，解压，展开，而后把系统控制权移交给内核。</p>
+<p>grub2分两部分：<br>1.在MBR引导记录中，大小为446字节，主要功能是引导启动介质的grub主体文件<br>2.partition,&#x2F;boot&#x2F;grub[2],此为grub的主体。</p>
+<p>KERNEL+INITRAMFS(INITRD)–&gt;ROOTFS：加载内核</p>
+<p>内核初始化，生成一个ramdisk文件，用来模拟系统环境。退出ramdisk,下一步加载到真正的根文件系统。</p>
+<p>ramdisk：内存上临时虚拟的系统<br>ramdisk(虚拟磁盘，双缓冲，双缓存）—-&gt; ramfs（虚拟文件系统）<br>centos5:initrd</p>
+<p>工具程序：mkinitrd</p>
+<p>centos6,7:initramfs</p>
+<p>工具程序：dracut,mkinitrd</p>
+<p>&#x2F;sbin&#x2F;init：运行用户空间的第一个应用程序</p>
+<p>init:</p>
+<p>Centos 5: SysV init    配置文件：&#x2F;etc&#x2F;inittab<br>Centos 6: Upstart      配置文件：&#x2F;etc&#x2F;inittab;&#x2F;etc&#x2F;init&#x2F;*.conf(主要）<br>Centos 7: systemd      配置文件：&#x2F;etc&#x2F;systemd&#x2F;system;&#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system</p>
+<p>至此，内核空间就已经启动完毕，内核启动完成接着开始启动用户态启动过程。<br>systemd是个守护进程，pid号为1,<br>后面所有启动的服务或进程都是systemd的子进程及子进程的子进程。</p>
+<p>二、用户态的启动顺序</p>
+<p>设置默认允许级别—&gt;初始化脚本，<br>完成系统初始化—&gt;关闭及启动对应级别下的服务—–&gt;设置登录终端—–&gt;[启动图形终端]</p>
+<p>参考：<a class="link"   href="https://blog.51cto.com/m51cto/1958856" >https://blog.51cto.com/m51cto/1958856<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <tags>
+        <tag>centos</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux运维的个人进阶</title>
+    <url>/2019/09/19/linux%E8%BF%90%E7%BB%B4%E7%9A%84%E4%B8%AA%E4%BA%BA%E8%BF%9B%E9%98%B6/</url>
+    <content><![CDATA[<h2 id="一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。"><a href="#一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。" class="headerlink" title="一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。"></a>一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。</h2><p>本文简单介绍了其中一种linux运维的个人进阶路线，有需要的朋友可以参考下。</p>
+<h3 id="第一阶段：企业级Linux运维工程师"><a href="#第一阶段：企业级Linux运维工程师" class="headerlink" title="第一阶段：企业级Linux运维工程师"></a>第一阶段：企业级Linux运维工程师</h3><p>1、Linux运维最佳学习方法”5W1H”六何分析法全面介绍，独家Linux快速入门学习技巧</p>
+<p>2、冯诺依曼体系（CPU架构、操作系统概念、发展演变、应用场景、业内形态）</p>
+<p>3、Linux运维基础实战入门，用户管理，权限，文件查找，文本编辑及实战讲解</p>
+<p>4、Linux运维系统管理和技能进阶，磁盘管理，软件安装，文件系统、内核使用方法和高级技巧</p>
+<p>5、Linux系统环境及日常管理，结合日常工作常用20个场景，排错思路、面试和工作中注意事项</p>
+<p>6、以实战方式全方位展示Bash八大特性和高级用法介绍以及高级企业级使用技巧实战演练</p>
+<p>7、Shell脚本工作原理、学习方法、配罝技巧、企业级书写规范、开发环境定制全面实战介绍</p>
+<p>8、职场人价值体系-知识、技能、成长目标和方向定位年薪30W运维人员必备知识体系关键技能点</p>
+<h3 id="第二阶段：Linux应用运维工程师-amp-DBA"><a href="#第二阶段：Linux应用运维工程师-amp-DBA" class="headerlink" title="第二阶段：Linux应用运维工程师&amp;DBA"></a>第二阶段：Linux应用运维工程师&amp;DBA</h3><p>1、TCP&#x2F;IP网络通信协议，IP地址含义、TCP有限状态机转换原理，路由协议</p>
+<p>2、利用Kickstart文件实现企业级自动化安装环境定制，百台并发安装实战</p>
+<p>3、Linux常见系统故障案例分析，企业级Linux运维工程师常犯错误Top5</p>
+<p>4、全面讲解CDN核心技术理念，实现智能DNS流量分发和用户策略引导</p>
+<p>5、实战讲解LAMP运维架构，Apache+PHP+Mysql架构体系和文件存储</p>
+<p>6、介绍企业级安全体系，iptables构建安全架构以及软硬防火墙优劣势</p>
+<p>7、深入讲解运维必备Web服务开源解决方案Nginx及LNMP企业高级用法</p>
+<p>8、企业级DBA实战课程，Mysql企业级实战应用，调优及redis企业级应用</p>
+<h3 id="第三阶段：企业级Linux云计算工程师"><a href="#第三阶段：企业级Linux云计算工程师" class="headerlink" title="第三阶段：企业级Linux云计算工程师"></a>第三阶段：企业级Linux云计算工程师</h3><p>1、全面讲解企业级LNMP架构及12条策略建议，实现互联网电子商务、博客、论坛等实战案例</p>
+<p>2、专业压测评估体系，从并发、响应时间、持久连接、pv、峰值、带宽，以及ab等压测方案实施</p>
+<p>4、讲解Linux Cluster集群，全面分析集群类别，讲解F5和LVS、haproxy、nginx的4-7层负载均衡</p>
+<p>5、实战带领在Centos7上实现LVS集群配罝、服务管理、调度算法修改、后端服务器上下线、服务状态监控，状态监测方实现NAT、DR、TUN等模型演练</p>
+<p>6、全面实现基于Nginx负载均衡功能，实现Nginx反代后端、Nginx负载均衡实现网站动静分离详解</p>
+<p>7、实战带领实现Keepalived主从架构及双主切换方案、报警定制、日志分析等</p>
+<p>8、全面讲解Zabbix3.X监控特性、Web服务监控、Zabbix内部监控、Zabbix特性及功能详解</p>
+<p>9、全面讲解Varnish缓存技术，深入Varnish工作机制、核心架构、及主流开源缓存技术解决方案</p>
+<p>10、laaS、PaaS和SaaS云平台功能及常见实现方式及OpenStack的功能特性及其实现的增强功能</p>
+<p>11、全面讲解KVM虚拟化技术，docker技术实现互联网容器和Docker容器云以及Kubemetes管理</p>
+<h3 id="第四阶段：Linux自动化运维工程师-amp-DevOps"><a href="#第四阶段：Linux自动化运维工程师-amp-DevOps" class="headerlink" title="第四阶段：Linux自动化运维工程师&amp;DevOps"></a>第四阶段：Linux自动化运维工程师&amp;DevOps</h3><p>1、以自动化运维框架为主线，讲解Devops运维自动化趋和核心技术</p>
+<p>2、自动化运维工具Puppet、Ansible、Cobbler、Saltstack、 Fabric对比</p>
+<p>3、Ansible生产环境应用案例和实战操练、批量进行上百台服务器管理</p>
+<p>4、企业自动化工具Puppet使用场景，实现搭建企业运维自动化平台架构</p>
+<p>5、全面讲解Git版本控制、脚本自动化管理、Git分支合并，Git服务器搭建</p>
+<p>6、深入讲解基于Shell脚本企业级高级用法和常见实现Shell自动化管理</p>
+<p>7、python基本语法和自动化工具应用，及开源跳板机Jumpserver实现</p>
+<p>8、实战：基于生产环境持续集成案例，Jenkins+gitlab+maven+shell实现代码自动化上线部署，可持续集成</p>
+<p>9、生产环境基于自动化运维常见场景如自动化发布、灰度发布、批量上线、降级方案、无缝切换等核心技术</p>
+<h3 id="第五阶段：Linux系统架构师-amp-运维架构师"><a href="#第五阶段：Linux系统架构师-amp-运维架构师" class="headerlink" title="第五阶段：Linux系统架构师&amp;运维架构师"></a>第五阶段：Linux系统架构师&amp;运维架构师</h3><p>1、全面介绍缓存技术要点，讲解数据流式化、代理式缓存、旁路式缓存、缓存算法、缓存设定策略、一致性哈希算法优劣势等</p>
+<p>2、全面讲解正向代理、反向代理机制，实战实现Nginx反向代理负载均衡，跳转规則实现动静分离、IP曰志记录、头部信息改写、缓存模块、缓存策略、请求超时机制、健康状态监测、判定规则、状态码定义、实现后端故障及自动上线等能力</p>
+<p>3、实战带领实现千万级大型互联网Web架构核心技术，运用LVS、Haproxy、Vamish、 Nginx、tomcat、MySQL等实现高并发运维体系Web架构，实现分布式集群存储Fastdfs和mogileFS架构</p>
+<p>4、全面讲解MySQL—主多从、一从多主企业级用法，深入讲解MySQL读写分离、连接池及sharding技术，以及MMM、MHA、Galera-Cluster核心技术， MySQL读写分离Amoeba实现</p>
+<p>5、实战:分布式收集Nginx日志于Elk集群，并通过Kibana展示；实战:分布式收集 JAVA日志于Elk集群，并通过Kibana展示；实战:分布式收集Syslog曰志于Elk集群，并通过Kibana展示</p>
+<p>6、结合自动化工具实现企业业务服务管理，持续化集成，实现Devops运维管理模型及架构设计。</p>
+<p>7、实现基于k8s的企业级容器云架构管理，以及docker容器的服务应用，实现私有云架构方案</p>
+<p>8、全面讲解大众点评、美团、滴滴、饿了么等亿级别PV大型互联网架构方案，以及设计规范，包含负载均衡、缓存、高可用、数据库、分布式存储、消息队列、自动化、运维规范、监控体系等</p>
 ]]></content>
       <categories>
-        <category>docker</category>
+        <category>linux</category>
       </categories>
       <tags>
-        <tag>docker</tag>
+        <tag>Linux运维, 进阶</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>k3s详细安装+rancher2.7界面展示</title>
+    <url>/2023/02/07/k3s/</url>
+    <content><![CDATA[<h1 id="k3s详细安装-rancher2-7界面展示"><a href="#k3s详细安装-rancher2-7界面展示" class="headerlink" title="k3s详细安装+rancher2.7界面展示"></a>k3s详细安装+rancher2.7界面展示</h1><h2 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h2><p>注：这里是arm版本，使用的M1安装的ubuntu虚拟机，其他版本需要找对应的版本</p>
+<h2 id="选择k3s版本并安装"><a href="#选择k3s版本并安装" class="headerlink" title="选择k3s版本并安装"></a>选择k3s版本并安装</h2><p>使用版本号：v1.23.14+k3s1</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 因为使用1.25不支持helm chart</span>
+root@hao:~<span class="token comment"># helm install rancher rancher-latest/rancher \</span>
+<span class="token operator">></span>   <span class="token parameter variable">--namespace</span> cattle-system <span class="token punctuation">\</span>
+<span class="token operator">></span>   <span class="token parameter variable">--set</span> <span class="token assign-left variable">hostname</span><span class="token operator">=</span><span class="token number">172.16</span>.190.100.sslip.io <span class="token punctuation">\</span>
+<span class="token operator">></span>   <span class="token parameter variable">--set</span> <span class="token assign-left variable">replicas</span><span class="token operator">=</span><span class="token number">1</span> <span class="token punctuation">\</span>
+<span class="token operator">></span>   <span class="token parameter variable">--set</span> <span class="token assign-left variable">bootstrapPassword</span><span class="token operator">=</span>jshebuebyxg45h3
+Error: INSTALLATION FAILED: chart requires kubeVersion: <span class="token operator">&lt;</span> <span class="token number">1.25</span>.0-0 <span class="token function">which</span> is incompatible with Kubernetes v1.25.4+k3s1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>一行命令即可安装，等待大约一分钟左右</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-sfL</span> https://get.k3s.io <span class="token operator">|</span> <span class="token assign-left variable">INSTALL_K3S_VERSION</span><span class="token operator">=</span>v1.23.14+k3s1 <span class="token function">sh</span> - <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>出现下边的提示，表示k3s安装已经八九不离十了</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">root@hao:~<span class="token comment"># curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.23.14+k3s1 sh -</span>
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Using v1.23.14+k3s1 as release
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Downloading <span class="token builtin class-name">hash</span> https://github.com/k3s-io/k3s/releases/download/v1.23.14+k3s1/sha256sum-arm64.txt
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Downloading binary https://github.com/k3s-io/k3s/releases/download/v1.23.14+k3s1/k3s-arm64
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Verifying binary download
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Installing k3s to /usr/local/bin/k3s
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Skipping installation of SELinux RPM
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Creating /usr/local/bin/kubectl symlink to k3s
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Creating /usr/local/bin/crictl symlink to k3s
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Skipping /usr/local/bin/ctr symlink to k3s, <span class="token builtin class-name">command</span> exists <span class="token keyword">in</span> <span class="token environment constant">PATH</span> at /usr/bin/ctr
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Creating <span class="token function">killall</span> script /usr/local/bin/k3s-killall.sh
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Creating uninstall script /usr/local/bin/k3s-uninstall.sh
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  env: Creating environment <span class="token function">file</span> /etc/systemd/system/k3s.service.env
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  systemd: Creating <span class="token function">service</span> <span class="token function">file</span> /etc/systemd/system/k3s.service
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  systemd: Enabling k3s unit
+Created symlink /etc/systemd/system/multi-user.target.wants/k3s.service → /etc/systemd/system/k3s.service.
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  systemd: Starting k3s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>拷贝配置文件到当前机器：</p>
+<pre class="line-numbers language-none"><code class="language-none">scp root@172.16.190.100:&#x2F;etc&#x2F;rancher&#x2F;k3s&#x2F;k3s.yaml ~&#x2F;.kube&#x2F;config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>本机可以直接cp</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cp</span> /etc/rancher/k3s/k3s.yaml ~/.kube/config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<p>下载helm</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> https://get.helm.sh/helm-v3.10.2-linux-arm64.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>解压并复制到指定路径</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">tar</span> <span class="token parameter variable">-zxvf</span>  helm-v3.10.2-linux-arm64.tar.gz
+<span class="token function">cp</span> linux-arm64/helm /usr/bin/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>查看helm版本</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">root@hao:~<span class="token comment"># helm version</span>
+version.BuildInfo<span class="token punctuation">&#123;</span>Version:<span class="token string">"v3.10.2"</span>, GitCommit:<span class="token string">"50f003e5ee8704ec937a756c646870227d7c8b58"</span>, GitTreeState:<span class="token string">"clean"</span>, GoVersion:<span class="token string">"go1.18.8"</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>更新helm相关配置</p>
+<pre class="line-numbers language-none"><code class="language-none">helm repo add rancher-latest https:&#x2F;&#x2F;releases.rancher.com&#x2F;server-charts&#x2F;latest
+
+kubectl create namespace cattle-system
+
+kubectl apply -f https:&#x2F;&#x2F;github.com&#x2F;cert-manager&#x2F;cert-manager&#x2F;releases&#x2F;download&#x2F;v1.7.1&#x2F;cert-manager.crds.yaml
+
+helm repo add jetstack https:&#x2F;&#x2F;charts.jetstack.io
+
+helm repo update
+
+helm install cert-manager jetstack&#x2F;cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --version v1.7.1
+
+# Windows Powershell
+helm install cert-manager jetstack&#x2F;cert-manager &#96;
+  --namespace cert-manager &#96;
+  --create-namespace &#96;
+  --version v1.7.1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>出现以下界面表示helm更新成功</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">root@hao:~<span class="token comment"># helm repo add rancher-latest https://releases.rancher.com/server-charts/latest</span>
+<span class="token string">"rancher-latest"</span> already exists with the same configuration, skipping
+root@hao:~<span class="token comment"># kubectl create namespace cattle-system</span>
+namespace/cattle-system created
+root@hao:~<span class="token comment"># kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.crds.yaml</span>
+customresourcedefinition.apiextensions.k8s.io/certificaterequests.cert-manager.io created
+customresourcedefinition.apiextensions.k8s.io/certificates.cert-manager.io created
+customresourcedefinition.apiextensions.k8s.io/challenges.acme.cert-manager.io created
+customresourcedefinition.apiextensions.k8s.io/clusterissuers.cert-manager.io created
+customresourcedefinition.apiextensions.k8s.io/issuers.cert-manager.io created
+customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io created
+root@hao:~<span class="token comment"># helm repo add jetstack https://charts.jetstack.io</span>
+<span class="token string">"jetstack"</span> already exists with the same configuration, skipping
+root@hao:~<span class="token comment"># helm repo update</span>
+Hang tight <span class="token keyword">while</span> we grab the latest from your chart repositories<span class="token punctuation">..</span>.
+<span class="token punctuation">..</span>.Successfully got an update from the <span class="token string">"jetstack"</span> chart repository
+<span class="token punctuation">..</span>.Successfully got an update from the <span class="token string">"rancher-latest"</span> chart repository
+Update Complete. ⎈Happy Helming<span class="token operator">!</span>⎈<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>使用helm安装rancher2.7</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">helm <span class="token function">install</span> rancher rancher-latest/rancher <span class="token punctuation">\</span>
+  <span class="token parameter variable">--namespace</span> cattle-system <span class="token punctuation">\</span>
+  <span class="token parameter variable">--set</span> <span class="token assign-left variable">hostname</span><span class="token operator">=</span><span class="token number">172.16</span>.190.100.sslip.io <span class="token punctuation">\</span>
+  <span class="token parameter variable">--set</span> <span class="token assign-left variable">replicas</span><span class="token operator">=</span><span class="token number">1</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--set</span> <span class="token assign-left variable">bootstrapPassword</span><span class="token operator">=</span>jshebuebyxg45h3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>出现下面提示就表示安装成功了</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">NAME: rancher
+LAST DEPLOYED: Sat Dec  <span class="token number">3</span> 09:12:02 <span class="token number">2022</span>
+NAMESPACE: cattle-system
+STATUS: deployed
+REVISION: <span class="token number">1</span>
+TEST SUITE: None
+NOTES:
+Rancher Server has been installed.
+
+NOTE: Rancher may take several minutes to fully initialize. Please standby <span class="token keyword">while</span> Certificates are being issued, Containers are started and the Ingress rule comes up.
+
+Check out our docs at https://rancher.com/docs/
+
+If you provided your own bootstrap password during installation, browse to https://172.16.190.100.sslip.io to get started.
+
+If this is the first <span class="token function">time</span> you installed Rancher, get started by running this <span class="token builtin class-name">command</span> and clicking the URL it generates:
+
+``<span class="token variable"><span class="token variable">`</span>
+<span class="token builtin class-name">echo</span> https://172.16.190.100.sslip.io/dashboard/?setup<span class="token operator">=</span><span class="token punctuation">$(</span>kubectl get secret <span class="token parameter variable">--namespace</span> cattle-system bootstrap-secret <span class="token parameter variable">-o</span> go-template<span class="token operator">=</span><span class="token string">'&#123;&#123;.data.bootstrapPassword|base64decode&#125;&#125;'</span><span class="token punctuation">)</span>
+<span class="token variable">`</span></span>`<span class="token variable"><span class="token variable">`</span>
+
+To get just the bootstrap password on its own, run:
+
+<span class="token variable">`</span></span>`<span class="token variable"><span class="token variable">`</span>
+kubectl get secret <span class="token parameter variable">--namespace</span> cattle-system bootstrap-secret <span class="token parameter variable">-o</span> go-template<span class="token operator">=</span><span class="token string">'&#123;&#123;.data.bootstrapPassword|base64decode&#125;&#125;&#123;&#123; "\n" &#125;&#125;'</span>
+<span class="token variable">`</span></span>``
+
+
+Happy Containering<span class="token operator">!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">root@hao:~<span class="token comment"># echo https://172.16.190.100.sslip.io/dashboard/?setup=$(kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='&#123;&#123;.data.bootstrapPassword|base64decode&#125;&#125;')</span>
+https://172.16.190.100.sslip.io/dashboard/?setup<span class="token operator">=</span>jshebuebyxg45h3
+
+root@hao:~<span class="token comment"># kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='&#123;&#123;.data.bootstrapPassword|base64decode&#125;&#125;&#123;&#123; "\n" &#125;&#125;'</span>
+jshebuebyxg45h3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>最后一步，因为是在内网，需要添加hosts才能正常访问</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> /etc/hosts
+<span class="token number">172.16</span>.190.100 <span class="token number">172.16</span>.190.100.sslip.io<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>熟悉的界面出现了！ok大功告成！</p>
+<img  
+                     lazyload
+                     alt="image"
+                     data-src="https://cdn.staticaly.com/gh/trojan20161207/blogpic@master/20230204/image-20221203172300525.1xxjl88mwj8g.webp"
+                      style="zoom:50%;" 
+                >
+
+
+
+
+
+]]></content>
+      <tags>
+        <tag>k3s</tag>
+        <tag>rancher</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nginx.conf配置文件结构</title>
+    <url>/2019/09/23/nginx.conf%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<p>　Nginx的核心模块为<em>Main</em>和<em>Events</em>，此外还包括标准<em>HTTP模块</em>、可选<em>HTTP模块</em>和<em>邮件模块</em>，其还可以支持诸多第三方模块。Main用于配置错误日志、进程及权限等相关的参数，Events用于配置IO模型，如epoll、kqueue、select或poll等，它们是必备模块，HTTP模块用于控制Nginx的HTTP进程。</p>
+<p>　　Nginx的主配置文件由几个段组成，这个段通常也被称为nginx的上下文，每个段的定义格式如下所示。需要注意的是，其每一个指令都必须使用分号(<em>;</em>)结束，否则为语法错误。</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;section&gt; &#123;
+     &lt;directive&gt; &lt;parameters&gt;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>主要结构（所有配置以分号结尾）如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">## Main段，定义全局属性
+events &#123;
+          ##定义不同IO模型下的工作机制；
+&#125;
+http &#123; 
+    ##定义作为web服务器的相关属性（还可以反向代理mail）
+    server &#123; 
+        ##定义一个虚拟主机的属性，所有web服务必须定义成一个虚拟主机，与httpd不同
+        location [option] uri &#123; 
+            ##定义一个URI的特性
+            ##location中可以嵌套location的
+            location [option] uri &#123; 
+                #嵌套location
+            &#125;
+               if (condition) &#123;
+                ##定义URL重写
+            &#125;
+        &#125;
+    &#125;
+    upstream  &amp;ltName&amp;gt &#123;
+        ##将多个server结合在一起，实现负载均衡
+    &#125;
+ &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nginx event配置指令</title>
+    <url>/2019/09/23/nginxevent%E9%85%8D%E7%BD%AE%E6%8C%87%E4%BB%A4/</url>
+    <content><![CDATA[<hr>
+<p>　　参考事件模型指令：<em>use [ kqueue | rtsig | epoll | &#x2F;dev&#x2F;poll | select | poll ];</em></p>
+<pre class="line-numbers language-none"><code class="language-none">use epoll;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>　　注：epoll模型是Linux 2.6以上版本内核中的高性能网络I&#x2F;O模型，如果跑在FreeBSD上面，就用kqueue模型。</p>
+<p>　　设置单个进程最大连接数用指令：_worker<em>connections</em>（最大连接数&#x3D;连接数*进程数）</p>
+<pre class="line-numbers language-none"><code class="language-none">worker_connections 65535;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nginx Rewrite简单示例</title>
+    <url>/2019/09/23/nginxRewrite%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/</url>
+    <content><![CDATA[<hr>
+<pre class="line-numbers language-none"><code class="language-none">worker_processes  1;
+events &#123;
+    worker_connections  1024;
+&#125;
+http &#123;
+       server &#123;
+            location &#x2F;google &#123;
+                      rewrite (.*) http:&#x2F;&#x2F;www.google.com;
+        &#125;
+           location &#x2F;baidu &#123;
+                      rewrite (.*) http:&#x2F;&#x2F;www.baidu.com;
+        &#125;
+        error_page   500 502 503 504  &#x2F;50x.html;
+        location &#x3D; &#x2F;50x.html &#123;
+            root   html;
+       &#125;
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>　　按照前面讲的内容以及上面的代码，修改我们自己的配置文件，保存，重新加载nginx，然后点击【访问测试】，在地址栏给出的地址后面分别输入“*&#x2F;google<em>”、“</em>&#x2F;baidu*”，是不是会和我的结果一样呢？</p>
+<p>输入“&#x2F;google”转到谷歌，输入“&#x2F;baidu”是不是转到百度了呢？</p>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -10346,321 +10661,6 @@ bits <span class="token operator">=</span> <span class="token operator">*</span>
       </tags>
   </entry>
   <entry>
-    <title>k3s详细安装+rancher2.7界面展示</title>
-    <url>/2023/02/07/k3s/</url>
-    <content><![CDATA[<h1 id="k3s详细安装-rancher2-7界面展示"><a href="#k3s详细安装-rancher2-7界面展示" class="headerlink" title="k3s详细安装+rancher2.7界面展示"></a>k3s详细安装+rancher2.7界面展示</h1><h2 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h2><p>注：这里是arm版本，使用的M1安装的ubuntu虚拟机，其他版本需要找对应的版本</p>
-<h2 id="选择k3s版本并安装"><a href="#选择k3s版本并安装" class="headerlink" title="选择k3s版本并安装"></a>选择k3s版本并安装</h2><p>使用版本号：v1.23.14+k3s1</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 因为使用1.25不支持helm chart</span>
-root@hao:~<span class="token comment"># helm install rancher rancher-latest/rancher \</span>
-<span class="token operator">></span>   <span class="token parameter variable">--namespace</span> cattle-system <span class="token punctuation">\</span>
-<span class="token operator">></span>   <span class="token parameter variable">--set</span> <span class="token assign-left variable">hostname</span><span class="token operator">=</span><span class="token number">172.16</span>.190.100.sslip.io <span class="token punctuation">\</span>
-<span class="token operator">></span>   <span class="token parameter variable">--set</span> <span class="token assign-left variable">replicas</span><span class="token operator">=</span><span class="token number">1</span> <span class="token punctuation">\</span>
-<span class="token operator">></span>   <span class="token parameter variable">--set</span> <span class="token assign-left variable">bootstrapPassword</span><span class="token operator">=</span>jshebuebyxg45h3
-Error: INSTALLATION FAILED: chart requires kubeVersion: <span class="token operator">&lt;</span> <span class="token number">1.25</span>.0-0 <span class="token function">which</span> is incompatible with Kubernetes v1.25.4+k3s1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>一行命令即可安装，等待大约一分钟左右</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-sfL</span> https://get.k3s.io <span class="token operator">|</span> <span class="token assign-left variable">INSTALL_K3S_VERSION</span><span class="token operator">=</span>v1.23.14+k3s1 <span class="token function">sh</span> - <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>出现下边的提示，表示k3s安装已经八九不离十了</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">root@hao:~<span class="token comment"># curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.23.14+k3s1 sh -</span>
-<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Using v1.23.14+k3s1 as release
-<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Downloading <span class="token builtin class-name">hash</span> https://github.com/k3s-io/k3s/releases/download/v1.23.14+k3s1/sha256sum-arm64.txt
-<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Downloading binary https://github.com/k3s-io/k3s/releases/download/v1.23.14+k3s1/k3s-arm64
-<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Verifying binary download
-<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Installing k3s to /usr/local/bin/k3s
-<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Skipping installation of SELinux RPM
-<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Creating /usr/local/bin/kubectl symlink to k3s
-<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Creating /usr/local/bin/crictl symlink to k3s
-<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Skipping /usr/local/bin/ctr symlink to k3s, <span class="token builtin class-name">command</span> exists <span class="token keyword">in</span> <span class="token environment constant">PATH</span> at /usr/bin/ctr
-<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Creating <span class="token function">killall</span> script /usr/local/bin/k3s-killall.sh
-<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Creating uninstall script /usr/local/bin/k3s-uninstall.sh
-<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  env: Creating environment <span class="token function">file</span> /etc/systemd/system/k3s.service.env
-<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  systemd: Creating <span class="token function">service</span> <span class="token function">file</span> /etc/systemd/system/k3s.service
-<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  systemd: Enabling k3s unit
-Created symlink /etc/systemd/system/multi-user.target.wants/k3s.service → /etc/systemd/system/k3s.service.
-<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  systemd: Starting k3s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<p>拷贝配置文件到当前机器：</p>
-<pre class="line-numbers language-none"><code class="language-none">scp root@172.16.190.100:&#x2F;etc&#x2F;rancher&#x2F;k3s&#x2F;k3s.yaml ~&#x2F;.kube&#x2F;config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>本机可以直接cp</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cp</span> /etc/rancher/k3s/k3s.yaml ~/.kube/config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-<p>下载helm</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> https://get.helm.sh/helm-v3.10.2-linux-arm64.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>解压并复制到指定路径</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">tar</span> <span class="token parameter variable">-zxvf</span>  helm-v3.10.2-linux-arm64.tar.gz
-<span class="token function">cp</span> linux-arm64/helm /usr/bin/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>查看helm版本</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">root@hao:~<span class="token comment"># helm version</span>
-version.BuildInfo<span class="token punctuation">&#123;</span>Version:<span class="token string">"v3.10.2"</span>, GitCommit:<span class="token string">"50f003e5ee8704ec937a756c646870227d7c8b58"</span>, GitTreeState:<span class="token string">"clean"</span>, GoVersion:<span class="token string">"go1.18.8"</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>更新helm相关配置</p>
-<pre class="line-numbers language-none"><code class="language-none">helm repo add rancher-latest https:&#x2F;&#x2F;releases.rancher.com&#x2F;server-charts&#x2F;latest
-
-kubectl create namespace cattle-system
-
-kubectl apply -f https:&#x2F;&#x2F;github.com&#x2F;cert-manager&#x2F;cert-manager&#x2F;releases&#x2F;download&#x2F;v1.7.1&#x2F;cert-manager.crds.yaml
-
-helm repo add jetstack https:&#x2F;&#x2F;charts.jetstack.io
-
-helm repo update
-
-helm install cert-manager jetstack&#x2F;cert-manager \
-  --namespace cert-manager \
-  --create-namespace \
-  --version v1.7.1
-
-# Windows Powershell
-helm install cert-manager jetstack&#x2F;cert-manager &#96;
-  --namespace cert-manager &#96;
-  --create-namespace &#96;
-  --version v1.7.1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>出现以下界面表示helm更新成功</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">root@hao:~<span class="token comment"># helm repo add rancher-latest https://releases.rancher.com/server-charts/latest</span>
-<span class="token string">"rancher-latest"</span> already exists with the same configuration, skipping
-root@hao:~<span class="token comment"># kubectl create namespace cattle-system</span>
-namespace/cattle-system created
-root@hao:~<span class="token comment"># kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.crds.yaml</span>
-customresourcedefinition.apiextensions.k8s.io/certificaterequests.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/certificates.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/challenges.acme.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/clusterissuers.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/issuers.cert-manager.io created
-customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io created
-root@hao:~<span class="token comment"># helm repo add jetstack https://charts.jetstack.io</span>
-<span class="token string">"jetstack"</span> already exists with the same configuration, skipping
-root@hao:~<span class="token comment"># helm repo update</span>
-Hang tight <span class="token keyword">while</span> we grab the latest from your chart repositories<span class="token punctuation">..</span>.
-<span class="token punctuation">..</span>.Successfully got an update from the <span class="token string">"jetstack"</span> chart repository
-<span class="token punctuation">..</span>.Successfully got an update from the <span class="token string">"rancher-latest"</span> chart repository
-Update Complete. ⎈Happy Helming<span class="token operator">!</span>⎈<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<p>使用helm安装rancher2.7</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">helm <span class="token function">install</span> rancher rancher-latest/rancher <span class="token punctuation">\</span>
-  <span class="token parameter variable">--namespace</span> cattle-system <span class="token punctuation">\</span>
-  <span class="token parameter variable">--set</span> <span class="token assign-left variable">hostname</span><span class="token operator">=</span><span class="token number">172.16</span>.190.100.sslip.io <span class="token punctuation">\</span>
-  <span class="token parameter variable">--set</span> <span class="token assign-left variable">replicas</span><span class="token operator">=</span><span class="token number">1</span> <span class="token punctuation">\</span>
-  <span class="token parameter variable">--set</span> <span class="token assign-left variable">bootstrapPassword</span><span class="token operator">=</span>jshebuebyxg45h3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<p>出现下面提示就表示安装成功了</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">NAME: rancher
-LAST DEPLOYED: Sat Dec  <span class="token number">3</span> 09:12:02 <span class="token number">2022</span>
-NAMESPACE: cattle-system
-STATUS: deployed
-REVISION: <span class="token number">1</span>
-TEST SUITE: None
-NOTES:
-Rancher Server has been installed.
-
-NOTE: Rancher may take several minutes to fully initialize. Please standby <span class="token keyword">while</span> Certificates are being issued, Containers are started and the Ingress rule comes up.
-
-Check out our docs at https://rancher.com/docs/
-
-If you provided your own bootstrap password during installation, browse to https://172.16.190.100.sslip.io to get started.
-
-If this is the first <span class="token function">time</span> you installed Rancher, get started by running this <span class="token builtin class-name">command</span> and clicking the URL it generates:
-
-``<span class="token variable"><span class="token variable">`</span>
-<span class="token builtin class-name">echo</span> https://172.16.190.100.sslip.io/dashboard/?setup<span class="token operator">=</span><span class="token punctuation">$(</span>kubectl get secret <span class="token parameter variable">--namespace</span> cattle-system bootstrap-secret <span class="token parameter variable">-o</span> go-template<span class="token operator">=</span><span class="token string">'&#123;&#123;.data.bootstrapPassword|base64decode&#125;&#125;'</span><span class="token punctuation">)</span>
-<span class="token variable">`</span></span>`<span class="token variable"><span class="token variable">`</span>
-
-To get just the bootstrap password on its own, run:
-
-<span class="token variable">`</span></span>`<span class="token variable"><span class="token variable">`</span>
-kubectl get secret <span class="token parameter variable">--namespace</span> cattle-system bootstrap-secret <span class="token parameter variable">-o</span> go-template<span class="token operator">=</span><span class="token string">'&#123;&#123;.data.bootstrapPassword|base64decode&#125;&#125;&#123;&#123; "\n" &#125;&#125;'</span>
-<span class="token variable">`</span></span>``
-
-
-Happy Containering<span class="token operator">!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">root@hao:~<span class="token comment"># echo https://172.16.190.100.sslip.io/dashboard/?setup=$(kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='&#123;&#123;.data.bootstrapPassword|base64decode&#125;&#125;')</span>
-https://172.16.190.100.sslip.io/dashboard/?setup<span class="token operator">=</span>jshebuebyxg45h3
-
-root@hao:~<span class="token comment"># kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='&#123;&#123;.data.bootstrapPassword|base64decode&#125;&#125;&#123;&#123; "\n" &#125;&#125;'</span>
-jshebuebyxg45h3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>最后一步，因为是在内网，需要添加hosts才能正常访问</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> /etc/hosts
-<span class="token number">172.16</span>.190.100 <span class="token number">172.16</span>.190.100.sslip.io<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>熟悉的界面出现了！ok大功告成！</p>
-<img  
-                     lazyload
-                     alt="image"
-                     data-src="https://cdn.staticaly.com/gh/trojan20161207/blogpic@master/20230204/image-20221203172300525.1xxjl88mwj8g.webp"
-                     
-                >
-
-
-
-
-
-]]></content>
-      <tags>
-        <tag>k3s</tag>
-        <tag>rancher</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux运维的个人进阶</title>
-    <url>/2019/09/19/linux%E8%BF%90%E7%BB%B4%E7%9A%84%E4%B8%AA%E4%BA%BA%E8%BF%9B%E9%98%B6/</url>
-    <content><![CDATA[<h2 id="一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。"><a href="#一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。" class="headerlink" title="一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。"></a>一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。</h2><p>本文简单介绍了其中一种linux运维的个人进阶路线，有需要的朋友可以参考下。</p>
-<h3 id="第一阶段：企业级Linux运维工程师"><a href="#第一阶段：企业级Linux运维工程师" class="headerlink" title="第一阶段：企业级Linux运维工程师"></a>第一阶段：企业级Linux运维工程师</h3><p>1、Linux运维最佳学习方法”5W1H”六何分析法全面介绍，独家Linux快速入门学习技巧</p>
-<p>2、冯诺依曼体系（CPU架构、操作系统概念、发展演变、应用场景、业内形态）</p>
-<p>3、Linux运维基础实战入门，用户管理，权限，文件查找，文本编辑及实战讲解</p>
-<p>4、Linux运维系统管理和技能进阶，磁盘管理，软件安装，文件系统、内核使用方法和高级技巧</p>
-<p>5、Linux系统环境及日常管理，结合日常工作常用20个场景，排错思路、面试和工作中注意事项</p>
-<p>6、以实战方式全方位展示Bash八大特性和高级用法介绍以及高级企业级使用技巧实战演练</p>
-<p>7、Shell脚本工作原理、学习方法、配罝技巧、企业级书写规范、开发环境定制全面实战介绍</p>
-<p>8、职场人价值体系-知识、技能、成长目标和方向定位年薪30W运维人员必备知识体系关键技能点</p>
-<h3 id="第二阶段：Linux应用运维工程师-amp-DBA"><a href="#第二阶段：Linux应用运维工程师-amp-DBA" class="headerlink" title="第二阶段：Linux应用运维工程师&amp;DBA"></a>第二阶段：Linux应用运维工程师&amp;DBA</h3><p>1、TCP&#x2F;IP网络通信协议，IP地址含义、TCP有限状态机转换原理，路由协议</p>
-<p>2、利用Kickstart文件实现企业级自动化安装环境定制，百台并发安装实战</p>
-<p>3、Linux常见系统故障案例分析，企业级Linux运维工程师常犯错误Top5</p>
-<p>4、全面讲解CDN核心技术理念，实现智能DNS流量分发和用户策略引导</p>
-<p>5、实战讲解LAMP运维架构，Apache+PHP+Mysql架构体系和文件存储</p>
-<p>6、介绍企业级安全体系，iptables构建安全架构以及软硬防火墙优劣势</p>
-<p>7、深入讲解运维必备Web服务开源解决方案Nginx及LNMP企业高级用法</p>
-<p>8、企业级DBA实战课程，Mysql企业级实战应用，调优及redis企业级应用</p>
-<h3 id="第三阶段：企业级Linux云计算工程师"><a href="#第三阶段：企业级Linux云计算工程师" class="headerlink" title="第三阶段：企业级Linux云计算工程师"></a>第三阶段：企业级Linux云计算工程师</h3><p>1、全面讲解企业级LNMP架构及12条策略建议，实现互联网电子商务、博客、论坛等实战案例</p>
-<p>2、专业压测评估体系，从并发、响应时间、持久连接、pv、峰值、带宽，以及ab等压测方案实施</p>
-<p>4、讲解Linux Cluster集群，全面分析集群类别，讲解F5和LVS、haproxy、nginx的4-7层负载均衡</p>
-<p>5、实战带领在Centos7上实现LVS集群配罝、服务管理、调度算法修改、后端服务器上下线、服务状态监控，状态监测方实现NAT、DR、TUN等模型演练</p>
-<p>6、全面实现基于Nginx负载均衡功能，实现Nginx反代后端、Nginx负载均衡实现网站动静分离详解</p>
-<p>7、实战带领实现Keepalived主从架构及双主切换方案、报警定制、日志分析等</p>
-<p>8、全面讲解Zabbix3.X监控特性、Web服务监控、Zabbix内部监控、Zabbix特性及功能详解</p>
-<p>9、全面讲解Varnish缓存技术，深入Varnish工作机制、核心架构、及主流开源缓存技术解决方案</p>
-<p>10、laaS、PaaS和SaaS云平台功能及常见实现方式及OpenStack的功能特性及其实现的增强功能</p>
-<p>11、全面讲解KVM虚拟化技术，docker技术实现互联网容器和Docker容器云以及Kubemetes管理</p>
-<h3 id="第四阶段：Linux自动化运维工程师-amp-DevOps"><a href="#第四阶段：Linux自动化运维工程师-amp-DevOps" class="headerlink" title="第四阶段：Linux自动化运维工程师&amp;DevOps"></a>第四阶段：Linux自动化运维工程师&amp;DevOps</h3><p>1、以自动化运维框架为主线，讲解Devops运维自动化趋和核心技术</p>
-<p>2、自动化运维工具Puppet、Ansible、Cobbler、Saltstack、 Fabric对比</p>
-<p>3、Ansible生产环境应用案例和实战操练、批量进行上百台服务器管理</p>
-<p>4、企业自动化工具Puppet使用场景，实现搭建企业运维自动化平台架构</p>
-<p>5、全面讲解Git版本控制、脚本自动化管理、Git分支合并，Git服务器搭建</p>
-<p>6、深入讲解基于Shell脚本企业级高级用法和常见实现Shell自动化管理</p>
-<p>7、python基本语法和自动化工具应用，及开源跳板机Jumpserver实现</p>
-<p>8、实战：基于生产环境持续集成案例，Jenkins+gitlab+maven+shell实现代码自动化上线部署，可持续集成</p>
-<p>9、生产环境基于自动化运维常见场景如自动化发布、灰度发布、批量上线、降级方案、无缝切换等核心技术</p>
-<h3 id="第五阶段：Linux系统架构师-amp-运维架构师"><a href="#第五阶段：Linux系统架构师-amp-运维架构师" class="headerlink" title="第五阶段：Linux系统架构师&amp;运维架构师"></a>第五阶段：Linux系统架构师&amp;运维架构师</h3><p>1、全面介绍缓存技术要点，讲解数据流式化、代理式缓存、旁路式缓存、缓存算法、缓存设定策略、一致性哈希算法优劣势等</p>
-<p>2、全面讲解正向代理、反向代理机制，实战实现Nginx反向代理负载均衡，跳转规則实现动静分离、IP曰志记录、头部信息改写、缓存模块、缓存策略、请求超时机制、健康状态监测、判定规则、状态码定义、实现后端故障及自动上线等能力</p>
-<p>3、实战带领实现千万级大型互联网Web架构核心技术，运用LVS、Haproxy、Vamish、 Nginx、tomcat、MySQL等实现高并发运维体系Web架构，实现分布式集群存储Fastdfs和mogileFS架构</p>
-<p>4、全面讲解MySQL—主多从、一从多主企业级用法，深入讲解MySQL读写分离、连接池及sharding技术，以及MMM、MHA、Galera-Cluster核心技术， MySQL读写分离Amoeba实现</p>
-<p>5、实战:分布式收集Nginx日志于Elk集群，并通过Kibana展示；实战:分布式收集 JAVA日志于Elk集群，并通过Kibana展示；实战:分布式收集Syslog曰志于Elk集群，并通过Kibana展示</p>
-<p>6、结合自动化工具实现企业业务服务管理，持续化集成，实现Devops运维管理模型及架构设计。</p>
-<p>7、实现基于k8s的企业级容器云架构管理，以及docker容器的服务应用，实现私有云架构方案</p>
-<p>8、全面讲解大众点评、美团、滴滴、饿了么等亿级别PV大型互联网架构方案，以及设计规范，包含负载均衡、缓存、高可用、数据库、分布式存储、消息队列、自动化、运维规范、监控体系等</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>Linux运维, 进阶</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>nginx.conf配置文件结构</title>
-    <url>/2019/09/23/nginx.conf%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/</url>
-    <content><![CDATA[<p>　Nginx的核心模块为<em>Main</em>和<em>Events</em>，此外还包括标准<em>HTTP模块</em>、可选<em>HTTP模块</em>和<em>邮件模块</em>，其还可以支持诸多第三方模块。Main用于配置错误日志、进程及权限等相关的参数，Events用于配置IO模型，如epoll、kqueue、select或poll等，它们是必备模块，HTTP模块用于控制Nginx的HTTP进程。</p>
-<p>　　Nginx的主配置文件由几个段组成，这个段通常也被称为nginx的上下文，每个段的定义格式如下所示。需要注意的是，其每一个指令都必须使用分号(<em>;</em>)结束，否则为语法错误。</p>
-<pre class="line-numbers language-none"><code class="language-none">&lt;section&gt; &#123;
-     &lt;directive&gt; &lt;parameters&gt;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>主要结构（所有配置以分号结尾）如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">## Main段，定义全局属性
-events &#123;
-          ##定义不同IO模型下的工作机制；
-&#125;
-http &#123; 
-    ##定义作为web服务器的相关属性（还可以反向代理mail）
-    server &#123; 
-        ##定义一个虚拟主机的属性，所有web服务必须定义成一个虚拟主机，与httpd不同
-        location [option] uri &#123; 
-            ##定义一个URI的特性
-            ##location中可以嵌套location的
-            location [option] uri &#123; 
-                #嵌套location
-            &#125;
-               if (condition) &#123;
-                ##定义URL重写
-            &#125;
-        &#125;
-    &#125;
-    upstream  &amp;ltName&amp;gt &#123;
-        ##将多个server结合在一起，实现负载均衡
-    &#125;
- &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>nginx event配置指令</title>
-    <url>/2019/09/23/nginxevent%E9%85%8D%E7%BD%AE%E6%8C%87%E4%BB%A4/</url>
-    <content><![CDATA[<hr>
-<p>　　参考事件模型指令：<em>use [ kqueue | rtsig | epoll | &#x2F;dev&#x2F;poll | select | poll ];</em></p>
-<pre class="line-numbers language-none"><code class="language-none">use epoll;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>　　注：epoll模型是Linux 2.6以上版本内核中的高性能网络I&#x2F;O模型，如果跑在FreeBSD上面，就用kqueue模型。</p>
-<p>　　设置单个进程最大连接数用指令：_worker<em>connections</em>（最大连接数&#x3D;连接数*进程数）</p>
-<pre class="line-numbers language-none"><code class="language-none">worker_connections 65535;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>nginx Rewrite简单示例</title>
-    <url>/2019/09/23/nginxRewrite%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/</url>
-    <content><![CDATA[<hr>
-<pre class="line-numbers language-none"><code class="language-none">worker_processes  1;
-events &#123;
-    worker_connections  1024;
-&#125;
-http &#123;
-       server &#123;
-            location &#x2F;google &#123;
-                      rewrite (.*) http:&#x2F;&#x2F;www.google.com;
-        &#125;
-           location &#x2F;baidu &#123;
-                      rewrite (.*) http:&#x2F;&#x2F;www.baidu.com;
-        &#125;
-        error_page   500 502 503 504  &#x2F;50x.html;
-        location &#x3D; &#x2F;50x.html &#123;
-            root   html;
-       &#125;
-   &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>　　按照前面讲的内容以及上面的代码，修改我们自己的配置文件，保存，重新加载nginx，然后点击【访问测试】，在地址栏给出的地址后面分别输入“*&#x2F;google<em>”、“</em>&#x2F;baidu*”，是不是会和我的结果一样呢？</p>
-<p>输入“&#x2F;google”转到谷歌，输入“&#x2F;baidu”是不是转到百度了呢？</p>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>nginx http配置指令</title>
     <url>/2019/09/23/nginxhttp%E9%85%8D%E7%BD%AE%E6%8C%87%E4%BB%A4/</url>
     <content><![CDATA[<hr>
@@ -10814,34 +10814,6 @@ location ~ \.(gif|jpg|png|js|css)$ &#123;
       </tags>
   </entry>
   <entry>
-    <title>nginx初体验</title>
-    <url>/2019/09/23/nginx%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
-    <content><![CDATA[<p>当我们安装完nginx后，我们首先进入nginx的安装目录，启动nginx的服务，然后在地址中输入 <a class="link"   href="http://127.0.0.1/" >http://127.0.0.1/<i class="fas fa-external-link-alt"></i></a> ， 然后我们就会看到”<em>welcome to nginx</em>“。<br>　　下面的代码为nginx.conf配置文件中的server段的默认配置，nginx所实现的功能都基于这个文件。我们将在后面的内容中继续进行讲解。</p>
-<pre class="line-numbers language-none"><code class="language-none"> server &#123;
-   listen       80;
-   server_name  localhost;
-   #charset koi8-r;
-   #access_log  logs&#x2F;host.access.log  main;
-   location &#x2F; &#123;
-           root   &#x2F;root;      #定义服务器的默认网站根目录位置
-           index index.php index.html index.htm;   #定义首页索引文件的名称
-   &#125;
-   #error_page  404              &#x2F;404.html;
-   # redirect server error pages to the static page &#x2F;50x.html
-   error_page   500 502 503 504  &#x2F;50x.html;
-   location &#x3D; &#x2F;50x.html &#123;
-           root   html;
-   &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>nginx 反向代理示例</title>
     <url>/2019/09/23/nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E7%A4%BA%E4%BE%8B/</url>
     <content><![CDATA[<hr>
@@ -10866,6 +10838,34 @@ location ~ \.(gif|jpg|png|js|css)$ &#123;
                 #……………………
 &#125;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nginx初体验</title>
+    <url>/2019/09/23/nginx%E5%88%9D%E4%BD%93%E9%AA%8C/</url>
+    <content><![CDATA[<p>当我们安装完nginx后，我们首先进入nginx的安装目录，启动nginx的服务，然后在地址中输入 <a class="link"   href="http://127.0.0.1/" >http://127.0.0.1/<i class="fas fa-external-link-alt"></i></a> ， 然后我们就会看到”<em>welcome to nginx</em>“。<br>　　下面的代码为nginx.conf配置文件中的server段的默认配置，nginx所实现的功能都基于这个文件。我们将在后面的内容中继续进行讲解。</p>
+<pre class="line-numbers language-none"><code class="language-none"> server &#123;
+   listen       80;
+   server_name  localhost;
+   #charset koi8-r;
+   #access_log  logs&#x2F;host.access.log  main;
+   location &#x2F; &#123;
+           root   &#x2F;root;      #定义服务器的默认网站根目录位置
+           index index.php index.html index.htm;   #定义首页索引文件的名称
+   &#125;
+   #error_page  404              &#x2F;404.html;
+   # redirect server error pages to the static page &#x2F;50x.html
+   error_page   500 502 503 504  &#x2F;50x.html;
+   location &#x3D; &#x2F;50x.html &#123;
+           root   html;
+   &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
       <categories>
         <category>nginx</category>
@@ -13050,6 +13050,44 @@ do_install<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
       </tags>
   </entry>
   <entry>
+    <title>运维架构层级</title>
+    <url>/2019/09/19/%E8%BF%90%E7%BB%B4%E6%9E%B6%E6%9E%84%E5%B1%82%E7%BA%A7/</url>
+    <content><![CDATA[<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/bing/20180330.jpg?imageView2/1/w/960/h/540/interlace/1/q/100"
+                     
+                > </p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/09/image-08604d6b.png"
+                      alt="image.png"
+                ><br><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/09/image-753a7fbe.png"
+                      alt="image.png"
+                ><br><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/09/image-8a1fb5a5.png"
+                      alt="image.png"
+                ><br><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/09/image-6fdcd397.png"
+                      alt="image.png"
+                ><br>来源：<a class="link"   href="https://www.unixhot.com/page/ops" >https://www.unixhot.com/page/ops<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <categories>
+        <category>架构</category>
+      </categories>
+      <tags>
+        <tag>Linux运维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>罗翔语录</title>
     <url>/2021/10/21/%E7%BD%97%E7%BF%94%E8%AF%AD%E5%BD%95/</url>
     <content><![CDATA[<h2 id="演好自己的剧本"><a href="#演好自己的剧本" class="headerlink" title="演好自己的剧本"></a>演好自己的剧本</h2><h2 id="Keep-calm-and-carry-on"><a href="#Keep-calm-and-carry-on" class="headerlink" title="Keep calm and carry on."></a>Keep calm and carry on.</h2><pre class="line-numbers language-none"><code class="language-none">我们很多时候是不是觉得我们抓的牌实在是太差了呀
@@ -13095,44 +13133,6 @@ do_install<span aria-hidden="true" class="line-numbers-rows"><span></span><span>
       </categories>
       <tags>
         <tag>摘抄</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>运维架构层级</title>
-    <url>/2019/09/19/%E8%BF%90%E7%BB%B4%E6%9E%B6%E6%9E%84%E5%B1%82%E7%BA%A7/</url>
-    <content><![CDATA[<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img.hacpai.com/bing/20180330.jpg?imageView2/1/w/960/h/540/interlace/1/q/100"
-                     
-                > </p>
-<p><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img.hacpai.com/file/2019/09/image-08604d6b.png"
-                      alt="image.png"
-                ><br><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img.hacpai.com/file/2019/09/image-753a7fbe.png"
-                      alt="image.png"
-                ><br><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img.hacpai.com/file/2019/09/image-8a1fb5a5.png"
-                      alt="image.png"
-                ><br><img  
-                     lazyload
-                     alt="image"
-                     data-src="https://img.hacpai.com/file/2019/09/image-6fdcd397.png"
-                      alt="image.png"
-                ><br>来源：<a class="link"   href="https://www.unixhot.com/page/ops" >https://www.unixhot.com/page/ops<i class="fas fa-external-link-alt"></i></a></p>
-]]></content>
-      <categories>
-        <category>架构</category>
-      </categories>
-      <tags>
-        <tag>Linux运维</tag>
       </tags>
   </entry>
   <entry>
