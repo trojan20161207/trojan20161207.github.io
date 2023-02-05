@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="小冲的个人博客">
+    <meta name="author" content="Devin hao">
+    
+    <title>
+        
+            将Python脚本变成漂亮的ML工具 |
+        
+        Devin blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/null">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"www.devinrain.homes","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":null,"favicon":null,"avatar":"/images/logo.svg","font_size":null,"font_family":"STHeiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":null,"font_color":null,"hitokoto":true},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+               Devin blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">将Python脚本变成漂亮的ML工具</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/logo.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Devin hao</span>
+                            
+                                <span class="author-label">Architect</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2019-10-08 17:03:50</span>
+        <span class="mobile">2019-10-08 17:03</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2019-10-08 17:03:50</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.7k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>10 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <h2 id="将Python脚本变成漂亮的ML工具"><a href="#将Python脚本变成漂亮的ML工具" class="headerlink" title="将Python脚本变成漂亮的ML工具"></a>将Python脚本变成漂亮的ML工具</h2><p>Streamlit，这是专为ML工程师打造的应用程序框架<br>Adrien Treuille<br><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/10/1Mbn2SxozueUkGKPW1NJkOw-342c5971.gif"
+                      alt="1Mbn2SxozueUkGKPW1NJkOw.gif"
+                ><br>在300行Python中使用实时神经网络推理对语义搜索引擎进行编码。</p>
+<p>以我的经验，每个不平凡的机器学习项目最终都将使用漏洞缠身且无法维护的内部工具进行缝合。这些工具（通常是Jupyter笔记本和Flask应用程序的拼凑而成）难以部署，需要对客户端-服务器体系结构进行推理，并且无法与Tensorflow GPU会话等机器学习结构很好地集成。</p>
+<p>我首先在卡内基·梅隆大学（Carnegie Mellon），然后在伯克利（Berkeley），谷歌X（Google X），以及后来在Zoox构建自动机器人时就看到了。这些工具通常是在Jupyter笔记本电脑中诞生的：传感器校准工具，模拟比较应用程序，LIDAR对准应用程序，场景重播工具等等。<br>随着工具重要性的提高，项目经理介入了。过程萌芽了。要求开花。这些单独的项目孕育成脚本，并逐渐成为繁琐的维护噩梦。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/10/15BWfcoBn2yypksY8QuKA-9aaa7cb1.png"
+                      alt="15BWfcoBn2yypksY8QuKA.png"
+                ><br>机器学习工程师的临时应用构建流程。</p>
+<p>当工具变得至关重要时，我们召集了<strong>工具团队</strong>。他们写了流利的Vue和React。他们在笔记本电脑上贴上声明性框架的标签。他们有一个设计过程：</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/10/1hNO5NYKjcsEV7jIpEaz8Eg-7c517413.png"
+                      alt="1hNO5NYKjcsEV7jIpEaz8Eg.png"
+                ><br>工具团队的应用程序构建流程整洁。</p>
+<p>太棒了!但是这些工具都需要新功能，例如每周一次。工具团队正在支持其他十个项目。他们会说：“我们将在两个月内再次更新您的工具。”<br>因此，我们回到了构建自己的工具，部署Flask应用程序，编写HTML，CSS和JavaScript，以及尝试对从笔记本到样式表的所有内容进行版本控制的过程。因此，我的老Google X朋友Thiago Teixeira和我开始思考以下问题：<strong>如果我们能够使构建工具像编写Python脚本一样容易，该怎么办？</strong><br>我们希望机器学习工程师无需工具团队就能创建精美的应用程序。这些内部工具应作为ML工作流程的自然副产品而出现。写这样的工具应该感觉像训练神经网络或Jupyter执行即席分析！同时，我们希望保留功能强大的应用程序框架的所有灵活性。我们想要创建工程师可以炫耀的漂亮，高性能的工具。基本上，我们想要这样：</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/10/1gdD55KRcRVRvfjsQLsXA-6c78e2d5.png"
+                      alt="1gdD55KRcRVRvfjsQLsXA.png"
+                ><br>Streamlit应用程序构建流程。</p>
+<p>我们拥有一个了不起的Beta社区，其中包括来自Uber，Twitter，Stitch Fix和Dropbox的工程师，我们工作了一年的时间来创建Streamlit，这是一个针对ML工程师的完全免费和开源的应用程序框架。对于每个原型，Streamlit的核心原理变得越来越简单。他们是：<br><strong>＃1：拥抱Python脚本。</strong>Streamlit应用程序实际上只是从上到下运行的脚本。没有隐藏状态。您可以使用函数调用来分解代码。如果您知道如何编写Python脚本，则可以编写Streamlit应用程序。例如，这是您写入屏幕的方式：</p>
+<pre class="line-numbers language-none"><code class="language-none">导入streamlit为st 
+st.write（&#39;Hello，world！&#39;）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/10/1VNqEOqFJQl5fB7Z0ed5lMw-83fa2837.png"
+                      alt="1VNqEOqFJQl5fB7Z0ed5lMw.png"
+                ></p>
+<p>很高兴见到你。<br><strong>＃2：将小部件视为变量。</strong>Streamlit中没有回调！每次交互都只是从上到下重新运行脚本。这种方法可以产生非常干净的代码：<br>导入streamlit为st </p>
+<pre class="line-numbers language-none"><code class="language-none">x &#x3D; st.slider（&#39;x&#39;）
+st.write（x，&#39;squared is&#39;，x * x）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/10/1h8BwonRrhnh3KtjO5cDEcA-0f122826.png"
+                      alt="1h8BwonRrhnh3KtjO5cDEcA.png"
+                ><br>包含三行代码的交互式Streamlit应用程序。</p>
+<p><strong>＃3：重用数据和计算。</strong>如果您下载大量数据或执行复杂的计算该怎么办？关键是跨运行安全地重用信息。Streamlit引入了一种缓存原语，其行为类似于持久的默认情况下不可变的数据存储，可让Streamlit应用程序安全，轻松地重用信息。例如，此代码<strong>下载数据一次</strong>从Udacity自驾车项目，得到一个简单，快捷的应用程序：</p>
+<pre class="line-numbers language-none"><code class="language-none">导入 streamlit as st
+将熊猫作为 pd 导入
+
+＃重复使用这些数据！
+read_and_cache_csv &#x3D; st.cache（pd.read_csv）
+
+BUCKET  &#x3D;  “ https:&#x2F;&#x2F;streamlit-self-driving.s3-us-west-2.amazonaws.com&#x2F; ”
+数据&#x3D; read_and_cache_csv（BUCKET  +  “ labels.csv.gz ”，NROWS &#x3D; 1000）
+wanted_label &#x3D; st.selectbox（&#39;过滤到：&#39;，[ &#39; car &#39;，&#39; truck &#39; ]）
+st.write（数据[数据。标签&#x3D;&#x3D;所需标签]）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>原始代码查看：<a class="link"   target="_blank" rel="noopener" href="https://gist.github.com/treuille/c633dc8bc86efaa98eb8abe76478aa81/raw/2019640b6a9ff5da5ab6d5b11b3345ddc764b285/cache_example.py" >https://gist.github.com/treuille/c633dc8bc86efaa98eb8abe76478aa81/raw/2019640b6a9ff5da5ab6d5b11b3345ddc764b285/cache_example.py<i class="fas fa-external-link-alt"></i></a></p>
+<p>使用st.cache在Streamlit运行中保留数据。要运行此代码，请按照以下说明进行操作。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/10/1vLvk0xZUVEx1GcrzYhWxXQ-b58f56c0.png"
+                      alt="1vLvk0xZUVEx1GcrzYhWxXQ.png"
+                ></p>
+<p>运行上面的st.cache示例的输出。</p>
+<p>简而言之，Streamlit的工作方式如下：</p>
+<ol>
+<li>对于每个用户交互，整个脚本都是从头开始运行的。<br>2.Streamlit在给定小部件状态的情况下为每个变量分配一个最新值。<br>3.缓存允许Streamlit跳过冗余数据获取和计算。<br>或在图片中：<br><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/10/1l4gxFYEZnRhysQQWIVJgA-afdf8c2f.png"
+                      alt="1l4gxFYEZnRhysQQWIVJgA.png"
+                ><br>用户事件触发Streamlit从头开始重新运行脚本。只有高速缓存在运行之间持续存在。</li>
+</ol>
+<p>如果这听起来很有趣，那么您可以立即尝试！赶紧运行：</p>
+<pre class="line-numbers language-none"><code class="language-none">$ pip install --upgrade streamlit 
+$ streamlit hello<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+   <pre class="line-numbers language-none"><code class="language-none">现在，您可以在浏览器中查看Streamlit应用程序。
+本地URL：
+http:&#x2F;&#x2F;localhost:8501 
+外网URL：
+http:&#x2F;&#x2F;10.0.1.29:8501<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这将自动弹出打开一个指向您本地Streamlit应用程序的Web浏览器。如果没有，只需单击链接。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/10/1Btm7O0pYqAkenXUPECLw-6ba5c610.png"
+                      alt="1Btm7O0pYqAkenXUPECLw.png"
+                ></p>
+<p>要查看类似此分形动画的更多示例，请从命令行运行streamlit hello。</p>
+<hr>
+<p>好。你从分形玩回来了吗？这些可能会令人着迷。<br>这些想法的简单性不会阻止您使用Streamlit创建令人难以置信的丰富实用的应用程序。在Zoox和Google X期间，我看着无人驾驶汽车项目激增为数以十亿计的视觉数据，需要对其进行搜索和理解，包括在图像上运行模型以比较性能。我见过的每个自动驾驶汽车项目最终都让整个团队都在使用这种工具。<br>在Streamlit中构建这样的工具很容易。这个Streamlit演示使您可以在整个Udacity自动驾驶汽车照片数据集中执行语义搜索，可视化人类注释的地面真相标签，并从应用程序内部实时运行完整的神经网络（YOLO） [1]。<br><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/10/1p3XPmx0TUIuMmQQa4mjHQ-81b29b26.gif"
+                      alt="1p3XPmx0TUIuMmQQa4mjHQ.gif"
+                ></p>
+<p>这个300行的Streamlit演示结合了语义视觉搜索和交互式神经网络推理。</p>
+<h2 id="整个应用程序是一个完全自包含的300行Python脚本，其中大多数是机器学习代码。实际上，整个应用程序中只有23个Streamlit调用。您可以立即自己运行它！"><a href="#整个应用程序是一个完全自包含的300行Python脚本，其中大多数是机器学习代码。实际上，整个应用程序中只有23个Streamlit调用。您可以立即自己运行它！" class="headerlink" title="整个应用程序是一个完全自包含的300行Python脚本，其中大多数是机器学习代码。实际上，整个应用程序中只有23个Streamlit调用。您可以立即自己运行它！"></a>整个应用程序是一个完全自包含的300行Python脚本，其中大多数是机器学习代码。实际上，整个应用程序中只有23个Streamlit调用。您可以立即自己运行它！<br><pre class="line-numbers language-none"><code class="language-none">$ pip install --upgrade streamlit opencv-python 
+$ streamlit run
+https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;streamlit&#x2F;demo-self-driving&#x2F;master&#x2F;app.py<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></h2><p>在与机器学习团队合作进行自己的项目时，我们意识到这些简单的想法产生了许多重要的好处：<br><strong>Streamlit应用程序是纯Python文件。</strong>因此，您可以在Streamlit中使用自己喜欢的编辑器和调试器。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/10/14KMALKoeS3TUSBn0ryzYg-d7bc9c09.png"
+                      alt="14KMALKoeS3TUSBn0ryzYg.png"
+                ></p>
+<p>我最喜欢的用于编写Streamlit应用程序的布局在左侧是VSCode，在右侧是Chrome。</p>
+<p><strong>纯Python脚本可与Git</strong>和其他源代码控制软件<strong>无缝配合</strong>，包括提交，拉取请求，问题和注释。因为Streamlit的基础语言是纯Python，所以您可以免费获得这些出色的协作工具的所有好处。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/10/0pY7e7BLPI2atTV-4bf401a4.png"
+                      alt="0pY7e7BLPI2atTV.png"
+                ></p>
+<p>因为Streamlit应用程序只是Python脚本，所以您可以使用Git轻松地对其进行版本控制。</p>
+<p><strong>Streamlit提供了即时模式实时编码环境。</strong>当Streamlit检测到源文件更改时，只需单击始终重新运行。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/10/1P3vtLkHGeCRHGu5B5ifg-0d278a81.png"
+                      alt="1P3vtLkHGeCRHGu5B5ifg.png"
+                ><br>单击“始终重新运行”以启用实时编码。</p>
+<p><strong>缓存简化了计算管道的设置。</strong>令人惊讶的是，链接缓存的功能会自动创建高效的计算管道！考虑以下代码，这些代码是从我们的Udacity演示改编而成的：</p>
+<pre class="line-numbers language-none"><code class="language-none">import streamlit as st
+import pandas as pd
+
+@st.cache
+def load_metadata():
+    DATA_URL &#x3D; &quot;https:&#x2F;&#x2F;streamlit-self-driving.s3-us-west-2.amazonaws.com&#x2F;labels.csv.gz&quot;
+    return pd.read_csv(DATA_URL, nrows&#x3D;1000)
+
+@st.cache
+def create_summary(metadata, summary_type):
+    one_hot_encoded &#x3D; pd.get_dummies(metadata[[&quot;frame&quot;, &quot;label&quot;]], columns&#x3D;[&quot;label&quot;])
+    return getattr(one_hot_encoded.groupby([&quot;frame&quot;]), summary_type)()
+
+# Piping one st.cache function into another forms a computation DAG.
+summary_type &#x3D; st.selectbox(&quot;Type of summary:&quot;, [&quot;sum&quot;, &quot;any&quot;])
+metadata &#x3D; load_metadata()
+summary &#x3D; create_summary(metadata, summary_type)
+st.write(&#39;## Metadata&#39;, metadata, &#39;## Summary&#39;, summary)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>源码来自：<a class="link"   target="_blank" rel="noopener" href="https://gist.github.com/treuille/ac7755eb37c63a78fac7dfef89f3517e/raw/568cc2d190c2f96b2a8a7aaf6fa444d68bde630e/caching_DAG_example.py" >https://gist.github.com/treuille/ac7755eb37c63a78fac7dfef89f3517e/raw/568cc2d190c2f96b2a8a7aaf6fa444d68bde630e/caching_DAG_example.py<i class="fas fa-external-link-alt"></i></a></p>
+<p>Streamlit中的简单计算管道。要运行此代码，请按照以下说明进行操作。<br>基本上，管道是load_metadata→create_summary。每次运行脚本时，<strong>Streamlit只会重新计算需要正确答案的管道子集。</strong>酷！</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/10/1e0z12L0pXYlCE5OM3n6LA-7b6f242f.png"
+                      alt="1e0z12L0pXYlCE5OM3n6LA.png"
+                ><br>为了使应用程序具有高性能，Streamlit仅重新计算更新UI所需的任何内容。</p>
+<p><strong>Streamlit是为GPU构建的。</strong>Streamlit允许直接访问机器级原语，例如TensorFlow和PyTorch，并补充了这些库。例如，在此演示中，Streamlit的缓存存储了整个NVIDIA名人GAN [2]。当用户更新滑块时，这种方法几乎可以实现瞬时推断。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/10/1188SkUE1onGcpQIuSZsiMQ-644dc8b5.gif"
+                      alt="1188SkUE1onGcpQIuSZsiMQ.gif"
+                ><br>该Streamlit应用程序使用管韶博的TL-GAN [3] 演示了NVIDIA名人GAN [2]模型。</p>
+<p><strong>Streamlit是一个免费的开源库，而不是专有的Web应用程序。</strong>您可以在不与我们联系的情况下在本地提供Streamlit应用程序。您甚至可以在没有Internet连接的笔记本电脑上本地运行Streamlit！此外，现有项目可以逐步采用Streamlit。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/10/1nyOMWYNcM9mPTU5mHf1CxQ-fa82969b.png"
+                      alt="1nyOMWYNcM9mPTU5mHf1CxQ.png"
+                ><br>有几种方法逐渐采用Streamlit。（图标由fullvector &#x2F; Freepik提供。）<br>这只是您使用Streamlit可以做的事情的表面。</p>
+<p>Streamlit最令人兴奋的方面之一是如何将这些原语轻松地组合成看起来像脚本的复杂应用程序。关于我们的架构如何工作以及我们计划的功能，我们还有很多话要说，但是我们将其保存下来以备将来之用。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://img.hacpai.com/file/2019/10/1wmwwsWkOHzsYLe8pB2RzBA-33e9fe5c.png"
+                      alt="1wmwwsWkOHzsYLe8pB2RzBA.png"
+                ><br>Streamlit组件的框图。更多即将推出！</p>
+<p>我们很高兴能最终与社区今天共享Streamlit，并看到你们所有人用它构建的东西。我们希望您会发现将Python脚本转换为漂亮的ML应用变得轻松而愉快。</p>
+<p>感谢Amanda Kelly，Thiago Teixeira，TC Ricks，Seth Weidman，Regan Carey，Beverly Treuille，GenevièveWachtell和Barney Pell在本文中提供的有益帮助。</p>
+<p>参考文献：<br>[1] J. Redmon and A. Farhadi, *YOLOv3: An Incremental Improvement *(2018), arXiv.<br>[2] T. Karras, T. Aila, S. Laine, and J. Lehtinen, <em>Progressive Growing of GANs for Improved Quality, Stability, and Variation</em> (2018), ICLR.<br>[3] S. Guan, *Controlled image synthesis and editing using a novel TL-GAN model *(2018), Insight Data Science Blog.</p>
+<p>感谢TC Ricks ，Amanda Kelly 和Amanda Kelly 。 </p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">#机器学习</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2019/10/15/%E5%AE%B9%E5%99%A8%E5%92%8C%E9%85%8D%E7%BD%AE3%E4%B8%AADevOps%E5%B7%A5%E5%85%B7%E4%BB%A5%E5%8F%8A%E5%AF%B9%E5%BA%94%E7%9A%84%E9%80%9F%E6%9F%A5%E8%A1%A8/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">容器和配置：3个DevOps工具以及对应的速查表</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2019/09/24/%E5%A6%82%E4%BD%95%E4%B8%BADevOps%E7%9A%84%E9%9D%A2%E8%AF%95%E5%81%9A%E5%A5%BD%E5%85%85%E5%88%86%E5%87%86%E5%A4%87/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">如何为DevOps的面试做好充分准备</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86Python%E8%84%9A%E6%9C%AC%E5%8F%98%E6%88%90%E6%BC%82%E4%BA%AE%E7%9A%84ML%E5%B7%A5%E5%85%B7"><span class="nav-number">1.</span> <span class="nav-text">将Python脚本变成漂亮的ML工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E4%B8%AA%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%98%AF%E4%B8%80%E4%B8%AA%E5%AE%8C%E5%85%A8%E8%87%AA%E5%8C%85%E5%90%AB%E7%9A%84300%E8%A1%8CPython%E8%84%9A%E6%9C%AC%EF%BC%8C%E5%85%B6%E4%B8%AD%E5%A4%A7%E5%A4%9A%E6%95%B0%E6%98%AF%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%BB%A3%E7%A0%81%E3%80%82%E5%AE%9E%E9%99%85%E4%B8%8A%EF%BC%8C%E6%95%B4%E4%B8%AA%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%8F%AA%E6%9C%8923%E4%B8%AAStreamlit%E8%B0%83%E7%94%A8%E3%80%82%E6%82%A8%E5%8F%AF%E4%BB%A5%E7%AB%8B%E5%8D%B3%E8%87%AA%E5%B7%B1%E8%BF%90%E8%A1%8C%E5%AE%83%EF%BC%81"><span class="nav-number">2.</span> <span class="nav-text">整个应用程序是一个完全自包含的300行Python脚本，其中大多数是机器学习代码。实际上，整个应用程序中只有23个Streamlit调用。您可以立即自己运行它！$ pip install --upgrade streamlit opencv-python 
+$ streamlit run
+https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;streamlit&#x2F;demo-self-driving&#x2F;master&#x2F;app.py</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2018</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Devin hao</a>
+            
+        </div>
+        
+            <script async data-pjax
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/utils.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/main.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/header-shrink.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/back2top.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/code-block.js"></script>
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/libs/anime.min.js"></script>
+        
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/toc.js"></script>
+        
+    
+</div>
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

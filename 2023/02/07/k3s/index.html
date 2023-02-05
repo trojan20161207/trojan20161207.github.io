@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="小冲的个人博客">
+    <meta name="author" content="Devin hao">
+    
+    <title>
+        
+            k3s详细安装+rancher2.7界面展示 |
+        
+        Devin blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/null">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"www.devinrain.homes","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":null,"favicon":null,"avatar":"/images/logo.svg","font_size":null,"font_family":"STHeiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":null,"font_color":null,"hitokoto":true},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+               Devin blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">k3s详细安装+rancher2.7界面展示</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/logo.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Devin hao</span>
+                            
+                                <span class="author-label">Architect</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-02-07 18:09:06</span>
+        <span class="mobile">2023-02-07 18:09</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-02-07 18:17:33</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/k3s/">k3s</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/rancher/">rancher</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.1k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>6 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <h1 id="k3s详细安装-rancher2-7界面展示"><a href="#k3s详细安装-rancher2-7界面展示" class="headerlink" title="k3s详细安装+rancher2.7界面展示"></a>k3s详细安装+rancher2.7界面展示</h1><h2 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h2><p>注：这里是arm版本，使用的M1安装的ubuntu虚拟机，其他版本需要找对应的版本</p>
+<h2 id="选择k3s版本并安装"><a href="#选择k3s版本并安装" class="headerlink" title="选择k3s版本并安装"></a>选择k3s版本并安装</h2><p>使用版本号：v1.23.14+k3s1</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 因为使用1.25不支持helm chart</span>
+root@hao:~<span class="token comment"># helm install rancher rancher-latest/rancher \</span>
+<span class="token operator">></span>   <span class="token parameter variable">--namespace</span> cattle-system <span class="token punctuation">\</span>
+<span class="token operator">></span>   <span class="token parameter variable">--set</span> <span class="token assign-left variable">hostname</span><span class="token operator">=</span><span class="token number">172.16</span>.190.100.sslip.io <span class="token punctuation">\</span>
+<span class="token operator">></span>   <span class="token parameter variable">--set</span> <span class="token assign-left variable">replicas</span><span class="token operator">=</span><span class="token number">1</span> <span class="token punctuation">\</span>
+<span class="token operator">></span>   <span class="token parameter variable">--set</span> <span class="token assign-left variable">bootstrapPassword</span><span class="token operator">=</span>jshebuebyxg45h3
+Error: INSTALLATION FAILED: chart requires kubeVersion: <span class="token operator">&lt;</span> <span class="token number">1.25</span>.0-0 <span class="token function">which</span> is incompatible with Kubernetes v1.25.4+k3s1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>一行命令即可安装，等待大约一分钟左右</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-sfL</span> https://get.k3s.io <span class="token operator">|</span> <span class="token assign-left variable">INSTALL_K3S_VERSION</span><span class="token operator">=</span>v1.23.14+k3s1 <span class="token function">sh</span> - <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>出现下边的提示，表示k3s安装已经八九不离十了</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">root@hao:~<span class="token comment"># curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.23.14+k3s1 sh -</span>
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Using v1.23.14+k3s1 as release
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Downloading <span class="token builtin class-name">hash</span> https://github.com/k3s-io/k3s/releases/download/v1.23.14+k3s1/sha256sum-arm64.txt
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Downloading binary https://github.com/k3s-io/k3s/releases/download/v1.23.14+k3s1/k3s-arm64
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Verifying binary download
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Installing k3s to /usr/local/bin/k3s
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Skipping installation of SELinux RPM
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Creating /usr/local/bin/kubectl symlink to k3s
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Creating /usr/local/bin/crictl symlink to k3s
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Skipping /usr/local/bin/ctr symlink to k3s, <span class="token builtin class-name">command</span> exists <span class="token keyword">in</span> <span class="token environment constant">PATH</span> at /usr/bin/ctr
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Creating <span class="token function">killall</span> script /usr/local/bin/k3s-killall.sh
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  Creating uninstall script /usr/local/bin/k3s-uninstall.sh
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  env: Creating environment <span class="token function">file</span> /etc/systemd/system/k3s.service.env
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  systemd: Creating <span class="token function">service</span> <span class="token function">file</span> /etc/systemd/system/k3s.service
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  systemd: Enabling k3s unit
+Created symlink /etc/systemd/system/multi-user.target.wants/k3s.service → /etc/systemd/system/k3s.service.
+<span class="token punctuation">[</span>INFO<span class="token punctuation">]</span>  systemd: Starting k3s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>拷贝配置文件到当前机器：</p>
+<pre class="line-numbers language-none"><code class="language-none">scp root@172.16.190.100:&#x2F;etc&#x2F;rancher&#x2F;k3s&#x2F;k3s.yaml ~&#x2F;.kube&#x2F;config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>本机可以直接cp</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cp</span> /etc/rancher/k3s/k3s.yaml ~/.kube/config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<p>下载helm</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> https://get.helm.sh/helm-v3.10.2-linux-arm64.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>解压并复制到指定路径</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">tar</span> <span class="token parameter variable">-zxvf</span>  helm-v3.10.2-linux-arm64.tar.gz
+<span class="token function">cp</span> linux-arm64/helm /usr/bin/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>查看helm版本</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">root@hao:~<span class="token comment"># helm version</span>
+version.BuildInfo<span class="token punctuation">&#123;</span>Version:<span class="token string">"v3.10.2"</span>, GitCommit:<span class="token string">"50f003e5ee8704ec937a756c646870227d7c8b58"</span>, GitTreeState:<span class="token string">"clean"</span>, GoVersion:<span class="token string">"go1.18.8"</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>更新helm相关配置</p>
+<pre class="line-numbers language-none"><code class="language-none">helm repo add rancher-latest https:&#x2F;&#x2F;releases.rancher.com&#x2F;server-charts&#x2F;latest
+
+kubectl create namespace cattle-system
+
+kubectl apply -f https:&#x2F;&#x2F;github.com&#x2F;cert-manager&#x2F;cert-manager&#x2F;releases&#x2F;download&#x2F;v1.7.1&#x2F;cert-manager.crds.yaml
+
+helm repo add jetstack https:&#x2F;&#x2F;charts.jetstack.io
+
+helm repo update
+
+helm install cert-manager jetstack&#x2F;cert-manager \
+  --namespace cert-manager \
+  --create-namespace \
+  --version v1.7.1
+
+# Windows Powershell
+helm install cert-manager jetstack&#x2F;cert-manager &#96;
+  --namespace cert-manager &#96;
+  --create-namespace &#96;
+  --version v1.7.1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>出现以下界面表示helm更新成功</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">root@hao:~<span class="token comment"># helm repo add rancher-latest https://releases.rancher.com/server-charts/latest</span>
+<span class="token string">"rancher-latest"</span> already exists with the same configuration, skipping
+root@hao:~<span class="token comment"># kubectl create namespace cattle-system</span>
+namespace/cattle-system created
+root@hao:~<span class="token comment"># kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.7.1/cert-manager.crds.yaml</span>
+customresourcedefinition.apiextensions.k8s.io/certificaterequests.cert-manager.io created
+customresourcedefinition.apiextensions.k8s.io/certificates.cert-manager.io created
+customresourcedefinition.apiextensions.k8s.io/challenges.acme.cert-manager.io created
+customresourcedefinition.apiextensions.k8s.io/clusterissuers.cert-manager.io created
+customresourcedefinition.apiextensions.k8s.io/issuers.cert-manager.io created
+customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io created
+root@hao:~<span class="token comment"># helm repo add jetstack https://charts.jetstack.io</span>
+<span class="token string">"jetstack"</span> already exists with the same configuration, skipping
+root@hao:~<span class="token comment"># helm repo update</span>
+Hang tight <span class="token keyword">while</span> we grab the latest from your chart repositories<span class="token punctuation">..</span>.
+<span class="token punctuation">..</span>.Successfully got an update from the <span class="token string">"jetstack"</span> chart repository
+<span class="token punctuation">..</span>.Successfully got an update from the <span class="token string">"rancher-latest"</span> chart repository
+Update Complete. ⎈Happy Helming<span class="token operator">!</span>⎈<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>使用helm安装rancher2.7</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">helm <span class="token function">install</span> rancher rancher-latest/rancher <span class="token punctuation">\</span>
+  <span class="token parameter variable">--namespace</span> cattle-system <span class="token punctuation">\</span>
+  <span class="token parameter variable">--set</span> <span class="token assign-left variable">hostname</span><span class="token operator">=</span><span class="token number">172.16</span>.190.100.sslip.io <span class="token punctuation">\</span>
+  <span class="token parameter variable">--set</span> <span class="token assign-left variable">replicas</span><span class="token operator">=</span><span class="token number">1</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--set</span> <span class="token assign-left variable">bootstrapPassword</span><span class="token operator">=</span>jshebuebyxg45h3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>出现下面提示就表示安装成功了</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">NAME: rancher
+LAST DEPLOYED: Sat Dec  <span class="token number">3</span> 09:12:02 <span class="token number">2022</span>
+NAMESPACE: cattle-system
+STATUS: deployed
+REVISION: <span class="token number">1</span>
+TEST SUITE: None
+NOTES:
+Rancher Server has been installed.
+
+NOTE: Rancher may take several minutes to fully initialize. Please standby <span class="token keyword">while</span> Certificates are being issued, Containers are started and the Ingress rule comes up.
+
+Check out our docs at https://rancher.com/docs/
+
+If you provided your own bootstrap password during installation, browse to https://172.16.190.100.sslip.io to get started.
+
+If this is the first <span class="token function">time</span> you installed Rancher, get started by running this <span class="token builtin class-name">command</span> and clicking the URL it generates:
+
+``<span class="token variable"><span class="token variable">`</span>
+<span class="token builtin class-name">echo</span> https://172.16.190.100.sslip.io/dashboard/?setup<span class="token operator">=</span><span class="token punctuation">$(</span>kubectl get secret <span class="token parameter variable">--namespace</span> cattle-system bootstrap-secret <span class="token parameter variable">-o</span> go-template<span class="token operator">=</span><span class="token string">'&#123;&#123;.data.bootstrapPassword|base64decode&#125;&#125;'</span><span class="token punctuation">)</span>
+<span class="token variable">`</span></span>`<span class="token variable"><span class="token variable">`</span>
+
+To get just the bootstrap password on its own, run:
+
+<span class="token variable">`</span></span>`<span class="token variable"><span class="token variable">`</span>
+kubectl get secret <span class="token parameter variable">--namespace</span> cattle-system bootstrap-secret <span class="token parameter variable">-o</span> go-template<span class="token operator">=</span><span class="token string">'&#123;&#123;.data.bootstrapPassword|base64decode&#125;&#125;&#123;&#123; "\n" &#125;&#125;'</span>
+<span class="token variable">`</span></span>``
+
+
+Happy Containering<span class="token operator">!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">root@hao:~<span class="token comment"># echo https://172.16.190.100.sslip.io/dashboard/?setup=$(kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='&#123;&#123;.data.bootstrapPassword|base64decode&#125;&#125;')</span>
+https://172.16.190.100.sslip.io/dashboard/?setup<span class="token operator">=</span>jshebuebyxg45h3
+
+root@hao:~<span class="token comment"># kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='&#123;&#123;.data.bootstrapPassword|base64decode&#125;&#125;&#123;&#123; "\n" &#125;&#125;'</span>
+jshebuebyxg45h3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>最后一步，因为是在内网，需要添加hosts才能正常访问</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> /etc/hosts
+<span class="token number">172.16</span>.190.100 <span class="token number">172.16</span>.190.100.sslip.io<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>熟悉的界面出现了！ok大功告成！</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://cdn.staticaly.com/gh/trojan20161207/blogpic@master/20230204/image-20221203172300525.1xxjl88mwj8g.webp"
+                      alt="image-20221203172300525"
+                ></p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/k3s/">#k3s</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/rancher/">#rancher</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/02/08/Awesome-Mac/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">Awesome Mac</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/02/06/HTTP%E7%8A%B6%E6%80%81%E7%A0%81%E5%90%AB%E4%B9%89/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">HTTP状态码含义</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#k3s%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85-rancher2-7%E7%95%8C%E9%9D%A2%E5%B1%95%E7%A4%BA"><span class="nav-number">1.</span> <span class="nav-text">k3s详细安装+rancher2.7界面展示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9k3s%E7%89%88%E6%9C%AC%E5%B9%B6%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text">选择k3s版本并安装</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2018</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Devin hao</a>
+            
+        </div>
+        
+            <script async data-pjax
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/utils.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/main.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/header-shrink.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/back2top.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/code-block.js"></script>
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/libs/anime.min.js"></script>
+        
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/toc.js"></script>
+        
+    
+</div>
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

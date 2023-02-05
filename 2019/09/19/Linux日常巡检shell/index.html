@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="小冲的个人博客">
+    <meta name="author" content="Devin hao">
+    
+    <title>
+        
+            Linux日常巡检shell |
+        
+        Devin blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/null">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"www.devinrain.homes","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":null,"favicon":null,"avatar":"/images/logo.svg","font_size":null,"font_family":"STHeiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":null,"font_color":null,"hitokoto":true},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+               Devin blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">Linux日常巡检shell</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/logo.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Devin hao</span>
+                            
+                                <span class="author-label">Architect</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2019-09-19 15:34:40</span>
+        <span class="mobile">2019-09-19 15:34</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2019-09-19 15:34:40</span>
+    </span>
+    
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/shell/">shell</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/shell-%E5%B7%A1%E6%A3%80/">shell, 巡检</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>4.8k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>28 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <pre class="line-numbers language-none"><code class="language-none">#!&#x2F;bin&#x2F;bash
+###################################################################
+# Functions: this script from polling system status
+# Info: be suitable for CentOS&#x2F;RHEL 6&#x2F;7 
+# Changelog:
+#      2019-01-30    haodexuan     initial commit
+###################################################################
+#set path env,if not set will some command not found in crontab
+
+export PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;sbin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;sbin:&#x2F;bin:&#x2F;usr&#x2F;sbin:&#x2F;usr&#x2F;bin:&#x2F;root&#x2F;bin
+source &#x2F;etc&#x2F;profile
+
+
+# run this script use root
+[ $(id -u) -gt 0 ] &amp;&amp; echo &quot;please use root run the script! &quot; &amp;&amp; exit 1
+
+# check system  version
+OS_Version&#x3D;$(awk &#39;&#123;print $(NF-1)&#125;&#39; &#x2F;etc&#x2F;redhat-release)
+
+# declare script version date
+Script_Version&#x3D;&quot;2019.01.30&quot;
+
+
+# define polling log path
+LOGPATH&#x3D;&#x2F;home&#x2F;logs&#x2F;polling
+[ -d $LOGPATH ] || mkdir -p $LOGPATH
+RESULTFILE&#x3D;&quot;$LOGPATH&#x2F;HostDailyCheck-&#96;hostname&#96;-&#96;date +%Y%m%d&#96;.txt&quot;
+
+
+# define globle variable
+report_DateTime&#x3D;&quot;&quot;    #日期 ok
+report_Hostname&#x3D;&quot;&quot;    #主机名 ok
+report_OSRelease&#x3D;&quot;&quot;    #发行版本 ok
+report_Kernel&#x3D;&quot;&quot;    #内核 ok
+report_Language&#x3D;&quot;&quot;    #语言&#x2F;编码 ok
+report_LastReboot&#x3D;&quot;&quot;    #最近启动时间 ok
+report_Uptime&#x3D;&quot;&quot;    #运行时间（天） ok
+report_CPUs&#x3D;&quot;&quot;    #CPU数量 ok
+report_CPUType&#x3D;&quot;&quot;    #CPU类型 ok
+report_Arch&#x3D;&quot;&quot;    #CPU架构 ok
+report_MemTotal&#x3D;&quot;&quot;    #内存总容量(MB) ok
+report_MemFree&#x3D;&quot;&quot;    #内存剩余(MB) ok
+report_MemUsedPercent&#x3D;&quot;&quot;    #内存使用率% ok
+report_DiskTotal&#x3D;&quot;&quot;    #硬盘总容量(GB) ok
+report_DiskFree&#x3D;&quot;&quot;    #硬盘剩余(GB) ok
+report_DiskUsedPercent&#x3D;&quot;&quot;    #硬盘使用率% ok
+report_InodeTotal&#x3D;&quot;&quot;    #Inode总量 ok
+report_InodeFree&#x3D;&quot;&quot;    #Inode剩余 ok
+report_InodeUsedPercent&#x3D;&quot;&quot;    #Inode使用率 ok
+report_IP&#x3D;&quot;&quot;    #IP地址 ok
+report_MAC&#x3D;&quot;&quot;    #MAC地址 ok
+report_Gateway&#x3D;&quot;&quot;    #默认网关 ok
+report_DNS&#x3D;&quot;&quot;    #DNS ok
+report_Listen&#x3D;&quot;&quot;    #监听 ok
+report_Selinux&#x3D;&quot;&quot;    #Selinux ok
+report_Firewall&#x3D;&quot;&quot;    #防火墙 ok
+report_USERs&#x3D;&quot;&quot;    #用户 ok
+report_USEREmptyPassword&#x3D;&quot;&quot;   #空密码用户 ok
+report_USERTheSameUID&#x3D;&quot;&quot;      #相同ID的用户 ok 
+report_PasswordExpiry&#x3D;&quot;&quot;    #密码过期（天） ok
+report_RootUser&#x3D;&quot;&quot;    #root用户 ok
+report_Sudoers&#x3D;&quot;&quot;    #sudo授权  ok
+report_SSHAuthorized&#x3D;&quot;&quot;    #SSH信任主机 ok
+report_SSHDProtocolVersion&#x3D;&quot;&quot;    #SSH协议版本 ok
+report_SSHDPermitRootLogin&#x3D;&quot;&quot;    #允许root远程登录 ok
+report_DefunctProsess&#x3D;&quot;&quot;    #僵尸进程数量 ok
+report_SelfInitiatedService&#x3D;&quot;&quot;    #自启动服务数量 ok
+report_SelfInitiatedProgram&#x3D;&quot;&quot;    #自启动程序数量 ok
+report_RuningService&#x3D;&quot;&quot;           #运行中服务数  ok
+report_Crontab&#x3D;&quot;&quot;    #计划任务数 ok
+report_Syslog&#x3D;&quot;&quot;    #日志服务 ok
+report_SNMP&#x3D;&quot;&quot;    #SNMP  OK
+report_NTP&#x3D;&quot;&quot;    #NTP ok
+report_JDK&#x3D;&quot;&quot;    #JDK版本 ok
+
+
+function version()&#123;
+    echo &quot;&quot;
+    echo &quot;System Polling：Version $Script_Version &quot;
+    echo &quot;&quot;
+&#125;
+
+
+function getCpuStatus()&#123;
+    echo &quot;&quot;
+    echo &quot;############################ Check CPU Status#############################&quot;
+    Physical_CPUs&#x3D;$(grep &quot;physical id&quot; &#x2F;proc&#x2F;cpuinfo| sort | uniq | wc -l)
+    Virt_CPUs&#x3D;$(grep &quot;processor&quot; &#x2F;proc&#x2F;cpuinfo | wc -l)
+    CPU_Kernels&#x3D;$(grep &quot;cores&quot; &#x2F;proc&#x2F;cpuinfo|uniq| awk -F &#39;: &#39; &#39;&#123;print $2&#125;&#39;)
+    CPU_Type&#x3D;$(grep &quot;model name&quot; &#x2F;proc&#x2F;cpuinfo | awk -F &#39;: &#39; &#39;&#123;print $2&#125;&#39; | sort | uniq)
+    CPU_Arch&#x3D;$(uname -m)
+    echo &quot;物理CPU个数:$Physical_CPUs&quot;
+    echo &quot;逻辑CPU个数:$Virt_CPUs&quot;
+    echo &quot;每CPU核心数:$CPU_Kernels&quot;
+    echo &quot;    CPU型号:$CPU_Type&quot;
+    echo &quot;    CPU架构:$CPU_Arch&quot;
+    # report information
+    report_CPUs&#x3D;$Virt_CPUs    #CPU数量
+    report_CPUType&#x3D;$CPU_Type  #CPU类型
+    report_Arch&#x3D;$CPU_Arch     #CPU架构
+&#125;
+
+
+function getMemStatus()&#123;
+    echo &quot;&quot;
+    echo &quot;############################ Check Memmory Usage ###########################&quot;
+    if [[ $OS_Version &lt; 7 ]];then
+        free -mo
+    else
+        free -h
+    fi
+    # report information
+    MemTotal&#x3D;$(grep MemTotal &#x2F;proc&#x2F;meminfo| awk &#39;&#123;print $2&#125;&#39;)  #KB
+    MemFree&#x3D;$(grep MemFree &#x2F;proc&#x2F;meminfo| awk &#39;&#123;print $2&#125;&#39;)    #KB
+    let MemUsed&#x3D;MemTotal-MemFree
+    MemPercent&#x3D;$(awk &quot;BEGIN &#123;if($MemTotal&#x3D;&#x3D;0)&#123;printf 100&#125;else&#123;printf \&quot;%.2f\&quot;,$MemUsed*100&#x2F;$MemTotal&#125;&#125;&quot;)
+    report_MemTotal&#x3D;&quot;$((MemTotal&#x2F;1024))&quot;&quot;MB&quot;        #内存总容量(MB)
+    report_MemFree&#x3D;&quot;$((MemFree&#x2F;1024))&quot;&quot;MB&quot;          #内存剩余(MB)
+    report_MemUsedPercent&#x3D;&quot;$(awk &quot;BEGIN &#123;if($MemTotal&#x3D;&#x3D;0)&#123;printf 100&#125;else&#123;printf \&quot;%.2f\&quot;,$MemUsed*100&#x2F;$MemTotal&#125;&#125;&quot;)&quot;&quot;%&quot;   #内存使用率%
+&#125;
+
+
+function getDiskStatus()&#123;
+    echo &quot;&quot;
+    echo &quot;############################ Check Disk Status ############################&quot;
+    df -hiP | sed &#39;s&#x2F;Mounted on&#x2F;Mounted&#x2F;&#39; &gt; &#x2F;tmp&#x2F;inode
+    df -hTP | sed &#39;s&#x2F;Mounted on&#x2F;Mounted&#x2F;&#39; &gt; &#x2F;tmp&#x2F;disk 
+    join &#x2F;tmp&#x2F;disk &#x2F;tmp&#x2F;inode | awk &#39;&#123;print $1,$2,&quot;|&quot;,$3,$4,$5,$6,&quot;|&quot;,$8,$9,$10,$11,&quot;|&quot;,$12&#125;&#39;| column -t
+    # report information
+    diskdata&#x3D;$(df -TP | sed &#39;1d&#39; | awk &#39;$2!&#x3D;&quot;tmpfs&quot;&#123;print&#125;&#39;) #KB
+    disktotal&#x3D;$(echo &quot;$diskdata&quot; | awk &#39;&#123;total+&#x3D;$3&#125;END&#123;print total&#125;&#39;) #KB
+    diskused&#x3D;$(echo &quot;$diskdata&quot; | awk &#39;&#123;total+&#x3D;$4&#125;END&#123;print total&#125;&#39;)  #KB
+    diskfree&#x3D;$((disktotal-diskused)) #KB
+    diskusedpercent&#x3D;$(echo $disktotal $diskused | awk &#39;&#123;if($1&#x3D;&#x3D;0)&#123;printf 100&#125;else&#123;printf &quot;%.2f&quot;,$2*100&#x2F;$1&#125;&#125;&#39;) 
+    inodedata&#x3D;$(df -iTP | sed &#39;1d&#39; | awk &#39;$2!&#x3D;&quot;tmpfs&quot;&#123;print&#125;&#39;)
+    inodetotal&#x3D;$(echo &quot;$inodedata&quot; | awk &#39;&#123;total+&#x3D;$3&#125;END&#123;print total&#125;&#39;)
+    inodeused&#x3D;$(echo &quot;$inodedata&quot; | awk &#39;&#123;total+&#x3D;$4&#125;END&#123;print total&#125;&#39;)
+    inodefree&#x3D;$((inodetotal-inodeused))
+    inodeusedpercent&#x3D;$(echo $inodetotal $inodeused | awk &#39;&#123;if($1&#x3D;&#x3D;0)&#123;printf 100&#125;else&#123;printf &quot;%.2f&quot;,$2*100&#x2F;$1&#125;&#125;&#39;)
+    report_DiskTotal&#x3D;$((disktotal&#x2F;1024&#x2F;1024))&quot;GB&quot;   #硬盘总容量(GB)
+    report_DiskFree&#x3D;$((diskfree&#x2F;1024&#x2F;1024))&quot;GB&quot;     #硬盘剩余(GB)
+    report_DiskUsedPercent&#x3D;&quot;$diskusedpercent&quot;&quot;%&quot;    #硬盘使用率%
+    report_InodeTotal&#x3D;$((inodetotal&#x2F;1000))&quot;K&quot;       #Inode总量
+    report_InodeFree&#x3D;$((inodefree&#x2F;1000))&quot;K&quot;         #Inode剩余
+    report_InodeUsedPercent&#x3D;&quot;$inodeusedpercent&quot;&quot;%&quot;  #Inode使用率%
+    echo &quot;&quot;
+&#125;
+
+
+function getSystemStatus()&#123;
+    echo &quot;&quot;
+    echo &quot;############################ Check System Status ############################&quot;
+    if [ -e &#x2F;etc&#x2F;sysconfig&#x2F;i18n ];then
+        default_LANG&#x3D;&quot;$(grep &quot;LANG&#x3D;&quot; &#x2F;etc&#x2F;sysconfig&#x2F;i18n | grep -v &quot;^#&quot; | awk -F &#39;&quot;&#39; &#39;&#123;print $2&#125;&#39;)&quot;
+    else
+        default_LANG&#x3D;$LANG
+    fi
+    export LANG&#x3D;&quot;en_US.UTF-8&quot;
+    Release&#x3D;$(cat &#x2F;etc&#x2F;redhat-release 2&gt;&#x2F;dev&#x2F;null)
+    Kernel&#x3D;$(uname -r)
+    OS&#x3D;$(uname -o)
+    Hostname&#x3D;$(uname -n)
+    SELinux&#x3D;$(&#x2F;usr&#x2F;sbin&#x2F;sestatus | grep &quot;SELinux status: &quot; | awk &#39;&#123;print $3&#125;&#39;)
+    LastReboot&#x3D;$(who -b | awk &#39;&#123;print $3,$4&#125;&#39;)
+    uptime&#x3D;$(uptime | sed &#39;s&#x2F;.*up [,]∗, .*&#x2F;\1&#x2F;&#39;)
+    echo &quot;     系统：$OS&quot;
+    echo &quot; 发行版本：$Release&quot;
+    echo &quot;     内核：$Kernel&quot;
+    echo &quot;   主机名：$Hostname&quot;
+    echo &quot;  SELinux：$SELinux&quot;
+    echo &quot;语言&#x2F;编码：$default_LANG&quot;
+    echo &quot; 当前时间：$(date +&#39;%F %T&#39;)&quot;
+    echo &quot; 最后启动：$LastReboot&quot;
+    echo &quot; 运行时间：$uptime&quot;
+    # report information
+    report_DateTime&#x3D;$(date +&quot;%F %T&quot;)  #日期
+    report_Hostname&#x3D;&quot;$Hostname&quot;       #主机名
+    report_OSRelease&#x3D;&quot;$Release&quot;       #发行版本
+    report_Kernel&#x3D;&quot;$Kernel&quot;           #内核
+    report_Language&#x3D;&quot;$default_LANG&quot;   #语言&#x2F;编码
+    report_LastReboot&#x3D;&quot;$LastReboot&quot;   #最近启动时间
+    report_Uptime&#x3D;&quot;$uptime&quot;           #运行时间（天）
+    report_Selinux&#x3D;&quot;$SELinux&quot;
+    export LANG&#x3D;&quot;$default_LANG&quot;
+    echo &quot;&quot;
+&#125;
+
+function getServiceStatus()&#123;
+    echo &quot;&quot;
+    echo &quot;############################ Check Service Status ############################&quot;
+    if [[ $OS_Version &gt; 7 ]];then
+        conf&#x3D;$(systemctl list-unit-files --type&#x3D;service --state&#x3D;enabled --no-pager | grep &quot;enabled&quot;)
+        process&#x3D;$(systemctl list-units --type&#x3D;service --state&#x3D;running --no-pager | grep &quot;.service&quot;)
+        # report information
+        report_SelfInitiatedService&#x3D;&quot;$(echo &quot;$conf&quot; | wc -l)&quot;       #自启动服务数量
+        report_RuningService&#x3D;&quot;$(echo &quot;$process&quot; | wc -l)&quot;           #运行中服务数量
+    else
+        conf&#x3D;$(&#x2F;sbin&#x2F;chkconfig | grep -E &quot;:on|:启用&quot;)
+        process&#x3D;$(&#x2F;sbin&#x2F;service --status-all 2&gt;&#x2F;dev&#x2F;null | grep -E &quot;is running|正在运行&quot;)
+        # report information
+        report_SelfInitiatedService&#x3D;&quot;$(echo &quot;$conf&quot; | wc -l)&quot;       #自启动服务数量
+        report_RuningService&#x3D;&quot;$(echo &quot;$process&quot; | wc -l)&quot;           #运行中服务数量
+    fi
+    echo &quot;Service Configure&quot;
+    echo &quot;--------------------------------&quot;
+    echo &quot;$conf&quot; | column -t
+    echo &quot;&quot;
+    echo &quot;The Running Services&quot;
+    echo &quot;--------------------------------&quot;
+    echo &quot;$process&quot;
+&#125;
+
+function getAutoStartStatus()&#123;
+    echo &quot;&quot;
+    echo &quot;############################ Check Self-starting Services ##########################&quot;
+    conf&#x3D;$(grep -v &quot;^#&quot; &#x2F;etc&#x2F;rc.d&#x2F;rc.local| sed &#39;&#x2F;^$&#x2F;d&#39;)
+    echo &quot;$conf&quot;
+    # report information
+    report_SelfInitiatedProgram&#x3D;&quot;$(echo $conf | wc -l)&quot;    #自启动程序数量
+&#125;
+
+
+function getLoginStatus()&#123;
+    echo &quot;&quot;
+    echo &quot;############################ Check Login In ############################&quot;
+    last | head
+&#125;
+
+function getNetworkStatus()&#123;
+    echo &quot;&quot;
+    echo &quot;############################ Check Network ############################&quot;
+    if [[ $OS_Version &lt; 7 ]];then
+        &#x2F;sbin&#x2F;ifconfig -a | grep -v packets | grep -v collisions | grep -v inet6
+    else
+        #ip address
+        for i in $(ip link | grep BROADCAST | awk -F: &#39;&#123;print $2&#125;&#39;);do ip add show $i | grep -E &quot;BROADCAST|global&quot;| awk &#39;&#123;print $2&#125;&#39; | tr &#39;\n&#39; &#39; &#39; ;echo &quot;&quot; ;done
+    fi
+    GATEWAY&#x3D;$(ip route | grep default | awk &#39;&#123;print $3&#125;&#39;)
+    DNS&#x3D;$(grep nameserver &#x2F;etc&#x2F;resolv.conf| grep -v &quot;#&quot; | awk &#39;&#123;print $2&#125;&#39; | tr &#39;\n&#39; &#39;,&#39; | sed &#39;s&#x2F;,$&#x2F;&#x2F;&#39;)
+    echo &quot;&quot;
+    echo &quot;Gateway: $GATEWAY &quot;
+    echo &quot; DNS: $DNS&quot;
+    # report information
+    IP&#x3D;$(ip -f inet addr | grep -v 127.0.0.1 |  grep inet | awk &#39;&#123;print $NF,$2&#125;&#39; | tr &#39;\n&#39; &#39;,&#39; | sed &#39;s&#x2F;,$&#x2F;&#x2F;&#39;)
+    MAC&#x3D;$(ip link | grep -v &quot;LOOPBACK\|loopback&quot; | awk &#39;&#123;print $2&#125;&#39; | sed &#39;N;s&#x2F;\n&#x2F;&#x2F;&#39; | tr &#39;\n&#39; &#39;,&#39; | sed &#39;s&#x2F;,$&#x2F;&#x2F;&#39;)
+    report_IP&#x3D;&quot;$IP&quot;            #IP地址
+    report_MAC&#x3D;$MAC            #MAC地址
+    report_Gateway&#x3D;&quot;$GATEWAY&quot;  #默认网关
+    report_DNS&#x3D;&quot;$DNS&quot;          #DNS
+&#125;
+
+
+function getListenStatus()&#123;
+    echo &quot;&quot;
+    echo &quot;############################ Check Connect Status ############################&quot;
+#    TCPListen&#x3D;$(ss -ntul | column -t)
+    TCPListen&#x3D;$(netstat -ntulp | column -t)
+    AllConnect&#x3D;$(ss -an | awk &#39;NR&gt;1 &#123;++s[$1]&#125; END &#123;for(k in s) print k,s[k]&#125;&#39; | column -t)
+    echo &quot;$TCPListen&quot;
+    echo &quot;$AllConnect&quot;
+    # report information
+    report_Listen&#x3D;&quot;$(echo &quot;$TCPListen&quot;| sed &#39;1d&#39; | awk &#39;&#x2F;tcp&#x2F; &#123;print $5&#125;&#39; | awk -F: &#39;&#123;print $NF&#125;&#39; | sort | uniq | wc -l)&quot;
+&#125;
+
+function getCronStatus()&#123;
+    echo &quot;&quot;
+    echo &quot;############################ Check Crontab ########################&quot;
+    Crontab&#x3D;0
+    for shell in $(grep -v &quot;&#x2F;sbin&#x2F;nologin&quot; &#x2F;etc&#x2F;shells);do
+        for user in $(grep &quot;$shell&quot; &#x2F;etc&#x2F;passwd | awk -F: &#39;&#123;print $1&#125;&#39;);do
+            crontab -l -u $user &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1
+            status&#x3D;$?
+            if [ $status -eq 0 ];then
+                echo &quot;$user&quot;
+                echo &quot;-------------&quot;
+                crontab -l -u $user
+                let Crontab&#x3D;Crontab+$(crontab -l -u $user | wc -l)
+                echo &quot;&quot;
+            fi
+        done
+    done
+    # scheduled task
+    find &#x2F;etc&#x2F;cron* -type f | xargs -i ls -l &#123;&#125; | column  -t
+    let Crontab&#x3D;Crontab+$(find &#x2F;etc&#x2F;cron* -type f | wc -l)
+    # report information
+    report_Crontab&#x3D;&quot;$Crontab&quot;    #计划任务数
+&#125;
+
+function getHowLongAgo()&#123;
+    # 计算一个时间戳离现在有多久了
+    datetime&#x3D;&quot;$*&quot;
+    [ -z &quot;$datetime&quot; ] &amp;&amp; echo &quot;错误的参数：getHowLongAgo() $*&quot;
+    Timestamp&#x3D;$(date +%s -d &quot;$datetime&quot;)    #转化为时间戳
+    Now_Timestamp&#x3D;$(date +%s)
+    Difference_Timestamp&#x3D;$(($Now_Timestamp-$Timestamp))
+    days&#x3D;0;hours&#x3D;0;minutes&#x3D;0;
+    sec_in_day&#x3D;$((60*60*24));
+    sec_in_hour&#x3D;$((60*60));
+    sec_in_minute&#x3D;60
+    while (( $(($Difference_Timestamp-$sec_in_day)) &gt; 1 ))
+    do
+        let Difference_Timestamp&#x3D;Difference_Timestamp-sec_in_day
+        let days++
+    done
+    while (( $(($Difference_Timestamp-$sec_in_hour)) &gt; 1 ))
+    do
+        let Difference_Timestamp&#x3D;Difference_Timestamp-sec_in_hour
+        let hours++
+    done
+    echo &quot;$days 天 $hours 小时前&quot;
+&#125;
+
+
+function getUserLastLogin()&#123;
+    # 获取用户最近一次登录的时间，含年份
+    # 很遗憾last命令不支持显示年份，只有&quot;last -t YYYYMMDDHHMMSS&quot;表示某个时间之间的登录，我
+    # 们只能用最笨的方法了，对比今天之前和今年元旦之前（或者去年之前和前年之前……）某个用户
+    # 登录次数，如果登录统计次数有变化，则说明最近一次登录是今年。
+    username&#x3D;$1
+    : $&#123;username:&#x3D;&quot;&#96;whoami&#96;&quot;&#125;
+    thisYear&#x3D;$(date +%Y)
+    oldesYear&#x3D;$(last | tail -n1 | awk &#39;&#123;print $NF&#125;&#39;)
+    while(( $thisYear &gt;&#x3D; $oldesYear));do
+        loginBeforeToday&#x3D;$(last $username | grep $username | wc -l)
+        loginBeforeNewYearsDayOfThisYear&#x3D;$(last $username -t $thisYear&quot;0101000000&quot; | grep $username | wc -l)
+        if [ $loginBeforeToday -eq 0 ];then
+            echo &quot;Never Login&quot;
+            break
+        elif [ $loginBeforeToday -gt $loginBeforeNewYearsDayOfThisYear ];then
+            lastDateTime&#x3D;$(last -i $username | head -n1 | awk &#39;&#123;for(i&#x3D;4;i&lt;(NF-2);i++)printf&quot;%s &quot;,$i&#125;&#39;)&quot; $thisYear&quot; #格式如: Sat Nov 2 20:33 2015
+            lastDateTime&#x3D;$(date &quot;+%Y-%m-%d %H:%M:%S&quot; -d &quot;$lastDateTime&quot;)
+            echo &quot;$lastDateTime&quot;
+            break
+        else
+            thisYear&#x3D;$((thisYear-1))
+        fi
+    done
+&#125;
+
+function getUserStatus()&#123;
+    echo &quot;&quot;
+    echo &quot;############################ Check User ############################&quot;
+    # &#x2F;etc&#x2F;passwd the last modification time
+    pwdfile&#x3D;&quot;$(cat &#x2F;etc&#x2F;passwd)&quot;
+    Modify&#x3D;$(stat &#x2F;etc&#x2F;passwd | grep Modify | tr &#39;.&#39; &#39; &#39; | awk &#39;&#123;print $2,$3&#125;&#39;)
+    echo &quot;&#x2F;etc&#x2F;passwd The last modification time：$Modify ($(getHowLongAgo $Modify))&quot;
+    echo &quot;&quot;
+    echo &quot;A privileged user&quot;
+    echo &quot;-----------------&quot;
+    RootUser&#x3D;&quot;&quot;
+    for user in $(echo &quot;$pwdfile&quot; | awk -F: &#39;&#123;print $1&#125;&#39;);do
+        if [ $(id -u $user) -eq 0 ];then
+            echo &quot;$user&quot;
+            RootUser&#x3D;&quot;$RootUser,$user&quot;
+        fi
+    done
+    echo &quot;&quot;
+    echo &quot;User List&quot;
+    echo &quot;--------&quot;
+    USERs&#x3D;0
+    echo &quot;$(
+    echo &quot;UserName UID GID HOME SHELL LasttimeLogin&quot;
+    for shell in $(grep -v &quot;&#x2F;sbin&#x2F;nologin&quot; &#x2F;etc&#x2F;shells);do
+        for username in $(grep &quot;$shell&quot; &#x2F;etc&#x2F;passwd| awk -F: &#39;&#123;print $1&#125;&#39;);do
+            userLastLogin&#x3D;&quot;$(getUserLastLogin $username)&quot;
+            echo &quot;$pwdfile&quot; | grep -w &quot;$username&quot; |grep -w &quot;$shell&quot;| awk -F: -v lastlogin&#x3D;&quot;$(echo &quot;$userLastLogin&quot; | tr &#39; &#39; &#39;_&#39;)&quot; &#39;&#123;print $1,$3,$4,$6,$7,lastlogin&#125;&#39;
+        done
+        let USERs&#x3D;USERs+$(echo &quot;$pwdfile&quot; | grep &quot;$shell&quot;| wc -l)
+    done
+    )&quot; | column -t
+    echo &quot;&quot;
+    echo &quot;Null Password User&quot;
+    echo &quot;------------------&quot;
+    USEREmptyPassword&#x3D;&quot;&quot;
+    for shell in $(grep -v &quot;&#x2F;sbin&#x2F;nologin&quot; &#x2F;etc&#x2F;shells);do
+            for user in $(echo &quot;$pwdfile&quot; | grep &quot;$shell&quot; | cut -d: -f1);do
+            r&#x3D;$(awk -F: &#39;$2&#x3D;&#x3D;&quot;!!&quot;&#123;print $1&#125;&#39; &#x2F;etc&#x2F;shadow | grep -w $user)
+            if [ ! -z $r ];then
+                echo $r
+                USEREmptyPassword&#x3D;&quot;$USEREmptyPassword,&quot;$r
+            fi
+        done    
+    done
+    echo &quot;&quot;
+    echo &quot;The Same UID User&quot;
+    echo &quot;----------------&quot;
+    USERTheSameUID&#x3D;&quot;&quot;
+    UIDs&#x3D;$(cut -d: -f3 &#x2F;etc&#x2F;passwd | sort | uniq -c | awk &#39;$1&gt;1&#123;print $2&#125;&#39;)
+    for uid in $UIDs;do
+        echo -n &quot;$uid&quot;;
+        USERTheSameUID&#x3D;&quot;$uid&quot;
+        r&#x3D;$(awk -F: &#39;ORS&#x3D;&quot;&quot;;$3&#x3D;&#x3D;&#39;&quot;$uid&quot;&#39;&#123;print &quot;:&quot;,$1&#125;&#39; &#x2F;etc&#x2F;passwd)
+        echo &quot;$r&quot;
+        echo &quot;&quot;
+        USERTheSameUID&#x3D;&quot;$USERTheSameUID $r,&quot;
+    done
+    # report information
+    report_USERs&#x3D;&quot;$USERs&quot;    #用户
+    report_USEREmptyPassword&#x3D;$(echo $USEREmptyPassword | sed &#39;s&#x2F;^,&#x2F;&#x2F;&#39;) 
+    report_USERTheSameUID&#x3D;$(echo $USERTheSameUID | sed &#39;s&#x2F;,$&#x2F;&#x2F;&#39;) 
+    report_RootUser&#x3D;$(echo $RootUser | sed &#39;s&#x2F;^,&#x2F;&#x2F;&#39;)    #特权用户
+&#125;
+
+
+function getPasswordStatus &#123;
+    echo &quot;&quot;
+    echo &quot;############################ Check Password Status ############################&quot;
+    pwdfile&#x3D;&quot;$(cat &#x2F;etc&#x2F;passwd)&quot;
+    echo &quot;&quot;
+    echo &quot;Password Expiration Check&quot;
+    echo &quot;-------------------------&quot;
+    result&#x3D;&quot;&quot;
+    for shell in $(grep -v &quot;&#x2F;sbin&#x2F;nologin&quot; &#x2F;etc&#x2F;shells);do
+        for user in $(echo &quot;$pwdfile&quot; | grep &quot;$shell&quot; | cut -d: -f1);do
+            get_expiry_date&#x3D;$(&#x2F;usr&#x2F;bin&#x2F;chage -l $user | grep &#39;Password expires&#39; | cut -d: -f2)
+            if [[ $get_expiry_date &#x3D; &#39; never&#39; || $get_expiry_date &#x3D; &#39;never&#39; ]];then
+                printf &quot;%-15s never expiration\n&quot; $user
+                result&#x3D;&quot;$result,$user:never&quot;
+            else
+                password_expiry_date&#x3D;$(date -d &quot;$get_expiry_date&quot; &quot;+%s&quot;)
+                current_date&#x3D;$(date &quot;+%s&quot;)
+                diff&#x3D;$(($password_expiry_date-$current_date))
+                let DAYS&#x3D;$(($diff&#x2F;(60*60*24)))
+                printf &quot;%-15s %s expiration after days\n&quot; $user $DAYS
+                result&#x3D;&quot;$result,$user:$DAYS days&quot;
+            fi
+        done
+    done
+    report_PasswordExpiry&#x3D;$(echo $result | sed &#39;s&#x2F;^,&#x2F;&#x2F;&#39;)
+    echo &quot;&quot;
+    echo &quot;Check The Password Policy&quot;
+    echo &quot;------------&quot;
+    grep -v &quot;#&quot; &#x2F;etc&#x2F;login.defs | grep -E &quot;PASS_MAX_DAYS|PASS_MIN_DAYS|PASS_MIN_LEN|PASS_WARN_AGE&quot;
+    echo &quot;&quot;
+&#125;
+
+function getSudoersStatus()&#123;
+    echo &quot;&quot;
+    echo &quot;############################ Sudoers Check #########################&quot;
+    conf&#x3D;$(grep -v &quot;^#&quot; &#x2F;etc&#x2F;sudoers| grep -v &quot;^Defaults&quot; | sed &#39;&#x2F;^$&#x2F;d&#39;)
+    echo &quot;$conf&quot;
+    echo &quot;&quot;
+    # report information
+    report_Sudoers&#x3D;&quot;$(echo $conf | wc -l)&quot;
+&#125;
+
+
+function getInstalledStatus()&#123;
+    echo &quot;&quot;
+    echo &quot;############################ Software Check ############################&quot;
+    rpm -qa --last | head | column -t 
+&#125;
+
+function getProcessStatus()&#123;
+    echo &quot;&quot;
+    echo &quot;############################ Process Check ############################&quot;
+    if [ $(ps -ef | grep defunct | grep -v grep | wc -l) -ge 1 ];then
+        echo &quot;&quot;
+        echo &quot;zombie process&quot;;
+        echo &quot;--------&quot;
+        ps -ef | head -n1
+        ps -ef | grep defunct | grep -v grep
+    fi
+    echo &quot;&quot;
+    echo &quot;Merory Usage TOP10&quot;
+    echo &quot;-------------&quot;
+    echo -e &quot;PID %MEM RSS COMMAND
+    $(ps aux | awk &#39;&#123;print $2, $4, $6, $11&#125;&#39; | sort -k3rn | head -n 10 )&quot;| column -t 
+    echo &quot;&quot;
+    echo &quot;CPU Usage TOP10&quot;
+    echo &quot;------------&quot;
+    top b -n1 | head -17 | tail -11
+    # report information
+    report_DefunctProsess&#x3D;&quot;$(ps -ef | grep defunct | grep -v grep|wc -l)&quot;
+&#125;
+
+
+function getJDKStatus()&#123;
+    echo &quot;&quot;
+    echo &quot;############################ JDK Check #############################&quot;
+    java -version 2&gt;&#x2F;dev&#x2F;null
+    if [ $? -eq 0 ];then
+        java -version 2&gt;&amp;1
+    fi
+    echo &quot;JAVA_HOME&#x3D;\&quot;$JAVA_HOME\&quot;&quot;
+    # report information
+    report_JDK&#x3D;&quot;$(java -version 2&gt;&amp;1 | grep version | awk &#39;&#123;print $1,$3&#125;&#39; | tr -d &#39;&quot;&#39;)&quot;
+&#125;
+
+function getSyslogStatus()&#123;
+    echo &quot;&quot;
+    echo &quot;############################ Syslog Check ##########################&quot;
+    echo &quot;Service Status：$(getState rsyslog)&quot;
+    echo &quot;&quot;
+    echo &quot;&#x2F;etc&#x2F;rsyslog.conf&quot;
+    echo &quot;-----------------&quot;
+    cat &#x2F;etc&#x2F;rsyslog.conf 2&gt;&#x2F;dev&#x2F;null | grep -v &quot;^#&quot; | grep -v &quot;^\\$&quot; | sed &#39;&#x2F;^$&#x2F;d&#39;  | column -t
+    #report information
+    report_Syslog&#x3D;&quot;$(getState rsyslog)&quot;
+&#125;
+
+
+function getFirewallStatus()&#123;
+    echo &quot;&quot;
+    echo &quot;############################ Firewall Check ##########################&quot;
+    # Firewall Status&#x2F;Poilcy
+    if [[ $OS_Version &lt; 7 ]];then
+        &#x2F;etc&#x2F;init.d&#x2F;iptables status &gt;&#x2F;dev&#x2F;null  2&gt;&amp;1
+        status&#x3D;$?
+        if [ $status -eq 0 ];then
+                s&#x3D;&quot;active&quot;
+        elif [ $status -eq 3 ];then
+                s&#x3D;&quot;inactive&quot;
+        elif [ $status -eq 4 ];then
+                s&#x3D;&quot;permission denied&quot;
+        else
+                s&#x3D;&quot;unknown&quot;
+        fi
+    else
+        s&#x3D;&quot;$(getState iptables)&quot;
+    fi
+    echo &quot;iptables: $s&quot;
+    echo &quot;&quot;
+    echo &quot;&#x2F;etc&#x2F;sysconfig&#x2F;iptables&quot;
+    echo &quot;-----------------------&quot;
+    cat &#x2F;etc&#x2F;sysconfig&#x2F;iptables 2&gt;&#x2F;dev&#x2F;null
+    # report information
+    report_Firewall&#x3D;&quot;$s&quot;
+&#125;
+
+
+function getSNMPStatus()&#123;
+    #SNMP Service Status,Configure
+    echo &quot;&quot;
+    echo &quot;############################ SNMP Check ############################&quot;
+    status&#x3D;&quot;$(getState snmpd)&quot;
+    echo &quot;Service Status：$status&quot;
+    echo &quot;&quot;
+    if [ -e &#x2F;etc&#x2F;snmp&#x2F;snmpd.conf ];then
+        echo &quot;&#x2F;etc&#x2F;snmp&#x2F;snmpd.conf&quot;
+        echo &quot;--------------------&quot;
+        cat &#x2F;etc&#x2F;snmp&#x2F;snmpd.conf 2&gt;&#x2F;dev&#x2F;null | grep -v &quot;^#&quot; | sed &#39;&#x2F;^$&#x2F;d&#39;
+    fi
+    # report information
+    report_SNMP&#x3D;&quot;$(getState snmpd)&quot;
+&#125;
+
+function getState()&#123;
+    if [[ $OS_Version &lt; 7 ]];then
+        if [ -e &quot;&#x2F;etc&#x2F;init.d&#x2F;$1&quot; ];then
+            if [ &#96;&#x2F;etc&#x2F;init.d&#x2F;$1 status 2&gt;&#x2F;dev&#x2F;null | grep -E &quot;is running|正在运行&quot; | wc -l&#96; -ge 1 ];then
+                r&#x3D;&quot;active&quot;
+            else
+                r&#x3D;&quot;inactive&quot;
+            fi
+        else
+            r&#x3D;&quot;unknown&quot;
+        fi
+    else
+        #CentOS 7+
+        r&#x3D;&quot;$(systemctl is-active $1 2&gt;&amp;1)&quot;
+    fi
+    echo &quot;$r&quot;
+&#125;
+
+function getSSHStatus()&#123;
+    #SSHD Service Status,Configure
+    echo &quot;&quot;
+    echo &quot;############################ SSH Check #############################&quot;
+    # Check the trusted host
+    pwdfile&#x3D;&quot;$(cat &#x2F;etc&#x2F;passwd)&quot;
+    echo &quot;Service Status：$(getState sshd)&quot;
+    Protocol_Version&#x3D;$(cat &#x2F;etc&#x2F;ssh&#x2F;sshd_config | grep Protocol | awk &#39;&#123;print $2&#125;&#39;)
+    echo &quot;SSH Protocol Version：$Protocol_Version&quot;
+    echo &quot;&quot;
+    echo &quot;Trusted Host&quot;
+    echo &quot;------------&quot;
+    authorized&#x3D;0
+    for user in $(echo &quot;$pwdfile&quot; | grep &#x2F;bin&#x2F;bash | awk -F: &#39;&#123;print $1&#125;&#39;);do
+        authorize_file&#x3D;$(echo &quot;$pwdfile&quot; | grep -w $user | awk -F: &#39;&#123;printf $6&quot;&#x2F;.ssh&#x2F;authorized_keys&quot;&#125;&#39;)
+        authorized_host&#x3D;$(cat $authorize_file 2&gt;&#x2F;dev&#x2F;null | awk &#39;&#123;print $3&#125;&#39; | tr &#39;\n&#39; &#39;,&#39; | sed &#39;s&#x2F;,$&#x2F;&#x2F;&#39;)
+        if [ ! -z $authorized_host ];then
+            echo &quot;$user authorization \&quot;$authorized_host\&quot; Password-less access&quot;
+        fi
+        let authorized&#x3D;authorized+$(cat $authorize_file 2&gt;&#x2F;dev&#x2F;null | awk &#39;&#123;print $3&#125;&#39;|wc -l)
+    done
+
+
+    echo &quot;&quot;
+    echo &quot;Whether to allow ROOT remote login&quot;
+    echo &quot;----------------------------------&quot;
+    config&#x3D;$(cat &#x2F;etc&#x2F;ssh&#x2F;sshd_config | grep PermitRootLogin)
+    firstChar&#x3D;$&#123;config:0:1&#125;
+    if [ $firstChar &#x3D;&#x3D; &quot;#&quot; ];then
+        PermitRootLogin&#x3D;&quot;yes&quot;  #The default is to allow ROOT remote login
+    else
+        PermitRootLogin&#x3D;$(echo $config | awk &#39;&#123;print $2&#125;&#39;)
+    fi
+    echo &quot;PermitRootLogin $PermitRootLogin&quot;
+
+
+    echo &quot;&quot;
+    echo &quot;&#x2F;etc&#x2F;ssh&#x2F;sshd_config&quot;
+    echo &quot;--------------------&quot;
+    cat &#x2F;etc&#x2F;ssh&#x2F;sshd_config | grep -v &quot;^#&quot; | sed &#39;&#x2F;^$&#x2F;d&#39;
+    # report information
+    report_SSHAuthorized&#x3D;&quot;$authorized&quot;    #SSH信任主机
+    report_SSHDProtocolVersion&#x3D;&quot;$Protocol_Version&quot;    #SSH协议版本
+    report_SSHDPermitRootLogin&#x3D;&quot;$PermitRootLogin&quot;    #允许root远程登录
+&#125;
+
+function getNTPStatus()&#123;
+    # The NTP service status, the current time, configuration, etc
+    echo &quot;&quot;
+    echo &quot;############################ NTP Check #############################&quot;
+    if [ -e &#x2F;etc&#x2F;ntp.conf ];then
+        echo &quot;Service Status：$(getState ntpd)&quot;
+        echo &quot;&quot;
+        echo &quot;&#x2F;etc&#x2F;ntp.conf&quot;
+        echo &quot;-------------&quot;
+        cat &#x2F;etc&#x2F;ntp.conf 2&gt;&#x2F;dev&#x2F;null | grep -v &quot;^#&quot; | sed &#39;&#x2F;^$&#x2F;d&#39;
+    fi
+    # report information
+    report_NTP&#x3D;&quot;$(getState ntpd)&quot;
+&#125;
+
+
+
+function getZabbixStatus()&#123;
+    # Check Zabbix Serivce Status
+    echo &quot;&quot;
+    echo &quot;######################### Zabbix Check ##############################&quot;
+    netstat -nltp | grep -v grep | grep zabbix &gt; &#x2F;dev&#x2F;null 2&gt;&amp;1
+    if [ $? -eq 0 ];then
+       echo &quot;Service Status&quot;: Zabbix is running!
+    else
+       echo &quot;Service Status&quot;: Zabbix not running!
+    fi
+    # report information
+&#125;
+
+function uploadHostDailyCheckReport()&#123;
+    json&#x3D;&quot;&#123;
+        \&quot;DateTime\&quot;:\&quot;$report_DateTime\&quot;,
+        \&quot;Hostname\&quot;:\&quot;$report_Hostname\&quot;,
+        \&quot;OSRelease\&quot;:\&quot;$report_OSRelease\&quot;,
+        \&quot;Kernel\&quot;:\&quot;$report_Kernel\&quot;,
+        \&quot;Language\&quot;:\&quot;$report_Language\&quot;,
+        \&quot;LastReboot\&quot;:\&quot;$report_LastReboot\&quot;,
+        \&quot;Uptime\&quot;:\&quot;$report_Uptime\&quot;,
+        \&quot;CPUs\&quot;:\&quot;$report_CPUs\&quot;,
+        \&quot;CPUType\&quot;:\&quot;$report_CPUType\&quot;,
+        \&quot;Arch\&quot;:\&quot;$report_Arch\&quot;,
+        \&quot;MemTotal\&quot;:\&quot;$report_MemTotal\&quot;,
+        \&quot;MemFree\&quot;:\&quot;$report_MemFree\&quot;,
+        \&quot;MemUsedPercent\&quot;:\&quot;$report_MemUsedPercent\&quot;,
+        \&quot;DiskTotal\&quot;:\&quot;$report_DiskTotal\&quot;,
+        \&quot;DiskFree\&quot;:\&quot;$report_DiskFree\&quot;,
+        \&quot;DiskUsedPercent\&quot;:\&quot;$report_DiskUsedPercent\&quot;,
+        \&quot;InodeTotal\&quot;:\&quot;$report_InodeTotal\&quot;,
+        \&quot;InodeFree\&quot;:\&quot;$report_InodeFree\&quot;,
+        \&quot;InodeUsedPercent\&quot;:\&quot;$report_InodeUsedPercent\&quot;,
+        \&quot;IP\&quot;:\&quot;$report_IP\&quot;,
+        \&quot;MAC\&quot;:\&quot;$report_MAC\&quot;,
+        \&quot;Gateway\&quot;:\&quot;$report_Gateway\&quot;,
+        \&quot;DNS\&quot;:\&quot;$report_DNS\&quot;,
+        \&quot;Listen\&quot;:\&quot;$report_Listen\&quot;,
+        \&quot;Selinux\&quot;:\&quot;$report_Selinux\&quot;,
+        \&quot;Firewall\&quot;:\&quot;$report_Firewall\&quot;,
+        \&quot;USERs\&quot;:\&quot;$report_USERs\&quot;,
+        \&quot;USEREmptyPassword\&quot;:\&quot;$report_USEREmptyPassword\&quot;,
+        \&quot;USERTheSameUID\&quot;:\&quot;$report_USERTheSameUID\&quot;,
+        \&quot;PasswordExpiry\&quot;:\&quot;$report_PasswordExpiry\&quot;,
+        \&quot;RootUser\&quot;:\&quot;$report_RootUser\&quot;,
+        \&quot;Sudoers\&quot;:\&quot;$report_Sudoers\&quot;,
+        \&quot;SSHAuthorized\&quot;:\&quot;$report_SSHAuthorized\&quot;,
+        \&quot;SSHDProtocolVersion\&quot;:\&quot;$report_SSHDProtocolVersion\&quot;,
+        \&quot;SSHDPermitRootLogin\&quot;:\&quot;$report_SSHDPermitRootLogin\&quot;,
+        \&quot;DefunctProsess\&quot;:\&quot;$report_DefunctProsess\&quot;,
+        \&quot;SelfInitiatedService\&quot;:\&quot;$report_SelfInitiatedService\&quot;,
+        \&quot;SelfInitiatedProgram\&quot;:\&quot;$report_SelfInitiatedProgram\&quot;,
+        \&quot;RuningService\&quot;:\&quot;$report_RuningService\&quot;,
+        \&quot;Crontab\&quot;:\&quot;$report_Crontab\&quot;,
+        \&quot;Syslog\&quot;:\&quot;$report_Syslog\&quot;,
+        \&quot;SNMP\&quot;:\&quot;$report_SNMP\&quot;,
+        \&quot;NTP\&quot;:\&quot;$report_NTP\&quot;,
+        \&quot;JDK\&quot;:\&quot;$report_JDK\&quot;
+    &#125;&quot;
+    #echo &quot;$json&quot; 
+    curl -l -H &quot;Content-type: application&#x2F;json&quot; -X POST -d &quot;$json&quot; &quot;$uploadHostDailyCheckReportApi&quot; 2&gt;&#x2F;dev&#x2F;null
+&#125;
+
+function check()&#123;
+    version
+    getSystemStatus
+    getCpuStatus
+    getMemStatus
+    getDiskStatus
+    getNetworkStatus
+    getListenStatus
+    getProcessStatus
+    getServiceStatus
+    getAutoStartStatus
+    getLoginStatus
+    getCronStatus
+    getUserStatus
+    getPasswordStatus
+    getSudoersStatus
+    getJDKStatus
+    getFirewallStatus
+    getSSHStatus
+    getSyslogStatus
+    getSNMPStatus
+    getNTPStatus
+    getZabbixStatus
+    getInstalledStatus
+&#125;
+
+# Perform inspections and save the inspection results  #执行检查并保存检查结果
+check &gt; $RESULTFILE
+echo &quot;Check the result：$RESULTFILE&quot;
+
+# Upload the result file  #上传检查结果的文件
+#curl -F &quot;filename&#x3D;@$RESULTFILE&quot; &quot;$uploadHostDailyCheckApi&quot; 2&gt;&#x2F;dev&#x2F;null
+
+#Upload inspection result report  #上传检查结果的报表
+#uploadHostDailyCheckReport 1&gt;&#x2F;dev&#x2F;null<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/shell-%E5%B7%A1%E6%A3%80/">#shell, 巡检</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2019/09/23/nginx%E6%A6%82%E8%BF%B0/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">nginx概述</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2019/09/19/%E8%BF%90%E7%BB%B4%E6%9E%B6%E6%9E%84%E5%B1%82%E7%BA%A7/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">运维架构层级</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2018</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Devin hao</a>
+            
+        </div>
+        
+            <script async data-pjax
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/utils.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/main.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/header-shrink.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/back2top.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/code-block.js"></script>
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/libs/anime.min.js"></script>
+        
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/toc.js"></script>
+        
+    
+</div>
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

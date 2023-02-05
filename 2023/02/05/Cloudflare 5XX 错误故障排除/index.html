@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="小冲的个人博客">
+    <meta name="author" content="Devin hao">
+    
+    <title>
+        
+            Cloudflare 5XX 错误故障排除 |
+        
+        Devin blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/null">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"www.devinrain.homes","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":null,"favicon":null,"avatar":"/images/logo.svg","font_size":null,"font_family":"STHeiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":null,"font_color":null,"hitokoto":true},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+               Devin blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">Cloudflare 5XX 错误故障排除</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/logo.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Devin hao</span>
+                            
+                                <span class="author-label">Architect</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2023-02-05 17:09:06</span>
+        <span class="mobile">2023-02-05 17:09</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2023-02-05 17:17:33</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/cloudflare/">cloudflare</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>4.6k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>17 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <p><em>诊断并解决 Cloudflare 代理的站点的 5XX 错误。</em></p>
+<h3 id="本文内容"><a href="#本文内容" class="headerlink" title="本文内容"></a>本文内容</h3><ul>
+<li>[概述]</li>
+<li>[错误分析](</li>
+<li>[Error 500: internal server error]</li>
+<li>[Error 502 bad gateway 或 Error 504 gateway timeout]</li>
+<li>[Error 503: service temporarily unavailable]</li>
+<li>[Error 520: web server returns an unknown error]</li>
+<li>[Error 521: web server is down]</li>
+<li>[Error 522: connection timed out]</li>
+<li>[Error 523: origin is unreachable]</li>
+<li>[Error 524: a timeout occurred]</li>
+<li>[错误 525：SSL 握手失败]</li>
+<li>[Error 526: invalid SSL certificate]</li>
+<li>[527 错误：Railgun Listener 至源站错误]</li>
+<li>[Error 530]</li>
+</ul>
+<hr>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>在排查 5XX 错误时，正确的操作步骤是先联系您的主机提供商或站点管理员来排除故障并收集数据。</p>
+<p>Cloudflare 支持仅协助域所有者解决问题。如果您是网站访问者，请联系网站所有者。</p>
+<h3 id="需要向主机提供商提供的错误详情"><a href="#需要向主机提供商提供的错误详情" class="headerlink" title="需要向主机提供商提供的错误详情"></a>需要向主机提供商提供的错误详情</h3><ol>
+<li>具体的 5XX 错误代码和消息</li>
+<li>发生 5XX 错误的时间和时区</li>
+<li>造成 HTTP 5XX 错误的 URL（例如：<em><a class="link"   target="_blank" rel="noopener" href="https://www.example.com/images/icons/image1.png" >https://www.example.com/images/icons/image1.png<i class="fas fa-external-link-alt"></i></a></em>）</li>
+</ol>
+<p>错误原因未必都能在源站错误日志中找到。请检查 Cloudflare 和源站 Web 服务器之间的所有负载平衡器、缓存、代理或防火墙。</p>
+<p>下方的各个错误描述中列出了应向主机提供商或站点管理员提供的其他详情。Cloudflare <a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/200172706" >Custom Error Pages<i class="fas fa-external-link-alt"></i></a> 可更改本文探讨的默认错误页面的外观。</p>
+<hr>
+<h2 id="错误分析"><a href="#错误分析" class="headerlink" title="错误分析"></a>错误分析</h2><p>每个域的错误分析可在您的帐户的支持门户中获得。通过错误分析，您可以按 HTTP 错误代码深入了解总体错误情况，它还提供了诊断和解决问题所需的 URL、响应、源站 IP 地址和 Cloudflare 数据中心。错误分析基于的是 1% 的流量样本。</p>
+<p>要查看错误分析：</p>
+<ul>
+<li>导航到 Cloudflare 支持门户。请参阅关于<a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/200172476#h_4b8753c8-f422-4c74-9e8e-07026c4da730" >提交支持票证<i class="fas fa-external-link-alt"></i></a>的说明，了解如何访问支持门户。</li>
+<li>往下滚动到<strong>错误分析</strong>部分。</li>
+<li>点击<strong>查看错误分析</strong>。</li>
+<li>输入要调查的域。</li>
+<li>此时将显示<strong>一段时间内的错误</strong>。</li>
+<li>点击图表下方表格中的状态代码，展开流量错误详情。</li>
+</ul>
+<hr>
+<h2 id="Error-500-internal-server-error"><a href="#Error-500-internal-server-error" class="headerlink" title="Error 500: internal server error"></a>Error 500: internal server error</h2><p>500 错误通常表示您的源站 Web 服务器存在问题。<em>Error establishing database</em> <em>connection</em> 是源站 Web 服务器生成的常见 HTTP 500 错误消息。<a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商<i class="fas fa-external-link-alt"></i></a>来解决。</p>
+<p><strong>解决方案</strong></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >向主机提供商提供详细信息<i class="fas fa-external-link-alt"></i></a>，协助对问题进行故障排除。</p>
+<p>不过，如果 500 错误的 HTML 响应代码中包含“cloudflare”或“cloudflare-nginx”，请将以下信息提供给 <a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/200172476" >Cloudflare 支持<i class="fas fa-external-link-alt"></i></a>：</p>
+<ol>
+<li>您的域名</li>
+<li>发生 500 错误的时间和时区</li>
+<li>观察到 500 错误的浏览器的 <em><a class="link"   target="_blank" rel="noopener" href="http://www.example.com/cdn-cgi/trace" >www.example.com/cdn-cgi/trace<i class="fas fa-external-link-alt"></i></a></em> 输出（将 <em><a class="link"   target="_blank" rel="noopener" href="http://www.example.com/" >www.example.com<i class="fas fa-external-link-alt"></i></a></em> 替换为您实际的域名和主机名）。</li>
+</ol>
+<p>如果发现访问您的网站时显示空白页，请确认问题是否在<a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/203118044#h_8654c523-e31e-4f40-a3c7-0674336a2753" >暂停 Cloudflare<i class="fas fa-external-link-alt"></i></a> 时发生，并联系您的主机提供商寻求帮助。</p>
+<hr>
+<h2 id="Error-502-bad-gateway-或-Error-504-gateway-timeout"><a href="#Error-502-bad-gateway-或-Error-504-gateway-timeout" class="headerlink" title="Error 502 bad gateway 或 Error 504 gateway timeout"></a>Error 502 bad gateway 或 Error 504 gateway timeout</h2><p>当 Cloudflare 无法与您的源站 Web 服务器建立联系时，会发生 HTTP 502 或 504 错误。</p>
+<p>可能的原因有两种：</p>
+<ul>
+<li>（最常见原因）<a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_85e06a1a-fa89-4685-aa24-2aaf57c0141b" >502&#x2F;504 源自您的源站 Web 服务器<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_845d633d-0842-4315-9dd2-53185cc4e1de" >502&#x2F;504 源自 Cloudflare<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h3 id="502-x2F-504-源自您的源站-Web-服务器"><a href="#502-x2F-504-源自您的源站-Web-服务器" class="headerlink" title="502&#x2F;504 源自您的源站 Web 服务器"></a>502&#x2F;504 源自您的源站 Web 服务器</h3><p>当您的源站 Web 服务器标准的 HTTP 502 网关损坏或 504 网关超时错误响应时，Cloudflare 将返回带有 Cloudflare 标志的 HTTTP 502 或 504 错误：</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://images.ctfassets.net/slt3lc6tev37/CTIa7Nqay9uZoBZnh7ao7/e61d8968ea919d75b26e0098437f7174/image1.png"
+                      alt="Cloudflare 品牌化错误 502 的示例。"
+                ></p>
+<p><strong>解决方案</strong></p>
+<p>联系您的主机提供商，在您的源站 Web 服务器上排查这些常见的原因：</p>
+<ul>
+<li>确保在请求生成生成 502 或 504 错误的访问者 URL 中的主机名和域名时，源站服务器能够响应请求。</li>
+<li>调查服务器过载、崩溃或网络故障。</li>
+<li>识别发生超时或被阻止的应用程序或服务。</li>
+</ul>
+<h3 id="502-x2F-504-源自-Cloudflare"><a href="#502-x2F-504-源自-Cloudflare" class="headerlink" title="502&#x2F;504 源自 Cloudflare"></a>502&#x2F;504 源自 Cloudflare</h3><p>源自 Cloudflare 的 502 或 504 错误如下方所示：</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://images.ctfassets.net/slt3lc6tev37/2BPhw2fUEiOLLFaHqCIsTP/679902b3c75ec783371cb3fecdc1066f/image5.png"
+                      alt="非品牌化错误 502 的示例。"
+                ></p>
+<p>如果错误未提及“cloudflare”，请联系主机提供商来寻求与<a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_85e06a1a-fa89-4685-aa24-2aaf57c0141b" >源自源站的 502&#x2F;504 错误<i class="fas fa-external-link-alt"></i></a>相关的帮助。</p>
+<p><strong>解决方案</strong></p>
+<p>为避免处理您的查询时发生延迟，请向 <a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/200172476" >Cloudflare 支持<i class="fas fa-external-link-alt"></i></a>提供以下必要详情：</p>
+<ol>
+<li>发生问题的时间和时区</li>
+<li>造成 HTTP 502 或 504 错误的 URL（例如：<em><a class="link"   target="_blank" rel="noopener" href="https://www.example.com/images/icons/image1.png" >https://www.example.com/images/icons/image1.png<i class="fas fa-external-link-alt"></i></a></em>）</li>
+<li>浏览 <em><a class="link"   target="_blank" rel="noopener" href="http://www.example.com/cdn-cgi/trace" >www.example.com/cdn-cgi/trace<i class="fas fa-external-link-alt"></i></a></em> 时的输出（将 <em><a class="link"   target="_blank" rel="noopener" href="http://www.example.com/" >www.example.com<i class="fas fa-external-link-alt"></i></a></em> 替换为导致 HTTP 502 或 504 错误的域名和主机名）</li>
+</ol>
+<hr>
+<h2 id="Error-503-service-temporarily-unavailable"><a href="#Error-503-service-temporarily-unavailable" class="headerlink" title="Error 503: service temporarily unavailable"></a>Error 503: service temporarily unavailable</h2><p>HTTP 错误 503 在源站 Web 服务器过载时发生。 可能的原因有两种，可通过错误消息来辨别：</p>
+<ul>
+<li>错误的 HTML 响应正文中不包含“cloudflare”或“cloudflare-nginx”。</li>
+</ul>
+<p><strong>解决方案</strong>：联系您的主机提供商，以核实是否针对您的源站 Web 服务器的请求实施了速率限制。</p>
+<ul>
+<li>错误的 HTML 响应正文中包含“cloudflare”或“cloudflare-nginx”。</li>
+</ul>
+<p><strong>解决方案</strong>：Cloudflare 数据中心中发生了连接问题。向 <a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/200172476" >Cloudflare 支持<i class="fas fa-external-link-alt"></i></a>提供以下信息：</p>
+<ol>
+<li>您的域名</li>
+<li>发生 503 错误的时间和时区</li>
+<li>观察到 503 错误的浏览器的 <em><a class="link"   target="_blank" rel="noopener" href="http://www.example.com/cdn-cgi/trace" >www.example.com/cdn-cgi/trace<i class="fas fa-external-link-alt"></i></a></em> 输出（将 <em><a class="link"   target="_blank" rel="noopener" href="http://www.example.com/" >www.example.com<i class="fas fa-external-link-alt"></i></a></em> 替换为您实际的域名和主机名）。</li>
+</ol>
+<hr>
+<h2 id="Error-520-web-server-returns-an-unknown-error"><a href="#Error-520-web-server-returns-an-unknown-error" class="headerlink" title="Error 520: web server returns an unknown error"></a>Error 520: web server returns an unknown error</h2><p>当源站服务器向 Cloudflare 返回空白、未知或意外响应时，会发生 520 错误。</p>
+<p><strong>解决方案</strong></p>
+<p>在进一步调查 520 错误期间采用以下快速解决办法：将 Cloudflare <strong>DNS</strong> 应用中的记录设为<a class="link"   target="_blank" rel="noopener" href="https://developers.cloudflare.com/dns/manage-dns-records/reference/proxied-dns-records" >“仅限 DNS”<i class="fas fa-external-link-alt"></i></a>，或<a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/203118044#h_8654c523-e31e-4f40-a3c7-0674336a2753" >暂停 Cloudflare<i class="fas fa-external-link-alt"></i></a>。</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商或站点管理员<i class="fas fa-external-link-alt"></i></a>，请他们核查您的源站 Web 服务器日志中的崩溃并检查以下常见原因：</p>
+<ul>
+<li><p>源站 Web 服务器应用程序崩溃</p>
+</li>
+<li><p>您的源站上未允许 <a class="link"   target="_blank" rel="noopener" href="https://www.cloudflare.com/ips" >Cloudflare IP<i class="fas fa-external-link-alt"></i></a>。</p>
+</li>
+<li><p>标头超过 16 KB（通常因为 Cookie 数量过多）</p>
+</li>
+<li><p>源站 Web 服务器的空响应中缺少 HTTP 状态代码或响应正文</p>
+</li>
+<li><p>缺少响应标头或源站 Web 服务器未返回</p>
+<p>正确的 HTTP 错误响应</p>
+<p>。</p>
+<ul>
+<li><code>在从上游读取响应标头时，上游过早地关闭了连接</code>，这是我们在日志中可能注意到的一个常见错误。这表明源站 Web 服务器有问题，导致Cloudflare 生成 520 错误。</li>
+</ul>
+</li>
+</ul>
+<p>520 错误普遍发生于造成源站 Web 服务器崩溃的 PHP 应用程序。</p>
+<p>如果在联系主机提供商或站点管理员后仍然出现 520 错误，请向 <a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/200172476" >Cloudflare 支持<i class="fas fa-external-link-alt"></i></a>提供以下信息：</p>
+<ul>
+<li><p>发生错误时所请求资源的完整 URL</p>
+</li>
+<li><p>520 错误消息中的 Cloudflare <strong>cf-ray</strong></p>
+</li>
+<li><p>来自 <em><a class="link"   target="_blank" rel="noopener" href="http://www.example.com/cdn-cgi/trace" >http://www.example.com/cdn-cgi/trace<i class="fas fa-external-link-alt"></i></a></em> 时的输出（将 <em><a class="link"   target="_blank" rel="noopener" href="http://www.example.com/" >www.example.com<i class="fas fa-external-link-alt"></i></a></em> 替换为您发生 520 错误时的您的域名和主机名）</p>
+</li>
+<li><p>两个</p>
+<p>HAR 文件</p>
+<p>：</p>
+<ul>
+<li>一个在您网站上启用了 Cloudflare 时生成</li>
+<li>另一个在<a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/200169176" >临时禁用 Cloudflare<i class="fas fa-external-link-alt"></i></a> 后生成。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="Error-521-web-server-is-down"><a href="#Error-521-web-server-is-down" class="headerlink" title="Error 521: web server is down"></a>Error 521: web server is down</h2><p>源站 Web 服务器拒绝来自 Cloudflare 的连接时，会发生 521 错误。源站上的安全解决方案可能阻止了来自某些 <a class="link"   target="_blank" rel="noopener" href="https://www.cloudflare.com/ips" >Cloudflare IP 地址<i class="fas fa-external-link-alt"></i></a>的合法连接。</p>
+<p>521 错误的两个最常见原因：</p>
+<ul>
+<li>源站 Web 服务器应用程序离线</li>
+<li>Cloudflare 请求被阻止</li>
+</ul>
+<p><strong>解决方案</strong></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的站点管理员或主机提供商<i class="fas fa-external-link-alt"></i></a>以排除这些常见原因：</p>
+<ul>
+<li>确保您的源站 Web 服务器正常响应</li>
+<li>查看源站 Web 服务器错误日志，以确定 Web 服务器应用程序崩溃或中断。</li>
+<li>确认没有阻止 <a class="link"   target="_blank" rel="noopener" href="https://www.cloudflare.com/ips" >Cloudflare IP 地址<i class="fas fa-external-link-alt"></i></a>或对其施加速率限制</li>
+<li>在您的源站 Web 服务器的防火墙或其他安全软件中允许所有 <a class="link"   target="_blank" rel="noopener" href="https://www.cloudflare.com/ips" >Cloudflare IP 范围<i class="fas fa-external-link-alt"></i></a></li>
+<li>确认您是否将 <strong>SSL&#x2F;TLS 模式</strong>设置为 <strong>Full</strong> 或 <strong>Full (Strict</strong>)，以及您是否安装了 <a class="link"   target="_blank" rel="noopener" href="https://developers.cloudflare.com/ssl/origin-configuration/origin-ca" >Cloudflare Origin 证书<i class="fas fa-external-link-alt"></i></a></li>
+<li>查找 <a class="link"   target="_blank" rel="noopener" href="https://community.cloudflare.com/t/community-tip-fixing-error-521-web-server-is-down/42461" >Cloudflare 社区<i class="fas fa-external-link-alt"></i></a>的更多故障排除信息。</li>
+</ul>
+<hr>
+<h2 id="Error-522-connection-timed-out"><a href="#Error-522-connection-timed-out" class="headerlink" title="Error 522: connection timed out"></a>Error 522: connection timed out</h2><p>Cloudflare 联系源站 Web 服务器时超时会发生 522 错误。 有两种不同的错误导致 HTTP 错误 522，具体取决于 Cloudflare 和源站 Web 服务器之间发生超时的时间：</p>
+<ol>
+<li>在连接建立之前，源站 Web 服务器未在 Cloudflare 发送 SYN 后 15 秒内将 SYN + ACK 返回给 Cloudflare。</li>
+<li>在连接建立之后，源站 Web 服务器未在 90 秒内确认（ACK）Cloudflare 的资源请求。</li>
+</ol>
+<p>如果源站 Web 服务器在连接建立之后确认（<em>ACK</em>）了资源请求，但没有及时发送响应，则发生 <a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Cloudflare-5XX-%E9%94%99%E8%AF%AF%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4#524error" >HTTP 524 错误<i class="fas fa-external-link-alt"></i></a>。</p>
+<p><strong>解决方案</strong></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商<i class="fas fa-external-link-alt"></i></a>，从源站 Web 服务器上排查下列常见原因：</p>
+<ul>
+<li>（最常见）.htaccess、iptables 或防火墙中阻止了 <a class="link"   target="_blank" rel="noopener" href="https://www.cloudflare.com/ips/" >Cloudflare IP 地址<i class="fas fa-external-link-alt"></i></a>或对其设置了速率限制。确认您的主机提供商允许 Cloudflare IP 地址。</li>
+<li>源站 Web 服务器过载或离线，因而丢弃了传入的请求。</li>
+<li>源站 Web 服务器上禁用了 <a class="link"   target="_blank" rel="noopener" href="http://tldp.org/HOWTO/TCP-Keepalive-HOWTO/overview.html" >Keepalives<i class="fas fa-external-link-alt"></i></a> 功能。</li>
+<li>Cloudflare <strong>DNS</strong> 应用中的源站 IP 地址与主机提供商当前为您的源站 Web 服务器置备的 IP 地址不匹配。</li>
+<li>您的源站 Web 服务器上丢弃了数据包。</li>
+</ul>
+<p>如果您使用的是 <a class="link"   target="_blank" rel="noopener" href="https://developers.cloudflare.com/pages/" >Cloudflare Pages<i class="fas fa-external-link-alt"></i></a>，请确认您已经设置了自定义域，并且您的 CNAME 记录指向您的自定义 Pages 域。如需了解如何设置自定义 Pages 域，请点击<a class="link"   target="_blank" rel="noopener" href="https://developers.cloudflare.com/pages/getting-started#adding-a-custom-domain" >此处<i class="fas fa-external-link-alt"></i></a>。</p>
+<p>如果上述原因都未能促成解决方案，请向主机提供商或站点管理员索取以下信息，然后<a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/200172476" >联系 Cloudflare 支持<i class="fas fa-external-link-alt"></i></a>：</p>
+<ul>
+<li>从源站 Web 服务器到发生问题前最常连接您的源站 Web 服务器的 <a class="link"   target="_blank" rel="noopener" href="http://www.cloudflare.com/ips" >Cloudflare IP 地址<i class="fas fa-external-link-alt"></i></a>的 <a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/203118044#h_b8cebafd-9243-40e9-9c44-d4b94ccd3a87" >MTR 或 traceroute<i class="fas fa-external-link-alt"></i></a> 结果。在源站 Web 服务器日志记录的 IP 中，找到一个可成功连接的 IP。</li>
+<li>来自主机提供商调查的详细信息，如相关的日志或与主机提供商的对话。</li>
+</ul>
+<hr>
+<h2 id="Error-523-origin-is-unreachable"><a href="#Error-523-origin-is-unreachable" class="headerlink" title="Error 523: origin is unreachable"></a>Error 523: origin is unreachable</h2><p>当 Cloudflare 无法联系您的源站 Web 服务器时，会发生 523 错误。这通常在 Cloudflare 和源站 Web 服务器之间的网络设备没有通向源站 IP 地址的路由时发生。</p>
+<p><strong>解决方案</strong> <a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商<i class="fas fa-external-link-alt"></i></a>，在您的源站 Web 服务器上排查下列常见原因：</p>
+<ul>
+<li>确认您的 Cloudflare DNS 应用中为 A 或 AAAA 记录列出了正确的源站 IP 地址。</li>
+<li>对源站与 Cloudflare 之间的互联网路由问题进行故障排除，或者对源站本身的问题进行故障排除。</li>
+</ul>
+<p>如果主机提供商经常更改该您的源站 Web 服务器 IP 地址，请参考有关<a class="link"   target="_blank" rel="noopener" href="https://developers.cloudflare.com/dns/manage-dns-records/how-to/managing-dynamic-ip-addresses" >动态 DNS 更新<i class="fas fa-external-link-alt"></i></a>的 Cloudflare 文档。</p>
+<p>如果上述原因都未能促成解决方案，请向主机提供商或站点管理员索取以下信息：</p>
+<ul>
+<li>从源站 Web 服务器到发生问题前最常连接您的源站 Web 服务器的 <a class="link"   target="_blank" rel="noopener" href="http://www.cloudflare.com/ips" >Cloudflare IP 地址<i class="fas fa-external-link-alt"></i></a>的 <a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/203118044#h_b8cebafd-9243-40e9-9c44-d4b94ccd3a87" >MTR 或 traceroute<i class="fas fa-external-link-alt"></i></a> 结果。从源站 Web 服务器日志查找一个可连接的 Cloudflare IP。</li>
+<li>如果您通过 Cloudflare 托管服务合作伙伴使用 Railgun，请<a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商<i class="fas fa-external-link-alt"></i></a>来排查 523 错误。</li>
+<li>如果您自己管理 Railgun 安装，请提供以下信息：<ul>
+<li>从 Railgun 服务器到源站 Web 服务器的 <a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/203118044#h_b8cebafd-9243-40e9-9c44-d4b94ccd3a87" >traceroute<i class="fas fa-external-link-alt"></i></a> 结果。</li>
+<li>来自 Railgun 服务器的最新系统日志文件。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="Error-524-a-timeout-occurred"><a href="#Error-524-a-timeout-occurred" class="headerlink" title="Error 524: a timeout occurred"></a>Error 524: a timeout occurred</h2><p>524 错误表明 Cloudflare 成功连接了源服务器，但源站 Web 服务器没有在默认的 100 秒连接超时结束前提供 HTTP 响应。如果源站服务器由于要做太多工作而花费太长时间（例如，大数据查询），或者因为服务器在争抢资源而无法及时返回任何数据，那么可能会发生这种情况。</p>
+<p><strong>解决方案</strong></p>
+<p>以下是我们建议的解决这一问题的方案：</p>
+<ul>
+<li><p>实施大型 HTTP 进程的状态轮询，以避免遇到该错误。</p>
+</li>
+<li><p>联系您的主机提供商</p>
+<p>，从您的源站 Web 服务器上排查下列常见原因：</p>
+<ul>
+<li>源站 Web 服务器上长时间运行的进程。</li>
+<li>发生过载的源站 Web 服务器。</li>
+</ul>
+</li>
+</ul>
+<p>源站 Web 服务器上记录请求响应时间有助于辨别资源速度缓慢的原因。联系您的主机提供商或站点管理员，以协助调整日志格式，或者搜索适用于您的 Web 服务器品牌（如 <a class="link"   target="_blank" rel="noopener" href="http://httpd.apache.org/docs/current/mod/mod_log_config.html" >Apache<i class="fas fa-external-link-alt"></i></a> 或 <a class="link"   target="_blank" rel="noopener" href="http://nginx.org/en/docs/http/ngx_http_log_module.html#log_format" >Nginx<i class="fas fa-external-link-alt"></i></a>）的日志文档。</p>
+<ul>
+<li>Enterprise 客户可以使用 <a class="link"   target="_blank" rel="noopener" href="https://api.cloudflare.com/#zone-settings-change-proxy-read-timeout-setting" >proxy_read_timeout API 端点<i class="fas fa-external-link-alt"></i></a>将 524 超时延长到最长 600 秒。</li>
+<li>如果您经常运行需要超过 100 秒才能完成的 HTTP 请求（例如大量数据导出），请在 Cloudflare <strong>DNS</strong> 应用中将这些进程移动到未由 Cloudflare 代理的子域后面。</li>
+<li>如果使用 Cloudflare Railgun 的域发生错误 524，请确保 <em>lan.timeout</em> 设置的值高于默认的 30 秒，再重启 railgun 服务。</li>
+</ul>
+<hr>
+<h2 id="错误-525：SSL-握手失败"><a href="#错误-525：SSL-握手失败" class="headerlink" title="错误 525：SSL 握手失败"></a>错误 525：SSL 握手失败</h2><p>525 错误表示 Cloudflare 与源站 Web 服务器之间的 SSL 握手失败。满足以下两个条件时会发生 525 错误：</p>
+<ol>
+<li>Cloudflare 与源站 Web 服务器之间的 <a class="link"   target="_blank" rel="noopener" href="https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake/" >SSL 握手<i class="fas fa-external-link-alt"></i></a>失败，以及</li>
+<li>Cloudflare <strong>SSL&#x2F;TLS</strong> 应用的<strong>概述</strong>选项卡中设置了 <a target="_blank" rel="noopener" href="https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes"><em>Full</em> 或 <em>Full (Strict)</em></a> <strong>SSL</strong>。</li>
+</ol>
+<p><strong>解决方案</strong></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_cf28c038-16c1-4841-a85f-f905240aaebe" >联系您的主机提供商<i class="fas fa-external-link-alt"></i></a>，从您的源站 Web 服务器上排查下列常见原因：</p>
+<ul>
+<li>未安装有效的 SSL 证书</li>
+<li>未开启 443 端口（或其他自定义安全端口）</li>
+<li>无 <a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/360026016272" >SNI<i class="fas fa-external-link-alt"></i></a> 支持</li>
+<li>Cloudflare 接受的加密套件与源站 Web 服务器支持的<a class="link"   target="_blank" rel="noopener" href="https://developers.cloudflare.com/ssl/ssl-tls/cipher-suites" >加密套件<i class="fas fa-external-link-alt"></i></a>不匹配。</li>
+</ul>
+<p>如果间歇性发生 525 错误，请查看源站 Web 服务器错误日志来确定原因。配置 Apache 以<a class="link"   target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/HTTPD/DebuggingSSLProblems#Enable_SSL_logging" >记录 mod_ssl 错误<i class="fas fa-external-link-alt"></i></a>。此外，nginx 的标准错误日志中包含 SSL 错误，但可能需要<a class="link"   target="_blank" rel="noopener" href="https://docs.nginx.com/nginx/admin-guide/monitoring/logging/" >提高日志级别<i class="fas fa-external-link-alt"></i></a>。</p>
+<p><strong>其他检查</strong></p>
+<ul>
+<li>检查您的源站服务器上是否安装了证书。您可以查看<a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/zh-cn/articles/203118044-Gathering-information-for-troubleshooting-sites#h_0c7f48b3-fc29-4266-8c63-477fe61a11c4" >这篇文章<i class="fas fa-external-link-alt"></i></a>，详细了解如何运行一些测试。如果您没有任何证书，你可以创建并安装免费的 <a class="link"   target="_blank" rel="noopener" href="https://developers.cloudflare.com/ssl/origin-configuration/origin-ca" >Cloudflare Origin CA 证书<i class="fas fa-external-link-alt"></i></a>。使用 Origin CA 证书，您就加密 Cloudflare 与源站 Web 服务器之间的流量。</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://developers.cloudflare.com/ssl/ssl-tls/cipher-suites" >检查服务器使用的密码套件<i class="fas fa-external-link-alt"></i></a>以确保它们与 Cloudflare 支持的密码套件匹配。</li>
+<li>根据看到的 525 的时间戳检查服务器的错误日志，以确保有错误可能导致在 SSL 握手期间重置连接。</li>
+</ul>
+<hr>
+<h2 id="Error-526-invalid-SSL-certificate"><a href="#Error-526-invalid-SSL-certificate" class="headerlink" title="Error 526: invalid SSL certificate"></a>Error 526: invalid SSL certificate</h2><p>满足以下两个条件时会发生 526 错误：</p>
+<ol>
+<li>Cloudflare 无法验证您的源站 Web 服务器上的 SSL 证书；</li>
+<li>Cloudflare <strong>SSL&#x2F;TLS</strong> 应用的<strong>概述</strong>选项卡中设置了 <a target="_blank" rel="noopener" href="https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes#full-strict"><em>Full SSL (Strict)</em></a> <strong>SSL</strong>。</li>
+</ol>
+<p><strong>解决方案</strong></p>
+<p>在 Cloudflare <strong>SSL&#x2F;TLS</strong> 应用的<strong>概述</strong>选项卡中将域的 <strong>SSL</strong> 设为 <em>Full</em> 而非 *Full (strict)*，这可能是一种快速修复方法。</p>
+<p>请您服务器管理员或主机提供商核查源站 Web 服务器的 SSL 证书，并进行以下验证：</p>
+<ul>
+<li>证书没有到期</li>
+<li>证书没有撤销</li>
+<li>证书由<a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/360026016272" >证书颁发机构<i class="fas fa-external-link-alt"></i></a>签名（而非自签名）</li>
+<li>所请求的域名或目标域名和主机名列在证书的 <strong>Common Name</strong> 或 <strong>Subject Alternative Name</strong> 中</li>
+<li>您的源站 Web 服务器接受通过 SSL 端口 443 进行连接</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/200169176" >暂停 Cloudflare<i class="fas fa-external-link-alt"></i></a> 并访问 <a class="link"   target="_blank" rel="noopener" href="https://www.sslshopper.com/ssl-checker.html#hostname=www.example.com%EF%BC%88%E5%B0%86" >https://www.sslshopper.com/ssl-checker.html#hostname=www.example.com（将<i class="fas fa-external-link-alt"></i></a> <a class="link"   target="_blank" rel="noopener" href="http://www.example.com/" >www.example.com<i class="fas fa-external-link-alt"></i></a> 替换为您的主机名和域名），以验源站 SSL 证书并无问题：</li>
+</ul>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://images.ctfassets.net/slt3lc6tev37/5vKfYKeOgh0GAa9vnr0Qwb/1db00bea64cd5fb77a839f41273840b9/hc-import-troubleshooting_5xx_errors_sslshopper_output.png"
+                      alt="该屏幕显示了没有错误的 SSL 证书。"
+                ></p>
+<p>如果源站服务器使用自签名证书，请将域配置为使用 <em>Full</em> <em>SSL</em> 而非 *Full SSL (Strict)*。请参考<a class="link"   target="_blank" rel="noopener" href="https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes" >适用于您的源站的 SSL 推荐设置<i class="fas fa-external-link-alt"></i></a>。</p>
+<hr>
+<h2 id="527-错误：Railgun-Listener-至源站错误"><a href="#527-错误：Railgun-Listener-至源站错误" class="headerlink" title="527 错误：Railgun Listener 至源站错误"></a>527 错误：Railgun Listener 至源站错误</h2><p>527 错误表示 Cloudflare 和源站的 <a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/200168406" >Railgun 服务器（rg-listener）<i class="fas fa-external-link-alt"></i></a>之间发生连接中断。常见的原因包括：</p>
+<ul>
+<li>防火墙干扰</li>
+<li>Railgun 服务器和 Cloudflare 之间网络故障或数据包丢失</li>
+</ul>
+<p>如需其他详细信息来协助故障排除，请<a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/218444227" >提高 Railgun 日志级别<i class="fas fa-external-link-alt"></i></a>。</p>
+<p>527 错误的最常见原因包括：</p>
+<ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_c559b9e5-a342-47ed-bfae-66e10e42aade" >连接超时<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_f8e4890c-9459-4c9a-a4ab-e9b44fa16dbf" >超过 LAN 超时<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_2e3e4251-3642-4fce-bbcf-1a45bb2b2c11" >连接遭拒<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/zh-cn/articles/115003011431-Troubleshooting-Cloudflare-5XX-errors#h_c30fe02c-98f2-4cbf-af8c-bafa9b4f5b8f" >TLS&#x2F;SSL 相关错误<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<p>如果要联系 Cloudflare 支持，请提供以下来自 Railgun Listener 的信息：</p>
+<ul>
+<li><em>railgun.conf</em> 文件的完整内容</li>
+<li><em>railgun-nat.conf</em> 文件的完整内容内容</li>
+<li>详述观察到的错误的 Railgun 日志文件</li>
+</ul>
+<h3 id="连接超时"><a href="#连接超时" class="headerlink" title="连接超时"></a>连接超时</h3><p>下列 Railgun 日志错误表明 Railgun Listener 和源站 Web 服务器之间存在连接故障：</p>
+<pre class="line-numbers language-none"><code class="language-none">connection failed 0.0.0.0:443&#x2F;example.com:dial tcp 0.0.0.0:443: i&#x2F;o timeout
+no response from origin (timeout) 0.0.0.0:80&#x2F;example.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>解决方案</strong></p>
+<p>联系您的主机提供商，以协助测试源站 Web 服务器和 Railgun Listener 之间的连接问题。例如，运行 netcat 命令可以测试从 Railgun Listener 到源站 Web 服务器的 <em>SERVERIP</em> 和 <em>PORT</em>（80 用于 HTTP，或 443 用于 HTTPS）的连接：</p>
+<pre class="line-numbers language-none"><code class="language-none">nc -vz SERVERIP PORT<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="超过-LAN-超时"><a href="#超过-LAN-超时" class="headerlink" title="超过 LAN 超时"></a>超过 LAN 超时</h3><p>如果源站 Web 服务器未在 30 秒默认超时内向 Railgun Listener 发送 HTTP 响应，则生成以下 Railgun Listener 日志错误：</p>
+<pre class="line-numbers language-none"><code class="language-none">connection failed 0.0.0.0:443&#x2F;example.com: dial tcp 0.0.0.0:443: i&#x2F;o timeout<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>可以通过 railgun.conf 文件的 lan.timeout 参数调整这一时间。</p>
+<p><strong>解决方案</strong></p>
+<p>提高 <em>railgun.conf</em> 中的 <em>lan.timeout</em> 限值，或检查 Web 服务器配置。联系您的主机提供商，以确认源站 Web 服务器是否过载。</p>
+<h3 id="连接遭拒"><a href="#连接遭拒" class="headerlink" title="连接遭拒"></a>连接遭拒</h3><p>当来自 Railgun Listener 的请求遭到拒绝时，Railgun 日志中会出现以下错误：</p>
+<pre class="line-numbers language-none"><code class="language-none">Error getting page: dial tcp 0.0.0.0:80:connection refused<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>解决方案</strong></p>
+<p>允许 Railgun Listener 的 IP 处于源站 Web 服务器的防火墙中。</p>
+<h3 id="TLS-x2F-SSL-相关错误"><a href="#TLS-x2F-SSL-相关错误" class="headerlink" title="TLS&#x2F;SSL 相关错误"></a>TLS&#x2F;SSL 相关错误</h3><p>如果 TLS 连接失败，Railgun 日志中会出现以下错误：</p>
+<pre class="line-numbers language-none"><code class="language-none">connection failed 0.0.0.0:443&#x2F;example.com:remote error: handshake failure
+connection failed 0.0.0.0:443&#x2F;example.com:dial tcp 0.0.0.0:443:connection refused
+connection failed 127.0.0.1:443&#x2F;www.example.com:x509: certificate is valid for
+example.com,www.example.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>解决方案</strong></p>
+<p>如果发生 TLS&#x2F;SSL 错误，请在源站 Web 服务器上检查并确保：</p>
+<ul>
+<li>已开启 443 端口</li>
+<li>源站 Web 服务器出示了 SSL 证书</li>
+<li>源站 Web 服务器的 SSL 证书的 SAN 或 Common Name 中包含请求的主机名或目标主机名</li>
+<li>在 Cloudflare <strong>SSL&#x2F;TLS</strong> 应用的<strong>概述</strong>选项卡中将 <strong>SSL</strong> 设为 <a class="link"   target="_blank" rel="noopener" href="https://developers.cloudflare.com/ssl/origin-configuration/ssl-modes" >Full 或 Full (Strict)<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<p>如果源站 Web 服务器 SSL 证书采用自签名，请<a target="_blank" rel="noopener" href="https://support.cloudflare.com/hc/articles/219336007">在 <em>railgun.conf</em> 中设置 <em>validate.cert&#x3D;0</em></a>。</p>
+<hr>
+<h2 id="Error-530"><a href="#Error-530" class="headerlink" title="Error 530"></a>Error 530</h2><p>返回 HTTP 错误 530 时会同时显示 1XXX 错误。后续我会总结，以了解故障排除信息。</p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/cloudflare/">#cloudflare</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2023/02/06/HTTP%E7%8A%B6%E6%80%81%E7%A0%81%E5%90%AB%E4%B9%89/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">HTTP状态码含义</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2023/02/04/Linux%20%E7%B3%BB%E7%BB%9F%E6%97%A5%E5%B8%B8%E5%B7%A1%E6%A3%80%E8%84%9A%E6%9C%AC2021/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Linux 系统日常巡检脚本</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">本文内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number"></span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E5%90%91%E4%B8%BB%E6%9C%BA%E6%8F%90%E4%BE%9B%E5%95%86%E6%8F%90%E4%BE%9B%E7%9A%84%E9%94%99%E8%AF%AF%E8%AF%A6%E6%83%85"><span class="nav-number">1.</span> <span class="nav-text">需要向主机提供商提供的错误详情</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%88%86%E6%9E%90"><span class="nav-number"></span> <span class="nav-text">错误分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Error-500-internal-server-error"><span class="nav-number"></span> <span class="nav-text">Error 500: internal server error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Error-502-bad-gateway-%E6%88%96-Error-504-gateway-timeout"><span class="nav-number"></span> <span class="nav-text">Error 502 bad gateway 或 Error 504 gateway timeout</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#502-x2F-504-%E6%BA%90%E8%87%AA%E6%82%A8%E7%9A%84%E6%BA%90%E7%AB%99-Web-%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">502&#x2F;504 源自您的源站 Web 服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#502-x2F-504-%E6%BA%90%E8%87%AA-Cloudflare"><span class="nav-number">2.</span> <span class="nav-text">502&#x2F;504 源自 Cloudflare</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Error-503-service-temporarily-unavailable"><span class="nav-number"></span> <span class="nav-text">Error 503: service temporarily unavailable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Error-520-web-server-returns-an-unknown-error"><span class="nav-number"></span> <span class="nav-text">Error 520: web server returns an unknown error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Error-521-web-server-is-down"><span class="nav-number"></span> <span class="nav-text">Error 521: web server is down</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Error-522-connection-timed-out"><span class="nav-number"></span> <span class="nav-text">Error 522: connection timed out</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Error-523-origin-is-unreachable"><span class="nav-number"></span> <span class="nav-text">Error 523: origin is unreachable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Error-524-a-timeout-occurred"><span class="nav-number"></span> <span class="nav-text">Error 524: a timeout occurred</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF-525%EF%BC%9ASSL-%E6%8F%A1%E6%89%8B%E5%A4%B1%E8%B4%A5"><span class="nav-number"></span> <span class="nav-text">错误 525：SSL 握手失败</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Error-526-invalid-SSL-certificate"><span class="nav-number"></span> <span class="nav-text">Error 526: invalid SSL certificate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#527-%E9%94%99%E8%AF%AF%EF%BC%9ARailgun-Listener-%E8%87%B3%E6%BA%90%E7%AB%99%E9%94%99%E8%AF%AF"><span class="nav-number"></span> <span class="nav-text">527 错误：Railgun Listener 至源站错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6"><span class="nav-number">1.</span> <span class="nav-text">连接超时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%85%E8%BF%87-LAN-%E8%B6%85%E6%97%B6"><span class="nav-number">2.</span> <span class="nav-text">超过 LAN 超时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E9%81%AD%E6%8B%92"><span class="nav-number">3.</span> <span class="nav-text">连接遭拒</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TLS-x2F-SSL-%E7%9B%B8%E5%85%B3%E9%94%99%E8%AF%AF"><span class="nav-number">4.</span> <span class="nav-text">TLS&#x2F;SSL 相关错误</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Error-530"><span class="nav-number"></span> <span class="nav-text">Error 530</span></a>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2018</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Devin hao</a>
+            
+        </div>
+        
+            <script async data-pjax
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/utils.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/main.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/header-shrink.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/back2top.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/code-block.js"></script>
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/libs/anime.min.js"></script>
+        
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/toc.js"></script>
+        
+    
+</div>
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

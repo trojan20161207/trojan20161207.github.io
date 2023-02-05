@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="小冲的个人博客">
+    <meta name="author" content="Devin hao">
+    
+    <title>
+        
+            linux运维的个人进阶 |
+        
+        Devin blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/null">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"www.devinrain.homes","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":null,"favicon":null,"avatar":"/images/logo.svg","font_size":null,"font_family":"STHeiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":null,"font_color":null,"hitokoto":true},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+               Devin blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">linux运维的个人进阶</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/logo.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Devin hao</span>
+                            
+                                <span class="author-label">Architect</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2019-09-19 14:20:06</span>
+        <span class="mobile">2019-09-19 14:20</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2019-09-19 14:22:28</span>
+    </span>
+    
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/linux/">linux</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Linux%E8%BF%90%E7%BB%B4-%E8%BF%9B%E9%98%B6/">Linux运维, 进阶</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.6k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>5 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <h2 id="一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。"><a href="#一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。" class="headerlink" title="一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。"></a>一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。</h2><p>本文简单介绍了其中一种linux运维的个人进阶路线，有需要的朋友可以参考下。</p>
+<h3 id="第一阶段：企业级Linux运维工程师"><a href="#第一阶段：企业级Linux运维工程师" class="headerlink" title="第一阶段：企业级Linux运维工程师"></a>第一阶段：企业级Linux运维工程师</h3><p>1、Linux运维最佳学习方法”5W1H”六何分析法全面介绍，独家Linux快速入门学习技巧</p>
+<p>2、冯诺依曼体系（CPU架构、操作系统概念、发展演变、应用场景、业内形态）</p>
+<p>3、Linux运维基础实战入门，用户管理，权限，文件查找，文本编辑及实战讲解</p>
+<p>4、Linux运维系统管理和技能进阶，磁盘管理，软件安装，文件系统、内核使用方法和高级技巧</p>
+<p>5、Linux系统环境及日常管理，结合日常工作常用20个场景，排错思路、面试和工作中注意事项</p>
+<p>6、以实战方式全方位展示Bash八大特性和高级用法介绍以及高级企业级使用技巧实战演练</p>
+<p>7、Shell脚本工作原理、学习方法、配罝技巧、企业级书写规范、开发环境定制全面实战介绍</p>
+<p>8、职场人价值体系-知识、技能、成长目标和方向定位年薪30W运维人员必备知识体系关键技能点</p>
+<h3 id="第二阶段：Linux应用运维工程师-amp-DBA"><a href="#第二阶段：Linux应用运维工程师-amp-DBA" class="headerlink" title="第二阶段：Linux应用运维工程师&amp;DBA"></a>第二阶段：Linux应用运维工程师&amp;DBA</h3><p>1、TCP&#x2F;IP网络通信协议，IP地址含义、TCP有限状态机转换原理，路由协议</p>
+<p>2、利用Kickstart文件实现企业级自动化安装环境定制，百台并发安装实战</p>
+<p>3、Linux常见系统故障案例分析，企业级Linux运维工程师常犯错误Top5</p>
+<p>4、全面讲解CDN核心技术理念，实现智能DNS流量分发和用户策略引导</p>
+<p>5、实战讲解LAMP运维架构，Apache+PHP+Mysql架构体系和文件存储</p>
+<p>6、介绍企业级安全体系，iptables构建安全架构以及软硬防火墙优劣势</p>
+<p>7、深入讲解运维必备Web服务开源解决方案Nginx及LNMP企业高级用法</p>
+<p>8、企业级DBA实战课程，Mysql企业级实战应用，调优及redis企业级应用</p>
+<h3 id="第三阶段：企业级Linux云计算工程师"><a href="#第三阶段：企业级Linux云计算工程师" class="headerlink" title="第三阶段：企业级Linux云计算工程师"></a>第三阶段：企业级Linux云计算工程师</h3><p>1、全面讲解企业级LNMP架构及12条策略建议，实现互联网电子商务、博客、论坛等实战案例</p>
+<p>2、专业压测评估体系，从并发、响应时间、持久连接、pv、峰值、带宽，以及ab等压测方案实施</p>
+<p>4、讲解Linux Cluster集群，全面分析集群类别，讲解F5和LVS、haproxy、nginx的4-7层负载均衡</p>
+<p>5、实战带领在Centos7上实现LVS集群配罝、服务管理、调度算法修改、后端服务器上下线、服务状态监控，状态监测方实现NAT、DR、TUN等模型演练</p>
+<p>6、全面实现基于Nginx负载均衡功能，实现Nginx反代后端、Nginx负载均衡实现网站动静分离详解</p>
+<p>7、实战带领实现Keepalived主从架构及双主切换方案、报警定制、日志分析等</p>
+<p>8、全面讲解Zabbix3.X监控特性、Web服务监控、Zabbix内部监控、Zabbix特性及功能详解</p>
+<p>9、全面讲解Varnish缓存技术，深入Varnish工作机制、核心架构、及主流开源缓存技术解决方案</p>
+<p>10、laaS、PaaS和SaaS云平台功能及常见实现方式及OpenStack的功能特性及其实现的增强功能</p>
+<p>11、全面讲解KVM虚拟化技术，docker技术实现互联网容器和Docker容器云以及Kubemetes管理</p>
+<h3 id="第四阶段：Linux自动化运维工程师-amp-DevOps"><a href="#第四阶段：Linux自动化运维工程师-amp-DevOps" class="headerlink" title="第四阶段：Linux自动化运维工程师&amp;DevOps"></a>第四阶段：Linux自动化运维工程师&amp;DevOps</h3><p>1、以自动化运维框架为主线，讲解Devops运维自动化趋和核心技术</p>
+<p>2、自动化运维工具Puppet、Ansible、Cobbler、Saltstack、 Fabric对比</p>
+<p>3、Ansible生产环境应用案例和实战操练、批量进行上百台服务器管理</p>
+<p>4、企业自动化工具Puppet使用场景，实现搭建企业运维自动化平台架构</p>
+<p>5、全面讲解Git版本控制、脚本自动化管理、Git分支合并，Git服务器搭建</p>
+<p>6、深入讲解基于Shell脚本企业级高级用法和常见实现Shell自动化管理</p>
+<p>7、python基本语法和自动化工具应用，及开源跳板机Jumpserver实现</p>
+<p>8、实战：基于生产环境持续集成案例，Jenkins+gitlab+maven+shell实现代码自动化上线部署，可持续集成</p>
+<p>9、生产环境基于自动化运维常见场景如自动化发布、灰度发布、批量上线、降级方案、无缝切换等核心技术</p>
+<h3 id="第五阶段：Linux系统架构师-amp-运维架构师"><a href="#第五阶段：Linux系统架构师-amp-运维架构师" class="headerlink" title="第五阶段：Linux系统架构师&amp;运维架构师"></a>第五阶段：Linux系统架构师&amp;运维架构师</h3><p>1、全面介绍缓存技术要点，讲解数据流式化、代理式缓存、旁路式缓存、缓存算法、缓存设定策略、一致性哈希算法优劣势等</p>
+<p>2、全面讲解正向代理、反向代理机制，实战实现Nginx反向代理负载均衡，跳转规則实现动静分离、IP曰志记录、头部信息改写、缓存模块、缓存策略、请求超时机制、健康状态监测、判定规则、状态码定义、实现后端故障及自动上线等能力</p>
+<p>3、实战带领实现千万级大型互联网Web架构核心技术，运用LVS、Haproxy、Vamish、 Nginx、tomcat、MySQL等实现高并发运维体系Web架构，实现分布式集群存储Fastdfs和mogileFS架构</p>
+<p>4、全面讲解MySQL—主多从、一从多主企业级用法，深入讲解MySQL读写分离、连接池及sharding技术，以及MMM、MHA、Galera-Cluster核心技术， MySQL读写分离Amoeba实现</p>
+<p>5、实战:分布式收集Nginx日志于Elk集群，并通过Kibana展示；实战:分布式收集 JAVA日志于Elk集群，并通过Kibana展示；实战:分布式收集Syslog曰志于Elk集群，并通过Kibana展示</p>
+<p>6、结合自动化工具实现企业业务服务管理，持续化集成，实现Devops运维管理模型及架构设计。</p>
+<p>7、实现基于k8s的企业级容器云架构管理，以及docker容器的服务应用，实现私有云架构方案</p>
+<p>8、全面讲解大众点评、美团、滴滴、饿了么等亿级别PV大型互联网架构方案，以及设计规范，包含负载均衡、缓存、高可用、数据库、分布式存储、消息队列、自动化、运维规范、监控体系等</p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/Linux%E8%BF%90%E7%BB%B4-%E8%BF%9B%E9%98%B6/">#Linux运维, 进阶</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2019/09/19/docker%E5%AE%89%E8%A3%85%E4%B8%8E%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">docker安装与简单使用</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2019/09/19/%E9%AB%98%E5%B9%B6%E5%8F%91%E5%A4%A7%E6%B5%81%E9%87%8F%E7%BD%91%E7%AB%9910%E4%B8%AA%E8%B0%83%E4%BC%98%E7%AD%96%E7%95%A5/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">高并发大流量网站10个调优策略</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E7%9B%B4%E4%BB%A5%E6%9D%A5%EF%BC%8C%E4%B8%AA%E4%BA%BA%E9%83%BD%E6%98%AF%E5%9C%A8%E9%80%9A%E8%BF%87%E4%B8%8D%E6%96%AD%E6%8E%A2%E7%B4%A2%EF%BC%8C%E4%BB%A5%E5%AF%BB%E6%89%BE%E6%9C%80%E5%A5%BD%E7%9A%84%E5%AD%A6%E4%B9%A0Linux%E7%9A%84%E6%96%B9%E5%BC%8F%E3%80%82"><span class="nav-number">1.</span> <span class="nav-text">一直以来，个人都是在通过不断探索，以寻找最好的学习Linux的方式。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%EF%BC%9A%E4%BC%81%E4%B8%9A%E7%BA%A7Linux%E8%BF%90%E7%BB%B4%E5%B7%A5%E7%A8%8B%E5%B8%88"><span class="nav-number">1.1.</span> <span class="nav-text">第一阶段：企业级Linux运维工程师</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%EF%BC%9ALinux%E5%BA%94%E7%94%A8%E8%BF%90%E7%BB%B4%E5%B7%A5%E7%A8%8B%E5%B8%88-amp-DBA"><span class="nav-number">1.2.</span> <span class="nav-text">第二阶段：Linux应用运维工程师&amp;DBA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%EF%BC%9A%E4%BC%81%E4%B8%9A%E7%BA%A7Linux%E4%BA%91%E8%AE%A1%E7%AE%97%E5%B7%A5%E7%A8%8B%E5%B8%88"><span class="nav-number">1.3.</span> <span class="nav-text">第三阶段：企业级Linux云计算工程师</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5%EF%BC%9ALinux%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4%E5%B7%A5%E7%A8%8B%E5%B8%88-amp-DevOps"><span class="nav-number">1.4.</span> <span class="nav-text">第四阶段：Linux自动化运维工程师&amp;DevOps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E9%98%B6%E6%AE%B5%EF%BC%9ALinux%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88-amp-%E8%BF%90%E7%BB%B4%E6%9E%B6%E6%9E%84%E5%B8%88"><span class="nav-number">1.5.</span> <span class="nav-text">第五阶段：Linux系统架构师&amp;运维架构师</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2018</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Devin hao</a>
+            
+        </div>
+        
+            <script async data-pjax
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/utils.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/main.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/header-shrink.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/back2top.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/code-block.js"></script>
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/libs/anime.min.js"></script>
+        
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/toc.js"></script>
+        
+    
+</div>
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

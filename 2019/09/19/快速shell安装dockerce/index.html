@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="小冲的个人博客">
+    <meta name="author" content="Devin hao">
+    
+    <title>
+        
+            快速shell安装docker-ce |
+        
+        Devin blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/null">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"www.devinrain.homes","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":null,"favicon":null,"avatar":"/images/logo.svg","font_size":null,"font_family":"STHeiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":null,"font_color":null,"hitokoto":true},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+               Devin blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">快速shell安装docker-ce</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/logo.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Devin hao</span>
+                            
+                                <span class="author-label">Architect</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2019-09-19 15:12:46</span>
+        <span class="mobile">2019-09-19 15:12</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2019-09-19 15:15:12</span>
+    </span>
+    
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/docker-shell/">docker, shell</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/docker-shell/">docker, shell</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>18 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <p>我们以18.09.8为例，以下为详细shell：</p>
+<pre class="line-numbers language-none"><code class="language-none">#!&#x2F;bin&#x2F;sh
+set -e
+
+CHANNEL&#x3D;&quot;stable&quot;
+
+docker_version&#x3D;18.09.8
+apt_url&#x3D;&quot;https:&#x2F;&#x2F;apt.dockerproject.org&quot;
+yum_url&#x3D;&quot;https:&#x2F;&#x2F;yum.dockerproject.org&quot;
+gpg_fingerprint&#x3D;&quot;9DC858229FC7DD38854AE2D88D81803C0EBFCD88&quot;
+
+key_servers&#x3D;&quot;
+ha.pool.sks-keyservers.net
+pgp.mit.edu
+keyserver.ubuntu.com
+&quot;
+
+rhel_repos&#x3D;&quot;
+rhel-7-server-extras-rpms
+rhui-REGION-rhel-server-extras
+rhui-rhel-7-server-rhui-extras-rpms
+rhui-rhel-7-for-arm-64-extras-rhui-rpms
+&quot;
+
+mirror&#x3D;&#39;&#39;
+while [ $# -gt 0 ]; do
+	case &quot;$1&quot; in
+		--mirror)
+			mirror&#x3D;&quot;$2&quot;
+			shift
+			;;
+		*)
+			echo &quot;Illegal option $1&quot;
+			;;
+	esac
+	shift $(( $# &gt; 0 ? 1 : 0 ))
+done
+
+case &quot;$mirror&quot; in
+	AzureChinaCloud)
+		apt_url&#x3D;&quot;https:&#x2F;&#x2F;mirror.azure.cn&#x2F;docker-engine&#x2F;apt&quot;
+		yum_url&#x3D;&quot;https:&#x2F;&#x2F;mirror.azure.cn&#x2F;docker-engine&#x2F;yum&quot;
+		;;
+	Aliyun)
+		apt_url&#x3D;&quot;https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-engine&#x2F;apt&quot;
+		yum_url&#x3D;&quot;https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-engine&#x2F;yum&quot;
+		;;
+esac
+
+command_exists() &#123;
+	command -v &quot;$@&quot; &gt; &#x2F;dev&#x2F;null 2&gt;&amp;1
+&#125;
+
+echo_docker_as_nonroot() &#123;
+	if command_exists docker &amp;&amp; [ -e &#x2F;var&#x2F;run&#x2F;docker.sock ]; then
+		(
+			set -x
+			$sh_c &#39;docker version&#39;
+		) || true
+	fi
+	your_user&#x3D;your-user
+	[ &quot;$user&quot; !&#x3D; &#39;root&#39; ] &amp;&amp; your_user&#x3D;&quot;$user&quot;
+	# intentionally mixed spaces and tabs here -- tabs are stripped by &quot;&lt;&lt;-EOF&quot;, spaces are kept in the output
+	cat &lt;&lt;-EOF
+
+	If you would like to use Docker as a non-root user, you should now consider
+	adding your user to the &quot;docker&quot; group with something like:
+
+	  sudo usermod -aG docker $your_user
+
+	Remember that you will have to log out and back in for this to take effect!
+
+	WARNING: Adding a user to the &quot;docker&quot; group will grant the ability to run
+	         containers which can be used to obtain root privileges on the
+	         docker host.
+	         Refer to https:&#x2F;&#x2F;docs.docker.com&#x2F;engine&#x2F;security&#x2F;security&#x2F;#docker-daemon-attack-surface
+	         for more information.
+
+	EOF
+&#125;
+
+# Check if this is a forked Linux distro
+check_forked() &#123;
+
+	# Check for lsb_release command existence, it usually exists in forked distros
+	if command_exists lsb_release; then
+		# Check if the &#96;-u&#96; option is supported
+		set +e
+		lsb_release -a -u &gt; &#x2F;dev&#x2F;null 2&gt;&amp;1
+		lsb_release_exit_code&#x3D;$?
+		set -e
+
+		# Check if the command has exited successfully, it means we&#39;re in a forked distro
+		if [ &quot;$lsb_release_exit_code&quot; &#x3D; &quot;0&quot; ]; then
+			# Print info about current distro
+			cat &lt;&lt;-EOF
+			You&#39;re using &#39;$lsb_dist&#39; version &#39;$dist_version&#39;.
+			EOF
+
+			# Get the upstream release info
+			lsb_dist&#x3D;$(lsb_release -a -u 2&gt;&amp;1 | tr &#39;[:upper:]&#39; &#39;[:lower:]&#39; | grep -E &#39;id&#39; | cut -d &#39;:&#39; -f 2 | tr -d &#39;[[:space:]]&#39;)
+			dist_version&#x3D;$(lsb_release -a -u 2&gt;&amp;1 | tr &#39;[:upper:]&#39; &#39;[:lower:]&#39; | grep -E &#39;codename&#39; | cut -d &#39;:&#39; -f 2 | tr -d &#39;[[:space:]]&#39;)
+
+			# Print info about upstream distro
+			cat &lt;&lt;-EOF
+			Upstream release is &#39;$lsb_dist&#39; version &#39;$dist_version&#39;.
+			EOF
+		else
+			if [ -r &#x2F;etc&#x2F;debian_version ] &amp;&amp; [ &quot;$lsb_dist&quot; !&#x3D; &quot;ubuntu&quot; ] &amp;&amp; [ &quot;$lsb_dist&quot; !&#x3D; &quot;raspbian&quot; ]; then
+				# We&#39;re Debian and don&#39;t even know it!
+				lsb_dist&#x3D;debian
+				dist_version&#x3D;&quot;$(cat &#x2F;etc&#x2F;debian_version | sed &#39;s&#x2F;\&#x2F;.*&#x2F;&#x2F;&#39; | sed &#39;s&#x2F;\..*&#x2F;&#x2F;&#39;)&quot;
+				case &quot;$dist_version&quot; in
+					10)
+						dist_version&#x3D;&quot;buster&quot;
+					;;
+					9)
+						dist_version&#x3D;&quot;stretch&quot;
+					;;
+					8|&#39;Kali Linux 2&#39;)
+						dist_version&#x3D;&quot;jessie&quot;
+					;;
+					7)
+						dist_version&#x3D;&quot;wheezy&quot;
+					;;
+				esac
+			fi
+		fi
+	fi
+&#125;
+
+semverParse() &#123;
+	major&#x3D;&quot;$&#123;1%%.*&#125;&quot;
+	minor&#x3D;&quot;$&#123;1#$major.&#125;&quot;
+	minor&#x3D;&quot;$&#123;minor%%.*&#125;&quot;
+	patch&#x3D;&quot;$&#123;1#$major.$minor.&#125;&quot;
+	patch&#x3D;&quot;$&#123;patch%%[-.]*&#125;&quot;
+&#125;
+
+deprecation_notice() &#123;
+	echo
+	echo
+	echo &quot;  WARNING: $1 is no longer updated @ $url&quot;
+	echo &quot;           Installing the legacy docker-engine package...&quot;
+	echo
+	echo
+	sleep 10;
+&#125;
+
+do_install() &#123;
+
+	architecture&#x3D;$(uname -m)
+	case $architecture in
+		# officially supported
+		amd64|aarch64|arm64|x86_64)
+			;;
+		# unofficially supported with available repositories
+		armv6l|armv7l)
+			;;
+		# unofficially supported without available repositories
+		ppc64le|s390x)
+			cat 1&gt;&amp;2 &lt;&lt;-EOF
+			Error: This install script does not support $architecture, because no
+			$architecture package exists in Docker&#39;s repositories.
+
+			Other install options include checking your distribution&#39;s package repository
+			for a version of Docker, or building Docker from source.
+			EOF
+			exit 1
+			;;
+		# not supported
+		*)
+			cat &gt;&amp;2 &lt;&lt;-EOF
+			Error: $architecture is not a recognized platform.
+			EOF
+			exit 1
+			;;
+	esac
+
+	if command_exists docker; then
+		version&#x3D;&quot;$(docker -v | cut -d &#39; &#39; -f3 | cut -d &#39;,&#39; -f1)&quot;
+		MAJOR_W&#x3D;1
+		MINOR_W&#x3D;10
+
+		semverParse $version
+
+		shouldWarn&#x3D;0
+		if [ $major -lt $MAJOR_W ]; then
+			shouldWarn&#x3D;1
+		fi
+
+		if [ $major -le $MAJOR_W ] &amp;&amp; [ $minor -lt $MINOR_W ]; then
+			shouldWarn&#x3D;1
+		fi
+
+		cat &gt;&amp;2 &lt;&lt;-&#39;EOF&#39;
+			Warning: the &quot;docker&quot; command appears to already exist on this system.
+
+			If you already have Docker installed, this script can cause trouble, which is
+			why we&#39;re displaying this warning and provide the opportunity to cancel the
+			installation.
+
+			If you installed the current Docker package using this script and are using it
+		EOF
+
+		if [ $shouldWarn -eq 1 ]; then
+			cat &gt;&amp;2 &lt;&lt;-&#39;EOF&#39;
+			again to update Docker, we urge you to migrate your image store before upgrading
+			to v1.10+.
+
+			You can find instructions for this here:
+			https:&#x2F;&#x2F;github.com&#x2F;docker&#x2F;docker&#x2F;wiki&#x2F;Engine-v1.10.0-content-addressability-migration
+			EOF
+		else
+			cat &gt;&amp;2 &lt;&lt;-&#39;EOF&#39;
+			again to update Docker, you can safely ignore this message.
+			EOF
+		fi
+
+		cat &gt;&amp;2 &lt;&lt;-&#39;EOF&#39;
+
+			You may press Ctrl+C now to abort this script.
+		EOF
+		( set -x; sleep 20 )
+	fi
+
+	user&#x3D;&quot;$(id -un 2&gt;&#x2F;dev&#x2F;null || true)&quot;
+
+	sh_c&#x3D;&#39;sh -c&#39;
+	if [ &quot;$user&quot; !&#x3D; &#39;root&#39; ]; then
+		if command_exists sudo; then
+			sh_c&#x3D;&#39;sudo -E sh -c&#39;
+		elif command_exists su; then
+			sh_c&#x3D;&#39;su -c&#39;
+		else
+			cat &gt;&amp;2 &lt;&lt;-&#39;EOF&#39;
+			Error: this installer needs the ability to run commands as root.
+			We are unable to find either &quot;sudo&quot; or &quot;su&quot; available to make this happen.
+			EOF
+			exit 1
+		fi
+	fi
+
+	curl&#x3D;&#39;&#39;
+	if command_exists curl; then
+		curl&#x3D;&#39;curl -sSL&#39;
+	elif command_exists wget; then
+		curl&#x3D;&#39;wget -qO-&#39;
+	elif command_exists busybox &amp;&amp; busybox --list-modules | grep -q wget; then
+		curl&#x3D;&#39;busybox wget -qO-&#39;
+	fi
+
+	# check to see which repo they are trying to install from
+	if [ -z &quot;$repo&quot; ]; then
+		repo&#x3D;&#39;main&#39;
+		if [ &quot;https:&#x2F;&#x2F;test.docker.com&#x2F;&quot; &#x3D; &quot;$url&quot; ]; then
+			repo&#x3D;&#39;testing&#39;
+		elif [ &quot;https:&#x2F;&#x2F;experimental.docker.com&#x2F;&quot; &#x3D; &quot;$url&quot; ]; then
+			repo&#x3D;&#39;experimental&#39;
+		fi
+	fi
+
+	# perform some very rudimentary platform detection
+	lsb_dist&#x3D;&#39;&#39;
+	dist_version&#x3D;&#39;&#39;
+	if command_exists lsb_release; then
+		lsb_dist&#x3D;&quot;$(lsb_release -si)&quot;
+	fi
+	if [ -z &quot;$lsb_dist&quot; ] &amp;&amp; [ -r &#x2F;etc&#x2F;lsb-release ]; then
+		lsb_dist&#x3D;&quot;$(. &#x2F;etc&#x2F;lsb-release &amp;&amp; echo &quot;$DISTRIB_ID&quot;)&quot;
+	fi
+	if [ -z &quot;$lsb_dist&quot; ] &amp;&amp; [ -r &#x2F;etc&#x2F;debian_version ]; then
+		lsb_dist&#x3D;&#39;debian&#39;
+	fi
+	if [ -z &quot;$lsb_dist&quot; ] &amp;&amp; [ -r &#x2F;etc&#x2F;fedora-release ]; then
+		lsb_dist&#x3D;&#39;fedora&#39;
+	fi
+	if [ -z &quot;$lsb_dist&quot; ] &amp;&amp; [ -r &#x2F;etc&#x2F;oracle-release ]; then
+		lsb_dist&#x3D;&#39;oracleserver&#39;
+	fi
+	if [ -z &quot;$lsb_dist&quot; ] &amp;&amp; [ -r &#x2F;etc&#x2F;centos-release ]; then
+		lsb_dist&#x3D;&#39;centos&#39;
+	fi
+	if [ -z &quot;$lsb_dist&quot; ] &amp;&amp; [ -r &#x2F;etc&#x2F;redhat-release ]; then
+		lsb_dist&#x3D;&#39;redhat&#39;
+	fi
+	if [ -z &quot;$lsb_dist&quot; ] &amp;&amp; [ -r &#x2F;etc&#x2F;os-release ]; then
+		lsb_dist&#x3D;&quot;$(. &#x2F;etc&#x2F;os-release &amp;&amp; echo &quot;$ID&quot;)&quot;
+	fi
+
+	lsb_dist&#x3D;&quot;$(echo &quot;$lsb_dist&quot; | tr &#39;[:upper:]&#39; &#39;[:lower:]&#39;)&quot;
+
+	# Special case redhatenterpriseserver
+	if [ &quot;$&#123;lsb_dist&#125;&quot; &#x3D; &quot;redhatenterpriseserver&quot; ]; then
+		# Set it to redhat, it will be changed to centos below anyways
+		lsb_dist&#x3D;&#39;redhat&#39;
+	fi
+
+	case &quot;$lsb_dist&quot; in
+
+		ubuntu)
+			if command_exists lsb_release; then
+				dist_version&#x3D;&quot;$(lsb_release --codename | cut -f2)&quot;
+			fi
+			if [ -z &quot;$dist_version&quot; ] &amp;&amp; [ -r &#x2F;etc&#x2F;lsb-release ]; then
+				dist_version&#x3D;&quot;$(. &#x2F;etc&#x2F;lsb-release &amp;&amp; echo &quot;$DISTRIB_CODENAME&quot;)&quot;
+			fi
+		;;
+
+		debian|raspbian)
+			dist_version&#x3D;&quot;$(cat &#x2F;etc&#x2F;debian_version | sed &#39;s&#x2F;\&#x2F;.*&#x2F;&#x2F;&#39; | sed &#39;s&#x2F;\..*&#x2F;&#x2F;&#39;)&quot;
+			case &quot;$dist_version&quot; in
+				9)
+					dist_version&#x3D;&quot;stretch&quot;
+				;;
+				8)
+					dist_version&#x3D;&quot;jessie&quot;
+				;;
+				7)
+					dist_version&#x3D;&quot;wheezy&quot;
+				;;
+			esac
+		;;
+
+		oracleserver)
+			# need to switch lsb_dist to match yum repo URL
+			lsb_dist&#x3D;&quot;oraclelinux&quot;
+			dist_version&#x3D;&quot;$(rpm -q --whatprovides redhat-release --queryformat &quot;%&#123;VERSION&#125;\n&quot; | sed &#39;s&#x2F;\&#x2F;.*&#x2F;&#x2F;&#39; | sed &#39;s&#x2F;\..*&#x2F;&#x2F;&#39; | sed &#39;s&#x2F;Server*&#x2F;&#x2F;&#39;)&quot;
+		;;
+
+		fedora|centos|redhat)
+			dist_version&#x3D;&quot;$(rpm -q --whatprovides $&#123;lsb_dist&#125;-release --queryformat &quot;%&#123;VERSION&#125;\n&quot; | sed &#39;s&#x2F;\&#x2F;.*&#x2F;&#x2F;&#39; | sed &#39;s&#x2F;\..*&#x2F;&#x2F;&#39; | sed &#39;s&#x2F;Server*&#x2F;&#x2F;&#39; | sort | tail -1)&quot;
+		;;
+
+		*)
+			if command_exists lsb_release; then
+				dist_version&#x3D;&quot;$(lsb_release --codename | cut -f2)&quot;
+			fi
+			if [ -z &quot;$dist_version&quot; ] &amp;&amp; [ -r &#x2F;etc&#x2F;os-release ]; then
+				dist_version&#x3D;&quot;$(. &#x2F;etc&#x2F;os-release &amp;&amp; echo &quot;$VERSION_ID&quot;)&quot;
+			fi
+		;;
+
+
+	esac
+
+	# Check if this is a forked Linux distro
+	check_forked
+
+	# Run setup for each distro accordingly
+	case &quot;$lsb_dist&quot; in
+		ubuntu|debian)
+			pre_reqs&#x3D;&quot;apt-transport-https ca-certificates curl&quot;
+			if [ &quot;$lsb_dist&quot; &#x3D; &quot;debian&quot; ] &amp;&amp; [ &quot;$dist_version&quot; &#x3D; &quot;wheezy&quot; ]; then
+				pre_reqs&#x3D;&quot;$pre_reqs python-software-properties&quot;
+				backports&#x3D;&quot;deb http:&#x2F;&#x2F;ftp.debian.org&#x2F;debian wheezy-backports main&quot;
+				if ! grep -Fxq &quot;$backports&quot; &#x2F;etc&#x2F;apt&#x2F;sources.list; then
+					(set -x; $sh_c &quot;echo \&quot;$backports\&quot; &gt;&gt; &#x2F;etc&#x2F;apt&#x2F;sources.list&quot;)
+				fi
+			else
+				pre_reqs&#x3D;&quot;$pre_reqs software-properties-common&quot;
+			fi
+			if ! command -v gpg &gt; &#x2F;dev&#x2F;null; then
+				pre_reqs&#x3D;&quot;$pre_reqs gnupg&quot;
+			fi
+			apt_repo&#x3D;&quot;deb [arch&#x3D;$(dpkg --print-architecture)] https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;$lsb_dist $dist_version $CHANNEL&quot;
+			(
+				set -x
+				$sh_c &#39;apt-get update&#39;
+				$sh_c &quot;apt-get install -y -q $pre_reqs&quot;
+				curl -fsSl &quot;https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;$lsb_dist&#x2F;gpg&quot; | $sh_c &#39;apt-key add -&#39;
+				$sh_c &quot;add-apt-repository \&quot;$apt_repo\&quot;&quot;
+				if [ &quot;$lsb_dist&quot; &#x3D; &quot;debian&quot; ] &amp;&amp; [ &quot;$dist_version&quot; &#x3D; &quot;wheezy&quot; ]; then
+					$sh_c &#39;sed -i &quot;&#x2F;deb-src.*download\.docker&#x2F;d&quot; &#x2F;etc&#x2F;apt&#x2F;sources.list&#39;
+				fi
+				$sh_c &#39;apt-get update&#39;
+				$sh_c &quot;apt-get install -y -q docker-ce&#x3D;$(apt-cache madison docker-ce | grep $&#123;docker_version&#125; | head -n 1 | cut -d &#39; &#39; -f 4)&quot;
+			)
+			echo_docker_as_nonroot
+			exit 0
+			;;
+		centos|fedora|redhat|oraclelinux)
+			yum_repo&#x3D;&quot;https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo&quot;
+			if [ &quot;$lsb_dist&quot; &#x3D; &quot;fedora&quot; ]; then
+				if [ &quot;$dist_version&quot; -lt &quot;24&quot; ]; then
+					echo &quot;Error: Only Fedora &gt;&#x3D;24 are supported by $url&quot;
+					exit 1
+				fi
+				pkg_manager&#x3D;&quot;dnf&quot;
+				config_manager&#x3D;&quot;dnf config-manager&quot;
+				enable_channel_flag&#x3D;&quot;--set-enabled&quot;
+				pre_reqs&#x3D;&quot;dnf-plugins-core&quot;
+			else
+				pkg_manager&#x3D;&quot;yum&quot;
+				config_manager&#x3D;&quot;yum-config-manager&quot;
+				enable_channel_flag&#x3D;&quot;--enable&quot;
+				pre_reqs&#x3D;&quot;yum-utils&quot;
+			fi
+			(
+				set -x
+			        if [ &quot;$lsb_dist&quot; &#x3D; &quot;redhat&quot; ]; then
+                                        for rhel_repo in $rhel_repos ; do
+                                                $sh_c &quot;$config_manager $enable_channel_flag $rhel_repo&quot;
+                                        done
+                                fi
+				$sh_c &quot;$pkg_manager install -y -q $pre_reqs&quot;
+				$sh_c &quot;$config_manager --add-repo $yum_repo&quot;
+				if [ &quot;$CHANNEL&quot; !&#x3D; &quot;stable&quot; ]; then
+					echo &quot;Info: Enabling channel &#39;$CHANNEL&#39; for docker-ce repo&quot;
+					$sh_c &quot;$config_manager $enable_channel_flag docker-ce-$CHANNEL&quot;
+				fi
+				$sh_c &quot;$pkg_manager makecache fast&quot;
+				$sh_c &quot;$pkg_manager install -y -q docker-ce-$&#123;docker_version&#125;&quot;
+				if [ -d &#39;&#x2F;run&#x2F;systemd&#x2F;system&#39; ]; then
+					$sh_c &#39;service docker start&#39;
+				else
+					$sh_c &#39;systemctl start docker&#39;
+				fi
+			)
+			echo_docker_as_nonroot
+			exit 0
+			;;
+		raspbian)
+			deprecation_notice &quot;$lsb_dist&quot;
+			export DEBIAN_FRONTEND&#x3D;noninteractive
+
+			did_apt_get_update&#x3D;
+			apt_get_update() &#123;
+				if [ -z &quot;$did_apt_get_update&quot; ]; then
+					( set -x; $sh_c &#39;sleep 3; apt-get update&#39; )
+					did_apt_get_update&#x3D;1
+				fi
+			&#125;
+
+			if [ &quot;$lsb_dist&quot; !&#x3D; &quot;raspbian&quot; ]; then
+				# aufs is preferred over devicemapper; try to ensure the driver is available.
+				if ! grep -q aufs &#x2F;proc&#x2F;filesystems &amp;&amp; ! $sh_c &#39;modprobe aufs&#39;; then
+					if uname -r | grep -q -- &#39;-generic&#39; &amp;&amp; dpkg -l &#39;linux-image-*-generic&#39; | grep -qE &#39;^ii|^hi&#39; 2&gt;&#x2F;dev&#x2F;null; then
+						kern_extras&#x3D;&quot;linux-image-extra-$(uname -r) linux-image-extra-virtual&quot;
+
+						apt_get_update
+						( set -x; $sh_c &#39;sleep 3; apt-get install -y -q &#39;&quot;$kern_extras&quot; ) || true
+
+						if ! grep -q aufs &#x2F;proc&#x2F;filesystems &amp;&amp; ! $sh_c &#39;modprobe aufs&#39;; then
+							echo &gt;&amp;2 &#39;Warning: tried to install &#39;&quot;$kern_extras&quot;&#39; (for AUFS)&#39;
+							echo &gt;&amp;2 &#39; but we still have no AUFS.  Docker may not work. Proceeding anyways!&#39;
+							( set -x; sleep 10 )
+						fi
+					else
+						echo &gt;&amp;2 &#39;Warning: current kernel is not supported by the linux-image-extra-virtual&#39;
+						echo &gt;&amp;2 &#39; package.  We have no AUFS support.  Consider installing the packages&#39;
+						echo &gt;&amp;2 &#39; &quot;linux-image-virtual&quot; and &quot;linux-image-extra-virtual&quot; for AUFS support.&#39;
+						( set -x; sleep 10 )
+					fi
+				fi
+			fi
+
+			# install apparmor utils if they&#39;re missing and apparmor is enabled in the kernel
+			# otherwise Docker will fail to start
+			if [ &quot;$(cat &#x2F;sys&#x2F;module&#x2F;apparmor&#x2F;parameters&#x2F;enabled 2&gt;&#x2F;dev&#x2F;null)&quot; &#x3D; &#39;Y&#39; ]; then
+				if command -v apparmor_parser &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1; then
+					echo &#39;apparmor is enabled in the kernel and apparmor utils were already installed&#39;
+				else
+					echo &#39;apparmor is enabled in the kernel, but apparmor_parser is missing. Trying to install it..&#39;
+					apt_get_update
+					( set -x; $sh_c &#39;sleep 3; apt-get install -y -q apparmor&#39; )
+				fi
+			fi
+
+			if [ ! -e &#x2F;usr&#x2F;lib&#x2F;apt&#x2F;methods&#x2F;https ]; then
+				apt_get_update
+				( set -x; $sh_c &#39;sleep 3; apt-get install -y -q apt-transport-https ca-certificates&#39; )
+			fi
+			if [ -z &quot;$curl&quot; ]; then
+				apt_get_update
+				( set -x; $sh_c &#39;sleep 3; apt-get install -y -q curl ca-certificates&#39; )
+				curl&#x3D;&#39;curl -sSL&#39;
+			fi
+			if ! command -v gpg &gt; &#x2F;dev&#x2F;null; then
+				apt_get_update
+				( set -x; $sh_c &#39;sleep 3; apt-get install -y -q gnupg2 || apt-get install -y -q gnupg&#39; )
+			fi
+
+			# dirmngr is a separate package in ubuntu yakkety; see https:&#x2F;&#x2F;bugs.launchpad.net&#x2F;ubuntu&#x2F;+source&#x2F;apt&#x2F;+bug&#x2F;1634464
+			if ! command -v dirmngr &gt; &#x2F;dev&#x2F;null; then
+				apt_get_update
+				( set -x; $sh_c &#39;sleep 3; apt-get install -y -q dirmngr&#39; )
+			fi
+
+			(
+			set -x
+                        for key_server in $key_servers ; do
+                                $sh_c &quot;apt-key adv --keyserver hkp:&#x2F;&#x2F;$&#123;key_server&#125;:80 --recv-keys $&#123;gpg_fingerprint&#125;&quot; &amp;&amp; break
+                        done
+                        $sh_c &quot;apt-key adv -k $&#123;gpg_fingerprint&#125; &gt;&#x2F;dev&#x2F;null&quot;
+			$sh_c &quot;mkdir -p &#x2F;etc&#x2F;apt&#x2F;sources.list.d&quot;
+			$sh_c &quot;echo deb \[arch&#x3D;$(dpkg --print-architecture)\] $&#123;apt_url&#125;&#x2F;repo $&#123;lsb_dist&#125;-$&#123;dist_version&#125; $&#123;repo&#125; &gt; &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;docker.list&quot;
+			$sh_c &#39;sleep 3; apt-get update; apt-get install -y -q docker-engine&#39;
+			)
+			echo_docker_as_nonroot
+			exit 0
+			;;
+		rancheros)
+			(
+			set -x
+			$sh_c &quot;sleep 3; ros engine switch -f $(sudo ros engine list | grep $&#123;docker_version&#125; | head -n 1 | cut -d &#39; &#39; -f 2)&quot;
+			)
+			exit 0
+			;;
+	esac
+
+	# intentionally mixed spaces and tabs here -- tabs are stripped by &quot;&lt;&lt;-&#39;EOF&#39;&quot;, spaces are kept in the output
+	cat &gt;&amp;2 &lt;&lt;-&#39;EOF&#39;
+
+	Either your platform is not easily detectable or is not supported by this
+	installer script.
+	Please visit the following URL for more detailed installation instructions:
+
+	https:&#x2F;&#x2F;docs.docker.com&#x2F;engine&#x2F;installation&#x2F;
+
+	EOF
+	exit 1
+&#125;
+
+# wrapped up in a function so that we have some protection against only getting
+# half the file during &quot;curl | sh&quot;
+do_install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/docker-shell/">#docker, shell</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2019/09/19/docker%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">docker命令使用</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2019/09/19/Linux%20%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Linux 目录结构</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2018</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Devin hao</a>
+            
+        </div>
+        
+            <script async data-pjax
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/utils.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/main.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/header-shrink.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/back2top.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/code-block.js"></script>
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/libs/anime.min.js"></script>
+        
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/toc.js"></script>
+        
+    
+</div>
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

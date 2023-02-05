@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="小冲的个人博客">
+    <meta name="author" content="Devin hao">
+    
+    <title>
+        
+            事件驱动的微服务架构的最佳实践 |
+        
+        Devin blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/null">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"www.devinrain.homes","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":null,"favicon":null,"avatar":"/images/logo.svg","font_size":null,"font_family":"STHeiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":null,"font_color":null,"hitokoto":true},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+               Devin blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">事件驱动的微服务架构的最佳实践</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/logo.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Devin hao</span>
+                            
+                                <span class="author-label">Architect</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2019-09-14 19:38:59</span>
+        <span class="mobile">2019-09-14 19:38</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2019-09-14 19:38:59</span>
+    </span>
+    
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E6%9E%B6%E6%9E%84-%E5%BE%AE%E6%9C%8D%E5%8A%A1/">架构, 微服务</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84-%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84/">微服务架构, 微服务, 微服务最佳实践, 事件驱动架构</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.1k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>10 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <h1 id="事件驱动的微服务架构的最佳实践"><a href="#事件驱动的微服务架构的最佳实践" class="headerlink" title="事件驱动的微服务架构的最佳实践"></a>事件驱动的微服务架构的最佳实践</h1><h3 id="你做到了吗？"><a href="#你做到了吗？" class="headerlink" title="你做到了吗？"></a>你做到了吗？</h3><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://dzone.com/storage/temp/12455990-she-is-doing-her-22best-practice22.jpeg"
+                      alt="她正在做她的“最佳实践”。"
+                ></p>
+<p><em>她正在做她的“最佳实践”。</em></p>
+<p>如果您是企业架构师，您可能已经听说过并使用过微服务架构。虽然您过去可能已将REST用作服务通信层，但越来越多的项目正在转向事件驱动的体系结构。让我们深入探讨这种流行架构的优缺点，它所包含的一些关键设计选择以及常见的反模式。</p>
+<h2 id="什么是事件驱动的微服务架构？"><a href="#什么是事件驱动的微服务架构？" class="headerlink" title="什么是事件驱动的微服务架构？"></a>什么是事件驱动的微服务架构？</h2><p>在事件驱动的体系结构中，当服务执行其他服务可能感兴趣的某项工作时，该服务会生成事件 - 执行操作的记录。其他服务使用这些事件，以便他们可以执行事件所需的任何自己的任务。与REST不同，创建请求的服务不需要知道使用请求的服务的详细信息。</p>
+<p>这是一个简单的例子：当一个订单放在电子商务网站上时，会产生一个“下订单”事件，然后由几个微服务消费：</p>
+<ol>
+<li>有序服务，可以将订单记录写入数据库。</li>
+<li>客户服务，可以创建客户记录。 </li>
+<li>付款服务，可以处理付款。</li>
+</ol>
+<p>事件可以以各种方式发布。例如，可以将它们发布到保证将事件传递给适当的消费者的队列，或者可以将它们发布到发布事件并允许访问所有感兴趣的各方的“发布&#x2F;订阅”模型流。在任何一种情况下，生产者都会发布事件，消费者会收到该事件，并做出相应的反应。请注意，在某些情况下，这两个actor也可以称为发布者（生产者）和订阅者（​​消费者）。</p>
+<h2 id="为什么使用事件驱动的体系结构"><a href="#为什么使用事件驱动的体系结构" class="headerlink" title="为什么使用事件驱动的体系结构"></a>为什么使用事件驱动的体系结构</h2><p>事件驱动的体系结构提供了多种优于REST的优势，其中包括：</p>
+<ul>
+<li><strong>异步</strong>  - 基于事件的体系结构是异步的，没有阻塞。这允许资源在他们的工作单元完成后自由移动到下一个任务，而不用担心之前发生的事情或接下来发生的事情。它们还允许事件排队或缓冲，从而防止消费者对生产者施加压力或阻止它们。</li>
+<li><strong>松散耦合</strong>  - 服务不需要（也不应该）了解或依赖其他服务。使用事件时，服务独立运行，不了解其他服务，包括其实现细节和传输协议。事件模型下的服务可以独立且更容易地更新，测试和部署。</li>
+<li><strong>轻松扩展</strong>  - 由于服务在事件驱动的体系结构下解耦，并且服务通常只执行一项任务，因此追踪到特定服务的瓶颈，并且扩展该服务（并且只有该服务）变得容易。</li>
+<li><strong>恢复支持</strong>  - 具有队列的事件驱动架构可以通过“重放”过去的事件来恢复丢失的工作。当消费者需要恢复时，这对于防止数据丢失是有价值的。</li>
+</ul>
+<p>当然，事件驱动的体系结构也有缺点。通过分离紧密耦合时可能更简单的问题，它们很容易过度设计; 他们可能需要大量的前期投资; 并且通常会导致基础架构，服务合同或模式，多语言构建系统和依赖关系图的额外复杂性。</p>
+<p>也许最重要的缺点和挑战是数据和事务管理。由于它们的异步性质，事件驱动模型必须小心处理服务之间的不一致数据，不兼容的版本，监视重复事件，并且通常不支持ACID事务，而不是支持更难以跟踪或调试的<a class="link"   target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Eventual_consistency" >最终一致性<i class="fas fa-external-link-alt"></i></a>。</p>
+<p>即使存在这些缺点，事件驱动的体系结构通常也是企业级微服务系统的更好选择。专业可扩展，松散耦合，开发友好的设计 - 超过缺点。</p>
+<h2 id="何时使用REST"><a href="#何时使用REST" class="headerlink" title="何时使用REST"></a>何时使用REST</h2><p>但是，有时候REST &#x2F; Web界面可能更适合：</p>
+<ul>
+<li>您需要一个异步请求&#x2F;回复接口。</li>
+<li>您需要支持强大的交易。</li>
+<li>您的API可供公众使用。</li>
+<li>您的项目很小（REST设置和部署起来要简单得多）。</li>
+</ul>
+<h2 id="您最重要的设计选择-消息传递框架"><a href="#您最重要的设计选择-消息传递框架" class="headerlink" title="您最重要的设计选择 - 消息传递框架"></a>您最重要的设计选择 - 消息传递框架</h2><p>一旦确定了事件驱动的体系结构，就应该选择事件框架了。生成和使用事件的方式是系统中的关键因素。存在数十种经过验证的框架和选择，选择正确的框架和选择需要时间和研究。</p>
+<p>您的基本选择归结为消息处理或流处理。</p>
+<h2 id="消息处理"><a href="#消息处理" class="headerlink" title="消息处理"></a>消息处理</h2><p>在传统的消息处理中，组件创建消息，然后将其发送到特定（通常是单个）目的地。已经闲置并等待的接收组件接收该消息并相应地动作。通常，当消息到达时，接收组件执行单个过程。然后，该邮件将被删除。</p>
+<p>消息处理体系结构的典型示例是消息队列。虽然大多数较新的项目使用流处理（如下所述），但使用消息（或事件）队列的体系结构仍然很受欢迎。消息队列通常使用“存储和转发”系统的代理，其中事件从代理传递到代理，直到它们到达适当的消费者。<a class="link"   target="_blank" rel="noopener" href="https://activemq.apache.org/" >ActiveMQ<i class="fas fa-external-link-alt"></i></a>和<a class="link"   target="_blank" rel="noopener" href="https://www.rabbitmq.com/" >RabbitMQ<i class="fas fa-external-link-alt"></i></a>是消息队列框架的两个流行示例。这两个项目都有多年的经过验证的使用和已建立的社区。</p>
+<h3 id="流处理"><a href="#流处理" class="headerlink" title="流处理"></a>流处理</h3><p>另一方面，在流处理中，组件在达到某个状态时发出事件。其他感兴趣的组件在事件流上侦听这些事件并做出相应的反应。事件不是针对某个收件人，而是针对所有感兴趣的组件。</p>
+<p>在流处理中，组件可以同时对多个事件做出反应，并对多个流和事件应用复杂的操作。一些流包括持久性，其中事件在必要时保留在流上。</p>
+<p>通过流处理，系统可以重现事件历史，在事件发生后上线并仍然对其作出反应，甚至执行滑动窗口计算。例如，它可以从每秒事件流计算每分钟的平均CPU使用率。</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://kafka.apache.org/" >Apache Kafka<i class="fas fa-external-link-alt"></i></a>是最受欢迎的流处理框架之一  。Kafka是许多项目使用的成熟稳定的解决方案。它可以被认为是一种首选的工业级流处理解决方案。Kafka拥有庞大的用户群，有用的社区和不断发展的工具集。</p>
+<h2 id="其他选择"><a href="#其他选择" class="headerlink" title="其他选择"></a>其他选择</h2><p>还有其他框架可以提供流和消息处理的组合或它们自己独特的解决方案。例如，  <a class="link"   target="_blank" rel="noopener" href="https://pulsar.apache.org/" >Pulsar<i class="fas fa-external-link-alt"></i></a>是Apache的新产品，是一个开源的pub &#x2F; sub消息系统，支持流和事件队列，所有这些都具有极高的性能。Pulsar功能丰富 - 它提供多租户和地理复制 - 因此很复杂。据说Kafka的目标是高吞吐量，而Pulsar的目标是低延迟。</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://nats.io/" >NATS<i class="fas fa-external-link-alt"></i></a>是具有“合成”排队的备选发布&#x2F;订阅消息系统。NATS旨在发送小而频繁的消息。它提供高性能和低延迟; 但是，NATS认为某些级别的数据丢失是可以接受的，优先考虑性能而不是交付保证。</p>
+<h2 id="其他设计考虑因素"><a href="#其他设计考虑因素" class="headerlink" title="其他设计考虑因素"></a>其他设计考虑因素</h2><p>选择事件框架后，还需要考虑以下几个其他挑战：</p>
+<ul>
+<li>活动采购</li>
+</ul>
+<p>很难实现松散耦合服务，不同数据存储和原子事务的组合。可能<a class="link"   target="_blank" rel="noopener" href="https://dzone.com/articles/introduction-to-event-sourcing" >有用的<i class="fas fa-external-link-alt"></i></a>一种模式是  <a class="link"   target="_blank" rel="noopener" href="https://dzone.com/articles/introduction-to-event-sourcing" >Event Sourcing<i class="fas fa-external-link-alt"></i></a>。在事件源中，永远不会直接对数据执行更新和删除操作; 相反，实体的状态更改将保存为一系列事件。</p>
+<ul>
+<li>CQRS</li>
+</ul>
+<p>上述事件采购引入了另一个问题：由于状态需要从一系列事件构建，因此查询可能既缓慢又复杂。命令查询责任分离（<a class="link"   target="_blank" rel="noopener" href="https://dzone.com/articles/microservices-with-cqrs-and-event-sourcing" >CQRS<i class="fas fa-external-link-alt"></i></a>）是一种设计解决方案，它要求插入操作和读取操作的单独模型。</p>
+<ul>
+<li>发现活动信息</li>
+</ul>
+<p>事件驱动架构中最大的挑战之一是编目服务和事件。您在哪里可以找到活动描述和详细信息？活动的原因是什么？什么团队创建了这个活动？他们是否积极致力于此？</p>
+<ul>
+<li>处理变革</li>
+</ul>
+<p>事件架构会改变吗？如何在不破坏其他服务的情况下更改事件架构？随着您的服务和事件数量的增长，您如何回答这些问题变得至关重要。</p>
+<p>作为一个好的事件消费者意味着编码改变的模式。作为一个好的事件生产者意味着要认识到你的模式变化如何影响其他服务，并创建明确记录的精心设计的事件。</p>
+<ul>
+<li>内部部署与托管部署</li>
+</ul>
+<p>无论您的事件框架如何，您还需要自己决定在内部部署框架（消息代理不是很容易操作，尤其是高可用性），或者<a class="link"   target="_blank" rel="noopener" href="https://www.heroku.com/kafka" >在Heroku上<i class="fas fa-external-link-alt"></i></a>使用<a class="link"   target="_blank" rel="noopener" href="https://www.heroku.com/kafka" >Apache Kafka等<i class="fas fa-external-link-alt"></i></a>托管服务。</p>
+<h2 id="反模式"><a href="#反模式" class="headerlink" title="反模式"></a>反模式</h2><p>与大多数体系结构一样，事件驱动的体系结构具有自己的一组反模式。以下是一些需要注意的事项：</p>
+<h3 id="好太多了"><a href="#好太多了" class="headerlink" title="好太多了"></a>好太多了</h3><p>小心你不要对创建事件感到太兴奋。创建太多事件将在服务之间产生不必要的复杂性，增加开发人员的认知负担，使部署和测试更加困难，并导致事件消费者拥塞。并非每种方法都需要成为一种事件。</p>
+<h3 id="通用事件"><a href="#通用事件" class="headerlink" title="通用事件"></a>通用事件</h3><p>不要在名称或故意使用通用事件。您希望其他团队了解您的事件存在的原因，应该使用的内容以及何时应该使用它。事件应具有特定目的并相应地命名。具有通用名称的事件或具有混淆标志的通用事件会导致问题。</p>
+<h3 id="复杂的依赖关系图"><a href="#复杂的依赖关系图" class="headerlink" title="复杂的依赖关系图"></a>复杂的依赖关系图</h3><p>注意彼此依赖的服务并创建复杂的依赖关系图或反馈循环。每个网络跃点都会为原始请求增加额外的延迟，尤其是离开数据中心的北&#x2F;南网络流量。</p>
+<h3 id="取决于保证订单，交货或副作用"><a href="#取决于保证订单，交货或副作用" class="headerlink" title="取决于保证订单，交货或副作用"></a>取决于保证订单，交货或副作用</h3><p>事件是异步的; 因此，包括对顺序或重复的假设不仅会增加复杂性，还会抵消基于事件的体系结构的许多关键优势。如果您的消费者有副作用，例如在数据库中添加值，那么您可能无法通过重播事件来恢复。</p>
+<h3 id="过早优化"><a href="#过早优化" class="headerlink" title="过早优化"></a>过早优化</h3><p>大多数产品从小开始，随着时间的推移而增长 虽然您可能梦想未来需要扩展到大型复杂组织，但如果您的团队规模较小，那么事件驱动架构的复杂性可能会让您失望。相反，考虑使用简单的架构设计您的系统，但包括必要的关注点分离，以便您可以随着需求的增长进行交换。</p>
+<h3 id="期待事件驱动来解决所有问题"><a href="#期待事件驱动来解决所有问题" class="headerlink" title="期待事件驱动来解决所有问题"></a>期待事件驱动来解决所有问题</h3><p>在技​​术水平较低的情况下，不要指望事件驱动的架构能够解决您的所有问题。虽然这种架构肯定可以改善技术功能障碍的许多方面，但它无法解决核心问题，例如缺乏自动化测试，团队沟通不畅或者过时的开发实践。</p>
+<h2 id="学到更多"><a href="#学到更多" class="headerlink" title="学到更多"></a>学到更多</h2><p>了解事件驱动架构的优缺点，以及一些最常见的设计决策和挑战是创建最佳设计的重要部分。</p>
+<p>如果您想了解更多信息，请查看这个<a class="link"   target="_blank" rel="noopener" href="https://devcenter.heroku.com/articles/event-driven-microservices-with-apache-kafka" >事件驱动的参考架构<i class="fas fa-external-link-alt"></i></a>，它允许您通过单击在Heroku上部署工作项目。该参考架构创建了一个销售虚构咖啡产品的网上商店。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://lh4.googleusercontent.com/OOp9l49cyvKMzp6ESmHAlu5oP4oDNQDiM-T0b5aKDJHiA9ecNb8HNLxAzwYJAWyhQewIiy3yPW6g3YkAkN6vaJt1kcES6xflzajp6lEpMaQwJRi5bszEsBrPZTVVat6aP9pR07e9"
+                      alt="null"
+                ></p>
+<p>产品点击次数作为事件进行跟踪并存储在Kafka中。然后，它们被报告仪表板使用。</p>
+<p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://lh4.googleusercontent.com/4ILhHjd5e6fAzp5VVm5eqhNtk71GdqSOY4HKd-8exLhMkqT-G2xboGZxDPAdH-KvJpFgXRbg1kfO_7u4i4mEhkLB4rndZ4O4XFzI3ehyd-qZC-FrkZ_9ZotjJQmaD9jMMMoFX7pG"
+                      alt="null"
+                ></p>
+<p>代码是开源的，因此您可以根据需要对其进行修改并运行您自己的实验。</p>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84-%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9E%B6%E6%9E%84/">#微服务架构, 微服务, 微服务最佳实践, 事件驱动架构</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2019/09/19/%E9%AB%98%E5%B9%B6%E5%8F%91%E5%A4%A7%E6%B5%81%E9%87%8F%E7%BD%91%E7%AB%9910%E4%B8%AA%E8%B0%83%E4%BC%98%E7%AD%96%E7%95%A5/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">高并发大流量网站10个调优策略</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2019/09/06/%E5%9F%BA%E4%BA%8E%E9%98%BF%E9%87%8C%E4%BA%91%E9%95%9C%E5%83%8F%E7%AB%99%E5%AE%89%E8%A3%85Kubernetes1.15/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">基于阿里云镜像站安装Kubernetes 1.15</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">1.</span> <span class="nav-text">事件驱动的微服务架构的最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%A0%E5%81%9A%E5%88%B0%E4%BA%86%E5%90%97%EF%BC%9F"><span class="nav-number">1.0.1.</span> <span class="nav-text">你做到了吗？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">什么是事件驱动的微服务架构？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">为什么使用事件驱动的体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%95%E6%97%B6%E4%BD%BF%E7%94%A8REST"><span class="nav-number">1.3.</span> <span class="nav-text">何时使用REST</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%82%A8%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E8%AE%BE%E8%AE%A1%E9%80%89%E6%8B%A9-%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E6%A1%86%E6%9E%B6"><span class="nav-number">1.4.</span> <span class="nav-text">您最重要的设计选择 - 消息传递框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86"><span class="nav-number">1.5.</span> <span class="nav-text">消息处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E5%A4%84%E7%90%86"><span class="nav-number">1.5.1.</span> <span class="nav-text">流处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%80%89%E6%8B%A9"><span class="nav-number">1.6.</span> <span class="nav-text">其他选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AE%BE%E8%AE%A1%E8%80%83%E8%99%91%E5%9B%A0%E7%B4%A0"><span class="nav-number">1.7.</span> <span class="nav-text">其他设计考虑因素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.8.</span> <span class="nav-text">反模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A5%BD%E5%A4%AA%E5%A4%9A%E4%BA%86"><span class="nav-number">1.8.1.</span> <span class="nav-text">好太多了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.8.2.</span> <span class="nav-text">通用事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E7%9A%84%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%E5%9B%BE"><span class="nav-number">1.8.3.</span> <span class="nav-text">复杂的依赖关系图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%96%E5%86%B3%E4%BA%8E%E4%BF%9D%E8%AF%81%E8%AE%A2%E5%8D%95%EF%BC%8C%E4%BA%A4%E8%B4%A7%E6%88%96%E5%89%AF%E4%BD%9C%E7%94%A8"><span class="nav-number">1.8.4.</span> <span class="nav-text">取决于保证订单，交货或副作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E6%97%A9%E4%BC%98%E5%8C%96"><span class="nav-number">1.8.5.</span> <span class="nav-text">过早优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%9F%E5%BE%85%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%9D%A5%E8%A7%A3%E5%86%B3%E6%89%80%E6%9C%89%E9%97%AE%E9%A2%98"><span class="nav-number">1.8.6.</span> <span class="nav-text">期待事件驱动来解决所有问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A6%E5%88%B0%E6%9B%B4%E5%A4%9A"><span class="nav-number">1.9.</span> <span class="nav-text">学到更多</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2018</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Devin hao</a>
+            
+        </div>
+        
+            <script async data-pjax
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/utils.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/main.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/header-shrink.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/back2top.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/code-block.js"></script>
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/libs/anime.min.js"></script>
+        
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/toc.js"></script>
+        
+    
+</div>
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="小冲的个人博客">
+    <meta name="author" content="Devin hao">
+    
+    <title>
+        
+            如何为DevOps的面试做好充分准备 |
+        
+        Devin blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/null">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-keep@3.6.1/source/font/css/brands.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"www.devinrain.homes","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","logo":null,"favicon":null,"avatar":"/images/logo.svg","font_size":null,"font_family":"STHeiti","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"header_transparent":true,"background_img":"/images/bg.svg","description":null,"font_color":null,"hitokoto":true},"scroll":{"progress_bar":true,"percent":true}},"local_search":{"enable":true,"preload":true},"code_copy":{},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"side_tools":{},"pjax":{"enable":true},"lazyload":{"enable":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.8"},"waline":{"server_url":null,"reaction":false,"version":2}},"post":{"author_label":{"enable":true,"auto":false,"custom_label_list":["Trainee","Engineer","Architect"]},"word_count":{"enable":true,"wordcount":true,"min2read":true},"img_align":"center","copyright_info":false},"version":"3.6.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+               Devin blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            <div class="article-title">
+                <span class="title-hover-animation">如何为DevOps的面试做好充分准备</span>
+            </div>
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/logo.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Devin hao</span>
+                            
+                                <span class="author-label">Architect</span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            
+<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        
+            <i class="fa-regular fa-calendar-plus"></i>&nbsp;
+        
+        <span class="pc">2019-09-24 12:43:37</span>
+        <span class="mobile">2019-09-24 12:43</span>
+    </span>
+    
+        <span class="article-update-date article-meta-item">
+        <i class="fas fa-file-pen"></i>&nbsp;
+        <span class="pc">2019-09-24 12:43:37</span>
+    </span>
+    
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/DevOps/">DevOps</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.3k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>11 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content keep-markdown-body">
+                
+
+                <h3 id="这是您为DevOps热点准备的面试准备。"><a href="#这是您为DevOps热点准备的面试准备。" class="headerlink" title="这是您为DevOps热点准备的面试准备。"></a>这是您为DevOps热点准备的面试准备。</h3><p><img  
+                     lazyload
+                     alt="image"
+                     data-src="https://dzone.com/storage/temp/12433224-interiew-chairs-and-table.jpg"
+                      alt="面试桌椅"
+                ></p>
+<p><em>那么，为什么他们要雇用您呢？</em></p>
+<p>在过去的十年中，DevOps成为一种新的技术文化和职业，将软件开发所需的快速迭代与基础架构运营团队的坚如磐石的稳定性相结合。对于系统管理员，运营工程师以及其他拥有强大系统和软件背景的人员来说，过渡到DevOps的时间可能比现在更好。截至2019年8月，仅在美国，目前就有超过50,000个 LinkedIn DevOps工作岗位。</p>
+<p>假设您已经了解了基础知识，并准备开始寻找工作。您如何评价DevOps面试？DevOps工程师必须既是优秀的软件开发人员，又是基础架构专家，因此，他们应该知道Linux基础架构，网络，算法和DevOps工具（例如Terraform，Docker和Kubernetes）。范围从标准软件工程师编码问题到有关系统设计，再到Linux调试和DevOps工具的问题等等。</p>
+<p>这是一个令人生畏的清单，但请不要害怕！在Insight上，DevOps奖学金将许多具有可转让技能的个人的职业推向了人们所期望的行业DevOps职位。这是我们为他们准备面试的方式。</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>动机是一个好的开始，但是您需要纪律才能有效地做好准备。我编写了这本指南，以帮助您制定有规律的面试准备程序。面试真的很烂-这是随机的，可能会让您对自己感到难过。在此过程中，<strong>不可</strong>控制的事情太多了，但是您<strong>可以</strong>控制自己的准备方式。</p>
+<p>在这里有很多值得一试的东西，所以不要指望能够一次学习所有东西。也许有一天您会选择一个主题来关注。也许您将连续一个星期专注于另一个主题。不过，通常来说，您应该每天习惯性地进行两到三项活动，轮流讨论不同的主题，以使您的思想保持新鲜和投入。这些类别按重要性顺序列出：</p>
+<ol>
+<li>Linux基础</li>
+<li>数据结构与算法</li>
+<li>系统设计</li>
+<li>解析</li>
+<li>DevOps工具</li>
+</ol>
+<p>首先，要建立广泛而浅薄的知识基础，这样一来，以循环方式首先在各个主题之间实现负载平衡是一件好事。这将扩大您的DevOps空间的概念框架，以便您可以更轻松地将新信息放入上下文中。每个类别中的活动也按重要性顺序或多或少地排名。某些活动适合日常实践，例如CodeSignal问题或OverTheWire挑战。其他人则适合深入学习。</p>
+<p>如果您想快点走，那就一个人走。但是，如果您想走得更远，那就一起走吧。与您的同龄人一起创建一个学习小组。互相追究责任。每周或每天签到和信息共享会话。在这段时间里，您会感到无动力，请记住，做某事总比什么都不做好。在您动力十足的那段时间里，请记住，睡眠和运动对您的成功至为重要。这些活动是人生下一阶段的垫脚石，但请记住让自己着迷于每块石头的形状。</p>
+<h2 id="Linux基础"><a href="#Linux基础" class="headerlink" title="Linux基础"></a>Linux基础</h2><p>作为一名DevOps工程师，你应该对Linux了如指掌。从内核到网络再到命令行命令，有关Linux的任何问题都是公平的游戏。</p>
+<h3 id="示例问题"><a href="#示例问题" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
+<li>Linux计算机加电时发生的步骤顺序是什么？</li>
+<li>当您在浏览器中键入google.com并导致网页返回给您时，会发生什么情况？如果没有出现网页怎么办？如何调试问题？</li>
+<li>您如何检查文件系统是否空间不足？如何打印最大文件列表？如何删除所有大于1 GB的.mov文件？</li>
+</ul>
+<h3 id="活动"><a href="#活动" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>通读<a target="_blank" rel="noopener" href="http://solutionsproj.net/software/The_Linux_Command_Linex.pdf"><em>Linux命令</em></a>行书</li>
+<li>通过<a class="link"   target="_blank" rel="noopener" href="https://overthewire.org/wargames/" >OverTheWire<i class="fas fa-external-link-alt"></i></a>战争游戏进行工作。这些是通过精心设计的Linux系统进行的有趣的寻宝游戏，旨在教您一些基本概念。至少通过强盗等级。如果遇到困难，请不要担心Google解决方案。我强烈建议您随时随地在GitHub中记录进度。</li>
+<li>只需使用vimtutor命令来学习vim。它是有史以来最好的编辑器，请勿让任何人说服您。</li>
+<li>考虑购买课程以获取Linux基础知识认证（Linux +，RedHat等）。的确，一磅的认证比一盎司的经验没有价值，但是，如果您经验不足，那么认证可以帮助填补您的知识空白，并证明您具有基本的了解。</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li>最好参考手册Linux命令是<a class="link"   target="_blank" rel="noopener" href="https://tldr.sh/" >tldr.sh<i class="fas fa-external-link-alt"></i></a>。我强烈建议您下载tl; dr移动应用程序以快速参考。这在电话采访中帮助了我，我当时根本不知道该怎么做。</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://devhints.io/" >devhints.io<i class="fas fa-external-link-alt"></i></a>是各种备忘单的重要来源。</li>
+<li>它看上去并不浮华，但是<a class="link"   target="_blank" rel="noopener" href="https://www.tldp.org/LDP/abs/html/" >Advanced Bash脚本指南<i class="fas fa-external-link-alt"></i></a>是个巨大的财产库。</li>
+</ul>
+<h2 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h2><p>请记住，DevOps是<strong>开发</strong> +运营，因此您应该知道如何编码。选择一种您选择的语言（不是Bash-如果您不太喜欢，我建议使用Python）并练习，练习，练习。这不仅仅是寻找最佳解决方案-您必须与面试官清楚地交流问题的参数，传达您的思考过程，并计算不同算法的时间和空间复杂度。</p>
+<h3 id="示例问题-1"><a href="#示例问题-1" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
+<li>从列表中删除所有重复项。</li>
+<li>在包含除一个以外的所有可能IP的文件中找到丢失的IP。</li>
+<li>对二叉树的所有节点进行排序。</li>
+</ul>
+<h3 id="活动-1"><a href="#活动-1" class="headerlink" title="活动"></a>活动</h3><ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.khanacademy.org/computing/computer-science/algorithms" >可汗学院<i class="fas fa-external-link-alt"></i></a>有一个非常好的数据结构和算法入门。它使用Javascript，但不要反对它。该课程是与汤姆·科门（Tom Cormen）合作完成的，汤姆·科门（Tom Cormen）是<a class="link"   target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms" >一本有关数据结构和算法<i class="fas fa-external-link-alt"></i></a>的权威<a class="link"   target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Introduction_to_Algorithms" >著作<i class="fas fa-external-link-alt"></i></a>，绝对值得拥有。</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://leetcode.com/" >LeetCode<i class="fas fa-external-link-alt"></i></a>拥有大量的问题库，这些问题库与真实的面试问题非常接近。实际上，许多公司都会直接问您LeetCode问题！每种算法至少要回答10个简单和中等问题。当您解决了100个问题后，您就可以开始感到准备好了，并且实际上可以解决这些问题而无需查找任何内容。</li>
+<li>每天在<a class="link"   target="_blank" rel="noopener" href="https://codesignal.com/developers/interview-practice/" >CodeSignal<i class="fas fa-external-link-alt"></i></a>上<a class="link"   target="_blank" rel="noopener" href="https://codesignal.com/developers/interview-practice/" >完成<i class="fas fa-external-link-alt"></i></a>面试准备材料。我建议使用Python，但您可以使用任何语言。将代码复制并粘贴到文件中，并使用Gi​​tHub对其进行版本控制。每天，仔细阅读您昨天做的代码，并详细记录下来。编写代码比阅读旧代码并记住发生的事情要容易。一两天后重新访问旧代码将迫使您综合所学的概念。</li>
+<li>通过CodeSignal的Python Arcade进行工作。这是对所有重要的标准Python库的很好的浏览。有些练习确实没有达到目标，但总体而言，这是一个不错的播放列表。</li>
+<li>研究动态规划，有向无环图，拓扑排序。</li>
+<li>每个人都需要一点SQL。无需花费大量时间，但是您应该在<a class="link"   target="_blank" rel="noopener" href="https://mode.com/" >Mode Analytics<i class="fas fa-external-link-alt"></i></a>上注册一个免费帐户，并利用其使用真实公共数据库的出色互动SQL教程。</li>
+<li>随着您对编码技能的适应程度提高，请使用<a class="link"   target="_blank" rel="noopener" href="https://www.pramp.com/" >Pramp<i class="fas fa-external-link-alt"></i></a>进行现场技术面试。这是重要的组成部分。像练习技术电话屏幕一样，您没有比技术电话屏幕更充分的准备。</li>
+<li>请记住，唯一有价值的知识是您可以在白板或实时编码上在面试官面前展示的内容。如果您倾向于在高压情况下停滞不前，那么您就远非唯一的人了-请确保与同伴一起做很多练习。</li>
+</ul>
+<h3 id="参考-1"><a href="#参考-1" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://learnxinyminutes.com/docs/python3/" >LearnXinYminutes<i class="fas fa-external-link-alt"></i></a>是一个很棒的示例驱动的Python备忘单</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://gto76.github.io/python-cheatsheet/#main" >Python<i class="fas fa-external-link-alt"></i></a>备忘<a class="link"   target="_blank" rel="noopener" href="https://gto76.github.io/python-cheatsheet/#main" >单<i class="fas fa-external-link-alt"></i></a>：最好的Python备忘单，尽管它很简洁</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://docs.python-guide.org/" >Hitchhiker的Python指南<i class="fas fa-external-link-alt"></i></a>：最佳的Python文档。</li>
+<li>我的<a class="link"   target="_blank" rel="noopener" href="https://github.com/chuckinator0/Projects/tree/master/scripts" >脚本GitHub存储库中<i class="fas fa-external-link-alt"></i></a>有很多示例文件，这些文件经过了详细记录，尽管实际上是无组织的！</li>
+</ul>
+<h2 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h2><p>系统设计面试可测试您的整体思维，架构复杂基础架构的能力以及沟通技巧。确保采用自上而下的设计方法，并具有清晰的基础结构图和DevOps注意事项。</p>
+<h3 id="示例问题-2"><a href="#示例问题-2" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
+<li>设计一个基于微博消息的社交网络，如Twitter。您将如何确保不同地区的高可用性？</li>
+</ul>
+<h3 id="活动-2"><a href="#活动-2" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>消除<a class="link"   target="_blank" rel="noopener" href="https://github.com/donnemartin/system-design-primer/blob/master/README.md" >系统设计入门知识<i class="fas fa-external-link-alt"></i></a>。一个有趣的事情是选择一个主题，然后请朋友选择另一个主题，然后花2个小时研究您的主题，然后再花一两个小时进行分享。轮流扮演面试官和受访者的角色。</li>
+<li>阅读<a class="link"   target="_blank" rel="noopener" href="https://landing.google.com/sre/sre-book/toc/index.html" >Google SRE图书<i class="fas fa-external-link-alt"></i></a>。这是现代DevOps必读的书。</li>
+</ul>
+<h2 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h2><p>系统管理员经常分析系统输出和日志，以获得系统见解和调试问题。使用grep，awk和sed之类的工具进行命令行解析是DevOps工具库的一项重要技能。</p>
+<h3 id="示例问题-3"><a href="#示例问题-3" class="headerlink" title="示例问题"></a>示例问题</h3><ul>
+<li>给定一个Apache Web服务器日志，每天有多少个请求？哪些IP是最常访问的访客？最需要哪些页面和图像？</li>
+</ul>
+<h3 id="活动-3"><a href="#活动-3" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>通过Insight的<a class="link"   target="_blank" rel="noopener" href="https://github.com/InsightDataScience/Parsing-Workshop" >解析研讨会资料<i class="fas fa-external-link-alt"></i></a>中的<strong>练习进行练习</strong>。专注于awk。本章材料不错，是练习是最重要的部分。<a class="link"   target="_blank" rel="noopener" href="https://github.com/InsightDataScience/Parsing-Workshop" ><i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h3 id="参考-2"><a href="#参考-2" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://learnxinyminutes.com/docs/awk/" >LearnXinYminutes<i class="fas fa-external-link-alt"></i></a>：另一个出色的示例驱动参考-这次是awk。</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://regexr.com/" >Regexr<i class="fas fa-external-link-alt"></i></a>：最佳正则表达式参考。</li>
+</ul>
+<h2 id="DevOps工具"><a href="#DevOps工具" class="headerlink" title="DevOps工具"></a>DevOps工具</h2><p>Docker，Terraform和Kubernetes是必不可少的DevOps工具，并且彻底学习它们不会出错。您还应该知道至少一种CI&#x2F;CD工具，例如Jenkins。强烈建议您至少在三大云之一上学习这些工具：AWS，GCP或Azure。</p>
+<h3 id="示例问题："><a href="#示例问题：" class="headerlink" title="示例问题："></a>示例问题：</h3><ul>
+<li>使用Terraform将Docker应用程序部署到新的AWS EC2实例上。</li>
+</ul>
+<h3 id="活动-4"><a href="#活动-4" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>您需要学习Kubernetes。为了学习Kubernetes，您需要了解容器化和Docker。</li>
+<li>通过<a class="link"   target="_blank" rel="noopener" href="https://github.com/docker/labs/blob/master/beginner/readme.md" >Docker初学者<i class="fas fa-external-link-alt"></i></a>实验</li>
+<li>通过<a class="link"   target="_blank" rel="noopener" href="https://training.play-with-docker.com/" >Docker课堂<i class="fas fa-external-link-alt"></i></a>进行<a class="link"   target="_blank" rel="noopener" href="https://training.play-with-docker.com/" >游戏<i class="fas fa-external-link-alt"></i></a></li>
+<li>Kubernetes（概念：容器编排）</li>
+<li>阅读<a class="link"   target="_blank" rel="noopener" href="https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/" >Kubernetes概念<i class="fas fa-external-link-alt"></i></a></li>
+<li>通过<a class="link"   target="_blank" rel="noopener" href="https://kubernetes.io/docs/tutorials/kubernetes-basics/" >Kubernetes基础<i class="fas fa-external-link-alt"></i></a>教程学习</li>
+<li>若要进行更深入的潜水，请完成<a class="link"   target="_blank" rel="noopener" href="https://www.katacoda.com/courses/kubernetes" >Katacoda课程<i class="fas fa-external-link-alt"></i></a></li>
+<li>通过一两个入门性的<a class="link"   target="_blank" rel="noopener" href="https://jenkins.io/doc/tutorials/build-a-python-app-with-pyinstaller/" >Jenkins教程<i class="fas fa-external-link-alt"></i></a>来学习有关CI &#x2F; CD的更多信息（概念：部署管道作为代码）。老实说，我对Jenkins知之甚少，所以我不了解更好的资源。</li>
+<li>使用<a class="link"   target="_blank" rel="noopener" href="https://www.vagrantup.com/intro/getting-started/index.html" >Vagrant<i class="fas fa-external-link-alt"></i></a>声明性地定义VM，然后使用<a class="link"   target="_blank" rel="noopener" href="https://www.virtualbox.org/" >VirtualBox<i class="fas fa-external-link-alt"></i></a>或<a class="link"   target="_blank" rel="noopener" href="https://www.packer.io/intro/getting-started/install.html" >Packer<i class="fas fa-external-link-alt"></i></a>将该VM导出为OVA文件（概念：不可变的基础结构，配置为代码）。</li>
+<li>Terraform（概念：基础架构作为代码）</li>
+<li>阅读Terragrunt的<a class="link"   target="_blank" rel="noopener" href="https://blog.gruntwork.io/a-comprehensive-guide-to-terraform-b3d32832baca" >Terraform综合指南<i class="fas fa-external-link-alt"></i></a></li>
+<li>通过<a class="link"   target="_blank" rel="noopener" href="https://learn.hashicorp.com/terraform/" >Terraform教程进行工作<i class="fas fa-external-link-alt"></i></a></li>
+<li>Ansible（概念：配置为代码）</li>
+<li>观看<a class="link"   target="_blank" rel="noopener" href="https://www.ansible.com/resources/videos/quick-start-video" >介绍视频<i class="fas fa-external-link-alt"></i></a></li>
+<li>对于一些动手实验，我认为Linux Academy可能是最好的选择（不是免费的）</li>
+<li>进行<a class="link"   target="_blank" rel="noopener" href="https://docs.honeycomb.io/learning-about-observability/quick-start/" >Honeycomb Quickstart，<i class="fas fa-external-link-alt"></i></a>以提供一种监视&#x2F;跟踪工具（概念：全栈跟踪）</li>
+<li>完成<a class="link"   target="_blank" rel="noopener" href="https://learn.hashicorp.com/consul/" >Consul教程<i class="fas fa-external-link-alt"></i></a>（概念：服务发现）。</li>
+<li>完成<a class="link"   target="_blank" rel="noopener" href="https://learn.hashicorp.com/vault/" >Vault教程<i class="fas fa-external-link-alt"></i></a>（概念：企业级机密管理）</li>
+<li>玩<a class="link"   target="_blank" rel="noopener" href="https://linkerd.io/2/getting-started/" >Linkerd<i class="fas fa-external-link-alt"></i></a>（概念：服务网格）</li>
+<li>Apache Kafka（概念：容错，高吞吐量事件流）</li>
+<li>适用于Apache Kafka的无耻插件—  在该网站上免费找到<a class="link"   target="_blank" rel="noopener" href="https://cloud.contentraven.com/confluent/self-userpackage" >Confluent培训<i class="fas fa-external-link-alt"></i></a>课程，以获取有关Kafka基础知识的不错的视频集</li>
+<li>查看<a class="link"   target="_blank" rel="noopener" href="https://github.com/confluentinc/training-operations-src" >操作培训仓库，<i class="fas fa-external-link-alt"></i></a>以建立自己的本地docker-组成Kafka集群，并开始使用Kafka</li>
+</ul>
+<h3 id="参考-3"><a href="#参考-3" class="headerlink" title="参考"></a>参考</h3><ul>
+<li>Ansible：<a class="link"   target="_blank" rel="noopener" href="https://docs.ansible.com/ansible/latest/user_guide/index.html" >用户指南<i class="fas fa-external-link-alt"></i></a>。</li>
+<li>想在Kubernetes中做一些特定的事情吗？检查文档的“ <a class="link"   target="_blank" rel="noopener" href="https://kubernetes.io/docs/tasks/" >任务”<i class="fas fa-external-link-alt"></i></a>部分。有许多特定于任务的指南。</li>
+<li>Docker的“demo”(<a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/samples/)%E9%A1%B5%E9%9D%A2%E6%8F%90%E4%BE%9B%E4%BA%86%E5%AE%8C%E6%95%B4%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%89%AF%E5%A5%BD%E7%A4%BA%E4%BE%8B%E4%BB%A5%E5%8F%8A%E4%B8%80%E4%BA%9B%E5%AE%9E%E7%94%A8%E7%9A%84%E6%95%99%E7%A8%8B%E3%80%82%E6%88%91%E5%96%9C%E6%AC%A2[Django" >https://docs.docker.com/samples/)页面提供了完整应用程序的良好示例以及一些实用的教程。我喜欢[Django<i class="fas fa-external-link-alt"></i></a> + Postgres](<a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/compose/django/)%E7%A4%BA%E4%BE%8B%E3%80%82" >https://docs.docker.com/compose/django/)示例。<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h2 id="其他具有高价值物品"><a href="#其他具有高价值物品" class="headerlink" title="其他具有高价值物品"></a>其他具有高价值物品</h2><h3 id="活动-5"><a href="#活动-5" class="headerlink" title="活动"></a>活动</h3><ul>
+<li>定期收听《软件工程日报》(<a class="link"   target="_blank" rel="noopener" href="https://softwareengineeringdaily.com/)%E6%92%AD%E5%AE%A2%E3%80%82%E5%88%B0%E7%9B%AE%E5%89%8D%E4%B8%BA%E6%AD%A2%EF%BC%8C%E8%BF%99%E6%98%AF%E4%BF%9D%E6%8C%81DevOps%E4%B8%96%E7%95%8C%E8%84%89%E6%90%8F%E7%9A%84%E6%9C%80%E4%BD%B3%E6%96%B9%E6%B3%95%E3%80%82%E5%BB%BA%E8%AE%AE%E6%82%A8%E5%AE%89%E8%A3%85%E8%AF%A5%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%EF%BC%8C%E4%BB%A5%E4%BE%BF%E6%82%A8%E5%8F%AF%E4%BB%A5%E8%BD%BB%E6%9D%BE%E6%90%9C%E7%B4%A2%E6%97%A7%E5%89%A7%E9%9B%86%EF%BC%8C%E4%BB%A5%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3%E6%AD%A3%E5%9C%A8%E7%A0%94%E7%A9%B6%E7%9A%84%E6%8A%80%E6%9C%AF%E5%92%8C%E6%A6%82%E5%BF%B5%E3%80%82%E5%9C%A8%E2%80%9C" >https://softwareengineeringdaily.com/)播客。到目前为止，这是保持DevOps世界脉搏的最佳方法。建议您安装该应用程序，以便您可以轻松搜索旧剧集，以深入了解正在研究的技术和概念。在“<i class="fas fa-external-link-alt"></i></a> DevOps工具”部分中，我为每个工具背后的概念提供了关键字。您可以使用这些关键字在SEdaily中搜索相关的播客。</li>
+<li>阅读有关看板(<a class="link"   target="_blank" rel="noopener" href="https://www.atlassian.com/agile/kanban/boards)%E7%9A%84%E7%9F%A5%E8%AF%86%EF%BC%8C%E5%B9%B6%E4%BD%BF%E7%94%A8%E5%AE%83%E4%BB%AC%E6%9D%A5%E5%A2%9E%E5%BC%BA%E6%82%A8%E7%9A%84%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%92%8C%E7%94%9F%E4%BA%A7%E5%8A%9B%E3%80%82GitHub%E6%9C%89%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E7%9C%8B%E6%9D%BF%EF%BC%8C%E6%82%A8%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E5%AE%83%E6%9D%A5%E4%BF%9D%E6%8C%81%E7%94%9F%E4%BA%A7%E5%8A%9B%E3%80%82%E6%88%91%E4%B8%AA%E4%BA%BA%E4%B9%9F%E5%96%9C%E6%AC%A2[%E5%AD%90%E5%BC%B9%E5%BC%8F%E6%97%A5%E8%AE%B0](https://www.youtube.com/watch?v=fm15cmYU0IM)%E5%92%8C%5BPomodoro%E6%96%B9%E6%B3%95%5D(https://en.wikipedia.org/wiki/Pomodoro_Technique)%E3%80%82" >https://www.atlassian.com/agile/kanban/boards)的知识，并使用它们来增强您的注意力和生产力。GitHub有一个简单的看板，您可以使用它来保持生产力。我个人也喜欢[子弹式日记](https://www.youtube.com/watch?v=fm15cmYU0IM)和[Pomodoro方法](https://en.wikipedia.org/wiki/Pomodoro_Technique)。<i class="fas fa-external-link-alt"></i></a></li>
+<li>深入了解一些您喜欢的工具的技术细节。从文档开始。配对并分享技术深层次的收获。</li>
+<li>考虑为Linux Academy或acloudguru课程付费以获得AWS，GCP或Azure认证。</li>
+</ul>
+<h3 id="参考-4"><a href="#参考-4" class="headerlink" title="参考"></a>参考</h3><ul>
+<li>Digital Ocean有很棒的教程。当我使用Google时，我倾向于首先尝试“ <research topic> site：digitalocean.com”。当您第一次学习手动安装某些东西时，这特别有用。</li>
+</ul>
+
+            </div>
+
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/DevOps/">#DevOps</a>&nbsp;
+                        </li>
+                    
+                        <li class="tag-item">
+                            <a href="/tags/linux/">#linux</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                               rel="prev"
+                               href="/2019/10/08/%E5%B0%86Python%E8%84%9A%E6%9C%AC%E5%8F%98%E6%88%90%E6%BC%82%E4%BA%AE%E7%9A%84ML%E5%B7%A5%E5%85%B7/"
+                            >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                                <span class="title flex-center">
+                                <span class="post-nav-title-item">将Python脚本变成漂亮的ML工具</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                               rel="next"
+                               href="/2019/09/23/nginxRewrite%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/"
+                            >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">nginx Rewrite简单示例</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                                <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%99%E6%98%AF%E6%82%A8%E4%B8%BADevOps%E7%83%AD%E7%82%B9%E5%87%86%E5%A4%87%E7%9A%84%E9%9D%A2%E8%AF%95%E5%87%86%E5%A4%87%E3%80%82"><span class="nav-number">1.</span> <span class="nav-text">这是您为DevOps热点准备的面试准备。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number"></span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E5%9F%BA%E7%A1%80"><span class="nav-number"></span> <span class="nav-text">Linux基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">示例问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B4%BB%E5%8A%A8"><span class="nav-number">2.</span> <span class="nav-text">活动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95"><span class="nav-number"></span> <span class="nav-text">数据结构与算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E9%97%AE%E9%A2%98-1"><span class="nav-number">1.</span> <span class="nav-text">示例问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B4%BB%E5%8A%A8-1"><span class="nav-number">2.</span> <span class="nav-text">活动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83-1"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1"><span class="nav-number"></span> <span class="nav-text">系统设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E9%97%AE%E9%A2%98-2"><span class="nav-number">1.</span> <span class="nav-text">示例问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B4%BB%E5%8A%A8-2"><span class="nav-number">2.</span> <span class="nav-text">活动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number"></span> <span class="nav-text">解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E9%97%AE%E9%A2%98-3"><span class="nav-number">1.</span> <span class="nav-text">示例问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B4%BB%E5%8A%A8-3"><span class="nav-number">2.</span> <span class="nav-text">活动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83-2"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DevOps%E5%B7%A5%E5%85%B7"><span class="nav-number"></span> <span class="nav-text">DevOps工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">示例问题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B4%BB%E5%8A%A8-4"><span class="nav-number">2.</span> <span class="nav-text">活动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83-3"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%85%B7%E6%9C%89%E9%AB%98%E4%BB%B7%E5%80%BC%E7%89%A9%E5%93%81"><span class="nav-number"></span> <span class="nav-text">其他具有高价值物品</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B4%BB%E5%8A%A8-5"><span class="nav-number">1.</span> <span class="nav-text">活动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83-4"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            
+<footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+                <span>2018</span> -
+            
+            2023
+            
+                &nbsp;<i class="fas fa-heart icon-animate"></i>
+                &nbsp;<a href="/">Devin hao</a>
+            
+        </div>
+        
+            <script async data-pjax
+                    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    访问人数&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                
+                
+                    总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.6.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/utils.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/main.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/header-shrink.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/back2top.js"></script><script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/dark-light-toggle.js"></script>
+
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/local-search.js"></script>
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/code-block.js"></script>
+
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/post-helper.js"></script>
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/libs/anime.min.js"></script>
+        
+        
+            <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/toc.js"></script>
+        
+    
+</div>
+
+
+    <script src="//unpkg.com/hexo-theme-keep@3.6.1/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
